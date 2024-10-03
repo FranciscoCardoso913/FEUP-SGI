@@ -72,6 +72,10 @@ class MyApp  {
         perspective1.position.set(10,10,3)
         this.cameras['Perspective'] = perspective1
 
+        const perspective2 = new THREE.PerspectiveCamera( 75, aspect, 0.1, 1000 )
+        perspective2.position.set(0,10,2)
+        this.cameras['Perspective2'] = perspective2
+
         // defines the frustum size for the orthographic cameras
         const left = -this.frustumSize / 2 * aspect
         const right = this.frustumSize /2 * aspect 
@@ -100,6 +104,19 @@ class MyApp  {
         orthoFront.position.set(0,0, this.frustumSize /4) 
         orthoFront.lookAt( new THREE.Vector3(0,0,0) );
         this.cameras['Front'] = orthoFront
+
+        const orthoRight = new THREE.OrthographicCamera( left, right, top, bottom, near, far);
+        orthoRight.up = new THREE.Vector3(0,1,0);
+        orthoRight.position.set(this.frustumSize /4,0,0) 
+        orthoRight.lookAt( new THREE.Vector3(0,0,0) );
+        this.cameras['Right'] = orthoRight
+        
+        const orthoBottom = new THREE.OrthographicCamera( left, right, top, bottom, near, far);
+        orthoBottom.up = new THREE.Vector3(0,0,1);
+        orthoBottom.position.set(0,-this.frustumSize /4, 0)
+        orthoBottom.lookAt( new THREE.Vector3(0,0,0) )
+        this.cameras['Bottom'] = orthoBottom;
+        
     }
 
     /**
