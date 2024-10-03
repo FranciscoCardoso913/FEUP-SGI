@@ -2,10 +2,10 @@
 
 ## Group: T0xG0y
 
-| Name             | Number    | E-Mail             |
-| ---------------- | --------- | ------------------ |
-| John Doe         | 201901010 | ...                |
-| Jane Doe         | 201901011 | ...                |
+| Name              | Number    | E-Mail             |
+| ----------------- | --------- | ------------------ |
+| Francisco Cardoso | 202108793 | up202108793@up.pt  |
+| José Martins      | 202108794 | up202108794@up.pt  |
 
 ----
 ## Project information
