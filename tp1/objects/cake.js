@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { Candle } from './candle.js';
 
 export class Cake{
     constructor(app, position, color = '#5C4033') {
@@ -9,6 +10,11 @@ export class Cake{
     }
     init(){
         this.cake();
+        new Candle(this.app, new THREE.Vector3(0.2,1.8,-0.7))
+        new Candle(this.app, new THREE.Vector3(0.8,1.8,0.4))
+        new Candle(this.app, new THREE.Vector3(-0.7,1.8,-0.5))
+        new Candle(this.app, new THREE.Vector3(0.5,1.8,-0.3))
+        new Candle(this.app, new THREE.Vector3(-0.8,1.8,0.6))
     }
     cake(){
         let cakeMaterial = new THREE.MeshPhongMaterial({
