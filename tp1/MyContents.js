@@ -3,7 +3,9 @@ import { MyAxis } from './MyAxis.js';
 import {MyPrimitive} from './objects/primitive.js';
 import { House } from './objects/house.js';
 import { Cake } from './objects/cake.js';
+import { Plate } from './objects/plate.js';
 import { Table } from './objects/table.js';
+
 /**
  *  This class contains the contents of out application
  */
@@ -91,10 +93,12 @@ class MyContents  {
 
         // Constructing the scene
         let house = new House(this.app, 30, 30, 30)
-        //let cake = new Cake(this.app, new THREE.Vector3(0,1,0))
         this.table = new Table(this.app, 10, 10, 1, 4, 0.5, "#ce9c69", "#ce9c69");
         this.table.enable();
-        
+        let cake = new Cake(this.app, new THREE.Vector3(0,0,0))
+        cake.enable()
+        let plate = new Plate(this.app, new THREE.Vector3(1,0,1))
+        plate.enable()
         
         // Create a Plane Mesh with basic material
         
