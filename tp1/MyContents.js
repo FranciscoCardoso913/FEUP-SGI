@@ -95,9 +95,9 @@ class MyContents  {
         let house = new House(this.app, 30, 30, 30)
         this.table = new Table(this.app, 10, 10, 1, 4, 0.5, "#ce9c69", "#ce9c69");
         this.table.enable();
-        let cake = new Cake(this.app, new THREE.Vector3(0,0,0))
+        let cake = new Cake(this.app, new THREE.Vector3(0,4.3,0))
         cake.enable()
-        let plate = new Plate(this.app, new THREE.Vector3(1,0,1))
+        let plate = new Plate(this.app, new THREE.Vector3(0,4.5,0))
         plate.enable()
         
         // Create a Plane Mesh with basic material
