@@ -3,6 +3,7 @@ import { MyAxis } from './MyAxis.js';
 import {MyPrimitive} from './objects/primitive.js';
 import { House } from './objects/house.js';
 import { Cake } from './objects/cake.js';
+import { Plate } from './objects/plate.js';
 /**
  *  This class contains the contents of out application
  */
@@ -80,7 +81,8 @@ class MyContents  {
 
         // prim.buildPlane();
         let house = new House(this.app, 15, 15, 10)
-        let cake = new Cake(this.app, new THREE.Vector3(0,1,0))
+        let cake = new Cake(this.app, new THREE.Vector3(0,0,0))
+        let plate = new Plate(this.app, new THREE.Vector3(1,0,1))
         //this.buildCircle();
         //this.buildSphere(1, 1, new THREE.Vector3(2, 5, 0));
         //this.buildSphere(0.5, 0.5, new THREE.Vector3(-2, 5, 0));
