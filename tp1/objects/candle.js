@@ -14,7 +14,7 @@ export class Candle {
         this.fire();
     
     }
-
+    
     candle(){
         let candleMaterial = new THREE.MeshPhongMaterial({
             color: this.color,
@@ -25,7 +25,7 @@ export class Candle {
 
         let candle = new THREE.CylinderGeometry(0.1, 0.1, this.height, 10, 5);
         this.candleMesh = new THREE.Mesh(candle, candleMaterial);
-        this.candleMesh.position.set(this.position.x, this.position.y, this.position.z)
+        this.candleMesh.position.set(this.position.x, this.position.y , this.position.z)
 
         this.app.scene.add(this.candleMesh);
     }
