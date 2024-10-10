@@ -3,6 +3,7 @@ import { MyAxis } from './MyAxis.js';
 import {MyPrimitive} from './objects/primitive.js';
 import { House } from './objects/house.js';
 import { Cake } from './objects/cake.js';
+import { Table } from './objects/table.js';
 /**
  *  This class contains the contents of out application
  */
@@ -19,7 +20,7 @@ class MyContents  {
         // box related attributes
         this.boxMesh = null
         this.boxMeshSize = 1.0
-        this.boxEnabled = true
+        this.boxEnabled = false
         this.lastBoxEnabled = null
         this.boxDisplacement = new THREE.Vector3(0,2,0)
 
@@ -76,11 +77,9 @@ class MyContents  {
 
         this.buildBox();
 
+        // Primitives
         // let prim = new MyPrimitive(this.app);
-
         // prim.buildPlane();
-        let house = new House(this.app, 15, 15, 10)
-        let cake = new Cake(this.app, new THREE.Vector3(0,1,0))
         //this.buildCircle();
         //this.buildSphere(1, 1, new THREE.Vector3(2, 5, 0));
         //this.buildSphere(0.5, 0.5, new THREE.Vector3(-2, 5, 0));
@@ -89,6 +88,12 @@ class MyContents  {
         //this.buildCone(1, new THREE.Vector3(2.5,12,0));
         //this.buildCone(0.25, new THREE.Vector3(-2.5,12,0));
         //this.buildPolyhedron();
+
+        // Constructing the scene
+        let house = new House(this.app, 30, 30, 30)
+        //let cake = new Cake(this.app, new THREE.Vector3(0,1,0))
+        this.table = new Table(this.app, 10, 10, 1, 4, 0.5, "#ce9c69", "#ce9c69");
+        this.table.enable();
         
         
         // Create a Plane Mesh with basic material
@@ -168,6 +173,7 @@ class MyContents  {
         this.boxMesh.position.x = this.boxDisplacement.x
         this.boxMesh.position.y = this.boxDisplacement.y
         this.boxMesh.position.z = this.boxDisplacement.z
+
         
     }
 
