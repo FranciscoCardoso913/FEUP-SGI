@@ -14,7 +14,7 @@ export class Candle {
         this.fire();
     
     }
-    
+
     candle(){
         let candleMaterial = new THREE.MeshPhongMaterial({
             color: this.color,
@@ -27,7 +27,7 @@ export class Candle {
         this.candleMesh = new THREE.Mesh(candle, candleMaterial);
         this.candleMesh.position.set(this.position.x, this.position.y , this.position.z)
 
-        this.app.scene.add(this.candleMesh);
+        //this.app.scene.add(this.candleMesh);
     }
     fire(){
         let sphereMaterial = new THREE.MeshPhongMaterial({
@@ -51,8 +51,18 @@ export class Candle {
         this.sphereMesh = new THREE.Mesh(sphere, sphereMaterial); 
         this.sphereMesh.position.set(this.position.x, this.position.y + this.height -0.2  , this.position.z)
         this.sphereMesh.rotation.x = Math.PI
-        this.app.scene.add(this.sphereMesh);
+        //this.app.scene.add(this.sphereMesh);
 
-        this.app.scene.add(this.coneMesh);
+        //this.app.scene.add(this.coneMesh);
+    }
+    enable(){
+        this.app.scene.add(this.sphereMesh)
+        this.app.scene.add(this.coneMesh)
+        this.app.scene.add(this.candleMesh)
+    }
+    disable(){
+        this.app.scene.remove(this.sphereMesh)
+        this.app.scene.remove(this.coneMesh)
+        this.app.scene.remove(this.candleMesh)
     }
 }
