@@ -1,6 +1,9 @@
 import * as THREE from 'three';
 import { MyAxis } from './MyAxis.js';
-
+import {MyPrimitive} from './objects/primitive.js';
+import { House } from './objects/house.js';
+import { Cake } from './objects/cake.js';
+import { Table } from './objects/table.js';
 /**
  *  This class contains the contents of out application
  */
@@ -17,7 +20,7 @@ class MyContents  {
         // box related attributes
         this.boxMesh = null
         this.boxMeshSize = 1.0
-        this.boxEnabled = true
+        this.boxEnabled = false
         this.lastBoxEnabled = null
         this.boxDisplacement = new THREE.Vector3(0,2,0)
 
@@ -35,7 +38,6 @@ class MyContents  {
     buildBox() {    
         let boxMaterial = new THREE.MeshPhongMaterial({ color: "#ffff77", 
         specular: "#000000", emissive: "#000000", shininess: 90 })
-
         // Create a Cube Mesh with basic material
         let box = new THREE.BoxGeometry(  this.boxMeshSize,  this.boxMeshSize,  this.boxMeshSize );
         this.boxMesh = new THREE.Mesh( box, boxMaterial );
@@ -44,131 +46,7 @@ class MyContents  {
         this.boxMesh.rotation.set(0,0,0);
     }
 
-    buildPlane() {
-        let planePrimitiveMaterial = new THREE.MeshPhongMaterial({ color: "#00ffff",
-        specular: "#000000", emissive: "#000000", shininess: 90 })
-
-        let planePrimitive = new THREE.PlaneGeometry( 5, 5); 
-        this.planePrimitiveMesh = new THREE.Mesh( planePrimitive, planePrimitiveMaterial );
-        this.planePrimitiveMesh.rotation.x = -Math.PI / 2;
-        this.planePrimitiveMesh.position.y = 3;
-        this.planePrimitiveMesh.scale.set(1,1,1);
-        this.app.scene.add(this.planePrimitiveMesh);
-    }
-
-    buildCircle(thetaMult=1) {
-        let circleMaterial = new THREE.MeshPhongMaterial({ color: "#ff00ff",
-        specular: "#000000", emissive: "#000000", shininess: 90 })
-
-        let circle = new THREE.CircleGeometry( 2, 32, 0, Math.PI * 2 * thetaMult);
-        this.circleMesh = new THREE.Mesh( circle, circleMaterial );
-        this.circleMesh.position.y = 4;
-        this.circleMesh.rotation.x = -Math.PI / 2;
-        
-        this.app.scene.add( this.circleMesh );
-    }
-
-    buildSphere(thetaMult=1, phiMult=1, position) {
-        let shpereMaterial = new THREE.MeshPhongMaterial({
-            color: "#07aadd",
-            specular: "#000000",
-            emissive: "#000000",
-            shininess: 90
-        })
-
-        let sphere = new THREE.SphereGeometry(1, 32, 32, 0, Math.PI * 2 * phiMult, 0, Math.PI * thetaMult);
-        this.sphereMesh = new THREE.Mesh(sphere, shpereMaterial); 
-        this.sphereMesh.position.x = position.x;
-        this.sphereMesh.position.y = position.y;
-        
-        this.app.scene.add(this.sphereMesh);
-
-    }
-
-    buildCylinder(thetaMult=1, position) {
-        
-        let cylinderMaterial = new THREE.MeshPhongMaterial({
-            color: "#ffff00",
-            specular: "#000000",
-            emissive: "#000000",
-            shininess: 90
-        })
-
-        let cylinder = new THREE.CylinderGeometry(2, 2, 3, 32, 32, false, 0, Math.PI * 2 * thetaMult);
-        this.cylinderMesh = new THREE.Mesh(cylinder, cylinderMaterial);
-        this.cylinderMesh.position.x = position.x;
-        this.cylinderMesh.position.y = position.y;
-
-        this.app.scene.add(this.cylinderMesh);
-    }
-
-    buildCone(thetaMult=1, position){
-        let coneMaterial = new THREE.MeshPhongMaterial({
-            color: "#C58B93",
-            specular: "#000000",
-            emissive: "#000000",
-            shininess: 90
-        })
-
-        let cone = new THREE.ConeGeometry(2,2,32,32,false,0,Math.PI *2 * thetaMult);
-        this.coneMesh = new THREE.Mesh(cone, coneMaterial);
-        this.coneMesh.position.x = position.x;
-        this.coneMesh.position.y = position.y;
-
-        this.app.scene.add(this.coneMesh);
-    }
-
-    buildPolyhedron() {
-        let polyhedronMaterial = new THREE.MeshPhongMaterial({
-            color: "#FFFFFF",
-            specular: "#000000",
-            emissive: "#FFFFFF",
-            shininess: 90
-        });
     
-        let vertices = [
-            1, 1, 1,   // 0
-           -1, 1, 1,   // 1
-           -1, -1, 1,  // 2
-            1, -1, 1,  // 3
-            1, 1, -1,  // 4
-           -1, 1, -1,  // 5
-           -1, -1, -1, // 6
-            1, -1, -1  // 7
-        ];
-    
-        let indices = [
-            // FRONT
-            0, 1, 2,
-            0, 2, 3,
-    
-            // BACK
-            4, 6, 5,
-            4, 7, 6,
-    
-            // TOP
-            4, 5, 1,
-            4, 1, 0,
-    
-            // BOTTOM
-            3, 2, 6,
-            3, 6, 7,
-
-            // RIGHT
-            4, 0, 3,
-            4, 3, 7,
-    
-            // LEFT
-            1, 5, 6,
-            1, 6, 2
-        ];
-    
-        let polyhedron = new THREE.PolyhedronGeometry(vertices, indices, 1, 0);
-    
-        let polyhedronMesh = new THREE.Mesh(polyhedron, polyhedronMaterial);
-        polyhedronMesh.position.y = 16; 
-        this.app.scene.add(polyhedronMesh);
-    }
     
 
     /**
@@ -198,15 +76,24 @@ class MyContents  {
         this.app.scene.add( ambientLight );
 
         this.buildBox();
-        this.buildPlane();
-        this.buildCircle();
-        this.buildSphere(1, 1, new THREE.Vector3(2, 5, 0));
-        this.buildSphere(0.5, 0.5, new THREE.Vector3(-2, 5, 0));
-        this.buildCylinder(1, new THREE.Vector3(-3, 8, 0));
-        this.buildCylinder(0.75, new THREE.Vector3(3, 8, 0));
-        this.buildCone(1, new THREE.Vector3(2.5,12,0));
-        this.buildCone(0.25, new THREE.Vector3(-2.5,12,0));
-        this.buildPolyhedron();
+
+        // Primitives
+        // let prim = new MyPrimitive(this.app);
+        // prim.buildPlane();
+        //this.buildCircle();
+        //this.buildSphere(1, 1, new THREE.Vector3(2, 5, 0));
+        //this.buildSphere(0.5, 0.5, new THREE.Vector3(-2, 5, 0));
+        //this.buildCylinder(1, new THREE.Vector3(-3, 8, 0));
+        //this.buildCylinder(0.75, new THREE.Vector3(3, 8, 0));
+        //this.buildCone(1, new THREE.Vector3(2.5,12,0));
+        //this.buildCone(0.25, new THREE.Vector3(-2.5,12,0));
+        //this.buildPolyhedron();
+
+        // Constructing the scene
+        let house = new House(this.app, 30, 30, 30)
+        //let cake = new Cake(this.app, new THREE.Vector3(0,1,0))
+        this.table = new Table(this.app, 10, 10, 1, 4, 0.5, "#ce9c69", "#ce9c69");
+        this.table.enable();
         
         
         // Create a Plane Mesh with basic material
@@ -215,7 +102,7 @@ class MyContents  {
         this.planeMesh = new THREE.Mesh( plane, this.planeMaterial );
         this.planeMesh.rotation.x = -Math.PI / 2;
         this.planeMesh.position.y = -0;
-        this.app.scene.add( this.planeMesh );
+        //this.app.scene.add( this.planeMesh );
     }
     
     /**
@@ -286,6 +173,7 @@ class MyContents  {
         this.boxMesh.position.x = this.boxDisplacement.x
         this.boxMesh.position.y = this.boxDisplacement.y
         this.boxMesh.position.z = this.boxDisplacement.z
+
         
     }
 
