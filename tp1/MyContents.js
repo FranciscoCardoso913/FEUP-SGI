@@ -22,24 +22,62 @@ class MyContents  {
         // box related attributes
         this.boxMesh = null
         this.boxMeshSize = 1.0
-        this.boxEnabled = false
+        this.boxEnabled = true;
         this.lastBoxEnabled = null
         this.boxDisplacement = new THREE.Vector3(0,2,0)
 
+        // Texture GUI attributes
+        this.wrapSName = "Repeat";
+        this.wrapTName = "Repeat";
+        this.wrapS = THREE.RepeatWrapping;
+        this.wrapT = THREE.RepeatWrapping;
+        this.repeatU = 1;
+        this.repeatV = 1;
+        this.offsetU = 0;
+        this.offsetV = 0;
+        this.rotation = 0;
+
         // plane related attributes
-        this.diffusePlaneColor = "#00ffff"
-        this.specularPlaneColor = "#777777"
-        this.planeShininess = 30
-        this.planeMaterial = new THREE.MeshPhongMaterial({ color: this.diffusePlaneColor, 
-            specular: this.specularPlaneColor, emissive: "#000000", shininess: this.planeShininess })
+        this.planeEnabled = true;
+        //texture
+        this.planeTexture = new THREE.TextureLoader().load('textures/feup_b.jpg');
+        this.planeTexture.wrapS = this.wrapS;
+        this.planeTexture.wrapT = this.wrapT;
+        this.planeTexture.repeat.set(this.repeatU, this.repeatV);
+        this.planeTexture.rotation = this.rotation;
+        this.planeTexture.offset.set(this.offsetU, this.offsetV);
+        //material 
+        this.diffusePlaneColor = "rgb(128,0,0)";
+        this.specularPlaneColor = "rgb(0,0,0)";
+        this.planeShininess = 0;
+        //relating texture and material:
+        //two alternatives with different results
+        //alternative 1
+        //this.planeMaterial = new THREE.MeshPhongMaterial({
+        //    color: this.diffusePlaneColor,
+        //    specular: this.specularPlaneColor,
+        //    emissive: "#000000",
+        //    shininess: this.planeShininess,
+        //    map: this.planeTexture
+        //}) //end of alternative 1 
+
+        //alternative 2
+        this.planeMaterial = new THREE.MeshLambertMaterial({
+            map: this.planeTexture
+        }) //end of alternative 2
+
     }
 
     /**
      * builds the box mesh with material assigned
      */
     buildBox() {    
+
+        // Box texture
+        this.boxTexture = new THREE.TextureLoader().load('textures/feup_entry.jpg');
+
         let boxMaterial = new THREE.MeshPhongMaterial({ color: "#ffff77", 
-        specular: "#000000", emissive: "#000000", shininess: 90 })
+        specular: "#000000", emissive: "#000000", shininess: 90, map: this.boxTexture });
         // Create a Cube Mesh with basic material
         let box = new THREE.BoxGeometry(  this.boxMeshSize,  this.boxMeshSize,  this.boxMeshSize );
         this.boxMesh = new THREE.Mesh( box, boxMaterial );
@@ -92,21 +130,88 @@ class MyContents  {
         //this.buildPolyhedron();
 
         // Constructing the scene
-        let house = new House(this.app, 30, 30, 30)
-        this.table = new Table(this.app, 10, 10, 1, 4, 0.5, "#ce9c69", "#ce9c69");
-        this.table.enable();
+        //let house = new House(this.app, 30, 30, 30)
+        this.table = new Table(this.app, 10, 10, 0.5, 4, 0.25, "#ce9c69", "#ce9c69");
+        //this.table.enable();
         let cake = new Cake(this.app, new THREE.Vector3(0,4.3,0))
-        cake.enable()
+        //cake.enable();
         let plate = new Plate(this.app, new THREE.Vector3(0,4.5,0))
-        plate.enable()
+        //plate.enable();
         
         // Create a Plane Mesh with basic material
-        
-        let plane = new THREE.PlaneGeometry( 10, 10 );
-        this.planeMesh = new THREE.Mesh( plane, this.planeMaterial );
-        this.planeMesh.rotation.x = -Math.PI / 2;
-        this.planeMesh.position.y = -0;
-        //this.app.scene.add( this.planeMesh );
+        let planeSizeU = 10;
+        let planeSizeV = 7;
+
+        var plane = new THREE.PlaneGeometry(planeSizeU, planeSizeV );
+        this.planeMesh = new THREE.Mesh( plane, this.planeMaterial);
+        this.planeMesh.rotation.x = - Math.PI / 2;
+        this.planeMesh.position.y = 0;
+        this.app.scene.add(this.planeMesh);
+
+    }
+
+    /**
+     * updates the Wrapping Mode in the desired axis
+     * @param {String} axis 
+     */
+    updateWrapMode(axis) {
+
+        let mode = axis === 's' ?  this.wrapSName : this.wrapTName;
+
+        if (mode === 'Clamp') {
+            axis === 's' ? this.wrapS = THREE.ClampToEdgeWrapping : this.wrapT = THREE.ClampToEdgeWrapping;
+        }
+        else if (mode === 'Repeat') {
+            axis === 's' ? this.wrapS = THREE.RepeatWrapping : this.wrapT = THREE.RepeatWrapping;
+        }
+        else {
+            axis === 's' ? this.wrapS = THREE.MirroredRepeatWrapping : this.wrapT = THREE.MirroredRepeatWrapping;
+        }
+
+        this.planeTexture.wrapS = this.wrapS;
+        this.planeTexture.wrapT = this.wrapT;
+
+        this.planeTexture.needsUpdate = true;
+    }
+
+
+    /**
+     * Updates the texture repeat in the desired axis
+     * @param {String} axis 
+     * @param {number} value 
+     */
+    updateRepeat(axis, value) {
+        if (axis === 'u') {
+            this.repeatU = value;
+        }
+        else {
+            this.repeatV = value;
+        }
+        this.planeTexture.repeat.set(this.repeatU, this.repeatV);
+    }
+
+    /**
+     * Updates the texture offset in the desired axis
+     * @param {String} axis 
+     * @param {number} value 
+     */
+    updateOffset(axis, value) {
+        if (axis === 'u') {
+            this.offsetU = value;
+        }
+        else {
+            this.offsetV = value;
+        }
+        this.planeTexture.offset.set(this.offsetU, this.offsetV);
+    }
+
+    /**
+     * updates the texture rotation
+     * @param {number} value 
+     */
+    updateRotation(value) {
+        this.rotation = value * Math.PI / 180;
+        this.planeTexture.rotation = this.rotation;
     }
     
     /**
@@ -132,6 +237,10 @@ class MyContents  {
     updatePlaneShininess(value) {
         this.planeShininess = value
         this.planeMaterial.shininess = this.planeShininess
+    }
+
+    enablePlane(enable) {
+        enable ? this.app.scene.add(this.planeMesh) : this.app.scene.remove(this.planeMesh);
     }
     
     /**
