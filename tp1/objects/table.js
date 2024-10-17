@@ -35,10 +35,10 @@ export class Table{
         this.legMesh3 = new THREE.Mesh( leg3, legMaterial );
         this.legMesh4 = new THREE.Mesh( leg4, legMaterial );
 
-        this.legMesh1.position.set(-this.widthx/3,-this.legHeight/2,-this.widthy/3);
-        this.legMesh2.position.set(-this.widthx/3,-this.legHeight/2,this.widthy/3);
-        this.legMesh3.position.set(this.widthx/3,-this.legHeight/2,-this.widthy/3);
-        this.legMesh4.position.set(this.widthx/3,-this.legHeight/2,this.widthy/3);      
+        this.legMesh1.position.set(-this.widthx/2.5,-this.legHeight/2,-this.widthy/2.5);
+        this.legMesh2.position.set(-this.widthx/2.5,-this.legHeight/2,this.widthy/2.5);
+        this.legMesh3.position.set(this.widthx/2.5,-this.legHeight/2,-this.widthy/2.5);
+        this.legMesh4.position.set(this.widthx/2.5,-this.legHeight/2,this.widthy/2.5);      
 
     }
 

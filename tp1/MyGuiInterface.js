@@ -49,14 +49,25 @@ class MyGuiInterface  {
         planeFolder.addColor( data, 'diffuse color' ).onChange( (value) => { this.contents.updateDiffusePlaneColor(value) } );
         planeFolder.addColor( data, 'specular color' ).onChange( (value) => { this.contents.updateSpecularPlaneColor(value) } );
         planeFolder.add(this.contents, 'planeShininess', 0, 1000).name("shininess").onChange( (value) => { this.contents.updatePlaneShininess(value) } );
+        planeFolder.add(this.contents, 'planeEnabled', true).name("enabled").onChange( (value) => { this.contents.enablePlane(value) } );
         planeFolder.open();
 
         // adds a folder to the gui interface for the camera
-        const cameraFolder = this.datgui.addFolder('Camera')
+        const cameraFolder = this.datgui.addFolder('Camera');
         cameraFolder.add(this.app, 'activeCameraName', [ 'Perspective', 'Perspective2', 'Left', 'Top', 'Front', 'Right', 'Bottom' ] ).name("active camera");
         // note that we are using a property from the app 
         cameraFolder.add(this.app.activeCamera.position, 'x', 0, 10).name("x coord")
         cameraFolder.open()
+
+        //  folder for the textures
+        const texturesFolder = this.datgui.addFolder('Textures');
+        texturesFolder.add(this.contents, 'wrapSName', ['Clamp', 'Repeat', 'Mirror Repeat']).name("Wrapping Mode S").onChange( () => (this.contents.updateWrapMode('s')) )
+        texturesFolder.add(this.contents, 'wrapTName', ['Clamp', 'Repeat', 'Mirror Repeat']).name("Wrapping Mode T").onChange( () => (this.contents.updateWrapMode('t')) )
+        texturesFolder.add(this.contents, 'repeatU', 0, 10).name("Repeat U").onChange( () => (this.contents.updateRepeat('u', this.contents.repeatU)) )
+        texturesFolder.add(this.contents, 'repeatV', 0, 10).name("Repeat V").onChange( () => (this.contents.updateRepeat('v', this.contents.repeatV)) )
+        texturesFolder.add(this.contents, 'offsetU', 0, 10).name("Offset U").onChange( () => (this.contents.updateOffset('u', this.contents.offsetU)) )
+        texturesFolder.add(this.contents, 'offsetV', 0, 10).name("Offset V").onChange( () => (this.contents.updateOffset('v', this.contents.offsetV)) )
+        texturesFolder.add(this.contents, 'rotation', 0, 360).name("Rotation").onChange( () => (this.contents.updateRotation(this.contents.rotation)) )
     }
 }
 
