@@ -22,6 +22,7 @@ class MyContents  {
         this.boxDisplacement = new THREE.Vector3(0,2,0)
 
         // plane related attributes
+    
         this.diffusePlaneColor = "#00ffff"
         this.specularPlaneColor = "#777777"
         this.planeShininess = 30
@@ -56,17 +57,34 @@ class MyContents  {
         }
 
         // add a point light on top of the model
-        const pointLight = new THREE.PointLight( 0xffffff, 500, 0 );
+        /*const pointLight = new THREE.PointLight( 0xffffff, 500, 0 );
         pointLight.position.set( 0, 20, 0 );
         this.app.scene.add( pointLight );
 
         // add a point light helper for the previous point light
         const sphereSize = 0.5;
         const pointLightHelper = new THREE.PointLightHelper( pointLight, sphereSize );
-        this.app.scene.add( pointLightHelper );
+        this.app.scene.add( pointLightHelper );*/
+
+        /*const directionalLight = new THREE.DirectionalLight( 0xffffff, 5);
+        directionalLight.position.set(-5, 10, -2);
+        directionalLight.target.position.set(10,0,10)
+        this.app.scene.add(directionalLight.target)
+        this.app.scene.add( directionalLight );*/
+
+        this.spotLight = new THREE.SpotLight( 0xffffff, 15,8,Math.PI/9.5,0,0);
+        this.spotLight.position.set (2,5,1);
+        this.spotLight.target.position.set (1,0.1)
+        this.app.scene.add(this.spotLight.target)
+        this.app.scene.add( this.spotLight );
+
+        // add a point light helper for the previous point light
+        const sphereSize = 0.5;
+        const spotLightHelper = new THREE.SpotLightHelper( this.spotLight, sphereSize );
+        this.app.scene.add( spotLightHelper );
 
         // add an ambient light
-        const ambientLight = new THREE.AmbientLight( 0x555555 );
+        const ambientLight = new THREE.AmbientLight( 0x555555, 4 );
         this.app.scene.add( ambientLight );
 
         this.buildBox()
@@ -79,6 +97,7 @@ class MyContents  {
         this.planeMesh.position.y = -0;
         this.app.scene.add( this.planeMesh );
     }
+
     
     /**
      * updates the diffuse plane color and the material
