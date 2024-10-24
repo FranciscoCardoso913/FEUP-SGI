@@ -37,7 +37,7 @@ class MyGuiInterface  {
         boxFolder.add(this.contents.boxDisplacement, 'x', -5, 5)
         boxFolder.add(this.contents.boxDisplacement, 'y', -5, 5)
         boxFolder.add(this.contents.boxDisplacement, 'z', -5, 5)
-        boxFolder.open()
+        boxFolder.close()
         
         const data = {  
             'diffuse color': this.contents.diffusePlaneColor,
@@ -49,15 +49,15 @@ class MyGuiInterface  {
         planeFolder.addColor( data, 'diffuse color' ).onChange( (value) => { this.contents.updateDiffusePlaneColor(value) } );
         planeFolder.addColor( data, 'specular color' ).onChange( (value) => { this.contents.updateSpecularPlaneColor(value) } );
         planeFolder.add(this.contents, 'planeShininess', 0, 1000).name("shininess").onChange( (value) => { this.contents.updatePlaneShininess(value) } );
-        planeFolder.add(this.contents, 'planeEnabled', true).name("enabled").onChange( (value) => { this.contents.enablePlane(value) } );
-        planeFolder.open();
+        planeFolder.add(this.contents, 'planeEnabled', false).name("enabled").onChange( (value) => { this.contents.enablePlane(value) } );
+        planeFolder.close();
 
         // adds a folder to the gui interface for the camera
         const cameraFolder = this.datgui.addFolder('Camera');
         cameraFolder.add(this.app, 'activeCameraName', [ 'Perspective', 'Perspective2', 'Left', 'Top', 'Front', 'Right', 'Bottom' ] ).name("active camera");
         // note that we are using a property from the app 
         cameraFolder.add(this.app.activeCamera.position, 'x', 0, 10).name("x coord")
-        cameraFolder.open()
+        cameraFolder.close();
 
         //  folder for the textures
         const texturesFolder = this.datgui.addFolder('Textures');
@@ -68,6 +68,10 @@ class MyGuiInterface  {
         texturesFolder.add(this.contents, 'offsetU', 0, 10).name("Offset U").onChange( () => (this.contents.updateOffset('u', this.contents.offsetU)) )
         texturesFolder.add(this.contents, 'offsetV', 0, 10).name("Offset V").onChange( () => (this.contents.updateOffset('v', this.contents.offsetV)) )
         texturesFolder.add(this.contents, 'rotation', 0, 360).name("Rotation").onChange( () => (this.contents.updateRotation(this.contents.rotation)) )
+        texturesFolder.close();
+
+        const scene3DFolder = this.datgui.addFolder('Scene 3D');
+        scene3DFolder.add(this.contents, 'scene3DEnabled', false).name("enabled").onChange( () => { this.contents.enableScene3D() } );
     }
 }
 

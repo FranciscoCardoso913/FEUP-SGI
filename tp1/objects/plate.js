@@ -24,11 +24,12 @@ export class Plate {
         this.cylinderMesh = new THREE.Mesh(cylinder, cylinderMaterial);
         this.cylinderMesh.position.set(this.position.x, this.position.y + 0.05, this.position.z)
 
-        //this.app.scene.add(this.cylinderMesh);
     }
+
     enable(){
         this.app.scene.add(this.cylinderMesh)
     }
+    
     disable(){
         this.app.scene.remove(this.cylinderMesh)
     }
