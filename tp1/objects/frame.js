@@ -2,7 +2,7 @@ import * as THREE from 'three';
 
 export class Frame{
 
-    constructor(app, imageTexture, width = 10, height = 15, depth = 2, frameColor = 'b2b48c', frameTexture = null, position, rotation) {
+    constructor(app, imageTexture, width = 10, height = 15, depth = 2, frameColor = 'b2b48c', position, rotation, frameTexture = null) {
         this.app = app;
         this.imageTexture = imageTexture;
         this.width = width;
@@ -18,9 +18,9 @@ export class Frame{
     init(){
 
         if (this.frameTexture === null){
-            this.frameTexture = new THREE.TextureLoader().load('textures/frame.png')
+            this.frameTexture = new THREE.TextureLoader().load('textures/frame.png');
             this.frameTexture.wrapS = THREE.MirroredRepeatWrapping;
-            this.frameTexture.wrapT = THREE.RepeatWrapping;    
+            this.frameTexture.wrapT = THREE.MirroredRepeatWrapping; 
         }
 
         this.frameMaterial = new THREE.MeshPhongMaterial({

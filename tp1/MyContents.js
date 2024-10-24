@@ -6,6 +6,8 @@ import { Cake } from './objects/cake.js';
 import { Plate } from './objects/plate.js';
 import { Table } from './objects/table.js';
 import { Frame } from './objects/frame.js';
+import { Lamp } from './objects/lamp.js';
+import { Landscape } from './objects/landscape.js';
 
 /**
  *  This class contains the contents of out application
@@ -103,42 +105,21 @@ class MyContents  {
             this.app.scene.add(this.axis)
         }
 
-        // add a point light on top of the model
-        const pointLight = new THREE.PointLight( 0xffffff, 500, 0 );
-        pointLight.position.set( 0, 20, 0 );
-        this.app.scene.add( pointLight );
-
-        // add a point light helper for the previous point light
-        const sphereSize = 0.5;
-        const pointLightHelper = new THREE.PointLightHelper( pointLight, sphereSize );
-        this.app.scene.add( pointLightHelper );
-
         // add an ambient light
         const ambientLight = new THREE.AmbientLight( 0x555555 );
         this.app.scene.add( ambientLight );
 
         this.buildBox();
 
-        //Building frames
-        this.frameTexture = new THREE.TextureLoader().load('textures/frame.png');
-        this.frameTexture.wrapS = THREE.MirroredRepeatWrapping;
-        this.frameTexture.wrapT = THREE.MirroredRepeatWrapping;
-
-        this.image1Texture = new THREE.TextureLoader().load('textures/202108793.jpg');
-        this.image2Texture = new THREE.TextureLoader().load('textures/202108794.jpg');
-
-        this.frameStudent1 = new Frame(this.app, this.image1Texture, 2, 3, 0.4, "#ce9c69", this.frameTexture, new THREE.Vector3(5, 10, -19.6), new THREE.Vector3(0, 0, 0));
-        this.frameStudent2 = new Frame(this.app, this.image2Texture, 2, 3, 0.4, "#ce9c69", this.frameTexture, new THREE.Vector3(-5, 10, -19.6), new THREE.Vector3(0, 0, 0));
-    
-        this.frameStudent1.enable();
-        this.frameStudent2.enable();
-
-
         // Constructing the scene
         this.house = new House(this.app, 40, 40, 20);
         this.table = new Table(this.app, 10, 10, 0.5, 4, 0.25, "#ce9c69", "#ce9c69");
-        this.cake = new Cake(this.app, new THREE.Vector3(0,4.3,0));
-        this.plate = new Plate(this.app, new THREE.Vector3(0,4.5,0));
+        this.cake = new Cake(this.app, new THREE.Vector3(0,4.2,0));
+        this.plate = new Plate(this.app, new THREE.Vector3(0,4.4,0));
+        this.lamp = new Lamp(this.app, new THREE.Vector3(0, 17, 0));
+        this.frameStudent1 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108793.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(5, 10, -19.6), new THREE.Vector3(0, 0, 0));
+        this.frameStudent2 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108794.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(-5, 10, -19.6), new THREE.Vector3(0, 0, 0));
+        this.landscape = new Landscape(this.app, new THREE.TextureLoader().load('textures/landscape.jpg'), new THREE.Vector3(300, 100, 0), new THREE.Vector3(0, - Math.PI / 2, 0));
         this.enableScene3D();
 
         // Create a Plane Mesh with basic material
@@ -254,6 +235,8 @@ class MyContents  {
             this.plate.enable();
             this.frameStudent1.enable();
             this.frameStudent2.enable();
+            this.lamp.enable();
+            this.landscape.enable();
         }
         else {
             this.house.disable();
@@ -262,6 +245,8 @@ class MyContents  {
             this.plate.disable();
             this.frameStudent1.disable();
             this.frameStudent2.disable();
+            this.lamp.disable();
+            this.landscape.disable();
         }
     }
 
