@@ -21,11 +21,28 @@ export class Cake{
         ]
     }
     cake(){
-        let cakeMaterial = new THREE.MeshPhongMaterial({
+
+        let interiorTexture = new THREE.TextureLoader().load('textures/interior_cake.jpg');
+        interiorTexture.wrapS = THREE.MirroredRepeatWrapping;
+        interiorTexture.wrapT = THREE.MirroredRepeatWrapping;
+        interiorTexture.repeat.set( 2, 2 );
+
+        let exteriorTexture = new THREE.TextureLoader().load('textures/exterior_cake.jpg');
+        exteriorTexture.wrapS = THREE.MirroredRepeatWrapping;
+        exteriorTexture.wrapT = THREE.MirroredRepeatWrapping;
+        exteriorTexture.repeat.set( 2, 2 );
+
+
+
+        let cakeInteriorMaterial = new THREE.MeshLambertMaterial({
+            map: interiorTexture
+        })
+
+        let cakeExteriorMaterial = new THREE.MeshPhongMaterial({
             color: this.color,
             specular: "#000000",
-            emissive: "#000000",
-            shininess: 90
+            shininess: 90,
+            map: exteriorTexture
         })
 
 
@@ -33,9 +50,9 @@ export class Cake{
         let interior = new THREE.PlaneGeometry( 1.5,1 ); // left 
         let interior2 = new THREE.PlaneGeometry( 1.5,1 ); // right 
 
-        this.cakeMesh = new THREE.Mesh(cake, cakeMaterial);
-        let interiorMesh = new THREE.Mesh(interior, cakeMaterial);
-        let interiorMesh2 = new THREE.Mesh(interior2, cakeMaterial);
+        this.cakeMesh = new THREE.Mesh(cake, cakeExteriorMaterial);
+        let interiorMesh = new THREE.Mesh(interior, cakeInteriorMaterial);
+        let interiorMesh2 = new THREE.Mesh(interior2, cakeInteriorMaterial);
 
         this.cakeMesh.position.set(this.position.x, this.position.y +0.7, this.position.z)
 
@@ -46,9 +63,8 @@ export class Cake{
         interiorMesh2.position.z = this.position.z+0.75;
         interiorMesh2.position.x = this.position.x;
         interiorMesh2.rotation.y = 3*Math.PI/2  ;
-        this.cakeMesh.add (interiorMesh)
-        this.cakeMesh.add (interiorMesh2)
-        // this.app.scene.add(this.cakeMesh);
+        this.cakeMesh.add (interiorMesh);
+        this.cakeMesh.add (interiorMesh2);
   
     }
     enable(){

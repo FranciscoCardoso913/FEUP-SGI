@@ -21,11 +21,17 @@ export class Table{
 
     legs(){
 
+        let legTexture = new THREE.TextureLoader().load('textures/table_legs.jpg');
+        legTexture.wrapS = THREE.RepeatWrapping;
+        legTexture.wrapT = THREE.MirroredRepeatWrapping;
+        legTexture.repeat.set( 2, 2 );
 
         let legMaterial = new THREE.MeshPhongMaterial({ 
             color: this.legColor, 
             specular: "#ffffff",
-            shininess: 90 })
+            shininess: 90,
+            map: legTexture
+        })
 
         let leg1 = new THREE.CylinderGeometry( this.legRadius, this.legRadius, this.legHeight );
         let leg2 = new THREE.CylinderGeometry( this.legRadius, this.legRadius, this.legHeight );
