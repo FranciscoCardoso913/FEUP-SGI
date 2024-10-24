@@ -5,6 +5,7 @@ import { House } from './objects/house.js';
 import { Cake } from './objects/cake.js';
 import { Plate } from './objects/plate.js';
 import { Table } from './objects/table.js';
+import { Frame } from './objects/frame.js';
 
 /**
  *  This class contains the contents of out application
@@ -18,11 +19,12 @@ class MyContents  {
     constructor(app) {
         this.app = app
         this.axis = null
+        this.scene3DEnabled = true;
 
         // box related attributes
         this.boxMesh = null
         this.boxMeshSize = 1.0
-        this.boxEnabled = true;
+        this.boxEnabled = false;
         this.lastBoxEnabled = null
         this.boxDisplacement = new THREE.Vector3(0,2,0)
 
@@ -38,7 +40,7 @@ class MyContents  {
         this.rotation = 0;
 
         // plane related attributes
-        this.planeEnabled = true;
+        this.planeEnabled = false;
         //texture
         this.planeTexture = new THREE.TextureLoader().load('textures/feup_b.jpg');
         this.planeTexture.wrapS = this.wrapS;
@@ -117,27 +119,28 @@ class MyContents  {
 
         this.buildBox();
 
-        // Primitives
-        // let prim = new MyPrimitive(this.app);
-        // prim.buildPlane();
-        //this.buildCircle();
-        //this.buildSphere(1, 1, new THREE.Vector3(2, 5, 0));
-        //this.buildSphere(0.5, 0.5, new THREE.Vector3(-2, 5, 0));
-        //this.buildCylinder(1, new THREE.Vector3(-3, 8, 0));
-        //this.buildCylinder(0.75, new THREE.Vector3(3, 8, 0));
-        //this.buildCone(1, new THREE.Vector3(2.5,12,0));
-        //this.buildCone(0.25, new THREE.Vector3(-2.5,12,0));
-        //this.buildPolyhedron();
+        //Building frames
+        this.frameTexture = new THREE.TextureLoader().load('textures/frame.png');
+        this.frameTexture.wrapS = THREE.MirroredRepeatWrapping;
+        this.frameTexture.wrapT = THREE.MirroredRepeatWrapping;
+
+        this.image1Texture = new THREE.TextureLoader().load('textures/202108793.jpg');
+        this.image2Texture = new THREE.TextureLoader().load('textures/202108794.jpg');
+
+        this.frameStudent1 = new Frame(this.app, this.image1Texture, 2, 3, 0.4, "#ce9c69", this.frameTexture, new THREE.Vector3(5, 10, -19.6), new THREE.Vector3(0, 0, 0));
+        this.frameStudent2 = new Frame(this.app, this.image2Texture, 2, 3, 0.4, "#ce9c69", this.frameTexture, new THREE.Vector3(-5, 10, -19.6), new THREE.Vector3(0, 0, 0));
+    
+        this.frameStudent1.enable();
+        this.frameStudent2.enable();
+
 
         // Constructing the scene
-        //let house = new House(this.app, 30, 30, 30)
+        this.house = new House(this.app, 40, 40, 20);
         this.table = new Table(this.app, 10, 10, 0.5, 4, 0.25, "#ce9c69", "#ce9c69");
-        //this.table.enable();
-        let cake = new Cake(this.app, new THREE.Vector3(0,4.3,0))
-        //cake.enable();
-        let plate = new Plate(this.app, new THREE.Vector3(0,4.5,0))
-        //plate.enable();
-        
+        this.cake = new Cake(this.app, new THREE.Vector3(0,4.3,0));
+        this.plate = new Plate(this.app, new THREE.Vector3(0,4.5,0));
+        this.enableScene3D();
+
         // Create a Plane Mesh with basic material
         let planeSizeU = 10;
         let planeSizeV = 7;
@@ -146,7 +149,7 @@ class MyContents  {
         this.planeMesh = new THREE.Mesh( plane, this.planeMaterial);
         this.planeMesh.rotation.x = - Math.PI / 2;
         this.planeMesh.position.y = 0;
-        this.app.scene.add(this.planeMesh);
+        this.planeEnabled ? this.app.scene.add(this.planeMesh) : null;
 
     }
 
@@ -243,6 +246,48 @@ class MyContents  {
         enable ? this.app.scene.add(this.planeMesh) : this.app.scene.remove(this.planeMesh);
     }
     
+    enableScene3D() {
+        if (this.scene3DEnabled) {
+            this.house.enable();
+            this.table.enable();
+            this.cake.enable();
+            this.plate.enable();
+            this.frameStudent1.enable();
+            this.frameStudent2.enable();
+        }
+        else {
+            this.house.disable();
+            this.table.disable();
+            this.cake.disable();
+            this.plate.disable();
+            this.frameStudent1.disable();
+            this.frameStudent2.disable();
+        }
+    }
+
+    //TODO Fazer esta função para mostrar as primitivas
+    enablePrimitives() {
+        // Primitives
+        // let prim = new MyPrimitive(this.app);
+        // prim.buildPlane();
+        //this.buildCircle();
+        //this.buildSphere(1, 1, new THREE.Vector3(2, 5, 0));
+        //this.buildSphere(0.5, 0.5, new THREE.Vector3(-2, 5, 0));
+        //this.buildCylinder(1, new THREE.Vector3(-3, 8, 0));
+        //this.buildCylinder(0.75, new THREE.Vector3(3, 8, 0));
+        //this.buildCone(1, new THREE.Vector3(2.5,12,0));
+        //this.buildCone(0.25, new THREE.Vector3(-2.5,12,0));
+        //this.buildPolyhedron();
+        
+        /*
+        if (this.primitivesEnabled) {
+            this.primitives.enable();
+        }
+        else {
+            this.primitives.disable();
+        }*/
+    }
+
     /**
      * rebuilds the box mesh if required
      * this method is called from the gui interface

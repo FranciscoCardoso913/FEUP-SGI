@@ -22,8 +22,10 @@ export class Table{
     legs(){
 
 
-        let legMaterial = new THREE.MeshPhongMaterial({ color: this.legColor, 
-            specular: "#000000", emissive: "#000000", shininess: 90 })
+        let legMaterial = new THREE.MeshPhongMaterial({ 
+            color: this.legColor, 
+            specular: "#ffffff",
+            shininess: 90 })
 
         let leg1 = new THREE.CylinderGeometry( this.legRadius, this.legRadius, this.legHeight );
         let leg2 = new THREE.CylinderGeometry( this.legRadius, this.legRadius, this.legHeight );
@@ -43,8 +45,16 @@ export class Table{
     }
 
     top(){
-        let topMaterial = new THREE.MeshPhongMaterial({ color: this.topColor, 
-        specular: "#000000", emissive: "#000000", shininess: 90 })
+
+        let table_texture = new THREE.TextureLoader().load('textures/table_wood.jpg');
+
+        let topMaterial = new THREE.MeshPhongMaterial({ 
+            color: this.topColor, 
+            specular: "#000000",
+            emissive: "#000000",
+            shininess: 90,
+            map: table_texture 
+        });
 
         let top = new THREE.BoxGeometry( this.widthx, this.tableHeight, this.widthy); 
         this.topMesh = new THREE.Mesh( top, topMaterial );
