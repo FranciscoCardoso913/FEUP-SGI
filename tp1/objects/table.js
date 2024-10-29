@@ -2,7 +2,7 @@ import * as THREE from 'three';
 
 export class Table{
 
-    constructor(app, widthx =10 ,widthy=10, tableHeight=0.5, legHeight=8, legRadius=2, topColor='#ce9c69', legColor='#ce9c69') {
+    constructor(app, widthx =10 ,widthy=10, tableHeight=0.5, legHeight=8, legRadius=2, position= new THREE.Vector3(0,0,0), topColor='#ce9c69', legColor='#ce9c69') {
         this.app = app;
         this.widthx = widthx;
         this.widthy = widthy;
@@ -11,12 +11,14 @@ export class Table{
         this.legRadius = legRadius; 
         this.topColor = topColor;
         this.legColor = legColor;
+        this.position= position;
         this.init()
     }
 
     init(){
         this.legs()
         this.top()
+        this.topMesh.position.add(this.position)
     }
 
     legs(){
