@@ -99,7 +99,7 @@ class MyContents  {
 
         // Constructing the scene
         this.house = new House(this.app, 40, 40, 20);
-        this.table = new Table(this.app, 10, 10, 0.5, 4, 0.25, "#ce9c69", "#ce9c69");
+        this.table = new Table(this.app, 10, 10, 0.5, 4, 0.25);
         this.cake = new Cake(this.app, new THREE.Vector3(0,4.2,0), Math.PI);
         this.plate = new Plate(this.app, new THREE.Vector3(0,4.4,0));
         this.lamp = new Lamp(this.app, new THREE.Vector3(0, 17, 0));
@@ -108,10 +108,12 @@ class MyContents  {
         this.carpet = new Carpet(this.app.scene, 15,15,new THREE.Vector3(0,0.1,0))
         this.spring = new Spring(this.app.scene , new THREE.Vector3(-3,4.2,3))
         this.jar = new Jar(this.app.scene, this.builder, new THREE.Vector3(3,4.2,3))
-        this.couch = new Couch(this.app.scene,new THREE.Vector3(12,0,15),Math.PI)
-        this.floor_lamp = new FloorLamp(this.app.scene,this.builder, new THREE.Vector3(5,0.2,14), Math.PI/3 )
+        this.couch = new Couch(this.app.scene,new THREE.Vector3(6,0,16),Math.PI)
+        this.mini_table = new Table(this.app, 5, 3, 0.5, 3, 0.25, new THREE.Vector3(12,0,16));
+        this.floor_lamp = new FloorLamp(this.app.scene,this.builder, new THREE.Vector3(0,0.2,14), Math.PI/3 )
         this.book = new Book(this.app.scene, this.builder,0x008833, new THREE.Vector3(-4, 4.25,-4.5),0,-Math.PI/8)
-        this.shelve = new Shelve(this.app.scene, this.builder, new THREE.Vector3(-3,0,20),Math.PI)
+        this.book2 = new Book(this.app.scene, this.builder,0xaa8833, new THREE.Vector3(12, 3.25,14),0,-Math.PI/8)
+        this.shelve = new Shelve(this.app.scene, this.builder, new THREE.Vector3(-10,0,20),Math.PI)
         this.paint = new Paint(this.app.scene, new THREE.Vector3(-20,8,15),Math.PI/2)
         this.frameStudent1 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108793.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(5, 10, -19.6), new THREE.Vector3(0, 0, 0));
         this.frameStudent2 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108794.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(-5, 10, -19.6), new THREE.Vector3(0, 0, 0));
@@ -241,8 +243,10 @@ class MyContents  {
             this.couch.enable()
             this.floor_lamp.enable()
             this.book.enable()
+            this.book2.enable()
             this.shelve.enable()
             this.paint.enable()
+            this.mini_table.enable()
         }
         else {
             this.house.disable();
