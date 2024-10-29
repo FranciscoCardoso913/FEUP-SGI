@@ -19,7 +19,14 @@ export class Book{
         this.samplesU = 20         // maximum defined in MyGuiInterface
 
         this.samplesV = 20  
-        this.coverMaterial = new THREE.MeshBasicMaterial({color: this.color, side: THREE.DoubleSide})
+
+        const map =new THREE.TextureLoader().load( 'textures/book.jpg' );
+
+        map.wrapS = map.wrapT = THREE.RepeatWrapping;
+
+
+        this.coverMaterial = new THREE.MeshLambertMaterial( { map: map, side: THREE.DoubleSide,color: this.color} );
+    
         this.pageMaterial = new THREE.MeshBasicMaterial({color: 0xdddddd})
        
         this.book.add(this.drawCover())

@@ -120,7 +120,7 @@ class MyContents  {
         this.door = new Door(this.app.scene, new THREE.Vector3(-19.9,0,0))
         this.cakePiece = new CakePiece(this.app,new THREE.Vector3(-0.2,4.1,-4.8))
         this.smallPlate = new Plate(this.app, new THREE.Vector3(0,4.2,-4), 1.2);
-        this.mug = new Mug(this.app.scene, this.builder, new THREE.Vector3(-3,4.3,-3), Math.PI/4)
+        this.mug = new Mug(this.app.scene, this.builder, new THREE.Vector3(-2.5,4.3,-2.5), Math.PI/4)
         this.frameStudent1 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108793.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(5, 10, -19.6), new THREE.Vector3(0, 0, 0));
         this.frameStudent2 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108794.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(-5, 10, -19.6), new THREE.Vector3(0, 0, 0));
         this.landscape = new Landscape(this.app, new THREE.TextureLoader().load('textures/landscape.png'), new THREE.Vector3(300, 50, 0), new THREE.Vector3(0, - Math.PI / 2, 0));
