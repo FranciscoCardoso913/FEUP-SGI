@@ -21,11 +21,12 @@ class HelixCurve extends THREE.Curve {
 
 export class Spring{
 
-    constructor(scene, radius = 0.3, height = 1, coils = 7) {
+    constructor(scene, position = new THREE.Vector3(0,0,0), radius = 0.3, height = 1, coils = 7) {
         this.scene = scene
         this.radius = radius
         this.height = height
         this.coils = coils
+        this.position = position
         this.init()
     }
 
@@ -50,6 +51,9 @@ export class Spring{
 
                     transparent: true, opacity: 1} );
         this.spring = new THREE.Mesh(tubeGeometry, this.material);
+
+        this.spring.position.add(this.position)
+        this.spring.rotateX(-Math.PI/2)
     }
 
     enable(){
