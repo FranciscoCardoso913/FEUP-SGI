@@ -127,5 +127,10 @@ export class NewsPaper{
         this.scene.add( this.newspaper )
     }
 
+    disable(){
+
+        this.scene.remove( this.newspaper )
+    }
+
         
 }

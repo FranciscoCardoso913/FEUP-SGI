@@ -21,7 +21,7 @@ export class Carpet{
 
         map.colorSpace = THREE.SRGBColorSpace;
 
-        const material = new THREE.MeshLambertMaterial( { map: map, color:0xcccccc} );
+        const material = new THREE.MeshLambertMaterial( { map: map, color:0x777777} );
         this.carpet = new THREE.Mesh(geometry, material)
         this.carpet.position.add(this.position)
         this.carpet.rotateX(-Math.PI/2)
@@ -30,5 +30,9 @@ export class Carpet{
 
     enable(){
         this.scene.add(this.carpet)
+    }
+    
+    disable(){
+        this.scene.remove(this.carpet)
     }
 }

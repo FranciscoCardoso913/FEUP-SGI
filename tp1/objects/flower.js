@@ -141,6 +141,10 @@ export class Flower{
     activate(){
         this.scene.add(this.flowerGroup)
     }
+    disable(){
+
+        this.scene.remove( this.flowerGroup )
+    }
     getMesh(){
         return this.flowerGroup
     }

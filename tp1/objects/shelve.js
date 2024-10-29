@@ -54,9 +54,9 @@ export class Shelve{
 
     drawBooks(){
         let angle =-Math.PI/2
-        this.shelve.add(new Book(this.scene,this.builder, 0x648964,new THREE.Vector3(1,0.3,0.5),angle,angle).getMesh())
-        this.shelve.add(new Book(this.scene,this.builder, 0x98727a,new THREE.Vector3(0.6,0.3,0.5),angle,angle).getMesh())
-        this.shelve.add(new Book(this.scene,this.builder, 0xD5A271,new THREE.Vector3(1.4,0.3,0.5),angle,angle,angle/8).getMesh())
+        this.shelve.add(new Book(this.scene,this.builder, 0x648964,new THREE.Vector3(1,10.6,0.5),angle,angle).getMesh())
+        this.shelve.add(new Book(this.scene,this.builder, 0x98727a,new THREE.Vector3(0.6,10.6,0.5),angle,angle).getMesh())
+        this.shelve.add(new Book(this.scene,this.builder, 0xD5A271,new THREE.Vector3(1.4,10.6,0.5),angle,angle,angle/8).getMesh())
 
         this.shelve.add(new Book(this.scene,this.builder, 0x123456,new THREE.Vector3(-2,4.2,1.2),0,-angle/3,0).getMesh())
         this.shelve.add(new Book(this.scene,this.builder, 0x789abc,new THREE.Vector3(-1,3.8,0.5),0,angle/3,0).getMesh())
@@ -75,6 +75,11 @@ export class Shelve{
 
     enable(){
         this.scene.add(this.shelve)
+    }
+
+    disable(){
+
+        this.scene.remove( this.shelve )
     }
 
 }

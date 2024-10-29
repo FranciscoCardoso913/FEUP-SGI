@@ -29,11 +29,7 @@ export class Chair{
 
         map.colorSpace = THREE.SRGBColorSpace;
 
-        this.plankMaterial = new THREE.MeshLambertMaterial( { map: map,
-
-                    side: THREE.DoubleSide,
-
-                    transparent: true, opacity: 1 } );
+        this.plankMaterial = new THREE.MeshLambertMaterial( { map: map,side: THREE.DoubleSide});
 
         this.chair.add(this.drawLeg(new THREE.Vector3(0,2.25,0),4.5))
         this.chair.add(this.drawLeg(new THREE.Vector3(2.5,2.25,0),4.5))
@@ -49,7 +45,6 @@ export class Chair{
     drawLeg(position, height =3){
         const geometry = new THREE.BoxGeometry(0.3, height, 0.3, 5, 5, 5);
 
-        // Create the cylinder mesh and add it to the scene
         let leg = new THREE.Mesh(geometry, this.legMaterial);
         leg.position.copy(position)
         return leg
@@ -57,9 +52,6 @@ export class Chair{
 
     drawPlank(width, height, position, angle=0){
         const geometry = new THREE.BoxGeometry(width, height, 0.3, 5, 5, 5);
-
-
- 
         let plank = new THREE.Mesh(geometry, this.plankMaterial);
         plank.position.copy(position)
         plank.rotateX(angle)
@@ -68,5 +60,9 @@ export class Chair{
 
     enable(){
         this.scene.add(this.chair)
+    }
+
+    disable(){
+        this.scene.remove(this.chair)
     }
 }
