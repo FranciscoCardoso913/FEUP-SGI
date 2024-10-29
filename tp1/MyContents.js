@@ -110,7 +110,7 @@ class MyContents  {
         this.jar = new Jar(this.app.scene, this.builder, new THREE.Vector3(3,4.2,3))
         this.couch = new Couch(this.app.scene,new THREE.Vector3(6,0,16),Math.PI)
         this.mini_table = new Table(this.app, 5, 3, 0.5, 3, 0.25, new THREE.Vector3(12,0,16));
-        this.floor_lamp = new FloorLamp(this.app.scene,this.builder, new THREE.Vector3(0,0.2,14), Math.PI/3 )
+        this.floor_lamp = new FloorLamp(this.app.scene,this.builder, new THREE.Vector3(0,0.2,16), Math.PI/2 )
         this.book = new Book(this.app.scene, this.builder,0x008833, new THREE.Vector3(-4, 4.25,-4.5),0,-Math.PI/8)
         this.book2 = new Book(this.app.scene, this.builder,0xaa8833, new THREE.Vector3(12, 3.25,14),0,-Math.PI/8)
         this.shelve = new Shelve(this.app.scene, this.builder, new THREE.Vector3(-10,0,20),Math.PI)
