@@ -16,6 +16,13 @@ export class Candle {
         this.candleGroup.add(this.candleMesh)
         this.candleGroup.add(this.coneMesh)
         this.candleGroup.add(this.sphereMesh)
+        this.candleGroup.add(this.light())
+    }
+
+    light(){
+        const light = new THREE.PointLight(0xFF7700,5, 10)
+        light.position.set(this.position.x, this.position.y + this.height -0.2  , this.position.z)
+        return light
     }
 
     candle(){
@@ -63,9 +70,7 @@ export class Candle {
     
     }
     disable(){
-        this.app.scene.remove(this.sphereMesh)
-        this.app.scene.remove(this.coneMesh)
-        this.app.scene.remove(this.candleMesh)
+        this.app.scene.add(this.candleGroup)
     }
     getMesh(){
         return this.candleGroup
