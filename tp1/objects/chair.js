@@ -66,7 +66,7 @@ export class Chair{
         return plank
     }
 
-    activate(){
+    enable(){
         this.scene.add(this.chair)
     }
 }

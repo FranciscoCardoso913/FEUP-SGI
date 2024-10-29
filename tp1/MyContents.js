@@ -8,6 +8,7 @@ import { Table } from './objects/table.js';
 import { Frame } from './objects/frame.js';
 import { Lamp } from './objects/lamp.js';
 import { Landscape } from './objects/landscape.js';
+import { Chair } from './objects/chair.js';
 
 /**
  *  This class contains the contents of out application
@@ -62,23 +63,7 @@ class MyContents  {
 
     }
 
-    /**
-     * builds the box mesh with material assigned
-     */
-    buildBox() {    
 
-        // Box texture
-        this.boxTexture = new THREE.TextureLoader().load('textures/feup_entry.jpg');
-
-        let boxMaterial = new THREE.MeshPhongMaterial({ color: "#ffff77", 
-        specular: "#000000", emissive: "#000000", shininess: 90, map: this.boxTexture });
-        // Create a Cube Mesh with basic material
-        let box = new THREE.BoxGeometry(  this.boxMeshSize,  this.boxMeshSize,  this.boxMeshSize );
-        this.boxMesh = new THREE.Mesh( box, boxMaterial );
-        this.boxMesh.position.y = this.boxDisplacement.y;
-        this.boxMesh.scale.set(1,1,2);
-        this.boxMesh.rotation.set(0,0,0);
-    }
 
     
     
@@ -99,7 +84,7 @@ class MyContents  {
         const ambientLight = new THREE.AmbientLight( 0x555555 );
         this.app.scene.add( ambientLight );
 
-        this.buildBox();
+    
 
         // Constructing the scene
         this.house = new House(this.app, 40, 40, 20);
@@ -107,6 +92,7 @@ class MyContents  {
         this.cake = new Cake(this.app, new THREE.Vector3(0,4.2,0));
         this.plate = new Plate(this.app, new THREE.Vector3(0,4.4,0));
         this.lamp = new Lamp(this.app, new THREE.Vector3(0, 17, 0));
+        this.chair = new Chair(this.app.scene, new THREE.Vector3(1.5,0, -8), -Math.PI/6)
         this.frameStudent1 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108793.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(5, 10, -19.6), new THREE.Vector3(0, 0, 0));
         this.frameStudent2 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108794.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(-5, 10, -19.6), new THREE.Vector3(0, 0, 0));
         this.landscape = new Landscape(this.app, new THREE.TextureLoader().load('textures/landscape.png'), new THREE.Vector3(300, 50, 0), new THREE.Vector3(0, - Math.PI / 2, 0));
@@ -227,6 +213,7 @@ class MyContents  {
             this.frameStudent2.enable();
             this.lamp.enable();
             this.landscape.enable();
+            this.chair.enable()
         }
         else {
             this.house.disable();
@@ -240,75 +227,7 @@ class MyContents  {
         }
     }
 
-    //TODO Fazer esta função para mostrar as primitivas
-    enablePrimitives() {
-        // Primitives
-        // let prim = new MyPrimitive(this.app);
-        // prim.buildPlane();
-        //this.buildCircle();
-        //this.buildSphere(1, 1, new THREE.Vector3(2, 5, 0));
-        //this.buildSphere(0.5, 0.5, new THREE.Vector3(-2, 5, 0));
-        //this.buildCylinder(1, new THREE.Vector3(-3, 8, 0));
-        //this.buildCylinder(0.75, new THREE.Vector3(3, 8, 0));
-        //this.buildCone(1, new THREE.Vector3(2.5,12,0));
-        //this.buildCone(0.25, new THREE.Vector3(-2.5,12,0));
-        //this.buildPolyhedron();
-        
-        /*
-        if (this.primitivesEnabled) {
-            this.primitives.enable();
-        }
-        else {
-            this.primitives.disable();
-        }*/
-    }
 
-    /**
-     * rebuilds the box mesh if required
-     * this method is called from the gui interface
-     */
-    rebuildBox() {
-        // remove boxMesh if exists
-        if (this.boxMesh !== undefined && this.boxMesh !== null) {  
-            this.app.scene.remove(this.boxMesh)
-        }
-        this.buildBox();
-        this.lastBoxEnabled = null
-    }
-    
-    /**
-     * updates the box mesh if required
-     * this method is called from the render method of the app
-     * updates are trigered by boxEnabled property changes
-     */
-    updateBoxIfRequired() {
-        if (this.boxEnabled !== this.lastBoxEnabled) {
-            this.lastBoxEnabled = this.boxEnabled
-            if (this.boxEnabled) {
-                this.app.scene.add(this.boxMesh)
-            }
-            else {
-                this.app.scene.remove(this.boxMesh)
-            }
-        }
-    }
-
-    /**
-     * updates the contents
-     * this method is called from the render method of the app
-     * 
-     */
-    update() {
-        // check if box mesh needs to be updated
-        this.updateBoxIfRequired()
-
-        // sets the box mesh position based on the displacement vector
-        this.boxMesh.position.x = this.boxDisplacement.x
-        this.boxMesh.position.y = this.boxDisplacement.y
-        this.boxMesh.position.z = this.boxDisplacement.z
-
-        
-    }
 
 }
 
