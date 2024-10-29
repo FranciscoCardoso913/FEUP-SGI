@@ -2,11 +2,12 @@ import * as THREE from 'three';
 
 export class NewsPaper{
 
-    constructor(scene,builder, position = new THREE.Vector3(0,0,0)) {
+    constructor(scene,builder, position = new THREE.Vector3(0,0,0), anglex=0, angley=0 ) {
         this.scene = scene
         this.builder = builder
         this.position = position
-        
+        this.anglex = anglex
+        this.angley = angley
         this.init()
     }
 
@@ -36,6 +37,9 @@ export class NewsPaper{
 
  
         this.newspaper.position.add(this.position)
+        this.newspaper.rotateY(this.angley)
+        this.newspaper.rotateX(this.anglex)
+        
  
     }
 
@@ -118,7 +122,7 @@ export class NewsPaper{
           return mesh
     }
 
-    activate(){
+    enable(){
 
         this.scene.add( this.newspaper )
     }
