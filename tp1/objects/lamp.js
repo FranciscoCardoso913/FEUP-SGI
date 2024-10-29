@@ -39,7 +39,7 @@ export class Lamp {
         this.lampMesh = new THREE.Mesh(lamp, lampMaterial);
         this.lampMesh.position.set(this.position.x, this.position.y, this.position.z);
 
-        this.light = new THREE.SpotLight(0xffffff, 80, 50, Math.PI/4, 1, 1);
+        this.light = new THREE.SpotLight(0xffffff, 80, 50, Math.PI/4, 0.3, 1);
         this.light.position.set(this.position.x, this.position.y, this.position.z);
         this.light.target.position.set(0,0,0);
 
