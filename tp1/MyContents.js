@@ -17,6 +17,7 @@ import { FloorLamp } from './objects/floor_lamp.js';
 import { Book } from './objects/book.js';
 import { Shelve } from './objects/shelve.js';
 import { Paint } from './objects/paint.js';
+import { Door } from './objects/door.js';
 import { MyNurbsBuilder } from './MyNurbsBuilder.js';
 
 /**
@@ -111,10 +112,10 @@ class MyContents  {
         this.couch = new Couch(this.app.scene,new THREE.Vector3(6,0,16),Math.PI)
         this.mini_table = new Table(this.app, 5, 3, 0.5, 3, 0.25, new THREE.Vector3(12,0,16));
         this.floor_lamp = new FloorLamp(this.app.scene,this.builder, new THREE.Vector3(0,0.2,16), Math.PI/2 )
-        this.book = new Book(this.app.scene, this.builder,0x008833, new THREE.Vector3(-4, 4.25,-4.5),0,-Math.PI/8)
-        this.book2 = new Book(this.app.scene, this.builder,0xaa8833, new THREE.Vector3(12, 3.25,14),0,-Math.PI/8)
+        this.book = new Book(this.app.scene, this.builder,0xaa8833, new THREE.Vector3(12, 3.25,14),0,-Math.PI/8)
         this.shelve = new Shelve(this.app.scene, this.builder, new THREE.Vector3(-10,0,20),Math.PI)
         this.paint = new Paint(this.app.scene, new THREE.Vector3(-20,8,15),Math.PI/2)
+        this.door = new Door(this.app.scene, new THREE.Vector3(-19.9,0,0))
         this.frameStudent1 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108793.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(5, 10, -19.6), new THREE.Vector3(0, 0, 0));
         this.frameStudent2 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108794.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(-5, 10, -19.6), new THREE.Vector3(0, 0, 0));
         this.landscape = new Landscape(this.app, new THREE.TextureLoader().load('textures/landscape.png'), new THREE.Vector3(300, 50, 0), new THREE.Vector3(0, - Math.PI / 2, 0));
@@ -243,10 +244,10 @@ class MyContents  {
             this.couch.enable()
             this.floor_lamp.enable()
             this.book.enable()
-            this.book2.enable()
             this.shelve.enable()
             this.paint.enable()
             this.mini_table.enable()
+            this.door.enable()
         }
         else {
             this.house.disable();
@@ -257,6 +258,17 @@ class MyContents  {
             this.frameStudent2.disable();
             this.lamp.disable();
             this.landscape.disable();
+            this.chair.disable()
+            this.newsPaper.disable()
+            this.carpet.disable()
+            this.spring.disable()
+            this.jar.disable()
+            this.couch.disable()
+            this.floor_lamp.disable()
+            this.book.disable()
+            this.shelve.disable()
+            this.paint.disable()
+            this.mini_table.disable()
         }
     }
 

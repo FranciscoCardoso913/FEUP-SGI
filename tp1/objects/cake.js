@@ -75,10 +75,7 @@ export class Cake{
      
     }
     disable(){
-        this.app.scene.remove(this.cakeMesh)
-        this.candles.forEach(element => {
-            element.disable()
-        });
+        this.app.scene.remove(this.cakeGroup)
     }
 
 }
