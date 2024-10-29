@@ -109,6 +109,10 @@ export class Book{
         this.scene.add( this.book )
     }
 
+    disable(){
+        this.scene.remove(this.book)
+    }
+
     getMesh(){
         return this.book
     }

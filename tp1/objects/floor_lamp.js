@@ -133,4 +133,9 @@ export class FloorLamp{
 
         this.scene.add( this.floor_lamp )
     }
+
+    disable(){
+
+        this.scene.remove( this.floor_lamp )
+    }
 }

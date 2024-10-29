@@ -72,4 +72,9 @@ export class Paint{
     enable(){
         this.scene.add(this.paint)
     }
+
+    disable(){
+
+        this.scene.remove( this.paint )
+    }
 }

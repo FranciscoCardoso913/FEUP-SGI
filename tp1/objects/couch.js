@@ -7,7 +7,7 @@ export class Couch{
     
         this.position = position
         this.angle = angle
-        this.chair = new THREE.Group();
+        this.couch = new THREE.Group();
         this.init()
     }
 
@@ -41,16 +41,16 @@ export class Couch{
 
                     transparent: true, opacity: 1 } ); 
 
-        this.chair.add(this.drawLeg(new THREE.Vector3(-1.5,3*Math.cos(Math.PI/4)/2,-1.5),Math.PI/4, Math.PI/4))
-        this.chair.add(this.drawLeg(new THREE.Vector3(-1.5,3*Math.cos(Math.PI/4)/2,1.5),Math.PI/4, 3*Math.PI/4))
-        this.chair.add(this.drawLeg(new THREE.Vector3(1.5,3*Math.cos(Math.PI/4)/2,1.5),Math.PI/4, 5*Math.PI/4))
-        this.chair.add(this.drawLeg(new THREE.Vector3(1.5,3*Math.cos(Math.PI/4)/2,-1.5),Math.PI/4, 7*Math.PI/4))
-        this.chair.add(this.drawPlank(4,4,new THREE.Vector3(0,2.3,0),Math.PI/2))
-        this.chair.add(this.drawPlank(4,2,new THREE.Vector3(1.7,3.1,0),0,Math.PI/2,-Math.PI/16))
-        this.chair.add(this.drawPlank(4,2,new THREE.Vector3(-2.2,3.1,0),0,Math.PI/2,Math.PI/16))
-        this.chair.add(this.drawPlank(4,5,new THREE.Vector3(0,4.8,-2),-Math.PI/16,Math.PI))
-        this.chair.position.add(this.position)
-        this.chair.rotateY(this.angle)
+        this.couch.add(this.drawLeg(new THREE.Vector3(-1.5,3*Math.cos(Math.PI/4)/2,-1.5),Math.PI/4, Math.PI/4))
+        this.couch.add(this.drawLeg(new THREE.Vector3(-1.5,3*Math.cos(Math.PI/4)/2,1.5),Math.PI/4, 3*Math.PI/4))
+        this.couch.add(this.drawLeg(new THREE.Vector3(1.5,3*Math.cos(Math.PI/4)/2,1.5),Math.PI/4, 5*Math.PI/4))
+        this.couch.add(this.drawLeg(new THREE.Vector3(1.5,3*Math.cos(Math.PI/4)/2,-1.5),Math.PI/4, 7*Math.PI/4))
+        this.couch.add(this.drawPlank(4,4,new THREE.Vector3(0,2.3,0),Math.PI/2))
+        this.couch.add(this.drawPlank(4,2,new THREE.Vector3(1.7,3.1,0),0,Math.PI/2,-Math.PI/16))
+        this.couch.add(this.drawPlank(4,2,new THREE.Vector3(-2.2,3.1,0),0,Math.PI/2,Math.PI/16))
+        this.couch.add(this.drawPlank(4,5,new THREE.Vector3(0,4.8,-2),-Math.PI/16,Math.PI))
+        this.couch.position.add(this.position)
+        this.couch.rotateY(this.angle)
     }
 
     drawLeg(position, anglex, angley){
@@ -89,24 +89,25 @@ export class Couch{
         shape.lineTo(-width / 2, -height / 2 + borderRadius);
         shape.quadraticCurveTo(-width / 2, -height / 2, -width / 2 + borderRadius, -height / 2);
     
-        // Extrude the shape to give it depth
+
         const extrudeSettings = { depth: 0.5, bevelEnabled: false };
         const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
-    
-        // Create the plank mesh
+
         let plank = new THREE.Mesh(geometry, this.plankMaterial);
         plank.position.copy(position);
         plank.rotateX(anglex);
         plank.rotateZ(anglez);
         plank.rotateY(angley);
-        
-    
         return plank;
     }
     
 
 
     enable(){
-        this.scene.add(this.chair)
+        this.scene.add(this.couch)
+    }
+
+    disable(){
+        this.scene.remove(this.couch)
     }
 }

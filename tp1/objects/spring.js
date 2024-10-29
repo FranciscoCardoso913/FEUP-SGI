@@ -59,5 +59,9 @@ export class Spring{
     enable(){
         this.scene.add(this.spring)
     }
+    disable(){
+
+      this.scene.remove( this.spring )
+  }
 
 }

@@ -118,4 +118,9 @@ export class Jar {
     enable() {
         this.scene.add(this.jarGroup);
     }
+
+    disable(){
+
+        this.scene.remove( this.jarGroup )
+    }
 }
