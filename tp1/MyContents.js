@@ -10,6 +10,7 @@ import { Lamp } from './objects/lamp.js';
 import { Landscape } from './objects/landscape.js';
 import { Chair } from './objects/chair.js';
 import { NewsPaper } from './objects/newspaper.js';
+import { Carpet } from './objects/carpet.js';
 import { MyNurbsBuilder } from './MyNurbsBuilder.js';
 
 /**
@@ -98,6 +99,7 @@ class MyContents  {
         this.lamp = new Lamp(this.app, new THREE.Vector3(0, 17, 0));
         this.chair = new Chair(this.app.scene, new THREE.Vector3(1.5,0, -8), -Math.PI/6)
         this.newsPaper= new NewsPaper(this.app.scene, this.builder, new THREE.Vector3(3,4.9,-4) ,Math.PI/3, -Math.PI/4)
+        this.carpet = new Carpet(this.app.scene, 15,15,new THREE.Vector3(0,0.1,0))
         this.frameStudent1 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108793.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(5, 10, -19.6), new THREE.Vector3(0, 0, 0));
         this.frameStudent2 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108794.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(-5, 10, -19.6), new THREE.Vector3(0, 0, 0));
         this.landscape = new Landscape(this.app, new THREE.TextureLoader().load('textures/landscape.png'), new THREE.Vector3(300, 50, 0), new THREE.Vector3(0, - Math.PI / 2, 0));
@@ -220,6 +222,7 @@ class MyContents  {
             this.landscape.enable();
             this.chair.enable()
             this.newsPaper.enable()
+            this.carpet.enable()
         }
         else {
             this.house.disable();
