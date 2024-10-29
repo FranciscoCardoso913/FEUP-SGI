@@ -54,16 +54,6 @@ class MyContents  {
         this.diffusePlaneColor = "rgb(128,0,0)";
         this.specularPlaneColor = "rgb(0,0,0)";
         this.planeShininess = 0;
-        //relating texture and material:
-        //two alternatives with different results
-        //alternative 1
-        //this.planeMaterial = new THREE.MeshPhongMaterial({
-        //    color: this.diffusePlaneColor,
-        //    specular: this.specularPlaneColor,
-        //    emissive: "#000000",
-        //    shininess: this.planeShininess,
-        //    map: this.planeTexture
-        //}) //end of alternative 1 
 
         //alternative 2
         this.planeMaterial = new THREE.MeshLambertMaterial({
@@ -119,7 +109,7 @@ class MyContents  {
         this.lamp = new Lamp(this.app, new THREE.Vector3(0, 17, 0));
         this.frameStudent1 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108793.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(5, 10, -19.6), new THREE.Vector3(0, 0, 0));
         this.frameStudent2 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108794.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(-5, 10, -19.6), new THREE.Vector3(0, 0, 0));
-        this.landscape = new Landscape(this.app, new THREE.TextureLoader().load('textures/landscape.jpg'), new THREE.Vector3(300, 100, 0), new THREE.Vector3(0, - Math.PI / 2, 0));
+        this.landscape = new Landscape(this.app, new THREE.TextureLoader().load('textures/landscape.png'), new THREE.Vector3(300, 50, 0), new THREE.Vector3(0, - Math.PI / 2, 0));
         this.enableScene3D();
 
         // Create a Plane Mesh with basic material

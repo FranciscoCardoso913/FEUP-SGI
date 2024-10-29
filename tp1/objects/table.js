@@ -21,15 +21,15 @@ export class Table{
 
     legs(){
 
-        let legTexture = new THREE.TextureLoader().load('textures/table_legs.jpg');
+        let legTexture = new THREE.TextureLoader().load('textures/dark_wood.jpg');
         legTexture.wrapS = THREE.RepeatWrapping;
         legTexture.wrapT = THREE.MirroredRepeatWrapping;
         legTexture.repeat.set( 2, 2 );
 
         let legMaterial = new THREE.MeshPhongMaterial({ 
             color: this.legColor, 
-            specular: "#ffffff",
-            shininess: 90,
+            specular: "#7e5c39",
+            shininess: 10,
             map: legTexture
         })
 
@@ -52,7 +52,7 @@ export class Table{
 
     top(){
 
-        let table_texture = new THREE.TextureLoader().load('textures/table_wood.jpg');
+        let table_texture = new THREE.TextureLoader().load('textures/dark_wood.jpg');
 
         let topMaterial = new THREE.MeshPhongMaterial({ 
             color: this.topColor, 

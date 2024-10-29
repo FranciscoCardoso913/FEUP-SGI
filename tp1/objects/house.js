@@ -21,7 +21,7 @@ export class House{
 
     window(){
 
-        let windowTexture = new THREE.TextureLoader().load( 'textures/table_legs.jpg' );
+        let windowTexture = new THREE.TextureLoader().load( 'textures/dark_wood.jpg' );
         windowTexture.wrapS = THREE.MirroredRepeatWrapping;
         windowTexture.wrapT = THREE.MirroredRepeatWrapping;
         windowTexture.repeat.set( 2, 3 );
@@ -128,18 +128,13 @@ export class House{
         this.wallMesh4_1.rotation.y = -Math.PI/2;
         this.wallMesh4_2.rotation.y = -Math.PI/2;
         this.wallMesh4_3.rotation.y = -Math.PI/2;
-        this.wallMesh4_4.rotation.y = -Math.PI/2;
-
-        //light outside the window points to the house
-        this.light = new THREE.SpotLight(0xffffff, 80, 500, Math.PI/4, 1, 1);
-        this.light.position.set( this.widthy, this.height/1.5, 0 );
-        this.light.target.position.set(0,0,0);        
+        this.wallMesh4_4.rotation.y = -Math.PI/2;      
         
     }
 
 
     celling (){
-        let cellingTexture = new THREE.TextureLoader().load( 'textures/floor.png' );
+        let cellingTexture = new THREE.TextureLoader().load( 'textures/floor.jpg' );
         cellingTexture.wrapS = THREE.RepeatWrapping;
         cellingTexture.wrapT = THREE.RepeatWrapping;
         cellingTexture.repeat.set( 5, 5 );
@@ -161,7 +156,7 @@ export class House{
 
     floor(){
 
-        let floorTexture = new THREE.TextureLoader().load( 'textures/floor.png' );
+        let floorTexture = new THREE.TextureLoader().load( 'textures/floor.jpg' );
         floorTexture.wrapS = THREE.MirroredRepeatWrapping;
         floorTexture.wrapT = THREE.MirroredRepeatWrapping;
         floorTexture.repeat.set( 5, 5 );
@@ -192,7 +187,6 @@ export class House{
         this.app.scene.add(this.floorMesh);
 
         //window
-        this.app.scene.add(this.light);
         this.app.scene.add(this.stripMesh1);
         this.app.scene.add(this.stripMesh2);
         this.app.scene.add(this.stripMesh3);
@@ -213,7 +207,6 @@ export class House{
         this.app.scene.remove(this.floorMesh);
 
         //window
-        this.app.scene.remove(this.light);
         this.app.scene.remove(this.stripMesh1);
         this.app.scene.remove(this.stripMesh2);
         this.app.scene.remove(this.stripMesh3);
