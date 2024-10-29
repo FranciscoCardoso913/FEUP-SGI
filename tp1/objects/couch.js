@@ -106,7 +106,7 @@ export class Couch{
     
 
 
-    activate(){
+    enable(){
         this.scene.add(this.chair)
     }
 }

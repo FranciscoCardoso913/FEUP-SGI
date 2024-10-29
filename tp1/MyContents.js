@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import { MyAxis } from './MyAxis.js';
-import {MyPrimitive} from './objects/primitive.js';
 import { House } from './objects/house.js';
 import { Cake } from './objects/cake.js';
 import { Plate } from './objects/plate.js';
@@ -13,6 +12,8 @@ import { NewsPaper } from './objects/newspaper.js';
 import { Carpet } from './objects/carpet.js';
 import { Spring } from './objects/spring.js';
 import { Jar } from './objects/jar.js';
+import { Couch } from './objects/couch.js';
+import { FloorLamp } from './objects/floor_lamp.js';
 import { MyNurbsBuilder } from './MyNurbsBuilder.js';
 
 /**
@@ -104,6 +105,8 @@ class MyContents  {
         this.carpet = new Carpet(this.app.scene, 15,15,new THREE.Vector3(0,0.1,0))
         this.spring = new Spring(this.app.scene , new THREE.Vector3(-3,4.2,3))
         this.jar = new Jar(this.app.scene, this.builder, new THREE.Vector3(3,4.2,3))
+        this.couch = new Couch(this.app.scene,new THREE.Vector3(12,0,15),Math.PI)
+        this.floor_lamp = new FloorLamp(this.app.scene,this.builder, new THREE.Vector3(5,0.2,14), Math.PI/3 )
         this.frameStudent1 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108793.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(5, 10, -19.6), new THREE.Vector3(0, 0, 0));
         this.frameStudent2 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108794.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(-5, 10, -19.6), new THREE.Vector3(0, 0, 0));
         this.landscape = new Landscape(this.app, new THREE.TextureLoader().load('textures/landscape.png'), new THREE.Vector3(300, 50, 0), new THREE.Vector3(0, - Math.PI / 2, 0));
@@ -229,6 +232,8 @@ class MyContents  {
             this.carpet.enable()
             this.spring.enable()
             this.jar.enable()
+            this.couch.enable()
+            this.floor_lamp.enable()
         }
         else {
             this.house.disable();
