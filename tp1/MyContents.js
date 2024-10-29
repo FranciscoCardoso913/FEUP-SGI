@@ -9,6 +9,8 @@ import { Frame } from './objects/frame.js';
 import { Lamp } from './objects/lamp.js';
 import { Landscape } from './objects/landscape.js';
 import { Chair } from './objects/chair.js';
+import { NewsPaper } from './objects/newspaper.js';
+import { MyNurbsBuilder } from './MyNurbsBuilder.js';
 
 /**
  *  This class contains the contents of out application
@@ -56,6 +58,8 @@ class MyContents  {
         this.specularPlaneColor = "rgb(0,0,0)";
         this.planeShininess = 0;
 
+        this.builder = new MyNurbsBuilder()
+
         //alternative 2
         this.planeMaterial = new THREE.MeshLambertMaterial({
             map: this.planeTexture
@@ -93,6 +97,7 @@ class MyContents  {
         this.plate = new Plate(this.app, new THREE.Vector3(0,4.4,0));
         this.lamp = new Lamp(this.app, new THREE.Vector3(0, 17, 0));
         this.chair = new Chair(this.app.scene, new THREE.Vector3(1.5,0, -8), -Math.PI/6)
+        this.newsPaper= new NewsPaper(this.app.scene, this.builder, new THREE.Vector3(3,4.9,-4) ,Math.PI/3, -Math.PI/4)
         this.frameStudent1 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108793.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(5, 10, -19.6), new THREE.Vector3(0, 0, 0));
         this.frameStudent2 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108794.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(-5, 10, -19.6), new THREE.Vector3(0, 0, 0));
         this.landscape = new Landscape(this.app, new THREE.TextureLoader().load('textures/landscape.png'), new THREE.Vector3(300, 50, 0), new THREE.Vector3(0, - Math.PI / 2, 0));
@@ -214,6 +219,7 @@ class MyContents  {
             this.lamp.enable();
             this.landscape.enable();
             this.chair.enable()
+            this.newsPaper.enable()
         }
         else {
             this.house.disable();
