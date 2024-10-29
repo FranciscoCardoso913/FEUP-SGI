@@ -7,12 +7,15 @@ export class Candle {
         this.color = color;
         this.position = position;
         this.height = 0.7
+        this.candleGroup = new THREE.Group()
         this.init()
     }
     init(){
         this.candle();
         this.fire();
-    
+        this.candleGroup.add(this.candleMesh)
+        this.candleGroup.add(this.coneMesh)
+        this.candleGroup.add(this.sphereMesh)
     }
 
     candle(){
@@ -56,13 +59,15 @@ export class Candle {
         //this.app.scene.add(this.coneMesh);
     }
     enable(){
-        this.app.scene.add(this.sphereMesh)
-        this.app.scene.add(this.coneMesh)
-        this.app.scene.add(this.candleMesh)
+        this.app.scene.add(this.candleGroup)
+    
     }
     disable(){
         this.app.scene.remove(this.sphereMesh)
         this.app.scene.remove(this.coneMesh)
         this.app.scene.remove(this.candleMesh)
+    }
+    getMesh(){
+        return this.candleGroup
     }
 }

@@ -2,23 +2,26 @@ import * as THREE from 'three';
 import { Candle } from './candle.js';
 
 export class Cake{
-    constructor(app, position, color = '#5C4033') {
+    constructor(app, position, angle=0, color = '#5C4033') {
         this.app = app;
         this.color = color;
         this.position = position;
+        this.cakeGroup = new THREE.Group()
+        this.angle = angle
         this.init()
     }
     init(){
         this.cake();
         let y = 1.5 + this.position.y;
         
-        this.candles = [
-            new Candle(this.app, new THREE.Vector3(0.2,y,-0.7)),
-            new Candle(this.app, new THREE.Vector3(0.8,y,0.4)),
-            new Candle(this.app, new THREE.Vector3(-0.7,y,-0.5)),
-            new Candle(this.app, new THREE.Vector3(0.5,y,-0.3)),
-            new Candle(this.app, new THREE.Vector3(-0.8,y,0.6))
-        ]
+        this.cakeGroup.add(this.cakeMesh)
+        this.cakeGroup.add(new Candle(this.app, new THREE.Vector3(0.2,y,-0.7)).getMesh())
+        this.cakeGroup.add(new Candle(this.app, new THREE.Vector3(0.8,y,0.4)).getMesh())
+        this.cakeGroup.add(new Candle(this.app, new THREE.Vector3(-0.7,y,-0.5)).getMesh())
+        this.cakeGroup.add(new Candle(this.app, new THREE.Vector3(0.5,y,-0.3)).getMesh())
+        this.cakeGroup.add(new Candle(this.app, new THREE.Vector3(-0.8,y,0.6)).getMesh())
+        this.cakeGroup.rotateY(this.angle)
+    
     }
     cake(){
 
@@ -68,10 +71,8 @@ export class Cake{
   
     }
     enable(){
-        this.app.scene.add(this.cakeMesh)
-        this.candles.forEach(element => {
-            element.enable()
-        });
+        this.app.scene.add(this.cakeGroup)
+     
     }
     disable(){
         this.app.scene.remove(this.cakeMesh)
