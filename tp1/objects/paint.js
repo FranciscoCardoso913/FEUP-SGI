@@ -14,7 +14,14 @@ export class Paint{
     }
 
     init() {
-        this.canvaMaterial = new THREE.MeshBasicMaterial({color: 0xDDDDDD})
+        const map =new THREE.TextureLoader().load( 'textures/book.jpg' );
+
+        map.wrapS = map.wrapT = THREE.RepeatWrapping;
+
+
+        this.canvaMaterial = new THREE.MeshLambertMaterial( { map: map, side: THREE.DoubleSide,color: 0xDDDDDD} );
+        
+    
 
 
 
