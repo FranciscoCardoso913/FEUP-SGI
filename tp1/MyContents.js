@@ -16,6 +16,7 @@ import { Couch } from './objects/couch.js';
 import { FloorLamp } from './objects/floor_lamp.js';
 import { Book } from './objects/book.js';
 import { Shelve } from './objects/shelve.js';
+import { Paint } from './objects/paint.js';
 import { MyNurbsBuilder } from './MyNurbsBuilder.js';
 
 /**
@@ -111,6 +112,7 @@ class MyContents  {
         this.floor_lamp = new FloorLamp(this.app.scene,this.builder, new THREE.Vector3(5,0.2,14), Math.PI/3 )
         this.book = new Book(this.app.scene, this.builder,0x008833, new THREE.Vector3(-4, 4.25,-4.5),0,-Math.PI/8)
         this.shelve = new Shelve(this.app.scene, this.builder, new THREE.Vector3(-3,0,20),Math.PI)
+        this.paint = new Paint(this.app.scene, new THREE.Vector3(-20,8,15),Math.PI/2)
         this.frameStudent1 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108793.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(5, 10, -19.6), new THREE.Vector3(0, 0, 0));
         this.frameStudent2 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108794.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(-5, 10, -19.6), new THREE.Vector3(0, 0, 0));
         this.landscape = new Landscape(this.app, new THREE.TextureLoader().load('textures/landscape.png'), new THREE.Vector3(300, 50, 0), new THREE.Vector3(0, - Math.PI / 2, 0));
@@ -240,6 +242,7 @@ class MyContents  {
             this.floor_lamp.enable()
             this.book.enable()
             this.shelve.enable()
+            this.paint.enable()
         }
         else {
             this.house.disable();
