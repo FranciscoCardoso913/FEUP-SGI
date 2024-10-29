@@ -73,7 +73,7 @@ export class Shelve{
         
     }
 
-    activate(){
+    enable(){
         this.scene.add(this.shelve)
     }
 

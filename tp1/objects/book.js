@@ -104,7 +104,7 @@ export class Book{
           return mesh
     }
 
-    activate(){
+    enable(){
 
         this.scene.add( this.book )
     }
