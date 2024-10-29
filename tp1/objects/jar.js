@@ -115,7 +115,7 @@ export class Jar {
         return points
     }
 
-    activate() {
+    enable() {
         this.scene.add(this.jarGroup);
     }
 }
