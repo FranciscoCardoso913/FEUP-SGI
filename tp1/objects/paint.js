@@ -69,7 +69,7 @@ export class Paint{
 
 
     }
-    activate(){
+    enable(){
         this.scene.add(this.paint)
     }
 }
