@@ -18,7 +18,7 @@ export class Frame{
     init(){
 
         if (this.frameTexture === null){
-            this.frameTexture = new THREE.TextureLoader().load('textures/frame.png');
+            this.frameTexture = new THREE.TextureLoader().load('textures/dark_wood.jpg');
             this.frameTexture.wrapS = THREE.MirroredRepeatWrapping;
             this.frameTexture.wrapT = THREE.MirroredRepeatWrapping; 
         }
