@@ -191,10 +191,7 @@ class MyApp  {
         this.stats.begin()
         this.updateCameraIfRequired()
 
-        // update the animation if contents were provided
-        if (this.activeCamera !== undefined && this.activeCamera !== null) {
-            this.contents.update()
-        }
+
 
         // required if controls.enableDamping or controls.autoRotate are set to true
         this.controls.update();
