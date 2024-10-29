@@ -27,7 +27,7 @@ export class Landscape{
         this.landscapeMesh.rotation.set(this.rotation.x, this.rotation.y, this.rotation.z);
 
         // add a point light on top of the model
-        this.pointLight = new THREE.PointLight( 0xffffff, 500,1000,1 );
+        this.pointLight = new THREE.PointLight( 0xffffff, 400,1000,1 );
         this.pointLight.position.set( this.position.x -150, this.position.y+80, this.position.z );
         
         // add a point light helper for the previous point light

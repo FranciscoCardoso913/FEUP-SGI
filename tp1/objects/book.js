@@ -20,14 +20,21 @@ export class Book{
 
         this.samplesV = 20  
 
-        const map =new THREE.TextureLoader().load( 'textures/book.jpg' );
+        let map =new THREE.TextureLoader().load( 'textures/book.jpg' );
 
         map.wrapS = map.wrapT = THREE.RepeatWrapping;
 
 
         this.coverMaterial = new THREE.MeshLambertMaterial( { map: map, side: THREE.DoubleSide,color: this.color} );
+
+         map =new THREE.TextureLoader().load( 'textures/book.jpg' );
+
+        map.wrapS = map.wrapT = THREE.RepeatWrapping;
+
+
+        this.pageMaterial = new THREE.MeshLambertMaterial( { map: map, side: THREE.DoubleSide,color: 0xfff5d3} );
     
-        this.pageMaterial = new THREE.MeshBasicMaterial({color: 0xdddddd})
+   
        
         this.book.add(this.drawCover())
         this.book.add(this.drawPages())
