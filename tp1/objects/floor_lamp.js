@@ -17,13 +17,14 @@ export class FloorLamp{
         this.poleMaterial = new THREE.MeshStandardMaterial({ color: 0x777777, side: THREE.DoubleSide });
         this.samplesU = 20;
         this.samplesV = 50;
+        this.floor_lamp.rotateY(this.angle)
         this.floor_lamp.add(this.drawPole())
         this.floor_lamp.add(this.drawBase())
         this.floor_lamp.add(this.drawLamp())
         this.floor_lamp.add(this.light())
 
         this.floor_lamp.position.add(this.position)
-        this.floor_lamp.rotateY(this.angle)
+    
     }
 
     drawPole(){
@@ -86,35 +87,30 @@ export class FloorLamp{
         return lamp
     }
     light(){
-        const spotLight = new THREE.SpotLight(0xcc9900, 100);
+        const spotLight = new THREE.SpotLight(0xcc9900, 100,25,Math.PI/5,0.3,1);
 
         // Set the position of the light
         spotLight.position.set(0, 9 ,2);
         let targetPosition = this.calculateIntersectionWithYZero(new THREE.Vector3(0,9,2), this.tangentVector)
         // Set target position for the spotlight direction
-        spotLight.target.position.set(targetPosition.x , targetPosition.y, targetPosition.z);
-    
+        spotLight.target.position.set(targetPosition.x , targetPosition.y, targetPosition.z );
+        
         // Add the target to the scene so the light can aim at it
-        this.scene.add(spotLight.target);
+        this.floor_lamp.add(spotLight.target);
     
-        // Set other optional spotlight parameters
-        spotLight.angle = Math.PI / 4;       // Spread angle of the spotlight beam
-        spotLight.penumbra = 0.3;            // Softness of the spotlight edges
-        spotLight.decay = 1;                 // Decay factor for the light intensity
-        spotLight.distance = 50;  
-
+    
 
         return spotLight
     }
 
     calculateIntersectionWithYZero(initialPoint, directionVector) {
-        const x0 = initialPoint.x + Math.sin(this.angle);
+        const x0 = initialPoint.x
         const y0 = initialPoint.y;
-        const z0 = initialPoint.z + Math.cos(this.angle);
+        const z0 = initialPoint.z 
     
-        const dx = directionVector.x + Math.sin(this.angle);
+        const dx = directionVector.x 
         const dy = directionVector.y;
-        const dz = directionVector.z + Math.cos(this.angle);
+        const dz = directionVector.z 
     
         // Calculate parameter t for y = 0
         const t = -y0 / dy;
