@@ -1,10 +1,11 @@
 import * as THREE from 'three';
 
 export class Plate {
-    constructor(app, position, color = '#ffffff') {
+    constructor(app, position,radius = 1.8, color = '#ffffff') {
         this.app = app;
         this.color = color;
         this.position = position;
+        this.radius = radius
         this.init()
     }
     init(){
@@ -13,14 +14,15 @@ export class Plate {
 
     plate(){
                 
-        let cylinderMaterial = new THREE.MeshPhongMaterial({
-            color: this.color,
-            specular: "#000000",
-            emissive: "#000000",
-            shininess: 90
-        })
+        const map =new THREE.TextureLoader().load( 'textures/plate.jpg' );
 
-        let cylinder = new THREE.CylinderGeometry(1.8, 1.5, 0.1, 15,15);
+        map.wrapS = map.wrapT = THREE.RepeatWrapping;
+
+        map.colorSpace = THREE.SRGBColorSpace;
+
+        let cylinderMaterial = new THREE.MeshLambertMaterial( { map: map, side: THREE.DoubleSide,color: 0xaaaaaa} );
+
+        let cylinder = new THREE.CylinderGeometry(this.radius, this.radius*5/6, 0.1, 15,15);
         this.cylinderMesh = new THREE.Mesh(cylinder, cylinderMaterial);
         this.cylinderMesh.position.set(this.position.x, this.position.y + 0.05, this.position.z)
 
