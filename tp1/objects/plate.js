@@ -20,11 +20,11 @@ export class Plate {
 
         map.colorSpace = THREE.SRGBColorSpace;
 
-        let cylinderMaterial = new THREE.MeshLambertMaterial( { map: map, side: THREE.DoubleSide,color: 0xaaaaaa} );
+        let cylinderMaterial = new THREE.MeshLambertMaterial( { map: map,color: 0xaaaaaa} );
 
         let cylinder = new THREE.CylinderGeometry(this.radius, this.radius*5/6, 0.1, 15,15);
         this.cylinderMesh = new THREE.Mesh(cylinder, cylinderMaterial);
-        this.cylinderMesh.castShadow = true;
+        this.cylinderMesh.castShadow = this.cylinderMesh.receiveShadow = true;
         this.cylinderMesh.position.set(this.position.x, this.position.y + 0.05, this.position.z)
 
     }

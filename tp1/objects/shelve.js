@@ -21,7 +21,7 @@ export class Shelve{
 
         map.colorSpace = THREE.SRGBColorSpace;
 
-        this.shelveMaterial = new THREE.MeshLambertMaterial( { map: map, side: THREE.DoubleSide} );
+        this.shelveMaterial = new THREE.MeshLambertMaterial( { map: map } );
         
         this.drawShelve()
         this.drawBooks()
@@ -45,7 +45,7 @@ export class Shelve{
     drawPlank(width,height,position, anglex=0, angley=0){
         const geometry = new THREE.BoxGeometry(width,height,0.3)
         const plank = new THREE.Mesh(geometry, this.shelveMaterial)
-        plank.castShadow = true
+        plank.castShadow = plank.receiveShadow = true
         plank.position.add(position)
         plank.rotateY(angley)
         plank.rotateX(anglex)

@@ -23,8 +23,6 @@ export class Couch{
 
         this.legMaterial = new THREE.MeshLambertMaterial( { map: map,
 
-                    side: THREE.DoubleSide,
-
                     transparent: true, opacity: 1 } );
 
         map =new THREE.TextureLoader().load( 'textures/couch.jpg' );
@@ -36,8 +34,6 @@ export class Couch{
         map.colorSpace = THREE.SRGBColorSpace;
 
         this.plankMaterial = new THREE.MeshLambertMaterial( { map: map,
-
-                    side: THREE.DoubleSide,
 
                     transparent: true, opacity: 1 } ); 
 

@@ -23,8 +23,8 @@ export class Jar {
 
         this.material = new THREE.MeshLambertMaterial({
             map: map,
-            side: THREE.DoubleSide,
             transparent: true,
+            side: THREE.DoubleSide,
             opacity: 0.5
         });
 
