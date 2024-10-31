@@ -47,8 +47,6 @@ export class Flower{
 
         let material = new THREE.MeshLambertMaterial( { map: map,
 
-                    side: THREE.DoubleSide,
-
                     transparent: true, opacity: 1 } );
 
 
@@ -101,8 +99,7 @@ export class Flower{
         
         // Define material for the petal
         const petalMaterial = new THREE.MeshBasicMaterial({
-            color: this.color, 
-            side: THREE.DoubleSide,
+            color: this.color, side: THREE.DoubleSide
         });
 
         // Create the petal mesh and set its position

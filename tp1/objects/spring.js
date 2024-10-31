@@ -47,8 +47,6 @@ export class Spring{
 
         this.material = new THREE.MeshLambertMaterial( { map: map,
 
-                    side: THREE.DoubleSide,
-
                     transparent: true, opacity: 1} );
         this.spring = new THREE.Mesh(tubeGeometry, this.material);
         this.spring.castShadow = this.spring.receiveShadow = true;

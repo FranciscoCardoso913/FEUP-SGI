@@ -14,7 +14,7 @@ export class FloorLamp{
     init() {
     
 
-        this.poleMaterial = new THREE.MeshStandardMaterial({ color: 0x777777, side: THREE.DoubleSide });
+        this.poleMaterial = new THREE.MeshStandardMaterial({ color: 0x777777 });
         this.samplesU = 20;
         this.samplesV = 50;
         this.floor_lamp.rotateY(this.angle)
@@ -81,8 +81,9 @@ export class FloorLamp{
             true  // Radial segments for smoothness
         );
 
+        let lampMaterial = new THREE.MeshPhongMaterial({ color: 0x777777, side: THREE.DoubleSide });
         
-        let lamp = new THREE.Mesh(geometry, this.poleMaterial);
+        let lamp = new THREE.Mesh(geometry, lampMaterial);
         lamp.castShadow = lamp.receiveShadow = true;
         lamp.position.y+=9
         lamp.position.z+=2
@@ -94,8 +95,8 @@ export class FloorLamp{
     light(){
         const spotLight = new THREE.SpotLight(0xcc9900, 100,25,Math.PI/5,0.3,1);
         //spotLight.castShadow = true;
-        spotLight.shadow.mapSize.width = 4096;
-        spotLight.shadow.mapSize.height = 4096;
+        spotLight.shadow.mapSize.width = 8192;
+        spotLight.shadow.mapSize.height = 8192;
 
         // Set the position of the light
         spotLight.position.set(0, 9 ,2);

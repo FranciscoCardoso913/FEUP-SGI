@@ -19,7 +19,7 @@ export class Paint{
         map.wrapS = map.wrapT = THREE.RepeatWrapping;
 
 
-        this.canvasMaterial = new THREE.MeshLambertMaterial( { map: map, side: THREE.DoubleSide,color: 0xDDDDDD} );
+        this.canvasMaterial = new THREE.MeshLambertMaterial( { map: map, color: 0xDDDDDD} );
         
     
 

@@ -23,7 +23,7 @@ export class Mug{
         map.anisotropy = 16;
 
         map.colorSpace = THREE.SRGBColorSpace;
-        this.mugMaterial = new THREE.MeshLambertMaterial( { map: map, side: THREE.DoubleSide, color: 0xcccccc} );
+        this.mugMaterial = new THREE.MeshLambertMaterial( { map: map, color: 0xcccccc, side: THREE.DoubleSide} );
 
         map =new THREE.TextureLoader().load( 'textures/coffe.jpg' );
 
@@ -32,7 +32,7 @@ export class Mug{
         map.anisotropy = 16;
 
         map.colorSpace = THREE.SRGBColorSpace;
-        this.coffeMaterial = new THREE.MeshLambertMaterial( { map: map, side: THREE.DoubleSide, color: 0x6f4e37} );
+        this.coffeMaterial = new THREE.MeshLambertMaterial( { map: map, color: 0x6f4e37} );
        
         this.mug.add(this.drawMug())
         this.mug.add(this.drawHandle())
