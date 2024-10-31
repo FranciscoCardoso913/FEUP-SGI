@@ -119,6 +119,7 @@ export class NewsPaper{
                         this.samplesV, this.material)  
   
           let mesh = new THREE.Mesh( surfaceData, this.material );
+          mesh.receiveShadow = mesh.castShadow = true
           return mesh
     }
 

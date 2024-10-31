@@ -45,6 +45,7 @@ export class Shelve{
     drawPlank(width,height,position, anglex=0, angley=0){
         const geometry = new THREE.BoxGeometry(width,height,0.3)
         const plank = new THREE.Mesh(geometry, this.shelveMaterial)
+        plank.castShadow = true
         plank.position.add(position)
         plank.rotateY(angley)
         plank.rotateX(anglex)

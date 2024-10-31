@@ -24,6 +24,7 @@ export class Plate {
 
         let cylinder = new THREE.CylinderGeometry(this.radius, this.radius*5/6, 0.1, 15,15);
         this.cylinderMesh = new THREE.Mesh(cylinder, cylinderMaterial);
+        this.cylinderMesh.castShadow = true;
         this.cylinderMesh.position.set(this.position.x, this.position.y + 0.05, this.position.z)
 
     }

@@ -53,6 +53,8 @@ export class Book{
         const pages = new THREE.Mesh(geometry, this.pageMaterial)
         pages.position.add(new THREE.Vector3(0.8,0.25,1.3))
         pages.rotateX(-Math.PI/2)
+        pages.receiveShadow = true
+        pages.castShadow = true
         return pages
     }
 
@@ -112,10 +114,12 @@ export class Book{
   
                         orderU, orderV, this.samplesU,
   
-                        this.samplesV, this.material)  
+                        this.samplesV, this.material);
   
-          let mesh = new THREE.Mesh( surfaceData, this.coverMaterial );
-          return mesh
+        let mesh = new THREE.Mesh( surfaceData, this.coverMaterial );
+        mesh.receiveShadow = true
+        mesh.castShadow = true
+        return mesh
     }
 
     enable(){

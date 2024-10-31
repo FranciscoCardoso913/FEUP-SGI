@@ -35,6 +35,7 @@ export class Candle {
 
         let candle = new THREE.CylinderGeometry(0.1, 0.1, this.height, 10, 5);
         this.candleMesh = new THREE.Mesh(candle, candleMaterial);
+        this.candleMesh.castShadow = this.candleMesh.receiveShadow = true;
         this.candleMesh.position.set(this.position.x, this.position.y , this.position.z)
 
         //this.app.scene.add(this.candleMesh);
@@ -55,10 +56,12 @@ export class Candle {
 
         let cone = new THREE.ConeGeometry(0.1,0.2,10,5,false,0,Math.PI *2);
         this.coneMesh = new THREE.Mesh(cone, coneMaterial);
+        this.coneMesh.castShadow = this.coneMesh.receiveShadow = true;
         this.coneMesh.position.set(this.position.x, this.position.y + this.height -0.1  , this.position.z)
 
         let sphere = new THREE.SphereGeometry(0.1, 10, 10, 0, Math.PI * 2  , 0, Math.PI*0.5);
         this.sphereMesh = new THREE.Mesh(sphere, sphereMaterial); 
+        this.sphereMesh.castShadow = this.sphereMesh.receiveShadow = true;
         this.sphereMesh.position.set(this.position.x, this.position.y + this.height -0.2  , this.position.z)
         this.sphereMesh.rotation.x = Math.PI
         //this.app.scene.add(this.sphereMesh);

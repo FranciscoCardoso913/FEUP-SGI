@@ -72,6 +72,7 @@ export class Jar {
         );
 
         this.bottomMesh = new THREE.Mesh(surfaceData, this.material);
+        this.bottomMesh.castShadow = true;
         return this.bottomMesh
     }
 
@@ -98,6 +99,7 @@ export class Jar {
         );
 
         this.topMesh = new THREE.Mesh(surfaceData, this.material);
+        this.topMesh.castShadow = true;
         this.topMesh.position.set(0,2.5,0)
         return this.topMesh
     }

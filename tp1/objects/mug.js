@@ -49,6 +49,7 @@ export class Mug{
     drawMug(){
         const geometry = new THREE.CylinderGeometry(0.5,0.5,1,32,1,true)
         const mug = new THREE.Mesh(geometry, this.mugMaterial)
+        mug.castShadow = true
         mug.position.add(new THREE.Vector3(0,0.4,0))
         return mug
     }
@@ -72,6 +73,7 @@ export class Mug{
 
         const tubeGeometry = new THREE.TubeGeometry(bezierCurve, 50, 0.1, 8, false);
         let handle = new THREE.Mesh(tubeGeometry, this.mugMaterial);
+        handle.castShadow = true;
 
         return handle
     }

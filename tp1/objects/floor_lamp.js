@@ -39,6 +39,7 @@ export class FloorLamp{
 
         const tubeGeometry = new THREE.TubeGeometry(bezierCurve, 50, 0.1, 8, false);
         let topPole = new THREE.Mesh(tubeGeometry, this.poleMaterial);
+        topPole.receiveShadow = topPole.castShadow = true;
 
         const geometry = new THREE.CylinderGeometry(
             0.1,         // Radius at the top
@@ -47,6 +48,7 @@ export class FloorLamp{
             10     // Radial segments for smoothness
         );
         let bottomPole = new THREE.Mesh(geometry, this.poleMaterial);
+        bottomPole.castShadow = bottomPole.receiveShadow = true;
 
         topPole.position.y+= 6;
         bottomPole.position.y+=3
@@ -66,6 +68,7 @@ export class FloorLamp{
 
         
         let base = new THREE.Mesh(geometry, this.poleMaterial);
+        base.castShadow = base.receiveShadow = true;
         return base
     }
 
@@ -80,14 +83,19 @@ export class FloorLamp{
 
         
         let lamp = new THREE.Mesh(geometry, this.poleMaterial);
+        lamp.castShadow = lamp.receiveShadow = true;
         lamp.position.y+=9
         lamp.position.z+=2
         const angleWithY = Math.acos(this.tangentVector.dot(new THREE.Vector3(0,-1,0)));
         lamp.rotateX(-angleWithY)
         return lamp
     }
+
     light(){
         const spotLight = new THREE.SpotLight(0xcc9900, 100,25,Math.PI/5,0.3,1);
+        //spotLight.castShadow = true;
+        spotLight.shadow.mapSize.width = 4096;
+        spotLight.shadow.mapSize.height = 4096;
 
         // Set the position of the light
         spotLight.position.set(0, 9 ,2);

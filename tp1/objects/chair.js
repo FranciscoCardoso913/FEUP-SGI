@@ -46,6 +46,7 @@ export class Chair{
         const geometry = new THREE.BoxGeometry(0.3, height, 0.3, 5, 5, 5);
 
         let leg = new THREE.Mesh(geometry, this.legMaterial);
+        leg.castShadow = leg.receiveShadow = true;
         leg.position.copy(position)
         return leg
     }
@@ -53,6 +54,7 @@ export class Chair{
     drawPlank(width, height, position, angle=0){
         const geometry = new THREE.BoxGeometry(width, height, 0.3, 5, 5, 5);
         let plank = new THREE.Mesh(geometry, this.plankMaterial);
+        plank.castShadow = plank.receiveShadow = true;
         plank.position.copy(position)
         plank.rotateX(angle)
         return plank

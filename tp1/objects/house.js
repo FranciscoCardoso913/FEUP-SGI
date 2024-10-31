@@ -30,8 +30,8 @@ export class House{
             map: windowTexture
         });
 
-        let strip1 = new THREE.BoxGeometry(1,this.height/3,1) //left
-        let strip2 = new THREE.BoxGeometry(1,this.height/3,1) //right
+        let strip1 = new THREE.BoxGeometry(1,this.height/3+1,1) //left
+        let strip2 = new THREE.BoxGeometry(1,this.height/3+1,1) //right
         let strip3 = new THREE.BoxGeometry(this.widthx/3,1,1) //top
         let strip4 = new THREE.BoxGeometry(this.widthx/3,1,1) //bottom
         let middleStrip1 = new THREE.BoxGeometry(1,this.height/3,1) //middle horizontal
@@ -44,6 +44,13 @@ export class House{
         this.stripMesh4 = new THREE.Mesh(strip4, windowMaterial);
         this.middleStripMesh1 = new THREE.Mesh(middleStrip1, windowMaterial);
         this.middleStripMesh2 = new THREE.Mesh(middleStrip2, windowMaterial);
+
+        this.stripMesh1.receiveShadow = this.stripMesh1.castShadow = true;
+        this.stripMesh2.receiveShadow = this.stripMesh2.castShadow = true;
+        this.stripMesh3.receiveShadow = this.stripMesh3.castShadow = true;
+        this.stripMesh4.receiveShadow = this.stripMesh4.castShadow = true;
+        this.middleStripMesh1.receiveShadow = this.middleStripMesh1.castShadow = true;
+        this.middleStripMesh2.receiveShadow = this.middleStripMesh2.castShadow = true;
 
         this.stripMesh3.rotation.y = Math.PI/2;
         this.stripMesh4.rotation.y = Math.PI/2;
@@ -128,7 +135,15 @@ export class House{
         this.wallMesh4_1.rotation.y = -Math.PI/2;
         this.wallMesh4_2.rotation.y = -Math.PI/2;
         this.wallMesh4_3.rotation.y = -Math.PI/2;
-        this.wallMesh4_4.rotation.y = -Math.PI/2;      
+        this.wallMesh4_4.rotation.y = -Math.PI/2;   
+        
+        this.wallMesh.receiveShadow = true;
+        this.wallMesh2.receiveShadow = true;
+        this.wallMesh3.receiveShadow = true;
+        this.wallMesh4_1.receiveShadow = true;
+        this.wallMesh4_2.receiveShadow = true;
+        this.wallMesh4_3.receiveShadow = true;
+        this.wallMesh4_4.receiveShadow = true;
         
     }
 
@@ -171,6 +186,7 @@ export class House{
 
             let planePrimitive = new THREE.PlaneGeometry( this.widthx, this.widthy); 
             this.floorMesh = new THREE.Mesh( planePrimitive, planePrimitiveMaterial );
+            this.floorMesh.receiveShadow = true;
             this.floorMesh.rotation.x = -Math.PI / 2;  
             
     }

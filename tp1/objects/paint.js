@@ -19,25 +19,26 @@ export class Paint{
         map.wrapS = map.wrapT = THREE.RepeatWrapping;
 
 
-        this.canvaMaterial = new THREE.MeshLambertMaterial( { map: map, side: THREE.DoubleSide,color: 0xDDDDDD} );
+        this.canvasMaterial = new THREE.MeshLambertMaterial( { map: map, side: THREE.DoubleSide,color: 0xDDDDDD} );
         
     
 
 
 
         this.lineMaterial = new THREE.LineBasicMaterial( { color: 0x000000 } )
-        this.paint.add(this.canva())
+        this.paint.add(this.canvas())
         this.paint.add(this.drawing())
         this.paint.scale.set(this.scale.x, this.scale.y, this.scale.z)
         this.paint.position.add(this.position)
         this.paint.rotateY(this.angle)
         
     }
-    canva(){
+    canvas(){
         const geometry = new THREE.BoxGeometry(23,15,0.1,5,5)
-        const canva = new THREE.Mesh(geometry, this.canvaMaterial)
-        canva.position.set(11.5,7.5,0)
-        return canva
+        const canvas = new THREE.Mesh(geometry, this.canvasMaterial)
+        canvas.castShadow = true
+        canvas.position.set(11.5,7.5,0)
+        return canvas
 
     }
     drawing(){

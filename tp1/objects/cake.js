@@ -65,7 +65,12 @@ export class Cake{
 
         interiorMesh2.position.z = this.position.z+0.75;
         interiorMesh2.position.x = this.position.x;
-        interiorMesh2.rotation.y = 3*Math.PI/2  ;
+        interiorMesh2.rotation.y = 3*Math.PI/2;
+
+        this.cakeMesh.receiveShadow = this.cakeMesh.castShadow = true;
+        interiorMesh.receiveShadow = interiorMesh.castShadow = true;
+        interiorMesh2.receiveShadow = interiorMesh.castShadow = true;
+
         this.cakeMesh.add (interiorMesh);
         this.cakeMesh.add (interiorMesh2);
   
