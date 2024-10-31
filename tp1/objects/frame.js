@@ -30,8 +30,6 @@ export class Frame{
             map : this.frameTexture
         })
 
-        //this.imageTexture.
-
         this.imageMaterial = new THREE.MeshLambertMaterial({
             map : this.imageTexture
         })

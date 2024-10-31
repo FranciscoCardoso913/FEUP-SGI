@@ -62,6 +62,7 @@ export class Couch{
         );
 
         let leg = new THREE.Mesh(geometry, this.legMaterial);
+        leg.castShadow = leg.receiveShadow = true;
         leg.rotateY(angley)
         leg.rotateX(anglex)
         
@@ -94,6 +95,7 @@ export class Couch{
         const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
 
         let plank = new THREE.Mesh(geometry, this.plankMaterial);
+        plank.castShadow = plank.receiveShadow = true;
         plank.position.copy(position);
         plank.rotateX(anglex);
         plank.rotateZ(anglez);

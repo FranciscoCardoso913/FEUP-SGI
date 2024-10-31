@@ -55,6 +55,7 @@ export class Flower{
 
         // Create a mesh by combining geometry and material
         const frontSphere = new THREE.Mesh(sphereGeometry, material);
+        frontSphere.castShadow = true;
         frontSphere.scale.z = 0.4
         frontSphere.position.z+=1
         frontSphere.position.y+=3
@@ -74,7 +75,7 @@ export class Flower{
         const backMaterial = new THREE.MeshBasicMaterial({ color: 0x006600, wireframe: false }); // Change wireframe to true for a wireframe sphere
 
         const backSphere = new THREE.Mesh(sphereGeometry, backMaterial);
-
+        backSphere.castShadow = true;
         
         backSphere.scale.z =0.4
         backSphere.position.z +=0.9
@@ -106,6 +107,7 @@ export class Flower{
 
         // Create the petal mesh and set its position
         let petal = new THREE.Mesh(petalGeometry, petalMaterial);
+        petal.castShadow = petal.receiveShadow = true;
         petal.rotateZ(angle)
         petal.position.z+=1
         petal.position.y+=3
@@ -135,6 +137,7 @@ export class Flower{
 
         // Create the line mesh for the stem
         let stem = new THREE.Line(geometry, material);
+        stem.castShadow = stem.receiveShadow = true;
         return stem
 
     }

@@ -51,6 +51,7 @@ export class Spring{
 
                     transparent: true, opacity: 1} );
         this.spring = new THREE.Mesh(tubeGeometry, this.material);
+        this.spring.castShadow = this.spring.receiveShadow = true;
 
         this.spring.position.add(this.position)
         this.spring.rotateX(-Math.PI/2)

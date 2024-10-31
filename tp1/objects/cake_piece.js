@@ -61,7 +61,12 @@ export class CakePiece{
 
         interiorMesh2.position.z = 0.75*Math.cos(Math.PI/5);
         interiorMesh2.position.x = 0.75*Math.sin(Math.PI/5);
-        interiorMesh2.rotation.y = Math.PI/2 + Math.PI*2/10  ;
+        interiorMesh2.rotation.y = Math.PI/2 + Math.PI*2/10;
+
+        this.cakeMesh.receiveShadow = this.cakeMesh.castShadow = true;
+        interiorMesh.receiveShadow = interiorMesh.castShadow = true;
+        interiorMesh2.receiveShadow = interiorMesh.castShadow = true;
+
         this.cakeMesh.add (interiorMesh);
         this.cakeMesh.add (interiorMesh2);
   

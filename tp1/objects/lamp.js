@@ -21,7 +21,6 @@ export class Lamp {
         let chain = new THREE.CylinderGeometry(0.5, 0.5, 2, 30, 30, false, 0, Math.PI*2);
 
         this.chainMesh = new THREE.Mesh(chain, chainMaterial);
-
         this.chainMesh.position.set(this.position.x, this.position.y + 2, this.position.z);
 
     }
@@ -41,6 +40,10 @@ export class Lamp {
 
         this.light = new THREE.SpotLight(0xffffff, 80, 50, Math.PI/4, 0.3, 1);
         this.light.position.set(this.position.x, this.position.y, this.position.z);
+        this.light.castShadow = true;
+        this.light.shadow.mapSize.width = 4096;
+        this.light.shadow.mapSize.height = 4096;
+
         this.light.target.position.set(0,0,0);
 
 
