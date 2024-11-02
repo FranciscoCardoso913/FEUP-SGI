@@ -13,25 +13,13 @@ export class Mug{
 
     init() {
 
-        this.samplesU = 20         // maximum defined in MyGuiInterface
-
+        this.samplesU = 20 
         this.samplesV = 20  
         let map =new THREE.TextureLoader().load( 'textures/mug.jpg' );
-
-        map.wrapS = map.wrapT = THREE.RepeatWrapping;
-
-        map.anisotropy = 16;
-
         map.colorSpace = THREE.SRGBColorSpace;
         this.mugMaterial = new THREE.MeshLambertMaterial( { map: map, color: 0xcccccc, side: THREE.DoubleSide} );
 
         map =new THREE.TextureLoader().load( 'textures/coffe.jpg' );
-
-        map.wrapS = map.wrapT = THREE.RepeatWrapping;
-
-        map.anisotropy = 16;
-
-        map.colorSpace = THREE.SRGBColorSpace;
         this.coffeMaterial = new THREE.MeshLambertMaterial( { map: map, color: 0x6f4e37} );
        
         this.mug.add(this.drawMug())

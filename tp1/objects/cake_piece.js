@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { Candle } from './candle.js';
 
 export class CakePiece{
+
     constructor(app, position, angle=0, color = '#5C4033') {
         this.app = app;
         this.color = color;
@@ -10,6 +11,10 @@ export class CakePiece{
         this.angle = angle
         this.init()
     }
+
+    /**
+     * Initializes the cake object and group
+     */
     init(){
         this.cake();
         let y = 1.5 ;
@@ -20,8 +25,13 @@ export class CakePiece{
         this.cakeGroup.position.add(this.position)
     
     }
+
+    /**
+     * Creates a mesh representing the cake
+     */
     cake(){
 
+        // Cake is 
         let interiorTexture = new THREE.TextureLoader().load('textures/interior_cake.jpg');
         interiorTexture.wrapS = THREE.MirroredRepeatWrapping;
         interiorTexture.wrapT = THREE.MirroredRepeatWrapping;

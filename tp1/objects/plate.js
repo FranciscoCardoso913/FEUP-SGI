@@ -15,9 +15,6 @@ export class Plate {
     plate(){
                 
         const map =new THREE.TextureLoader().load( 'textures/plate.jpg' );
-
-        map.wrapS = map.wrapT = THREE.RepeatWrapping;
-
         map.colorSpace = THREE.SRGBColorSpace;
 
         let cylinderMaterial = new THREE.MeshLambertMaterial( { map: map,color: 0xaaaaaa} );

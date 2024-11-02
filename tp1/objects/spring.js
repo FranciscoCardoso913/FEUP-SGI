@@ -38,16 +38,13 @@ export class Spring{
         // Create the TubeGeometry to wrap the curve path
         const tubeGeometry = new THREE.TubeGeometry(helixCurve, 300, 0.05, 8, false); // 0.1 is the tube radius
         const map =new THREE.TextureLoader().load( 'textures/spring.jpg' );
-
-        map.wrapS = map.wrapT = THREE.RepeatWrapping;
-
-        map.anisotropy = 16;
-
         map.colorSpace = THREE.SRGBColorSpace;
 
-        this.material = new THREE.MeshLambertMaterial( { map: map,
-
-                    transparent: true, opacity: 1} );
+        this.material = new THREE.MeshLambertMaterial( { 
+          map: map,
+          transparent: true,
+          opacity: 1
+          } );
         this.spring = new THREE.Mesh(tubeGeometry, this.material);
         this.spring.castShadow = this.spring.receiveShadow = true;
 

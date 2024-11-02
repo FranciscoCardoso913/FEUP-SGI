@@ -17,8 +17,6 @@ export class Jar {
         this.samplesU = 50; // Increased for smoother surface
         this.samplesV = 20; 
         const map = new THREE.TextureLoader().load('textures/glass.jpg');
-        map.wrapS = map.wrapT = THREE.RepeatWrapping;
-        map.anisotropy = 16;
         map.colorSpace = THREE.SRGBColorSpace;
 
         this.material = new THREE.MeshLambertMaterial({

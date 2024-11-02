@@ -38,11 +38,6 @@ export class Flower{
 
         // Create a material for the sphere
         const map =new THREE.TextureLoader().load( 'textures/flower.jpg' );
-
-        map.wrapS = map.wrapT = THREE.RepeatWrapping;
-
-        map.anisotropy = 16;
-
         map.colorSpace = THREE.SRGBColorSpace;
 
         let material = new THREE.MeshLambertMaterial( { map: map,

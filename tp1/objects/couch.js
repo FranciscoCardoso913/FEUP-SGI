@@ -14,25 +14,12 @@ export class Couch{
     init() {
 
         let map =new THREE.TextureLoader().load( 'textures/light_wood.jpg' );
-
-        map.wrapS = map.wrapT = THREE.RepeatWrapping;
-
-        map.anisotropy = 16;
-
         map.colorSpace = THREE.SRGBColorSpace;
-
         this.legMaterial = new THREE.MeshLambertMaterial( { map: map,
 
                     transparent: true, opacity: 1 } );
 
         map =new THREE.TextureLoader().load( 'textures/couch.jpg' );
-
-        map.wrapS = map.wrapT = THREE.RepeatWrapping;
-
-        map.anisotropy = 16;
-
-        map.colorSpace = THREE.SRGBColorSpace;
-
         this.plankMaterial = new THREE.MeshLambertMaterial( { map: map,
 
                     transparent: true, opacity: 1 } ); 
