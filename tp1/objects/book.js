@@ -91,7 +91,8 @@ export class Book{
             controlPoints,
             orderU, orderV,
             this.samplesU, this.samplesV,
-            this.material);
+            this.material
+        );
   
         let mesh = new THREE.Mesh( surfaceData, this.coverMaterial );
         mesh.receiveShadow = mesh.castShadow = true

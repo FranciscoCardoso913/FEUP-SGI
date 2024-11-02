@@ -34,10 +34,9 @@ export class Chair{
     }
 
     /**
-     * 
      * @param {THREE.Vector3} position 
      * @param {Number} height 
-     * @returns 
+     * @returns {THREE.MESH} Mesh representing the chair at the given position with the given height
      */
     drawLeg(position, height =3){
         const geometry = new THREE.BoxGeometry(0.3, height, 0.3, 5, 5, 5);
@@ -48,6 +47,13 @@ export class Chair{
         return leg
     }
 
+    /**
+     * @param {Number} width 
+     * @param {Number} height 
+     * @param {THREE.Vector3} position 
+     * @param {Number} angle 
+     * @returns {THREE.MESH} Mesh representing the plank at the given position with the given width, height and angle
+     */
     drawPlank(width, height, position, angle=0){
         const geometry = new THREE.BoxGeometry(width, height, 0.3, 5, 5, 5);
         let plank = new THREE.Mesh(geometry, this.plankMaterial);
@@ -57,10 +63,16 @@ export class Chair{
         return plank
     }
 
+    /**
+     * Adds the chair to the scene
+     */
     enable(){
         this.scene.add(this.chair)
     }
 
+    /**
+     * Removes the chair from the scene
+     */
     disable(){
         this.scene.remove(this.chair)
     }
