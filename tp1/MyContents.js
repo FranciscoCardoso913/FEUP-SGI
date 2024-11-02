@@ -17,7 +17,6 @@ import { FloorLamp } from './objects/floor_lamp.js';
 import { Book } from './objects/book.js';
 import { Shelve } from './objects/shelve.js';
 import { Paint } from './objects/paint.js';
-import { Door } from './objects/door.js';
 import { Mug } from './objects/mug.js';
 import { MyNurbsBuilder } from './MyNurbsBuilder.js';
 
@@ -94,8 +93,6 @@ class MyContents  {
         const ambientLight = new THREE.AmbientLight( 0x555555 );
         this.app.scene.add( ambientLight );
 
-    
-
         // Constructing the scene
         this.house = new House(this.app, 40, 40, 20);
         this.table = new Table(this.app.scene, 10, 10, 0.5, 4, 0.25);
@@ -113,7 +110,7 @@ class MyContents  {
         this.book = new Book(this.app.scene, this.builder,0xaa8833, new THREE.Vector3(12, 3.25,14),0,-Math.PI/8)
         this.shelve = new Shelve(this.app.scene, this.builder, new THREE.Vector3(-10,0,20),Math.PI)
         this.paint = new Paint(this.app.scene, new THREE.Vector3(-20,8,15),Math.PI/2)
-        this.door = new Door(this.app.scene, new THREE.Vector3(-19.9,0,0))
+        this.door = new Frame(this.app, new THREE.TextureLoader().load('textures/door.jpg'), 5, 12, 0.5, "#ce9c69", new THREE.Vector3(-19.9, 6, 0), new THREE.Vector3(0, Math.PI / 2, 0));
         this.cakePiece = new Cake(this.app.scene,1,new THREE.Vector3(-0.2,4.1,-4.8))
         this.smallPlate = new Plate(this.app.scene, new THREE.Vector3(0,4.2,-4), 1.2);
         this.mug = new Mug(this.app.scene, this.builder, new THREE.Vector3(-2.5,4.3,-2.5), Math.PI/4)
@@ -276,6 +273,7 @@ class MyContents  {
             this.mug.disable()
             this.cakePiece.disable()
             this.smallPlate.disable()
+            this.door.disable()
         }
     }
 
