@@ -1,17 +1,29 @@
 import * as THREE from 'three';
 
 export class Plate {
-    constructor(app, position,radius = 1.8, color = '#ffffff') {
-        this.app = app;
+    /**
+     * 
+     * @param {*} scene 
+     * @param {*} position Position of the plate
+     * @param {*} radius radius of the plate
+     * @param {*} color color of the plate
+     */
+    constructor(scene, position,radius = 1.8, color = '#ffffff') {
+        this.scene = scene;
         this.color = color;
         this.position = position;
         this.radius = radius
         this.init()
     }
+    /**
+     * Initialize the plate
+     */
     init(){
         this.plate()
     }
-
+    /**
+     * Creates plate object
+     */
     plate(){
                 
         const map =new THREE.TextureLoader().load( 'textures/plate.jpg' );
@@ -25,12 +37,16 @@ export class Plate {
         this.cylinderMesh.position.set(this.position.x, this.position.y + 0.05, this.position.z)
 
     }
-
+    /**
+    * Enables the plate object in the scene
+    */
     enable(){
-        this.app.scene.add(this.cylinderMesh)
+        this.scene.add(this.cylinderMesh)
     }
-    
+    /**
+    * Disables the plate object in the scene
+    */
     disable(){
-        this.app.scene.remove(this.cylinderMesh)
+        this.scene.remove(this.cylinderMesh)
     }
 }

@@ -1,7 +1,14 @@
 import * as THREE from 'three';
 
-export class Mug{
 
+export class Mug{
+    /**
+     * 
+     * @param {*} scene 
+     * @param {*} builder builder to create curved surfaces
+     * @param {THREE.Vector3} position Position of the mug
+     * @param {float} angle Angle that the mug will rotate in y
+     */
     constructor(scene,builder, position = new THREE.Vector3(0,0,0), angle=0)  {
         this.scene = scene
         this.builder = builder
@@ -11,6 +18,9 @@ export class Mug{
         this.init()
     }
 
+    /**
+     * Initializes the mug object
+     */
     init() {
 
         this.samplesU = 20 
@@ -28,12 +38,11 @@ export class Mug{
 
         this.mug.position.add(this.position)
         this.mug.rotateY(this.angle)
-
-        
-        
- 
     }
-
+    /**
+     * Creates the mug
+     * @returns {THREE.Mesh} The mug mesh
+     */
     drawMug(){
         const geometry = new THREE.CylinderGeometry(0.5,0.5,1,32,1,true)
         const mug = new THREE.Mesh(geometry, this.mugMaterial)
@@ -41,7 +50,10 @@ export class Mug{
         mug.position.add(new THREE.Vector3(0,0.4,0))
         return mug
     }
-
+    /**
+     * Creates the coffe
+     * @returns {THREE.Mesh} The coffe mesh
+     */
     drawCoffe(){
         const geometry = new THREE.CircleGeometry(0.5,32)
         const coffe = new THREE.Mesh(geometry, this.coffeMaterial)
@@ -50,7 +62,10 @@ export class Mug{
         return coffe
     }
 
-
+    /**
+     * Creates the handle of the mug
+     * @returns {THREE.Mesh} The handle mesh
+     */
     drawHandle(){
   
         const startPoint = new THREE.Vector3(0.46, 0.1, 0); // starting point
@@ -65,12 +80,16 @@ export class Mug{
 
         return handle
     }
-
+   /**
+    * Enables the mug object in the scene
+    */
     enable(){
 
         this.scene.add( this.mug )
     }
-
+   /**
+    * Disables the mug object in the scene
+    */
     disable(){
         this.scene.remove(this.mug)
     }
