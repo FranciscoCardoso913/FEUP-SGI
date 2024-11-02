@@ -17,7 +17,6 @@ import { FloorLamp } from './objects/floor_lamp.js';
 import { Book } from './objects/book.js';
 import { Shelve } from './objects/shelve.js';
 import { Paint } from './objects/paint.js';
-import { Door } from './objects/door.js';
 import { Mug } from './objects/mug.js';
 import { CakePiece } from './objects/cake_piece.js';
 import { MyNurbsBuilder } from './MyNurbsBuilder.js';
@@ -95,8 +94,6 @@ class MyContents  {
         const ambientLight = new THREE.AmbientLight( 0x555555 );
         this.app.scene.add( ambientLight );
 
-    
-
         // Constructing the scene
         this.house = new House(this.app, 40, 40, 20);
         this.table = new Table(this.app, 10, 10, 0.5, 4, 0.25);
@@ -110,16 +107,16 @@ class MyContents  {
         this.jar = new Jar(this.app.scene, this.builder, new THREE.Vector3(3,4.2,3))
         this.couch = new Couch(this.app.scene,new THREE.Vector3(6,0,16),Math.PI)
         this.mini_table = new Table(this.app, 5, 3, 0.5, 3, 0.25, new THREE.Vector3(12,0,16));
-        this.floor_lamp = new FloorLamp(this.app.scene,this.builder, new THREE.Vector3(0,0.2,16), Math.PI/2 )
+        this.floor_lamp = new FloorLamp(this.app.scene, new THREE.Vector3(0,0.2,16), Math.PI/2 )
         this.book = new Book(this.app.scene, this.builder,0xaa8833, new THREE.Vector3(12, 3.25,14),0,-Math.PI/8)
         this.shelve = new Shelve(this.app.scene, this.builder, new THREE.Vector3(-10,0,20),Math.PI)
         this.paint = new Paint(this.app.scene, new THREE.Vector3(-20,8,15),Math.PI/2)
-        this.door = new Door(this.app.scene, new THREE.Vector3(-19.9,0,0))
         this.cakePiece = new CakePiece(this.app,new THREE.Vector3(-0.2,4.1,-4.8))
         this.smallPlate = new Plate(this.app, new THREE.Vector3(0,4.2,-4), 1.2);
         this.mug = new Mug(this.app.scene, this.builder, new THREE.Vector3(-2.5,4.3,-2.5), Math.PI/4)
         this.frameStudent1 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108793.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(5, 10, -19.6), new THREE.Vector3(0, 0, 0));
         this.frameStudent2 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108794.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(-5, 10, -19.6), new THREE.Vector3(0, 0, 0));
+        this.door = new Frame(this.app, new THREE.TextureLoader().load('textures/door.jpg'), 5, 12, 0.5, "#ce9c69", new THREE.Vector3(-19.9, 6, 0), new THREE.Vector3(0, Math.PI / 2, 0));
         this.landscape = new Landscape(this.app, new THREE.TextureLoader().load('textures/landscape.png'), new THREE.Vector3(200, 50, 0), new THREE.Vector3(0, - Math.PI / 2, 0));
         this.enableScene3D();
 

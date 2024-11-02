@@ -8,10 +8,13 @@ export class Jar {
         this.builder = builder;
         this.position = position;
 
-        this.jarGroup = new THREE.Group()
+        this.jarGroup = new THREE.Group();
         this.init();
     }
 
+    /**
+     * Initialize the jar by creating the bottom and up curved surfaces and adding flowers
+     */
     init() {
 
         this.samplesU = 50; // Increased for smoother surface
@@ -35,10 +38,12 @@ export class Jar {
 
         this.jarGroup.position.add(this.position)
 
-
-
     }
 
+    /**
+     * Creates the bottom curved surface of the jar
+     * @returns {THREE.Mesh} A mesh representing the bottom of the jar
+     */
     bottom(){
         let controlPoints;
         let surfaceData;
@@ -47,17 +52,12 @@ export class Jar {
         let orderV = 32;
 
         // Build NURBS surface control points for a rounded jar
-        controlPoints = [
-        
-        ];
-
+        controlPoints = [];
         controlPoints.push(this.circle(0,0,orderV,2))
         controlPoints.push(this.circle(0.8,0,orderV,2))
         controlPoints.push(this.circle(1,0.5,orderV))
         controlPoints.push(this.circle(1,2,orderV))
         controlPoints.push(this.circle(0.5,2.5,orderV))
-
-   
 
         // Build NURBS surface
         surfaceData = this.builder.build(
@@ -74,17 +74,18 @@ export class Jar {
         return this.bottomMesh
     }
 
+    /**
+     * Creates the top curved surface of the jar
+     * @returns {THREE.Mesh} A mesh representing the top of the jar
+     */
     up(){
-        let controlPoints = [
-        
-        ];
-
         let orderU = 2;
         let orderV = 32;
+
+        let controlPoints = [];
         controlPoints.push(this.circle(0.5,0,orderV,2))
         controlPoints.push(this.circle(0.3,0.3,orderV,2))
         controlPoints.push(this.circle(0.5,0.5,orderV))
-
 
         // Build NURBS surface
         let surfaceData = this.builder.build(
@@ -102,6 +103,13 @@ export class Jar {
         return this.topMesh
     }
 
+    /**
+     * @param {Number} radius 
+     * @param {Number} height 
+     * @param {Number} segments 
+     * @param {Number} importance 
+     * @returns {Array} An array of points representing a circle 
+     */
     circle(radius, height, segments, importance = 1){
         let points = []
         for (let i = 0; i<= segments; i++){
@@ -115,10 +123,16 @@ export class Jar {
         return points
     }
 
+    /**
+     * Enable the frame by adding it to the scene
+     */
     enable() {
         this.scene.add(this.jarGroup);
     }
 
+    /**
+     * Disable the frame by removing it from the scene
+     */
     disable(){
 
         this.scene.remove( this.jarGroup )

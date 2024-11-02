@@ -27,8 +27,8 @@ export class Landscape{
         this.pointLight = new THREE.PointLight( 0xffffff, 400,1000,1 );
         this.pointLight.position.set( this.position.x - 100, this.position.y+80, this.position.z );
         this.pointLight.castShadow = true;
-        this.pointLight.shadow.mapSize.width = 8192;
-        this.pointLight.shadow.mapSize.height = 8192;
+        this.pointLight.shadow.mapSize.width = 4096;
+        this.pointLight.shadow.mapSize.height = 4096;
 
         // add a point light helper for the previous point light
         let sphereSize = 10;
