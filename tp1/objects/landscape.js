@@ -1,15 +1,24 @@
 import * as THREE from 'three';
 
 export class Landscape{
-
-    constructor(app, imageTexture, position, rotation) {
-        this.app = app;
+    /**
+     * 
+     * @param {*} scene 
+     * @param {THREE.Texture} imageTexture texture of the landscape
+     * @param {THREE.Vector3} position position of the landscape
+     * @param {THREE.Vector3} rotation rotation of the landscape
+     */
+    constructor(scene, imageTexture, position, rotation) {
+        this.scene = scene;
         this.imageTexture = imageTexture;
         this.position = position;
         this.rotation = rotation;
+        this.landscapeGroup = new THREE.Group()
         this.init();
     }
-
+    /**
+     * Initializes the landscaoe object
+     */
     init(){
 
         this.landscapeMaterial = new THREE.MeshPhongMaterial({
@@ -27,26 +36,28 @@ export class Landscape{
         this.pointLight = new THREE.PointLight( 0xffffff, 400,1000,1 );
         this.pointLight.position.set( this.position.x - 100, this.position.y+80, this.position.z );
         this.pointLight.castShadow = true;
-        this.pointLight.shadow.mapSize.width = 8192;
-        this.pointLight.shadow.mapSize.height = 8192;
+        this.pointLight.shadow.mapSize.width = 4096;
+        this.pointLight.shadow.mapSize.height = 4096;
 
         // add a point light helper for the previous point light
         let sphereSize = 10;
         this.pointLightHelper = new THREE.PointLightHelper( this.pointLight, sphereSize );
-
+        this.landscapeGroup.add(this.landscapeMesh)
+        this.landscapeGroup.add(this.pointLight)
+        this.landscapeGroup.add(this.pointLightHelper)
 
     }
-
+   /**
+    * Enables the landscape object in the scene
+    */
     enable() {
-        this.app.scene.add(this.landscapeMesh);
-        this.app.scene.add( this.pointLight );
-        this.app.scene.add( this.pointLightHelper );
+        this.scene.add(this.landscapeGroup);
     }
-
+   /**
+    * Disables the landscape object in the scene
+    */
     disable() {
-        this.app.scene.remove(this.landscapeMesh);
-        this.app.scene.remove( this.pointLight );
-        this.app.scene.remove( this.pointLightHelper );
+        this.scene.remove(this.landscapeGroup);
     }
 
     

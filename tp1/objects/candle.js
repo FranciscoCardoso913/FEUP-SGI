@@ -1,9 +1,14 @@
 import * as THREE from 'three';
 
 export class Candle {
-
-    constructor(app, position, color = '#A020F0') {
-        this.app = app;
+    /**
+     * 
+     * @param {*} scene 
+     * @param {*} position Position of the cake
+     * @param {*} color // Color of the candle
+     */
+    constructor(scene, position, color = '#A020F0') {
+        this.scene = scene;
         this.color = color;
         this.position = position;
         this.height = 0.7
@@ -78,14 +83,14 @@ export class Candle {
      * Enables the candle object in the scene
      */
     enable(){
-        this.app.scene.add(this.candleGroup)
+        this.scene.add(this.candleGroup)
     }
 
     /**
      * Disables the candle object in the scene
      */
     disable(){
-        this.app.scene.add(this.candleGroup)
+        this.scene.add(this.candleGroup)
     }
 
     /**

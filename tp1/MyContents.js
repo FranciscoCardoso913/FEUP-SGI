@@ -19,7 +19,6 @@ import { Shelve } from './objects/shelve.js';
 import { Paint } from './objects/paint.js';
 import { Door } from './objects/door.js';
 import { Mug } from './objects/mug.js';
-import { CakePiece } from './objects/cake_piece.js';
 import { MyNurbsBuilder } from './MyNurbsBuilder.js';
 
 /**
@@ -99,28 +98,28 @@ class MyContents  {
 
         // Constructing the scene
         this.house = new House(this.app, 40, 40, 20);
-        this.table = new Table(this.app, 10, 10, 0.5, 4, 0.25);
-        this.cake = new Cake(this.app, new THREE.Vector3(0,4.1,0), Math.PI);
-        this.plate = new Plate(this.app, new THREE.Vector3(0,4.2,0));
-        this.lamp = new Lamp(this.app, new THREE.Vector3(0, 17, 0));
+        this.table = new Table(this.app.scene, 10, 10, 0.5, 4, 0.25);
+        this.cake = new Cake(this.app.scene,9, new THREE.Vector3(0,4.1,0), -Math.PI);
+        this.plate = new Plate(this.app.scene, new THREE.Vector3(0,4.2,0));
+        this.lamp = new Lamp(this.app.scene, new THREE.Vector3(0, 17, 0));
         this.chair = new Chair(this.app.scene, new THREE.Vector3(1.5,0, -8), -Math.PI/6)
         this.newsPaper= new NewsPaper(this.app.scene, this.builder, new THREE.Vector3(3,4.9,-4) ,Math.PI/3, -Math.PI/4)
         this.carpet = new Carpet(this.app.scene, 15,15,new THREE.Vector3(0,0.1,0))
         this.spring = new Spring(this.app.scene , new THREE.Vector3(-3,4.2,3))
         this.jar = new Jar(this.app.scene, this.builder, new THREE.Vector3(3,4.2,3))
         this.couch = new Couch(this.app.scene,new THREE.Vector3(6,0,16),Math.PI)
-        this.mini_table = new Table(this.app, 5, 3, 0.5, 3, 0.25, new THREE.Vector3(12,0,16));
-        this.floor_lamp = new FloorLamp(this.app.scene,this.builder, new THREE.Vector3(0,0.2,16), Math.PI/2 )
+        this.mini_table = new Table(this.app.scene, 5, 3, 0.5, 3, 0.25, new THREE.Vector3(12,0,16));
+        this.floor_lamp = new FloorLamp(this.app.scene, new THREE.Vector3(0,0.2,16), Math.PI/2 )
         this.book = new Book(this.app.scene, this.builder,0xaa8833, new THREE.Vector3(12, 3.25,14),0,-Math.PI/8)
         this.shelve = new Shelve(this.app.scene, this.builder, new THREE.Vector3(-10,0,20),Math.PI)
         this.paint = new Paint(this.app.scene, new THREE.Vector3(-20,8,15),Math.PI/2)
         this.door = new Door(this.app.scene, new THREE.Vector3(-19.9,0,0))
-        this.cakePiece = new CakePiece(this.app,new THREE.Vector3(-0.2,4.1,-4.8))
-        this.smallPlate = new Plate(this.app, new THREE.Vector3(0,4.2,-4), 1.2);
+        this.cakePiece = new Cake(this.app.scene,1,new THREE.Vector3(-0.2,4.1,-4.8))
+        this.smallPlate = new Plate(this.app.scene, new THREE.Vector3(0,4.2,-4), 1.2);
         this.mug = new Mug(this.app.scene, this.builder, new THREE.Vector3(-2.5,4.3,-2.5), Math.PI/4)
         this.frameStudent1 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108793.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(5, 10, -19.6), new THREE.Vector3(0, 0, 0));
         this.frameStudent2 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108794.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(-5, 10, -19.6), new THREE.Vector3(0, 0, 0));
-        this.landscape = new Landscape(this.app, new THREE.TextureLoader().load('textures/landscape.png'), new THREE.Vector3(200, 50, 0), new THREE.Vector3(0, - Math.PI / 2, 0));
+        this.landscape = new Landscape(this.app.scene, new THREE.TextureLoader().load('textures/landscape.png'), new THREE.Vector3(200, 50, 0), new THREE.Vector3(0, - Math.PI / 2, 0));
         this.enableScene3D();
 
         // Create a Plane Mesh with basic material
