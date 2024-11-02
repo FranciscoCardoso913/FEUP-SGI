@@ -12,9 +12,6 @@ export class Landscape{
 
     init(){
 
-        this.imageTexture.wrapS = THREE.RepeatWrapping;
-        this.imageTexture.wrapT = THREE.RepeatWrapping;
-
         this.landscapeMaterial = new THREE.MeshPhongMaterial({
             shininess: 1000,
             map: this.imageTexture,

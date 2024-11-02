@@ -18,13 +18,7 @@ export class NewsPaper{
         this.samplesV = 20  
         
         const map =new THREE.TextureLoader().load( 'textures/newspaper.jpg' );
-
-        map.wrapS = map.wrapT = THREE.RepeatWrapping;
-
-        map.anisotropy = 16;
-
         map.colorSpace = THREE.SRGBColorSpace;
-
         this.material = new THREE.MeshLambertMaterial( { map: map, side: THREE.DoubleSide,} );
 
        

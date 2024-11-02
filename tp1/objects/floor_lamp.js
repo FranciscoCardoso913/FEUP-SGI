@@ -94,7 +94,7 @@ export class FloorLamp{
 
     light(){
         const spotLight = new THREE.SpotLight(0xcc9900, 100,25,Math.PI/5,0.3,1);
-        //spotLight.castShadow = true;
+        spotLight.castShadow = true;
         spotLight.shadow.mapSize.width = 8192;
         spotLight.shadow.mapSize.height = 8192;
 

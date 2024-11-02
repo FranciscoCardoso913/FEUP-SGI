@@ -7,18 +7,15 @@ export class Carpet{
         this.width=width
         this.height=height
         this.position = position
-
         this.init()
     }
 
+    /**
+     * Initializes the carpet object
+     */
     init() {
         const geometry = new THREE.PlaneGeometry(this.width,this.height,5,5)
         let map =new THREE.TextureLoader().load( 'textures/carpet.jpg' );
-
-        map.wrapS = map.wrapT = THREE.RepeatWrapping;
-
-        map.anisotropy = 4;
-
         map.colorSpace = THREE.SRGBColorSpace;
 
         const material = new THREE.MeshLambertMaterial( { map: map, color:0x777777} );
@@ -29,10 +26,16 @@ export class Carpet{
 
     }
 
+    /**
+     * Adds the carpet to the scene
+     */
     enable(){
         this.scene.add(this.carpet)
     }
     
+    /**
+     * Removes the carpet from the scene
+     */
     disable(){
         this.scene.remove(this.carpet)
     }

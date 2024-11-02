@@ -15,10 +15,6 @@ export class Paint{
 
     init() {
         const map =new THREE.TextureLoader().load( 'textures/book.jpg' );
-
-        map.wrapS = map.wrapT = THREE.RepeatWrapping;
-
-
         this.canvasMaterial = new THREE.MeshLambertMaterial( { map: map, color: 0xDDDDDD} );
         
     

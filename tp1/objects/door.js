@@ -14,11 +14,6 @@ export class Door{
     init() {
         const geometry = new THREE.PlaneGeometry(this.width,this.height,5,5)
         let map =new THREE.TextureLoader().load( 'textures/door.jpg' );
-
-        map.wrapS = map.wrapT = THREE.RepeatWrapping;
-
-        map.anisotropy = 4;
-
         map.colorSpace = THREE.SRGBColorSpace;
 
         const material = new THREE.MeshLambertMaterial( { map: map, color:0xfebc99} );

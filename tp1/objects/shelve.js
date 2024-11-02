@@ -14,11 +14,6 @@ export class Shelve{
 
     init() {
         let map =new THREE.TextureLoader().load( 'textures/light_wood.jpg' );
-
-        map.wrapS = map.wrapT = THREE.RepeatWrapping;
-
-        map.anisotropy = 16;
-
         map.colorSpace = THREE.SRGBColorSpace;
 
         this.shelveMaterial = new THREE.MeshLambertMaterial( { map: map } );

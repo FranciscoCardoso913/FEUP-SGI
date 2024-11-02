@@ -24,7 +24,6 @@ export class Table{
     legs(){
 
         let legTexture = new THREE.TextureLoader().load('textures/dark_wood.jpg');
-        legTexture.wrapS = THREE.RepeatWrapping;
         legTexture.wrapT = THREE.MirroredRepeatWrapping;
         legTexture.repeat.set( 2, 2 );
 

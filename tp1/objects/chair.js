@@ -10,25 +10,16 @@ export class Chair{
         this.init()
     }
 
+    /**
+     * Initializes the chair object
+     */
     init() {
+
         let map =new THREE.TextureLoader().load( 'textures/dark_wood.jpg' );
-
-        map.wrapS = map.wrapT = THREE.RepeatWrapping;
-
-        map.anisotropy = 16;
-
         map.colorSpace = THREE.SRGBColorSpace;
-
         this.legMaterial = new THREE.MeshLambertMaterial( { map: map } );
-
+        
         map =new THREE.TextureLoader().load( 'textures/light_wood.jpg' );
-
-        map.wrapS = map.wrapT = THREE.RepeatWrapping;
-
-        map.anisotropy = 16;
-
-        map.colorSpace = THREE.SRGBColorSpace;
-
         this.plankMaterial = new THREE.MeshLambertMaterial( { map: map, color: 0xcccccc});
 
         this.chair.add(this.drawLeg(new THREE.Vector3(0,2.25,0),4.5))
@@ -42,6 +33,12 @@ export class Chair{
         this.chair.rotateY(this.angle)
     }
 
+    /**
+     * 
+     * @param {THREE.Vector3} position 
+     * @param {Number} height 
+     * @returns 
+     */
     drawLeg(position, height =3){
         const geometry = new THREE.BoxGeometry(0.3, height, 0.3, 5, 5, 5);
 

@@ -10,6 +10,7 @@ export class Cake{
         this.angle = angle
         this.init()
     }
+    
     init(){
         this.cake();
         let y = 1.5 + this.position.y;
