@@ -18,6 +18,7 @@ import { Book } from './objects/book.js';
 import { Shelve } from './objects/shelve.js';
 import { Paint } from './objects/paint.js';
 import { Mug } from './objects/mug.js';
+import { Banner } from './objects/banner.js';
 import { MyNurbsBuilder } from './MyNurbsBuilder.js';
 
 /**
@@ -80,6 +81,7 @@ class MyContents  {
         this.frameStudent2 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108794.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(-10, 10, -19.6), new THREE.Vector3(0, 0, 0));
         this.frameProf = new Frame(this.app, new THREE.TextureLoader().load('textures/prof.jpg'), 5, 3, 0.4, "#ce9c69", new THREE.Vector3(0, 10, -19.6), new THREE.Vector3(0, 0, 0));
         this.landscape = new Landscape(this.app.scene, new THREE.TextureLoader().load('textures/landscape.png'), new THREE.Vector3(90, 50, 0), new THREE.Vector3(0, - Math.PI / 2, 0));
+        this.banner = new Banner(this.app.scene, new THREE.TextureLoader().load('textures/banner.jpg'), new THREE.Vector3(0, 16, -19.9), new THREE.Vector3(0, 0, 0))
         this.enableScene3D();
 
         this.ceilingLight = this.lamp.getLight(); 
@@ -114,6 +116,7 @@ class MyContents  {
             this.mug.enable()
             this.cakePiece.enable()
             this.smallPlate.enable()
+            this.banner.enable()
         }
         else {
             this.house.disable();
@@ -140,6 +143,7 @@ class MyContents  {
             this.cakePiece.disable()
             this.smallPlate.disable()
             this.door.disable()
+            this.banner.disable()
         }
     }
 
