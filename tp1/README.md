@@ -24,6 +24,9 @@ This project showcases an inviting, immersive 3D environment developed in three.
 
 The scene features a central table adorned with a cake topped with candles—each with lights representing flames—alongside the missing slice on a separate plate, a newspaper, a spring, and a coffee mug. A chair is placed beside the table, which rests on a carpet, adding to the cozy setting. Nearby, a comfortable area includes a sofa, a bookshelf filled with books, and a smaller table with a book on top, enhancing the inviting atmosphere. Above, a ceiling light directs illumination onto the cake, while a floor light casts a warm glow toward the sofa. The walls add subtle details: one displays framed photos of the students and Professor Augusto, another has a window where sunlight enters, a third wall is left empty, and the final wall features a beetle and a door represented by an expanded frame with a door-like texture.
 
+![perspective1](imgs/1.png)
+![perspective2](imgs/2.png)
+![perspective3](imgs/3.png)
 
 ----
 ## Issues/Problems
