@@ -42,12 +42,12 @@ class MyApp  {
         this.stats = new Stats()
         this.stats.showPanel(1) // 0: fps, 1: ms, 2: mb, 3+: custom
         document.body.appendChild(this.stats.dom)
-
+        this.renderer = new THREE.WebGLRenderer({antialias:true});
         this.initCameras();
         this.setActiveCamera('Perspective')
 
         // Create a renderer with Antialiasing
-        this.renderer = new THREE.WebGLRenderer({antialias:true});
+        
         this.renderer.setPixelRatio( window.devicePixelRatio );
         this.renderer.setClearColor("#000000");
         this.renderer.shadowMap.enabled = true;
@@ -78,6 +78,30 @@ class MyApp  {
         perspective2.position.set(0,10,2)
         this.cameras['Perspective2'] = perspective2
 
+        const Corner1 = new THREE.PerspectiveCamera( 75, aspect, 0.1, 1000 )
+        Corner1.position.set(-17,17,-17)
+        this.cameras['Corner1'] = Corner1
+
+        const Corner2 = new THREE.PerspectiveCamera( 75, aspect, 0.1, 1000 )
+        Corner2.position.set(17,17,-17)
+        this.cameras['Corner2'] = Corner2
+
+        const Corner3 = new THREE.PerspectiveCamera( 75, aspect, 0.1, 1000 )
+        Corner3.position.set(17,17,17)
+        this.cameras['Corner3'] = Corner3
+
+        const Corner4 = new THREE.PerspectiveCamera( 75, aspect, 0.1, 1000 )
+        Corner4.position.set(-17,17,17)
+        this.cameras['Corner4'] = Corner4
+
+        const Chair = new THREE.PerspectiveCamera( 75, aspect, 0.1, 1000 )
+        Chair.position.set(2,9,-8)
+        this.cameras['Chair'] = Chair
+
+        const Couch = new THREE.PerspectiveCamera( 75, aspect, 0.1, 1000 )
+        Couch.position.set(7,8,17)
+        this.cameras['Couch'] = Couch
+
         // defines the frustum size for the orthographic cameras
         const left = -this.frustumSize / 2 * aspect
         const right = this.frustumSize /2 * aspect 
@@ -85,6 +109,7 @@ class MyApp  {
         const bottom = -this.frustumSize / 2
         const near = -this.frustumSize /2
         const far =  this.frustumSize
+
 
         // create a left view orthographic camera
         const orthoLeft = new THREE.OrthographicCamera( left, right, top, bottom, near, far);
@@ -157,6 +182,10 @@ class MyApp  {
             }
             else {
                 this.controls.object = this.activeCamera
+                if(this.activeCameraName === 'Chair' || this.activeCameraName === 'Couch')
+                    this.controls.target = new THREE.Vector3(0,7,0)
+                else
+                    this.controls.target = new THREE.Vector3(0,0,0)
             }
         }
     }
