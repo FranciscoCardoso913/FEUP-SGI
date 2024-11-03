@@ -35,7 +35,7 @@ class MyGuiInterface  {
 
         // adds a folder to the gui interface for the camera
         const cameraFolder = this.datgui.addFolder('Camera');
-        cameraFolder.add(this.app, 'activeCameraName', [ 'Perspective', 'Perspective2','Corner1','Corner2', 'Corner3', 'Corner4', 'Chair','Couch', 'Left', 'Top', 'Front', 'Right', 'Bottom' ,,] ).name("active camera");
+        cameraFolder.add(this.app, 'activeCameraName', [ 'Perspective', 'Perspective2','Corner1','Corner2', 'Corner3', 'Corner4', 'Chair','Couch','Lamp', 'Left', 'Top', 'Front', 'Right', 'Bottom' ,,] ).name("active camera");
         // note that we are using a property from the app 
         cameraFolder.add(this.app.activeCamera.position, 'x', 0, 10).name("x coord")
         cameraFolder.close();
@@ -49,8 +49,6 @@ class MyGuiInterface  {
         ceilingLightFolder.add(this.contents.ceilingLight, 'intensity', 0, 1000, 100).name("intensity");
         ceilingLightFolder.add(this.contents.ceilingLight, 'visible').name("visible");
         ceilingLightFolder.add(this.contents.ceilingLight, 'castShadow').name("castShadow");
-        ceilingLightFolder.add(this.contents.ceilingLight.shadow.mapSize, 'width', [ 512, 1024, 2048, 4096 ]).name("mapSize Width");
-        ceilingLightFolder.add(this.contents.ceilingLight.shadow.mapSize, 'height', [ 512, 1024, 2048, 4096 ]).name("mapSize Height");
         ceilingLightFolder.close();
 
         // Floor Light
@@ -58,8 +56,6 @@ class MyGuiInterface  {
         floorLightFolder.add(this.contents.floorLight, 'intensity', 0, 1000, 100).name("intensity");
         floorLightFolder.add(this.contents.floorLight, 'visible').name("visible");
         floorLightFolder.add(this.contents.floorLight, 'castShadow').name("castShadow");
-        floorLightFolder.add(this.contents.floorLight.shadow.mapSize, 'width', [ 512, 1024, 2048, 4096 ]).name("mapSize Width");
-        floorLightFolder.add(this.contents.floorLight.shadow.mapSize, 'height', [ 512, 1024, 2048, 4096 ]).name("mapSize Height");
         floorLightFolder.close();
 
         // Landscape Light
@@ -67,8 +63,6 @@ class MyGuiInterface  {
         landscapeLightFolder.add(this.contents.landscapeLight, 'intensity', 0, 1000, 100).name("intensity");
         landscapeLightFolder.add(this.contents.landscapeLight, 'visible').name("visible");
         landscapeLightFolder.add(this.contents.landscapeLight, 'castShadow').name("castShadow");
-        landscapeLightFolder.add(this.contents.landscapeLight.shadow.mapSize, 'width', [ 512, 1024, 2048, 4096 ]).name("mapSize Width");
-        landscapeLightFolder.add(this.contents.landscapeLight.shadow.mapSize, 'height', [ 512, 1024, 2048, 4096 ]).name("mapSize Height");
         landscapeLightFolder.close();
 
     }
