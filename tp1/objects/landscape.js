@@ -26,7 +26,7 @@ export class Landscape{
             map: this.imageTexture,
         });
 
-        this.landscape = new THREE.PlaneGeometry(400, 300, 800, 600);
+        this.landscape = new THREE.PlaneGeometry(240, 180, 800, 600);
 
         this.landscapeMesh = new THREE.Mesh(this.landscape, this.landscapeMaterial);
         this.landscapeMesh.position.set(this.position.x, this.position.y, this.position.z);
@@ -34,7 +34,7 @@ export class Landscape{
 
         // add a point light on top of the model
         this.pointLight = new THREE.PointLight( 0xffffff, 400,1000,1 );
-        this.pointLight.position.set( this.position.x - 100, this.position.y+80, this.position.z );
+        this.pointLight.position.set( this.position.x - 50, this.position.y+80, this.position.z );
         this.pointLight.castShadow = true;
         this.pointLight.shadow.mapSize.width = 4096;
         this.pointLight.shadow.mapSize.height = 4096;
@@ -60,6 +60,14 @@ export class Landscape{
         this.scene.remove(this.landscapeGroup);
     }
 
+
+    /**
+     * Returns the Light object
+     * @returns {THREE.PointLight} the light object
+     */
+    getLight(){
+        return this.pointLight;
+    }
     
 
 }

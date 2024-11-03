@@ -34,45 +34,7 @@ class MyContents  {
         this.axis = null
         this.scene3DEnabled = true;
 
-        // box related attributes
-        this.boxMesh = null
-        this.boxMeshSize = 1.0
-        this.boxEnabled = false;
-        this.lastBoxEnabled = null
-        this.boxDisplacement = new THREE.Vector3(0,2,0)
-
-        // Texture GUI attributes
-        this.wrapSName = "Repeat";
-        this.wrapTName = "Repeat";
-        this.wrapS = THREE.RepeatWrapping;
-        this.wrapT = THREE.RepeatWrapping;
-        this.repeatU = 1;
-        this.repeatV = 1;
-        this.offsetU = 0;
-        this.offsetV = 0;
-        this.rotation = 0;
-
-        // plane related attributes
-        this.planeEnabled = false;
-        //texture
-        this.planeTexture = new THREE.TextureLoader().load('textures/feup_b.jpg');
-        this.planeTexture.wrapS = this.wrapS;
-        this.planeTexture.wrapT = this.wrapT;
-        this.planeTexture.repeat.set(this.repeatU, this.repeatV);
-        this.planeTexture.rotation = this.rotation;
-        this.planeTexture.offset.set(this.offsetU, this.offsetV);
-        //material 
-        this.diffusePlaneColor = "rgb(128,0,0)";
-        this.specularPlaneColor = "rgb(0,0,0)";
-        this.planeShininess = 0;
-
-        this.builder = new MyNurbsBuilder()
-
-        //alternative 2
-        this.planeMaterial = new THREE.MeshLambertMaterial({
-            map: this.planeTexture
-        }) //end of alternative 2
-
+        this.builder = new MyNurbsBuilder();
     }
 
 
@@ -114,114 +76,16 @@ class MyContents  {
         this.cakePiece = new Cake(this.app.scene,1,new THREE.Vector3(-0.2,4.1,-4.8))
         this.smallPlate = new Plate(this.app.scene, new THREE.Vector3(0,4.2,-4), 1.2);
         this.mug = new Mug(this.app.scene, this.builder, new THREE.Vector3(-2.5,4.3,-2.5), Math.PI/4)
-        this.frameStudent1 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108793.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(5, 10, -19.6), new THREE.Vector3(0, 0, 0));
-        this.frameStudent2 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108794.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(-5, 10, -19.6), new THREE.Vector3(0, 0, 0));
-        this.landscape = new Landscape(this.app.scene, new THREE.TextureLoader().load('textures/landscape.png'), new THREE.Vector3(200, 50, 0), new THREE.Vector3(0, - Math.PI / 2, 0));
+        this.frameStudent1 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108793.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(10, 10, -19.6), new THREE.Vector3(0, 0, 0));
+        this.frameStudent2 = new Frame(this.app, new THREE.TextureLoader().load('textures/202108794.jpg'), 2, 3, 0.4, "#ce9c69", new THREE.Vector3(-10, 10, -19.6), new THREE.Vector3(0, 0, 0));
+        this.frameProf = new Frame(this.app, new THREE.TextureLoader().load('textures/prof.jpg'), 5, 3, 0.4, "#ce9c69", new THREE.Vector3(0, 10, -19.6), new THREE.Vector3(0, 0, 0));
+        this.landscape = new Landscape(this.app.scene, new THREE.TextureLoader().load('textures/landscape.png'), new THREE.Vector3(90, 50, 0), new THREE.Vector3(0, - Math.PI / 2, 0));
         this.enableScene3D();
 
-        // Create a Plane Mesh with basic material
-        let planeSizeU = 10;
-        let planeSizeV = 7;
+        this.ceilingLight = this.lamp.getLight(); 
+        this.floorLight = this.floor_lamp.getLight();
+        this.landscapeLight = this.landscape.getLight();
 
-        var plane = new THREE.PlaneGeometry(planeSizeU, planeSizeV );
-        this.planeMesh = new THREE.Mesh( plane, this.planeMaterial);
-        this.planeMesh.rotation.x = - Math.PI / 2;
-        this.planeMesh.position.y = 0;
-        this.planeEnabled ? this.app.scene.add(this.planeMesh) : null;
-
-    }
-
-    /**
-     * updates the Wrapping Mode in the desired axis
-     * @param {String} axis 
-     */
-    updateWrapMode(axis) {
-
-        let mode = axis === 's' ?  this.wrapSName : this.wrapTName;
-
-        if (mode === 'Clamp') {
-            axis === 's' ? this.wrapS = THREE.ClampToEdgeWrapping : this.wrapT = THREE.ClampToEdgeWrapping;
-        }
-        else if (mode === 'Repeat') {
-            axis === 's' ? this.wrapS = THREE.RepeatWrapping : this.wrapT = THREE.RepeatWrapping;
-        }
-        else {
-            axis === 's' ? this.wrapS = THREE.MirroredRepeatWrapping : this.wrapT = THREE.MirroredRepeatWrapping;
-        }
-
-        this.planeTexture.wrapS = this.wrapS;
-        this.planeTexture.wrapT = this.wrapT;
-
-        this.planeTexture.needsUpdate = true;
-    }
-
-
-    /**
-     * Updates the texture repeat in the desired axis
-     * @param {String} axis 
-     * @param {number} value 
-     */
-    updateRepeat(axis, value) {
-        if (axis === 'u') {
-            this.repeatU = value;
-        }
-        else {
-            this.repeatV = value;
-        }
-        this.planeTexture.repeat.set(this.repeatU, this.repeatV);
-    }
-
-    /**
-     * Updates the texture offset in the desired axis
-     * @param {String} axis 
-     * @param {number} value 
-     */
-    updateOffset(axis, value) {
-        if (axis === 'u') {
-            this.offsetU = value;
-        }
-        else {
-            this.offsetV = value;
-        }
-        this.planeTexture.offset.set(this.offsetU, this.offsetV);
-    }
-
-    /**
-     * updates the texture rotation
-     * @param {number} value 
-     */
-    updateRotation(value) {
-        this.rotation = value * Math.PI / 180;
-        this.planeTexture.rotation = this.rotation;
-    }
-    
-    /**
-     * updates the diffuse plane color and the material
-     * @param {THREE.Color} value 
-     */
-    updateDiffusePlaneColor(value) {
-        this.diffusePlaneColor = value
-        this.planeMaterial.color.set(this.diffusePlaneColor)
-    }
-    /**
-     * updates the specular plane color and the material
-     * @param {THREE.Color} value 
-     */
-    updateSpecularPlaneColor(value) {
-        this.specularPlaneColor = value
-        this.planeMaterial.specular.set(this.specularPlaneColor)
-    }
-    /**
-     * updates the plane shininess and the material
-     * @param {number} value 
-     */
-    updatePlaneShininess(value) {
-        this.planeShininess = value
-        this.planeMaterial.shininess = this.planeShininess
-    }
-
-    enablePlane(enable) {
-        enable ? this.app.scene.add(this.planeMesh) : this.app.scene.remove(this.planeMesh);
     }
     
     enableScene3D() {
@@ -232,6 +96,7 @@ class MyContents  {
             this.plate.enable();
             this.frameStudent1.enable();
             this.frameStudent2.enable();
+            this.frameProf.enable();
             this.lamp.enable();
             this.landscape.enable();
             this.chair.enable()
@@ -257,6 +122,7 @@ class MyContents  {
             this.plate.disable();
             this.frameStudent1.disable();
             this.frameStudent2.disable();
+            this.frameProf.disable();
             this.lamp.disable();
             this.landscape.disable();
             this.chair.disable()
@@ -277,6 +143,12 @@ class MyContents  {
         }
     }
 
+    /**
+     * Update the contents
+     */
+    update() {
+        
+    }
 
 
 }

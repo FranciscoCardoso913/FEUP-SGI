@@ -78,4 +78,12 @@ export class Lamp {
         this.scene.remove(this.lampGroup);
     }
 
+    /**
+     * Returns the light object
+     * @returns {THREE.SpotLight} light object
+     */
+    getLight(){
+        return this.light;
+    }
+
 }

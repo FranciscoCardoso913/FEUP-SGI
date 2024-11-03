@@ -24,7 +24,7 @@ export class House{
         this.floor()
         this.window()
 
-        this.house.receiveShadow = true;
+        this.house.receiveShadow = this.house.castShadow = true;
     }
 
 
@@ -219,7 +219,6 @@ export class House{
 
         let planePrimitive = new THREE.PlaneGeometry( this.widthx, this.widthy); 
         this.floorMesh = new THREE.Mesh( planePrimitive, planePrimitiveMaterial );
-        this.floorMesh.receiveShadow = true;
         this.floorMesh.rotation.x = -Math.PI / 2;  
 
         this.house.add(this.floorMesh);
