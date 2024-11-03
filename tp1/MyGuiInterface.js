@@ -32,13 +32,7 @@ class MyGuiInterface  {
 
         // Activate/Deactivate the scene3D
         this.datgui.add(this.contents, 'scene3DEnabled', false).name("Scene 3D").onChange( () => { this.contents.enableScene3D() } );
-
-        // adds a folder to the gui interface for the camera
-        const cameraFolder = this.datgui.addFolder('Camera');
-        cameraFolder.add(this.app, 'activeCameraName', [ 'Perspective', 'Perspective2','Corner1','Corner2', 'Corner3', 'Corner4', 'Chair','Couch','Lamp', 'Left', 'Top', 'Front', 'Right', 'Bottom' ,,] ).name("active camera");
-        // note that we are using a property from the app 
-        cameraFolder.add(this.app.activeCamera.position, 'x', 0, 10).name("x coord")
-        cameraFolder.close();
+        this.datgui.add(this.app, 'activeCameraName', [ 'Perspective', 'Perspective2','Corner1','Corner2', 'Corner3', 'Corner4', 'Chair','Couch', 'Lamp','Left', 'Top', 'Front', 'Right', 'Bottom' ,,] ).name("active camera");
 
         // Folder to control Each Light
         const lightsFolder = this.datgui.addFolder('Lights');
