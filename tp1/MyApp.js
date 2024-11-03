@@ -94,12 +94,17 @@ class MyApp  {
         Corner4.position.set(-17,17,17)
         this.cameras['Corner4'] = Corner4
 
+
+        const Lamp = new THREE.PerspectiveCamera( 75, aspect, 0.1, 1000 )
+        Lamp.position.set(0,17,0)
+        this.cameras['Lamp'] = Lamp
+
         const Chair = new THREE.PerspectiveCamera( 75, aspect, 0.1, 1000 )
-        Chair.position.set(2,9,-8)
+        Chair.position.set(2,11,-8)
         this.cameras['Chair'] = Chair
 
         const Couch = new THREE.PerspectiveCamera( 75, aspect, 0.1, 1000 )
-        Couch.position.set(7,8,17)
+        Couch.position.set(5,7,18)
         this.cameras['Couch'] = Couch
 
         // defines the frustum size for the orthographic cameras
