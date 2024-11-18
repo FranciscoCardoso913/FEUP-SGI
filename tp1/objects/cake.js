@@ -2,28 +2,28 @@ import * as THREE from 'three';
 import { Candle } from './candle.js';
 
 export class Cake{
-    constructor(app, position, angle=0, color = '#5C4033') {
-        this.app = app;
+    /**
+     * 
+     * @param {*} scene 
+     * @param {*} slices Number of slices the cake is composed by [1-10]
+     * @param {*} position Position of the cake
+     * @param {*} angle Angle that the cake will rotate in y
+     * @param {*} color Color of the cake object
+     */
+    constructor(scene, slices , position, angle=0, color = '#5C4033') {
+        this.scene = scene;
         this.color = color;
         this.position = position;
         this.cakeGroup = new THREE.Group()
         this.angle = angle
+        this.slices = slices
         this.init()
+
     }
+    /**
+     * Initializes the Cake object
+     */
     init(){
-        this.cake();
-        let y = 1.5 + this.position.y;
-        
-        this.cakeGroup.add(this.cakeMesh)
-        this.cakeGroup.add(new Candle(this.app, new THREE.Vector3(0.2,y,-0.7)).getMesh())
-        this.cakeGroup.add(new Candle(this.app, new THREE.Vector3(0.8,y,0.4)).getMesh())
-        this.cakeGroup.add(new Candle(this.app, new THREE.Vector3(-0.7,y,-0.5)).getMesh())
-        this.cakeGroup.add(new Candle(this.app, new THREE.Vector3(0.5,y,-0.3)).getMesh())
-        this.cakeGroup.add(new Candle(this.app, new THREE.Vector3(-0.8,y,0.6)).getMesh())
-        this.cakeGroup.rotateY(this.angle)
-    
-    }
-    cake(){
 
         let interiorTexture = new THREE.TextureLoader().load('textures/interior_cake.jpg');
         interiorTexture.wrapS = THREE.MirroredRepeatWrapping;
@@ -35,52 +35,82 @@ export class Cake{
         exteriorTexture.wrapT = THREE.MirroredRepeatWrapping;
         exteriorTexture.repeat.set( 2, 2 );
 
-
-
-        let cakeInteriorMaterial = new THREE.MeshLambertMaterial({
+        this.cakeInteriorMaterial = new THREE.MeshLambertMaterial({
             map: interiorTexture
         })
 
-        let cakeExteriorMaterial = new THREE.MeshPhongMaterial({
+        this.cakeExteriorMaterial = new THREE.MeshPhongMaterial({
             color: this.color,
             specular: "#000000",
             shininess: 90,
             map: exteriorTexture
         })
+        
+        this.cake();
+        this.candles();
+        this.cakeGroup.rotateY(this.angle)
+        this.cakeGroup.position.add(new THREE.Vector3(0,0.75,0))
+        this.cakeGroup.position.add(this.position)
+    
+    }
+    /**
+     * Creates cake mesh
+     */
+    cake(){
 
-
-        let cake = new THREE.CylinderGeometry(1.5, 1.5, 1, 32, 32, false, 0, (Math.PI * 2 * 0.9));
+        const slice_ang = (Math.PI * 2 * 0.1*this.slices)
+        let cake = new THREE.CylinderGeometry(1.5, 1.5, 1, 32, 32, false, 0, slice_ang );
         let interior = new THREE.PlaneGeometry( 1.5,1 ); // left 
         let interior2 = new THREE.PlaneGeometry( 1.5,1 ); // right 
 
-        this.cakeMesh = new THREE.Mesh(cake, cakeExteriorMaterial);
-        let interiorMesh = new THREE.Mesh(interior, cakeInteriorMaterial);
-        let interiorMesh2 = new THREE.Mesh(interior2, cakeInteriorMaterial);
+        let cakeMesh = new THREE.Mesh(cake, this.cakeExteriorMaterial);
+        let interiorMesh = new THREE.Mesh(interior, this.cakeInteriorMaterial);
+        let interiorMesh2 = new THREE.Mesh(interior2, this.cakeInteriorMaterial);
 
-        this.cakeMesh.position.set(this.position.x, this.position.y +0.7, this.position.z)
+        interiorMesh.rotateY(-Math.PI/2)
+        interiorMesh.position.add( new THREE.Vector3(0,0,0.75))
 
-        interiorMesh.position.z = this.position.z+0.60;
-        interiorMesh.position.x = this.position.x  -0.45;
-        interiorMesh.rotation.y = Math.PI/2 -(Math.PI*2)/9  +0.075  ;
+        let ang = Math.PI/2 + slice_ang
+        interiorMesh2.rotateY(ang)
+        interiorMesh2.position.add( new THREE.Vector3(0.75*Math.sin(slice_ang),0,0.75*Math.cos(slice_ang)))
+    
 
-        interiorMesh2.position.z = this.position.z+0.75;
-        interiorMesh2.position.x = this.position.x;
-        interiorMesh2.rotation.y = 3*Math.PI/2;
-
-        this.cakeMesh.receiveShadow = this.cakeMesh.castShadow = true;
+        cakeMesh.receiveShadow = cakeMesh.castShadow = true;
         interiorMesh.receiveShadow = interiorMesh.castShadow = true;
         interiorMesh2.receiveShadow = interiorMesh.castShadow = true;
 
-        this.cakeMesh.add (interiorMesh);
-        this.cakeMesh.add (interiorMesh2);
+        this.cakeGroup.add (cakeMesh);
+        this.cakeGroup.add (interiorMesh2);
+        this.cakeGroup.add (interiorMesh);
   
     }
+    /**
+     * Adds candles to the cake
+     */
+    candles(){
+        const y = 0.75 ; // candle y position
+        const init_angle = (Math.PI * 2 * 0.1)/2
+        const slice_angle =  (Math.PI * 2 * 0.1)
+        for(let i =0; i< this.slices; i++){
+            let candle_angle = init_angle + i*slice_angle
+            let candle = new Candle(this.scene, new THREE.Vector3(0.75*Math.sin(candle_angle),y,0.75*Math.cos(candle_angle)))
+            this.cakeGroup.add( candle.getMesh())
+        }
+
+    }
+
+    /**
+    * Enables the cake object in the scene
+    */
     enable(){
-        this.app.scene.add(this.cakeGroup)
+        this.scene.add(this.cakeGroup)
      
     }
+    /**
+    * Enables the cake object in the scene
+    */
     disable(){
-        this.app.scene.remove(this.cakeGroup)
+        this.scene.remove(this.cakeGroup)
     }
 
 }
