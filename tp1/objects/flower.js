@@ -12,6 +12,10 @@ export class Flower{
         this.init()
     }
 
+    /**
+     * Initialize the flower by creating the center, petals, and stem
+     * The center is divided into two parts: front and back, each represented by a sphere
+     */
     init() {
         this.flowerGroup.add(this.frontCenter());
         this.flowerGroup.add(this.backCenter());
@@ -23,38 +27,25 @@ export class Flower{
         }
 
         this.flowerGroup.position.add(this.position)
-
         this.flowerGroup.rotateY(this.angle)
-
-
-
     }
+
+    /**
+     * @returns {THREE.Mesh} A mesh representing the front center of the flower
+     */
     frontCenter(){
         const radius = 0.3; // Radius of the sphere
         const widthSegments = 12; // Number of horizontal segments
         const heightSegments = 12; // Number of vertical segments
         const sphereGeometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments);
-    
 
         // Create a material for the sphere
         const map =new THREE.TextureLoader().load( 'textures/flower.jpg' );
-
-        map.wrapS = map.wrapT = THREE.RepeatWrapping;
-
-        map.anisotropy = 16;
-
         map.colorSpace = THREE.SRGBColorSpace;
-
-        let material = new THREE.MeshLambertMaterial( { map: map,
-
-                    side: THREE.DoubleSide,
-
-                    transparent: true, opacity: 1 } );
-
-
-
-        // Create a mesh by combining geometry and material
+        let material = new THREE.MeshLambertMaterial( { map: map, transparent: true } );
         const frontSphere = new THREE.Mesh(sphereGeometry, material);
+
+        // frontSphere properties
         frontSphere.castShadow = true;
         frontSphere.scale.z = 0.4
         frontSphere.position.z+=1
@@ -63,27 +54,32 @@ export class Flower{
        
     }
 
+    /**
+     * 
+     * @returns {THREE.Mesh} A mesh representing the back center of the flower
+     */
     backCenter(){
         const radius = 0.3; // Radius of the sphere
         const widthSegments = 12; // Number of horizontal segments
         const heightSegments = 12; // Number of vertical segments
-        const sphereGeometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments);
-
-
-        // Create a material for the sphere
-
-        const backMaterial = new THREE.MeshBasicMaterial({ color: 0x006600, wireframe: false }); // Change wireframe to true for a wireframe sphere
-
-        const backSphere = new THREE.Mesh(sphereGeometry, backMaterial);
-        backSphere.castShadow = true;
         
+        const sphereGeometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments);
+        const backMaterial = new THREE.MeshBasicMaterial({ color: 0x006600, wireframe: false }); // Change wireframe to true for a wireframe sphere
+        const backSphere = new THREE.Mesh(sphereGeometry, backMaterial);
+
+        // backSphere properties
+        backSphere.castShadow = true;        
         backSphere.scale.z =0.4
         backSphere.position.z +=0.9
         backSphere.position.y+=3
         return backSphere
-       
     }
 
+    /**
+     * Creates a petal mesh based on the given angle
+     * @param {Number} angle 
+     * @returns {THREE.Mesh} A mesh representing a petal of the flower
+     */
     createPetal(angle) {
         // Define the petal shape
         const petalShape = new THREE.Shape();
@@ -101,8 +97,7 @@ export class Flower{
         
         // Define material for the petal
         const petalMaterial = new THREE.MeshBasicMaterial({
-            color: this.color, 
-            side: THREE.DoubleSide,
+            color: this.color, side: THREE.DoubleSide
         });
 
         // Create the petal mesh and set its position
@@ -114,10 +109,14 @@ export class Flower{
         return petal
     }
 
+    /**
+     * @returns {THREE.Line} A line representing the stem of the flower
+     */
     createStem() {
 
         this.start = new THREE.Vector3(0,0,0);
         this.end = new THREE.Vector3(0, 3,1);
+
         // Define points for the stem curve
         const points = [
             this.start,
@@ -141,13 +140,26 @@ export class Flower{
         return stem
 
     }
-    activate(){
+
+    /**
+     * Add the flower to the scene
+     * This method is not used in the current implementation, but can be used to add the flower to the scene
+     */
+    enable(){
         this.scene.add(this.flowerGroup)
     }
-    disable(){
 
+    /**
+     * Remove the flower from the scene
+     * This method is not used in the current implementation, but can be used to remove the flower from the scene
+     */
+    disable(){
         this.scene.remove( this.flowerGroup )
     }
+
+    /**
+     * @returns {THREE.Group} The group containing the flower mesh
+     */
     getMesh(){
         return this.flowerGroup
     }

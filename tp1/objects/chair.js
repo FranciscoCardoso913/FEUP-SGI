@@ -10,25 +10,16 @@ export class Chair{
         this.init()
     }
 
+    /**
+     * Initializes the chair object
+     */
     init() {
+
         let map =new THREE.TextureLoader().load( 'textures/dark_wood.jpg' );
-
-        map.wrapS = map.wrapT = THREE.RepeatWrapping;
-
-        map.anisotropy = 16;
-
         map.colorSpace = THREE.SRGBColorSpace;
-
-        this.legMaterial = new THREE.MeshLambertMaterial( { map: map, side: THREE.DoubleSide} );
-
+        this.legMaterial = new THREE.MeshLambertMaterial( { map: map } );
+        
         map =new THREE.TextureLoader().load( 'textures/light_wood.jpg' );
-
-        map.wrapS = map.wrapT = THREE.RepeatWrapping;
-
-        map.anisotropy = 16;
-
-        map.colorSpace = THREE.SRGBColorSpace;
-
         this.plankMaterial = new THREE.MeshLambertMaterial( { map: map, color: 0xcccccc});
 
         this.chair.add(this.drawLeg(new THREE.Vector3(0,2.25,0),4.5))
@@ -42,6 +33,11 @@ export class Chair{
         this.chair.rotateY(this.angle)
     }
 
+    /**
+     * @param {THREE.Vector3} position 
+     * @param {Number} height 
+     * @returns {THREE.MESH} Mesh representing the chair at the given position with the given height
+     */
     drawLeg(position, height =3){
         const geometry = new THREE.BoxGeometry(0.3, height, 0.3, 5, 5, 5);
 
@@ -51,6 +47,13 @@ export class Chair{
         return leg
     }
 
+    /**
+     * @param {Number} width 
+     * @param {Number} height 
+     * @param {THREE.Vector3} position 
+     * @param {Number} angle 
+     * @returns {THREE.MESH} Mesh representing the plank at the given position with the given width, height and angle
+     */
     drawPlank(width, height, position, angle=0){
         const geometry = new THREE.BoxGeometry(width, height, 0.3, 5, 5, 5);
         let plank = new THREE.Mesh(geometry, this.plankMaterial);
@@ -60,10 +63,16 @@ export class Chair{
         return plank
     }
 
+    /**
+     * Adds the chair to the scene
+     */
     enable(){
         this.scene.add(this.chair)
     }
 
+    /**
+     * Removes the chair from the scene
+     */
     disable(){
         this.scene.remove(this.chair)
     }
