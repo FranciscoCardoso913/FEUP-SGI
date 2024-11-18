@@ -29,7 +29,7 @@ export class Chair{
 
         map.colorSpace = THREE.SRGBColorSpace;
 
-        this.plankMaterial = new THREE.MeshLambertMaterial( { map: map,side: THREE.DoubleSide, color: 0xcccccc});
+        this.plankMaterial = new THREE.MeshLambertMaterial( { map: map, color: 0xcccccc});
 
         this.chair.add(this.drawLeg(new THREE.Vector3(0,2.25,0),4.5))
         this.chair.add(this.drawLeg(new THREE.Vector3(2.5,2.25,0),4.5))
