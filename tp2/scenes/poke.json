@@ -36,6 +36,12 @@
         "textures": {
             "floor": {
                 "filepath": "scenes/textures/plate.jpg"
+            },
+            "wood": {
+                "filepath": "scenes/textures/wood.jpg"
+            },
+            "woodenplate": {
+                "filepath": "scenes/textures/woodenplate.jpg"
             }
         },
         "materials": {
@@ -62,7 +68,7 @@
                 "texlength_s": 5,
                 "texlength_t": -5
             },
-            "default": {
+            "woodTexture": {
                 "color": {
                     "r": 0.39,
                     "g": 0.29,
@@ -80,7 +86,10 @@
                     "b": 0
                 },
                 "transparent": false,
-                "opacity": 1.0
+                "opacity": 1.0,
+                "textureref": "wood",
+                "texlength_s": 18,
+                "texlength_t": -15
             },
             "walls": {
                 "color": {
@@ -101,7 +110,10 @@
                 },
                 "transparent": false,
                 "opacity": 1.0,
-                "twosided": "true"
+                "twosided": "true",
+                "textureref": "woodenplate",
+                "texlength_s": 18,
+                "texlength_t": -15
             }
         },
         "cameras": {
@@ -209,7 +221,7 @@
             "base": {
                 "type": "node",
                 "materialref": {
-                    "materialId": "default"
+                    "materialId": "woodTexture"
                 },
                 "children": {
                     "nodesList": [
@@ -719,7 +731,7 @@
             "roofmiddleplank": {
                 "type": "node",
                 "materialref": {
-                    "materialId": "default"
+                    "materialId": "woodTexture"
                 },
                 "transforms": [
                     {
@@ -805,7 +817,7 @@
             "roofleft": {
                 "type": "node",
                 "materialref": {
-                    "materialId": "default"
+                    "materialId": "woodTexture"
                 },
                 "transforms": [
                     {
@@ -842,7 +854,7 @@
             "roofright": {
                 "type": "node",
                 "materialref": {
-                    "materialId": "default"
+                    "materialId": "woodTexture"
                 },
                 "transforms": [
                     {
@@ -879,7 +891,7 @@
             "roofmiddle": {
                 "type": "node",
                 "materialref": {
-                    "materialId": "default"
+                    "materialId": "woodTexture"
                 },
                 "transforms": [
                     {
@@ -916,7 +928,7 @@
             "rooflimit": {
                 "type": "node",
                 "materialref": {
-                    "materialId": "default"
+                    "materialId": "woodTexture"
                 },
                 "transforms": [
                     {
@@ -945,7 +957,7 @@
             "roofside": {
                 "type": "node",                
                 "materialref": {
-                    "materialId": "default"
+                    "materialId": "woodTexture"
                 },
                 "transforms": [
                     {
@@ -972,7 +984,6 @@
                     ]
                 }
             },
-
             "extraroof": {
                 "type": "node",
                 "transforms": [
@@ -1015,7 +1026,7 @@
             "extraroofleft": {
                 "type": "node",
                 "materialref": {
-                    "materialId": "default"
+                    "materialId": "woodTexture"
                 },
                 "transforms": [
                     {
@@ -1044,7 +1055,7 @@
             "extraroofright": {
                 "type": "node",
                 "materialref": {
-                    "materialId": "default"
+                    "materialId": "woodTexture"
                 },
                 "transforms": [
                     {
@@ -1070,8 +1081,6 @@
                     ]
                 }
             },
-
-
             "woodplank": {
                 "type": "node",
                 "children": {
