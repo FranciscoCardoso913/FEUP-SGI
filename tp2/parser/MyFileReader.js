@@ -27,7 +27,7 @@ class MyFileReader {
 	}
 
 	open(jsonfile) {
-		fetch(jsonfile)
+		return fetch(jsonfile)
 			.then((res) => {
 				if (!res.ok) {
 					throw new Error(`HTTP error! Status: ${res.status}`);
@@ -36,10 +36,14 @@ class MyFileReader {
 			})
 			.then((data) => {
 				this.onSceneLoadedCallback(data);
+				return data; // Return the parsed data
 			})
-			.catch((error) =>
-				console.error("Unable to fetch data:", error));
-	};
+			.catch((error) => {
+				console.error("Unable to fetch data:", error);
+				throw error; // Re-throw the error so it propagates to the caller
+			});
+	}
+	
 
 }
 
