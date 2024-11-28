@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {rgbToHex} from './utils.js'
+import {parseAmbientLight,parseFog} from './parser.js'
 
 
 class MyGraph {
@@ -7,7 +8,8 @@ class MyGraph {
 	/**
 	   constructs the object
 	*/
-	constructor(json) {
+	constructor(scene,json) {
+		this.scene = scene
         this.json = json['yasf']
         this.init()
 	}
@@ -15,13 +17,11 @@ class MyGraph {
        this.parseGlobals(this.json['globals'])
 	   this.parseTextures(this.json['textures'])
     }
-	
+
 	parseGlobals(globals){
 		this.background = rgbToHex(globals['background'])
-		this.ambient = rgbToHex(globals['ambient'])
-		this.fogColor =rgbToHex(globals['fog']["color"])
-		this.fogNear =(globals['fog']["near"])
-		this.fogFar =(globals['fog']["far"])
+		this.ambientLight = parseAmbientLight(globals['ambient'])
+		this.scene.fog = parseFog(globals["fog"])
 		this.skybox = globals['skybox']
 	}
 	parseTextures(textures){
@@ -29,6 +29,9 @@ class MyGraph {
 			dict[name] = value.filepath;
 			return dict;
 		}, {});
+	}
+	parseMaterials(materials){
+
 	}
 
 }
