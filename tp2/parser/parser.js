@@ -4,7 +4,7 @@ import * as THREE from 'three';
 
 export function parseAmbientLight(ambient){
     const color = rgbToHex(ambient)
-    return new  THREE.AmbientLight(color)
+    return new  THREE.AmbientLight(color, ambient["intensity"])
 }
 
 export function parseFog(fog){
@@ -13,6 +13,7 @@ export function parseFog(fog){
 }
 
 export function parseSkybox(skybox){
+
     const textureLoader = new THREE.TextureLoader();
     const front = textureLoader.load(skybox["front"]);
     const back = textureLoader.load(skybox["back"]);
@@ -26,30 +27,12 @@ export function parseSkybox(skybox){
     const planeGeometry2 = new THREE.PlaneGeometry(skybox["size"]["y"], skybox["size"]["z"], skybox["size"]["y"], skybox["size"]["z"]);
     const planeGeometry3 = new THREE.PlaneGeometry(skybox["size"]["z"], skybox["size"]["x"], skybox["size"]["z"], skybox["size"]["x"]);
 
-    const planeMaterialFront = new THREE.MeshPhongMaterial({
-        map: front,
-        emissive: emissive
-    });
-    const planeMaterialBack = new THREE.MeshPhongMaterial({
-        map: back,
-        emissive: emissive
-    });
-    const planeMaterialUp = new THREE.MeshPhongMaterial({
-        map: up,
-        emissive: emissive
-    });
-    const planeMaterialDown = new THREE.MeshPhongMaterial({
-        map: down,
-        emissive: emissive
-    });
-    const planeMaterialLeft = new THREE.MeshPhongMaterial({
-        map: left,
-        emissive: emissive
-    });
-    const planeMaterialRight = new THREE.MeshPhongMaterial({
-        map: right,
-        emissive: emissive
-    });
+    const planeMaterialFront = new THREE.MeshPhongMaterial({map: front,emissive: emissive});
+    const planeMaterialBack = new THREE.MeshPhongMaterial({map: back,emissive: emissive});
+    const planeMaterialUp = new THREE.MeshPhongMaterial({map: up,emissive: emissive});
+    const planeMaterialDown = new THREE.MeshPhongMaterial({map: down,emissive: emissive});
+    const planeMaterialLeft = new THREE.MeshPhongMaterial({map: left,emissive: emissive});
+    const planeMaterialRight = new THREE.MeshPhongMaterial({map: right,emissive: emissive});
     let skyboxGroup = new THREE.Group()
 
     const frontPlane = new THREE.Mesh(planeGeometry1, planeMaterialFront) 
@@ -79,6 +62,6 @@ export function parseSkybox(skybox){
     skyboxGroup.add(rightPlane)
 
     return skyboxGroup
-  
 
 }
+
