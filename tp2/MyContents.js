@@ -20,10 +20,13 @@ class MyContents {
 
         this.reader.open("scenes/scene.json").then((json) => {
             console.log(json['yasf']);
-            let graph = new MyGraph(this.app.scene,json)
+            this.graph = new MyGraph(json)
+            this.graph.build(this.app.scene)
         }).catch((error) => {
             console.error("Error in loading JSON:", error);
         });
+
+        
         
         
     }

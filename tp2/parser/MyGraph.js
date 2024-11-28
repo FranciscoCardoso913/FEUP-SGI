@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import {rgbToHex} from './utils.js'
-import {parseAmbientLight,parseFog} from './parser.js'
+import {parseAmbientLight,parseFog, parseSkybox} from './parser.js'
 
 
 class MyGraph {
@@ -8,8 +8,7 @@ class MyGraph {
 	/**
 	   constructs the object
 	*/
-	constructor(scene,json) {
-		this.scene = scene
+	constructor(json) {
         this.json = json['yasf']
         this.init()
 	}
@@ -21,8 +20,8 @@ class MyGraph {
 	parseGlobals(globals){
 		this.background = rgbToHex(globals['background'])
 		this.ambientLight = parseAmbientLight(globals['ambient'])
-		this.scene.fog = parseFog(globals["fog"])
-		this.skybox = globals['skybox']
+		this.fog = parseFog(globals["fog"])
+		this.skybox = parseSkybox(globals['skybox'])
 	}
 	parseTextures(textures){
 		this.textures = Object.entries(textures).reduce((dict, [name, value]) => {
@@ -32,6 +31,12 @@ class MyGraph {
 	}
 	parseMaterials(materials){
 
+	}
+
+	build(scene){
+		scene.fog = this.fog
+		scene.add(this.skybox)
+		scene.add(this.ambientLight)
 	}
 
 }
