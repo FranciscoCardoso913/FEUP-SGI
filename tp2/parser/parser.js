@@ -65,3 +65,58 @@ export function parseSkybox(skybox){
 
 }
 
+export function parseTextures(textures){
+    return Object.entries(textures).reduce((dict, [name, value]) => {
+        let texture;
+        if(value.isVideo){
+            const video = document.createElement('video');
+            video.src = value.filepath; 
+            video.loop = true; 
+            video.muted = true; 
+            video.play(); 
+            texture = new THREE.VideoTexture(video);
+        }
+        else{
+            texture = new THREE.TextureLoader().load(value.filepath)
+            texture.minFilter = THREE.LinearMipmapLinearFilter; 
+            texture.mipmaps = []
+            for( let i =0; i<= 7;i++){
+                if(value["mipmap"+i.toString()]){
+                    texture.mipmaps.append(value["mipmap"+i.toString()]);
+                }else break;
+            }
+
+        }
+        dict[name] = texture;
+        return dict;
+    }, {});
+}
+
+
+export function parseMaterials(textures, materials){
+    return Object.entries(materials).reduce((dict, [name, value]) => {
+
+        let material =new THREE.MeshPhongMaterial({ 
+            color: rgbToHex(value.color), 
+            specular: rgbToHex(value.specular),
+            shininess: value.shininess,
+            emissive: rgbToHex(value.emissive),
+            transparent: value.transparent,
+            opacity: value.opacity,
+            side: value.twosided? THREE.DoubleSide : THREE.FrontSide
+        })
+        let texture = textures[value.textureref]
+        if(texture){
+            texture.wrapS = THREE.RepeatWrapping
+            texture.wrapT = THREE.RepeatWrapping;
+ 
+            texture.repeat.set(
+                1 / value.texlength_s, 
+                1 / value.texlength_t 
+            );
+            material.map = texture
+        }
+        dict[name] = material;
+        return dict;
+    }, {});
+}
