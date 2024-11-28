@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { MyAxis } from './MyAxis.js';
 import { MyFileReader } from './parser/MyFileReader.js';
+import { MyGraph } from './parser/MyGraph.js';
 /**
  *  This class contains the contents of out application
  */
@@ -15,7 +16,16 @@ class MyContents {
         this.axis = null
 
         this.reader = new MyFileReader(this.onSceneLoaded.bind(this));
-        this.reader.open("scenes/scene.json");
+    
+
+        this.reader.open("scenes/scene.json").then((json) => {
+            console.log(json['yasf']);
+            let graph = new MyGraph(json)
+        }).catch((error) => {
+            console.error("Error in loading JSON:", error);
+        });
+        
+        
     }
 
     /**
