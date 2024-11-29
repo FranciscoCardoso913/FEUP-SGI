@@ -1,6 +1,6 @@
 import {rgbToHex} from './utils.js'
 import * as THREE from 'three';
-
+import { Node } from './Node.js';
 
 export function parseAmbientLight(ambient){
     const color = rgbToHex(ambient)
@@ -119,4 +119,14 @@ export function parseMaterials(textures, materials){
         dict[name] = material;
         return dict;
     }, {});
+}
+
+export function parseNodes(graph){
+    return Object.entries(graph).reduce((dict, [name, value]) => {
+        if(name !== "rootid"){
+            dict[name] = new Node(value)
+        }
+        return dict;
+    }, {});
+
 }
