@@ -2,7 +2,7 @@
     "yasf": {
         "globals": {
             "background": {
-                "r": 0.0,
+                "r": 1.0,
                 "g": 0.0,
                 "b": 0.0
             },
@@ -17,12 +17,12 @@
                     "g": 0,
                     "b": 0
                 },
-                "near": 10.0,
+                "near": 1.0,
                 "far": 2000.0
             },
             "skybox": {
-                "size": {"x": 1000, "y": 1000, "z": 1000},
-                "center": {"x": 0, "y": 500, "z": 0},
+                "size": {"x": 150, "y": 150, "z": 150},
+                "center": {"x": 0, "y": 20, "z": 0},
                 "emissive": {"r": 0, "g": 0, "b": 0},
                 "intensity": 0,
                 "front": "scenes/textures/skybox_front.jpg",              
@@ -124,8 +124,8 @@
                 "transparent": false,
                 "opacity": 1.0,
                 "textureref": "wood",
-                "texlength_s": 8,
-                "texlength_t": -5
+                "texlength_s": 1.5,
+                "texlength_t": -1.5
             },
             "walls": {
                 "color": {
@@ -148,8 +148,8 @@
                 "opacity": 1.0,
                 "twosided": "true",
                 "textureref": "woodenplate",
-                "texlength_s": 18,
-                "texlength_t": -15
+                "texlength_s": 5,
+                "texlength_t": -5
             },
             "doorleftplank": {
                 "color": {
@@ -228,11 +228,11 @@
                 "type": "perspective",
                 "angle": 60,
                 "near": 0.1,
-                "far": 2000,
+                "far": 300,
                 "location": {
-                    "x": 150,
-                    "y": 150,
-                    "z": 150
+                    "x": 35,
+                    "y": 35,
+                    "z": 35
                 },
                 "target": {
                     "x": 0,
@@ -273,8 +273,8 @@
                             "g": 0.6,
                             "b": 0.8
                         },
-                        "intensity": 1.0,
-                        "distance": 1000,
+                        "intensity": 1000.0,
+                        "distance": 10000,
                         "decay": 2.0,
                         "castshadow": false,
                         "position": {
@@ -285,7 +285,8 @@
                     },
                     "nodesList": [
                         "cabin",
-                        "floor"
+                        "floor",
+                        "regua"
                     ]
                 }
             },
@@ -325,8 +326,8 @@
                             "y": 0
                         },
                         "xy2": {
-                            "x": 1000,
-                            "y": 1000
+                            "x": 100,
+                            "y": 100
                         }
                     }
                 }
@@ -346,9 +347,9 @@
                             "z": 0
                         },
                         "xyz2": {
-                            "x": 200,
-                            "y": 10,
-                            "z": 350
+                            "x": 20,
+                            "y": 1,
+                            "z": 35
                         }
                     }
                 }
@@ -377,9 +378,9 @@
                     {
                         "type": "translate",
                         "amount": {
-                            "x": -92.5,
-                            "y": 50,
-                            "z": 167.5
+                            "x": -9.25,
+                            "y": 5,
+                            "z": 16.75
                         }
                     },
                     {
@@ -403,9 +404,9 @@
                     {
                         "type": "translate",
                         "amount": {
-                            "x": 92.5,
-                            "y": 50,
-                            "z": 167.5
+                            "x": 9.25,
+                            "y": 5,
+                            "z": 16.75
                         }
                     },
                     {
@@ -429,9 +430,9 @@
                     {
                         "type": "translate",
                         "amount": {
-                            "x": -92.5,
-                            "y": 50,
-                            "z": -167.5
+                            "x": -9.25,
+                            "y": 5,
+                            "z": -16.75
                         }
                     },
                     {
@@ -455,9 +456,9 @@
                     {
                         "type": "translate",
                         "amount": {
-                            "x": 92.5,
-                            "y": 50,
-                            "z": -167.5
+                            "x": 9.25,
+                            "y": 5,
+                            "z": -16.75
                         }
                     },
                     {
@@ -482,8 +483,8 @@
                         "type": "translate",
                         "amount": {
                             "x": 0,
-                            "y": 100,
-                            "z": 167.5
+                            "y": 10,
+                            "z": 16.75
                         }
                     },
                     {
@@ -516,8 +517,8 @@
                         "type": "translate",
                         "amount": {
                             "x": 0,
-                            "y": 100,
-                            "z": -167.5
+                            "y": 10,
+                            "z": -16.75
                         }
                     },
                     {
@@ -549,8 +550,8 @@
                     {
                         "type": "translate",
                         "amount": {
-                            "x": -92.5,
-                            "y": 100,
+                            "x": -9.25,
+                            "y": 10,
                             "z": 0
                         }
                     },
@@ -583,8 +584,8 @@
                     {
                         "type": "translate",
                         "amount": {
-                            "x": 92.5,
-                            "y": 100,
+                            "x": 9.25,
+                            "y": 10,
                             "z": 0
                         }
                     },
@@ -635,18 +636,16 @@
                         "type": "translate",
                         "amount": {
                             "x": 0,
-                            "y": 50,
-                            "z": 170
+                            "y": 5,
+                            "z": 17
                         }
                     }
                 ],
                 "children": {
                     "nodesList": [
-                        "door",
-                        "doorleftplank",
-                        "doorrightplank",
-                        "smallwall",
-                        "tinywall"
+                        "frontdoor",
+                        "frontleftwall",
+                        "frontrightwall"
                     ]
                 }
             },
@@ -657,8 +656,8 @@
                         "type": "translate",
                         "amount": {
                             "x": 0,
-                            "y": 50,
-                            "z": -170
+                            "y": 5,
+                            "z": -17
                         }
                     }
                 ],
@@ -666,12 +665,12 @@
                     "wall": {
                         "type": "rectangle",
                         "xy1": {
-                            "x": -100,
+                            "x": -10,
                             "y": 0
                         },
                         "xy2": {
-                            "x": 100,
-                            "y": 100
+                            "x": 10,
+                            "y": 10
                         }
                     }
                 }
@@ -682,8 +681,8 @@
                     {
                         "type": "translate",
                         "amount": {
-                            "x": -95,
-                            "y": 50,
+                            "x": -9.5,
+                            "y": 5,
                             "z": 0
                         }
                     },
@@ -704,8 +703,8 @@
                             "y": 0
                         },
                         "xy2": {
-                            "x": 350,
-                            "y": 100
+                            "x": 35,
+                            "y": 10
                         }
                     }
                 }
@@ -716,8 +715,8 @@
                     {
                         "type": "translate",
                         "amount": {
-                            "x": 95,
-                            "y": 50,
+                            "x": 9.5,
+                            "y": 5,
                             "z": 0
                         }
                     },
@@ -731,17 +730,12 @@
                     }
                 ],
                 "children": {
-                    "wall": {
-                        "type": "rectangle",
-                        "xy1": {
-                            "x": 0,
-                            "y": 0
-                        },
-                        "xy2": {
-                            "x": 350,
-                            "y": 100
-                        }
-                    }
+                    "nodesList": [
+                        "rightdoor",
+                        "rigthleftwall",
+                        "rightmiddlewall"
+                        
+                    ]
                 }
             },
             "fronttriangle": {
@@ -754,18 +748,18 @@
                         "type": "triangle",
                         "xyz1": {
                             "x": 0,
-                            "y": 150,
-                            "z": 170
+                            "y": 17,
+                            "z": 17
                         },
                         "xyz2": {
-                            "x": -95,
-                            "y": 100,
-                            "z": 170
+                            "x": -11,
+                            "y": 10,
+                            "z": 17
                         },
                         "xyz3": {
-                            "x": 95,
-                            "y": 100,
-                            "z": 170
+                            "x": 11,
+                            "y": 10,
+                            "z": 17
                         }
                     }
                 }
@@ -780,22 +774,172 @@
                         "type": "triangle",
                         "xyz1": {
                             "x": 0,
-                            "y": 150,
-                            "z": -170
+                            "y": 17,
+                            "z": -17
                         },
                         "xyz2": {
-                            "x": -95,
-                            "y": 100,
-                            "z": -170
+                            "x": -11,
+                            "y": 10,
+                            "z": -17
                         },
                         "xyz3": {
-                            "x": 95,
-                            "y": 100,
-                            "z": -170
+                            "x": 11,
+                            "y": 10,
+                            "z": -17
                         }
                     }
                 }
             }, 
+            "frontdoor": {
+                "type":"node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2.5,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "door",
+                        "doorleftplank",
+                        "doorrightplank"
+                    ]
+                }
+            },
+            "frontleftwall": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -5,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "wall": {
+                        "type": "rectangle",
+                        "xy1": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "xy2": {
+                            "x": 10,
+                            "y": 10
+                        }
+                    }
+                }
+            },
+            "frontrightwall": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 7.5,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "wall": {
+                        "type": "rectangle",
+                        "xy1": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "xy2": {
+                            "x": 5,
+                            "y": 10
+                        }
+                    }
+                }
+            },
+            "rightdoor": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "door"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -10,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "door",
+                        "doorleftplank",
+                        "doorrightplank"
+                    ]
+                }
+            },
+            "rigthleftwall": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -14.5,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "wall": {
+                        "type": "rectangle",
+                        "xy1": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "xy2": {
+                            "x": 3,
+                            "y": 10
+                        }
+                    }
+                }
+                
+            },
+            "rightmiddlewall": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -2.5,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "wall": {
+                        "type": "rectangle",
+                        "xy1": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "xy2": {
+                            "x": 10,
+                            "y": 10
+                        }
+                    }
+                }
+            },
+
+
             "roof": {
                 "type": "node",
                 "children": {
@@ -812,8 +956,8 @@
                     {
                         "type": "translate",
                         "amount": {
-                            "x": -180,
-                            "y": 55,
+                            "x": -11.5,
+                            "y": 10,
                             "z": 0
                         }
                     },
@@ -839,8 +983,8 @@
                     {
                         "type": "translate",
                         "amount": {
-                            "x": 180,
-                            "y": 55,
+                            "x": 11.5,
+                            "y": 10,
                             "z": 0
                         }
                     },
@@ -869,7 +1013,7 @@
                         "type": "translate",
                         "amount": {
                             "x": 0,
-                            "y": 150,
+                            "y": 17,
                             "z": 0
                         }
                     },
@@ -898,6 +1042,16 @@
             },
             "roofdefault": {
                 "type": "node",
+                "transforms": [
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 0.7,
+                            "z": 1
+                        }
+                    }
+                ],
                 "children": {
                     "nodesList": [
                         "roofwood",
@@ -918,7 +1072,7 @@
                         "type": "translate",
                         "amount": {
                             "x": 0,
-                            "y": 100,
+                            "y": 10,
                             "z": 0
                         }
                     },
@@ -939,8 +1093,8 @@
                             "y": 0
                         },
                         "xy2": {
-                            "x": 400,
-                            "y": 200
+                            "x": 40,
+                            "y": 20
                         }
                     }
                 }
@@ -955,8 +1109,8 @@
                         "type": "translate",
                         "amount": {
                             "x": 0,
-                            "y": 100,
-                            "z": 200
+                            "y": 10,
+                            "z": 20
                         }
                     },
                     {
@@ -992,8 +1146,8 @@
                         "type": "translate",
                         "amount": {
                             "x": 0,
-                            "y": 100,
-                            "z": -200
+                            "y": 10,
+                            "z": -20
                         }
                     },
                     {
@@ -1029,7 +1183,7 @@
                         "type": "translate",
                         "amount": {
                             "x": 0,
-                            "y": 100,
+                            "y": 10,
                             "z": 0
                         }
                     },
@@ -1066,7 +1220,7 @@
                         "type": "rotate",
                         "amount": {
                             "x": 90,
-                            "y": -100,
+                            "y": -10,
                             "z": 0
                         }
                     },
@@ -1095,8 +1249,8 @@
                         "type": "translate",
                         "amount": {
                             "x": 0,
-                            "y": 100,
-                            "z": 200
+                            "y": 10,
+                            "z": 20
                         }
                     },
                     {
@@ -1122,7 +1276,7 @@
                         "type": "translate",
                         "amount": {
                             "x": 0,
-                            "y": -100,
+                            "y": -10,
                             "z": 0
                         }
                     }
@@ -1164,8 +1318,8 @@
                         "type": "translate",
                         "amount": {
                             "x": 0,
-                            "y": 50,
-                            "z": 200
+                            "y": 5,
+                            "z": 20
                         }
                     },
                     {
@@ -1193,8 +1347,8 @@
                         "type": "translate",
                         "amount": {
                             "x": 0,
-                            "y": 50,
-                            "z": -200
+                            "y": 5,
+                            "z": -20
                         }
                     },
                     {
@@ -1223,28 +1377,20 @@
                             "z": 0
                         },
                         "xyz2": {
-                            "x": 15,
-                            "y": 50,
-                            "z": 15
+                            "x": 1.5,
+                            "y": 5,
+                            "z": 1.5
                         }
                     }
                 }
             },
+            
+
             "door": {
                 "type": "node",
                 "materialref": {
                     "materialId": "door"
                 },
-                "transforms": [
-                    {
-                        "type": "translate",
-                        "amount": {
-                            "x": 25,
-                            "y": 0,
-                            "z": 0
-                        }
-                    }
-                ],
                 "children": {
                     "doorrectangle": {
                         "type": "rectangle",
@@ -1253,60 +1399,8 @@
                             "y": 0
                         },
                         "xy2": {
-                            "x": 40,
-                            "y": 100
-                        }
-                    }
-                }
-            },
-            "smallwall": {
-                "type": "node",
-                "transforms": [
-                    {
-                        "type": "translate",
-                        "amount": {
-                            "x": -50,
-                            "y": 0,
-                            "z": 0
-                        }
-                    }
-                ],
-                "children": {
-                    "wall": {
-                        "type": "rectangle",
-                        "xy1": {
-                            "x": 0,
-                            "y": 0
-                        },
-                        "xy2": {
-                            "x": 100,
-                            "y": 100
-                        }
-                    }
-                }
-            },
-            "tinywall": {
-                "type": "node",
-                "transforms": [
-                    {
-                        "type": "translate",
-                        "amount": {
-                            "x": 75,
-                            "y": 0,
-                            "z": 0
-                        }
-                    }
-                ],
-                "children": {
-                    "wall": {
-                        "type": "rectangle",
-                        "xy1": {
-                            "x": 0,
-                            "y": 0
-                        },
-                        "xy2": {
-                            "x": 50,
-                            "y": 100
+                            "x": 4,
+                            "y": 10
                         }
                     }
                 }
@@ -1320,7 +1414,7 @@
                     {
                         "type": "translate",
                         "amount": {
-                            "x": 0,
+                            "x": -2.5,
                             "y": 0,
                             "z": 0
                         }
@@ -1349,7 +1443,7 @@
                     {
                         "type": "translate",
                         "amount": {
-                            "x": 50,
+                            "x": 2.5,
                             "y": 0,
                             "z": 0
                         }
@@ -1368,7 +1462,14 @@
                         "woodplank"
                     ]
                 }
+            },
+
+            "window": {
+
             }
+
+
+
 
             
             
