@@ -31,7 +31,7 @@ class MyGraph {
 	build(){
 		this.graph = new THREE.Group()
 		let root = this.nodes[this.rootNode]
-		root.build(this.nodes, this.materials)
+		this.graph.add(root.build(this.nodes, this.materials))
 	}
 
 
@@ -40,6 +40,7 @@ class MyGraph {
 		scene.fog = this.fog
 		scene.add(this.skybox)
 		scene.add(this.ambientLight)
+		scene.add(this.graph)
 	}
 
 }

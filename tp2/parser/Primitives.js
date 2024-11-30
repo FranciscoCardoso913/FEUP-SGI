@@ -1,7 +1,10 @@
 import * as THREE from 'three';
+import { rgbToHex } from './utils.js';
 
 const map = {
+    "pointlight": buildPointlight,
     "rectangle": buildRetangle
+
 }
 
 export function buildPrimitive(primitive, material){
@@ -20,5 +23,15 @@ function buildRetangle(rectangle, material){
     const rectangleMesh = new THREE.Mesh(geometry, material);
     rectangleMesh.position.copy (new THREE.Vector3(rectangle["xy1"]["x"] , rectangle["xy1"]["y"],0 ))
     return rectangleMesh
+}
+
+function buildPointlight(pointlight, material){
+
+    const pointLight = new THREE.PointLight(rgbToHex(pointlight["color"]), pointlight["intensity"], pointlight["distance"], pointlight["decay"]);  
+    pointLight.position.set(pointlight.position.x, pointlight.position.y, pointlight.position.z);
+    pointLight.castShadow = pointlight.castshadow
+    return pointLight
+
+
 
 }
