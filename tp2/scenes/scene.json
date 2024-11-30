@@ -273,7 +273,7 @@
                             "g": 1,
                             "b": 1
                         },
-                        "intensity": 1000.0,
+                        "intensity": 500.0,
                         "distance": 1000,
                         "decay": 1.0,
                         "castshadow": false,
