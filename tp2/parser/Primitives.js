@@ -3,7 +3,8 @@ import { rgbToHex } from './utils.js';
 
 const map = {
     "pointlight": buildPointlight,
-    "rectangle": buildRetangle
+    "rectangle": buildRetangle,
+    "triangle":buildTriangle
 
 }
 
@@ -31,7 +32,17 @@ function buildPointlight(pointlight, material){
     pointLight.position.set(pointlight.position.x, pointlight.position.y, pointlight.position.z);
     pointLight.castShadow = pointlight.castshadow
     return pointLight
+}
 
+function buildTriangle(triangle, material){
 
-
+    const geometry = new THREE.BufferGeometry();
+    const vertices = new Float32Array([
+        triangle["xyz1"]["x"],triangle["xyz1"]["y"],triangle["xyz1"]["z"],
+        triangle["xyz2"]["x"],triangle["xyz2"]["y"],triangle["xyz2"]["z"],
+        triangle["xyz3"]["x"],triangle["xyz3"]["y"],triangle["xyz3"]["z"]
+    ]);
+    geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
+    const triangleMesh = new THREE.Mesh(geometry, material);
+    return triangleMesh
 }
