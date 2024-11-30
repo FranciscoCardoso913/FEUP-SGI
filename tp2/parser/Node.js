@@ -45,11 +45,19 @@ class Node {
 
 	transform(node){
 		this.transforms.forEach(element=>{
-			if(element["type"]=== "rotate"){
-				node.rotation.x+= degreesToRadians(element["amount"]["x"])
-				node.rotation.y+= degreesToRadians(element["amount"]["y"])
-				node.rotation.z+= degreesToRadians(element["amount"]["z"])
+			if (element["type"]=== "scale"){
+				node.scale.set(new THREE.Vector3(element["amount"]["x"],element["amount"]["y"],element["amount"]["z"]))
 			}
+			else if (element["type"]=== "translate"){
+				node.position.copy(new THREE.Vector3(element["amount"]["x"],element["amount"]["y"],element["amount"]["z"]))
+			}
+			else if(element["type"]=== "rotate"){
+				node.rotation.x= degreesToRadians(element["amount"]["x"])
+				node.rotation.y= degreesToRadians(element["amount"]["y"])
+				node.rotation.z= degreesToRadians(element["amount"]["z"])
+			}
+
+		
 		})
 		return node
 	}

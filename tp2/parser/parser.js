@@ -101,8 +101,8 @@ export function parseMaterials(textures, materials){
             specular: rgbToHex(value.specular),
             shininess: value.shininess,
             emissive: rgbToHex(value.emissive),
-            //transparent: value.transparent,
-            //opacity: value.opacity,
+            transparent: value.transparent,
+            opacity: value.opacity,
             side: value.twosided? THREE.DoubleSide : THREE.FrontSide
         })
         let texture = textures[value.textureref]
