@@ -21,6 +21,7 @@ class MyApp  {
         this.activeCameraName = null
         this.lastCameraName = null
         this.cameras = []
+        this.camerasNames = []
         this.frustumSize = 20
 
         // other attributes
