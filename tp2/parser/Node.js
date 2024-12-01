@@ -12,7 +12,7 @@ class Node {
 	*/
 	constructor(json) {
         this.json = json
-
+		this.lightHelpers = false
 		this.lodNodes = json["lodNodes"]
         this.transforms = json ["transforms"]?? []
 		this.castshadows = json["castshadows"] ?? false
@@ -30,7 +30,6 @@ class Node {
 	}
 
 	build(nodes, materials, inheritMaterial = null){
-
 		let node = new THREE.Group()
 		const materialref = this.json["materialref"]
 		let materialId = null;
@@ -55,6 +54,7 @@ class Node {
 			});
 
 			this.primitives.forEach(element => {
+				element.lightHelpers = this.lightHelpers
 				let child = buildPrimitive(element, material)
 				if(child) node.add(child)
 			});

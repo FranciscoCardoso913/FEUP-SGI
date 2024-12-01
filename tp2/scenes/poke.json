@@ -563,6 +563,8 @@
             "rootid": "scene",
             "scene": {
                 "type": "node",
+                "castshadows": true,
+                "receiveshadows": true,
                 "children": {
                     "nodesList": [
                         "cabin",
@@ -577,18 +579,18 @@
                 "children": {
                     "pointLight": {
                         "type": "pointlight",
-                        "enabled": true,
+                        "enabled": false,
                         "color": {
                             "r": 1,
                             "g": 1,
                             "b": 1
                         },
-                        "intensity": 20.0,
-                        "distance": 100,
+                        "intensity": 200.0,
+                        "distance": 10000,
                         "decay": 1.0,
                         "position": {
                             "x": 0,
-                            "y": 9,
+                            "y": 100,
                             "z": 0
                         },
                         "castshadow": false
@@ -604,11 +606,11 @@
                         },
                         "intensity": 200,
                         "distance": 50,
-                        "angle": 60,
+                        "angle": 90,
                         "decay": 2,
                         "penumbra": 1,
                         "position": {
-                            "x": 13,
+                            "x": 15,
                             "y": 20,
                             "z": -12.5
                         },
@@ -618,7 +620,7 @@
                             "z": -8
                         },
                         "castshadow": true,
-                        "shadowfar": 800,
+                        "shadowfar": 80,
                         "shadowmapsize": 4096
                     },
                     "directionallight": {
@@ -629,18 +631,18 @@
                             "g": 1,
                             "b": 1
                         },
-                        "intensity": 3,
+                        "intensity": 2,
                         "position": {
                             "x": 15,
                             "y": 5,
                             "z": -5
                         },
                         "castshadow": true,
-                        "shadowleft": -500,
-                        "shadowright": 500,
-                        "shadowbottom": -500,
-                        "shadowtop": 500,
-                        "shadowfar": 800,
+                        "shadowleft": -50,
+                        "shadowright": 50,
+                        "shadowbottom": -50,
+                        "shadowtop": 50,
+                        "shadowfar": 80,
                         "shadowmapsize": 4096
                     }
                 }
@@ -649,8 +651,6 @@
 
             "cabin": {
                 "type": "node",
-                "castshadows": true,
-                "receiveshadows": true,
                 "children": {
                     "nodesList": [
                         "housefloor",
