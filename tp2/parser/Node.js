@@ -12,8 +12,10 @@ class Node {
 	*/
 	constructor(json) {
         this.json = json
-        this.edges = json["children"]["nodesList"] ? json["children"]["nodesList"] : []
-        this.transforms = json ["transforms"]? json ["transforms"]:[]
+        this.edges = json["children"]["nodesList"] ?? []
+		this.lods = json["children"]["lodsList"] ?? []
+		this.lodNodes = json["lodNodes"]
+        this.transforms = json ["transforms"]?? []
 		this.primitives =  Object.entries(json["children"]).reduce((list, [name, value]) => {
 			if(name !== "nodesList"){
 				list.push (value)
@@ -31,15 +33,30 @@ class Node {
 		if( materialref) materialId = materialref["materialId"];
 		const material = materialId ? materials[materialId] : inheritMaterial
 
-		this.edges.forEach(element => {
-			let child = nodes[element].build(nodes, materials, material);
-			if(child) node.add(child)
-		});
+		if(this.lodNodes){
+			let lod = new THREE.LOD();
+			this.lodNodes.forEach(element => {
+				let child = nodes[element.nodeId].build(nodes, materials, material);
+				if(child) lod.addLevel(child, element.mindist)
+			});
+			node.add(lod)
+		}else{
 
-		this.primitives.forEach(element => {
-			let child = buildPrimitive(element, material)
-			if(child) node.add(child)
-		});
+			this.edges.forEach(element => {
+				let child = nodes[element].build(nodes, materials, material);
+				if(child) node.add(child)
+			});
+
+			this.primitives.forEach(element => {
+				let child = buildPrimitive(element, material)
+				if(child) node.add(child)
+			});
+			
+			this.lods.forEach(element => {
+				let child = nodes[element].build(nodes, materials, material);
+				if(child) node.add(child)
+			});
+		}
 
 		node = this.transform(node)
 		
