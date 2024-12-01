@@ -3,8 +3,8 @@
         "globals": {
             "background": {
                 "r": 1.0,
-                "g": 0.0,
-                "b": 0.0
+                "g": 1.0,
+                "b": 1.0
             },
             "ambient": {
                 "r": 1,
@@ -273,7 +273,7 @@
                             "g": 1,
                             "b": 1
                         },
-                        "intensity": 100.0,
+                        "intensity": 200.0,
                         "distance": 10000,
                         "decay": 1.0,
                         "castshadow": false,

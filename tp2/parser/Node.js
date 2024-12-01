@@ -16,6 +16,8 @@ class Node {
 		this.lods = json["children"]["lodsList"] ?? []
 		this.lodNodes = json["lodNodes"]
         this.transforms = json ["transforms"]?? []
+		this.castshadows = json["castshadows"] ?? false
+		this.receiveshadows = json["receiveshadows"] ?? false
 		this.primitives =  Object.entries(json["children"]).reduce((list, [name, value]) => {
 			if(name !== "nodesList"){
 				list.push (value)
@@ -59,6 +61,8 @@ class Node {
 		}
 
 		node = this.transform(node)
+		node.castShadow = this.castshadows
+		node.receiveShadow = this.receiveshadows
 		
 		return node
 	}
