@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { rgbToHex, degreesToRadians } from './utils.js';
+import { rgbToHex, degreesToRadians, createPolygon } from './utils.js';
 import { MyNurbsBuilder } from '../MyNurbsBuilder.js';
 
 const map = {
@@ -11,7 +11,8 @@ const map = {
     "sphere": buildSphere,
     "nurbs": buildNurbs,
     "spotlight": buildSpotlight,
-    "directionallight": buildDirectionalLight
+    "directionallight": buildDirectionalLight,
+    "polygon":buildPolygon
 
 }
 
@@ -208,4 +209,17 @@ function buildDirectionalLight(directionallight,material ){
         return directionalLight
     }
     return null
+}
+
+function buildPolygon(polygon,material ){
+    const radius = polygon.radius;
+    const stacks = polygon.stacks;
+    const slices = polygon.slices;
+    const color_c = rgbToHex(polygon.color_c);
+    const color_p = rgbToHex(polygon.color_p); 
+
+    const polygonGeometry = createPolygon(radius, stacks, slices, color_c, color_p);
+    material = new THREE.MeshBasicMaterial({ vertexColors: true });
+    const polygonMesh = new THREE.Mesh(polygonGeometry, material);
+    return polygonMesh
 }
