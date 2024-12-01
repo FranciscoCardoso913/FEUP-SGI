@@ -269,18 +269,18 @@
                         "type": "pointlight",
                         "enabled": true,
                         "color": {
-                            "r": 0.5,
-                            "g": 0.6,
-                            "b": 0.8
+                            "r": 1,
+                            "g": 1,
+                            "b": 1
                         },
-                        "intensity": 1000.0,
+                        "intensity": 100.0,
                         "distance": 10000,
-                        "decay": 2.0,
+                        "decay": 1.0,
                         "castshadow": false,
                         "position": {
-                            "x": 33.75,
-                            "y": 37.3,
-                            "z": 33.75
+                            "x": 0,
+                            "y": 100,
+                            "z": 0
                         }
                     },
                     "nodesList": [
