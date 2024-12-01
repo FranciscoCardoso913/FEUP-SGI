@@ -12,6 +12,9 @@ class MyGraph {
         this.json = json['yasf']
         this.init()
 	}
+	/**
+	 * Parses the json file and creates the graph
+	 */
     init(){
        this.parseGlobals(this.json['globals'])
 	   this.textures= parseTextures(this.json['textures'])
@@ -22,20 +25,29 @@ class MyGraph {
 	   this.initCamera = this.json["cameras"]["initial"]
 
     }
-
+	/**
+	 * Parses the global variables
+	 * @param {*} globals json with the global variables
+	 */
 	parseGlobals(globals){
 		this.background = rgbToHex(globals['background'])
 		this.ambientLight = parseAmbientLight(globals['ambient'])
 		this.fog = parseFog(globals["fog"])
 		this.skybox = parseSkybox(globals['skybox'])
 	}
-
+	/**
+	 * Iterates throught the nodes and creates the graph scene
+	 */
 	build(){
 		this.graph = new THREE.Group()
 		let root = this.nodes[this.rootNode]
 		this.graph.add(root.build(this.nodes, this.materials))
 	}
 
+	/**
+	 * Enables/Disables the wireframes in all the materials
+	 * @param {*} bool True to enable, False to disable
+	 */
 	wireframe(bool){
 		this.materials = Object.entries(this.materials).reduce((dict, [name, value]) => {
 			value.wireframe = bool
@@ -44,7 +56,10 @@ class MyGraph {
 		},{})
 		
 	}
-
+	/**
+	 * Enables/Disables the light helpers in all the light
+	 * @param {*} bool True to enable, False to disable
+	 */
 	lightHelpers(bool){
 		this.nodes = Object.entries(this.nodes).reduce((dict, [name, value]) => {
 			value.lightHelpers = bool
@@ -54,7 +69,10 @@ class MyGraph {
 		
 	}
 
-
+	/**
+	 * Creates the scene with all the yasf information
+	 * @param {*} scene 
+	 */
 	create(scene){
 		scene.background = this.background
 		scene.fog = this.fog
@@ -62,6 +80,10 @@ class MyGraph {
 		scene.add(this.ambientLight)
 		scene.add(this.graph)
 	}
+	/**
+	 * Deletes the scene
+	 * @param {*} scene 
+	 */
 	remove (scene){
 		scene.remove(this.skybox)
 		scene.remove(this.ambientLight)
