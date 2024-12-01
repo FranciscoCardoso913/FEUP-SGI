@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { MyAxis } from './MyAxis.js';
 import { MyFileReader } from './parser/MyFileReader.js';
 import { MyGraph } from './parser/MyGraph.js';
+import { MyGuiInterface } from './MyGuiInterface.js';
 /**
  *  This class contains the contents of out application
  */
@@ -23,6 +24,19 @@ class MyContents {
             this.graph = new MyGraph(json)
             this.graph.build()
             this.graph.create(this.app.scene)
+            this.app.cameras = this.graph.cameras
+    
+            this.app.activeCameraName = this.graph.initCamera
+        
+            this.app.setActiveCamera(this.graph.initCamera)
+            this.app.camerasNames = Object.entries(this.app.cameras).reduce((list, [name, value]) => {
+                list.push(name)
+                return list;
+            }, []);
+
+            let gui = new MyGuiInterface(this.app)
+            gui.setContents(this)
+            gui.init();
         }).catch((error) => {
             console.error("Error in loading JSON:", error);
         });

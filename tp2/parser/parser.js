@@ -133,3 +133,35 @@ export function parseNodes(graph){
     }, {});
 
 }
+
+export function parseCameras(cameras){
+    return Object.entries(cameras).reduce((dict, [name, value]) => {
+        if(name !== "initial"){
+            const near = value.near;
+            const far = value.far;
+            const location = value.location;
+            const target = value.target;
+            let camera = null
+            if(value.type === "orthogonal"){
+                const left = value.left;
+                const right = value.right;
+                const bottom = value.bottom;
+                const top = value.top;
+
+                camera = new THREE.OrthographicCamera(left, right, top, bottom, near, far);
+                camera.position.set(location.x, location.y, location.z);
+                camera.lookAt(new THREE.Vector3(target.x, target.y, target.z));
+            }
+            else{
+                const angle = value.angle;
+                const aspect = window.innerWidth / window.innerHeight;
+                camera = new THREE.PerspectiveCamera(angle,aspect , near, far);
+
+            }
+            camera.position.set(location.x, location.y, location.z);
+            camera.lookAt(new THREE.Vector3(target.x, target.y, target.z));
+            dict[name] = camera
+        }
+        return dict;
+    }, {});
+}
