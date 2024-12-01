@@ -40,9 +40,9 @@ function buildPointlight(pointlight, material){
     const distance = pointlight.distance ?? 1000;
     const decay = pointlight.decay ?? 2;
     const position = pointlight.position ;
-    const castShadow = pointlight.castShadow ?? false ;
-    const shadowFar = pointlight.shadowFar ?? 500.0;
-    const shadowMapSize = pointlight.shadowMapSize ?? 512;
+    const castShadow = pointlight.castshadow ?? false ;
+    const shadowFar = pointlight.shadowfar ?? 500.0;
+    const shadowMapSize = pointlight.shadowmapsize ?? 512;
     
     if (enabled) {
         const pointLight = new THREE.PointLight(color, intensity, distance, decay);
@@ -164,9 +164,9 @@ function buildSpotlight(spotLight,material ){
     const penumbra = spotLight.penumbra ?? 1;
     const position = spotLight.position;
     const target = spotLight.target;
-    const castShadow = spotLight.castShadow ?? false;
-    const shadowFar = spotLight.shadowFar ?? 500;
-    const shadowMapSize = spotLight.shadowMapSize ?? 512;
+    const castShadow = spotLight.castshadow ?? false;
+    const shadowFar = spotLight.shadowfar ?? 500;
+    const shadowMapSize = spotLight.shadowmapsize ?? 512;
 
     if (enabled) {
         const spotlight = new THREE.SpotLight(color, intensity, distance, angle, penumbra, decay);
@@ -196,13 +196,13 @@ function buildDirectionalLight(directionallight,material ){
     const color = rgbToHex(directionallight.color);
     const intensity = directionallight.intensity ?? 1;
     const position = directionallight.position;
-    const castShadow = directionallight.castShadow ?? false;
-    const shadowLeft = directionallight.shadowLeft ?? -5;
-    const shadowRight = directionallight.shadowRight ?? 5;
-    const shadowBottom = directionallight.shadowBottom ?? -5;
-    const shadowTop = directionallight.shadowTop ?? 5;
-    const shadowFar = directionallight.shadowFar ?? 500.0;
-    const shadowMapSize = directionallight.shadowMapSize ?? 512;
+    const castShadow = directionallight.castshadow ?? false;
+    const shadowLeft = directionallight.shadowleft ?? -5;
+    const shadowRight = directionallight.shadowright ?? 5;
+    const shadowBottom = directionallight.shadowbottom ?? -5;
+    const shadowTop = directionallight.shadowtop ?? 5;
+    const shadowFar = directionallight.shadowfar ?? 500.0;
+    const shadowMapSize = directionallight.shadowmapsize ?? 512;
     
     if (enabled) {
         const directionalLight = new THREE.DirectionalLight(color, intensity);
