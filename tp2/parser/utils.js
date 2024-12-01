@@ -25,7 +25,7 @@ export function createPolygon(radius, stacks, slices, color_c, color_p) {
     const centerColor = new THREE.Color(color_c);
     const peripheryColor = new THREE.Color(color_p);
 
-    console.log(centerColor)
+  
 
     // Add center vertex
     positions.push(0, 0, 0);
