@@ -9,7 +9,8 @@
             "ambient": {
                 "r": 1,
                 "g": 1,
-                "b": 1
+                "b": 1,
+                "intensity": 0.5
             },
             "fog": {
                 "color": {
@@ -35,28 +36,36 @@
         },
         "textures": {
             "floor": {
-                "filepath": "scenes/textures/floor.jpg"
+                "filepath": "scenes/textures/floor.jpg",
+                "isVideo": false
             },
             "housefloor": {
-                "filepath": "scenes/textures/plate.jpg"
+                "filepath": "scenes/textures/plate.jpg",
+                "isVideo": false
             },
             "wood": {
-                "filepath": "scenes/textures/wood.jpg"
+                "filepath": "scenes/textures/wood.jpg",
+                "isVideo": false
             },
             "woodenplate": {
-                "filepath": "scenes/textures/woodenplate.jpg"
+                "filepath": "scenes/textures/woodenplate.jpg",
+                "isVideo": false
             },
             "doorsymbolsleft": {
-                "filepath": "scenes/textures/door_symbols_left.jpg"
+                "filepath": "scenes/textures/door_symbols_left.jpg",
+                "isVideo": false
             },
             "doorsymbolsright": {
-                "filepath": "scenes/textures/door_symbols_right.jpg"
+                "filepath": "scenes/textures/door_symbols_right.jpg",
+                "isVideo": false
             },
             "door": {
-                "filepath": "scenes/textures/door.jpg"
+                "filepath": "scenes/textures/door.jpg",
+                "isVideo": false
             },
             "paint": {
                 "filepath": "scenes/textures/caravaggio.jpg",
+                "isVideo": false,
                 "mipmap0": "scenes/textures/caravaggio.1024.jpg",
                 "mipmap1": "scenes/textures/caravaggio.512.jpg",
                 "mipmap2": "scenes/textures/caravaggio.256.jpg",
@@ -67,17 +76,24 @@
                 "mipmap7": "scenes/textures/caravaggio.8.jpg"
             },
             "blanket": {
-                "filepath": "scenes/textures/blanket.jpg"
+                "filepath": "scenes/textures/blanket.jpg",
+                "isVideo": false
             },
             "blanketbump": {
-                "filepath": "scenes/textures/blanket_bump.jpg"
+                "filepath": "scenes/textures/blanket_bump.jpg",
+                "isVideo": false
             },
             "video": {
-                "filepath": "scenes/videos/video.mp4",
+                "filepath": "scenes/textures/video.mp4",
                 "isVideo": true
             },
             "pillow": {
-                "filepath": "scenes/textures/pillow.jpg"
+                "filepath": "scenes/textures/pillow.jpg",
+                "isVideo": false
+            },
+            "basket": {
+                "filepath": "scenes/textures/basket.jpg",
+                "isVideo": false
             }
         },
         "materials": {
@@ -318,6 +334,54 @@
                 "textureref": "pillow",
                 "texlength_s": 1,
                 "texlength_t": 1
+            },
+            "video": {
+                "color": {
+                    "r": 1,
+                    "g": 1,
+                    "b": 1
+                },
+                "specular": {
+                    "r": 0.5,
+                    "g": 0.5,
+                    "b": 0.5
+                },
+                "shininess": 32,
+                "emissive": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "transparent": false,
+                "opacity": 1.0,
+                "twosided": "false",
+                "textureref": "video",
+                "texlength_s": 1,
+                "texlength_t": 1
+            },
+            "basket": {
+                "color": {
+                    "r": 0.35,
+                    "g": 0.25,
+                    "b": 0.2
+                },
+                "specular": {
+                    "r": 0.35,
+                    "g": 0.25,
+                    "b": 0.2
+                },
+                "shininess": 32,
+                "emissive": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "transparent": false,
+                "opacity": 1.0,
+                "twosided": "true",
+                "textureref": "basket",
+                "texlength_s": 4,
+                "texlength_t": 8
             }
         },
         "cameras": {
@@ -363,9 +427,20 @@
             "scene": {
                 "type": "node",
                 "children": {
+                    "nodesList": [
+                        "cabin",
+                        "floor",
+                        "lights"
+                    ]
+                }
+            },
+
+            "lights": {
+                "type": "node",
+                "children": {
                     "pointLight": {
                         "type": "pointlight",
-                        "enabled": true,
+                        "enabled": false,
                         "color": {
                             "r": 1,
                             "g": 1,
@@ -374,20 +449,67 @@
                         "intensity": 200.0,
                         "distance": 10000,
                         "decay": 1.0,
-                        "castshadow": false,
                         "position": {
                             "x": 0,
                             "y": 100,
                             "z": 0
-                        }
+                        },
+                        "castshadow": false
                     },
-  
-                    "nodesList": [
-                        "cabin",
-                        "floor"
-                    ]
+
+                    "spotlight": {
+                        "type": "spotlight",
+                        "enabled": true,
+                        "color": {
+                            "r": 1,
+                            "g": 1,
+                            "b": 1
+                        },
+                        "intensity": 200,
+                        "distance": 50,
+                        "angle": 90,
+                        "decay": 2,
+                        "penumbra": 1,
+                        "position": {
+                            "x": 15,
+                            "y": 20,
+                            "z": -12.5
+                        },
+                        "target": {
+                            "x": 0,
+                            "y": 0,
+                            "z": -8
+                        },
+                        "castshadow": true,
+                        "shadowfar": 80,
+                        "shadowmapsize": 4096
+                    },
+                    "directionallight": {
+                        "type": "directionallight",
+                        "enabled": true,
+                        "color": {
+                            "r": 1,
+                            "g": 1,
+                            "b": 1
+                        },
+                        "intensity": 2,
+                        "position": {
+                            "x": 15,
+                            "y": 5,
+                            "z": -5
+                        },
+                        "castshadow": false,
+                        "shadowleft": -50,
+                        "shadowright": 50,
+                        "shadowbottom": -50,
+                        "shadowtop": 50,
+                        "shadowfar": 80,
+                        "shadowmapsize": 4096
+                    }
                 }
             },
+
+
             "cabin": {
                 "type": "node",
                 "children": {
@@ -893,7 +1015,8 @@
                             "x": 10,
                             "y": 10
                         }
-                    }
+                    },
+                    "nodesList": ["video"]
                 }
             },
             "leftwall": {
@@ -1212,6 +1335,35 @@
                         "xy2": {
                             "x": 5,
                             "y": 5
+                        }
+                    }
+                }
+            },
+            "video": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "video"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0.01
+                        }
+                    }
+                ],
+                "children": {
+                    "videoprim": {
+                        "type": "rectangle",
+                        "xy1": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "xy2": {
+                            "x": 16,
+                            "y": 9
                         }
                     }
                 }
@@ -1698,7 +1850,7 @@
                         "skylightrightlimit",
                         "skylightleftholder",
                         "skylightroof"
-                    ]
+                    ]   
                 }
             },
             "skylightleftlimit": {
@@ -2728,7 +2880,8 @@
                 "children": {
                     "nodesList": [
                         "bedkratos",
-                        "bedatreus"
+                        "bedatreus",
+                        "basket"
                     ]
                 }
             },
@@ -2755,8 +2908,7 @@
                 }
             },
 
-            "bedatreus": {
-                
+            "bedatreus": {             
                 "type": "node",
                 "transforms": [
                     {
@@ -3322,6 +3474,83 @@
                         "stacks": 40
                     }
                 }
+            },
+            
+            "basket": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "basket"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 7,
+                            "y": 2,
+                            "z": 9
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "basketcylinder",
+                        "basketcover"
+                    ]
+                }
+            },
+            "basketcylinder": {
+                "type": "node",
+                "children": {
+                    "jar": {
+                        "type": "cylinder",
+                        "base": 1,
+                        "top": 1.5,
+                        "height": 4,
+                        "slices": 20,
+                        "stacks": 5
+                    }
+                }
+            },
+            "basketcover": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 1.5,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": -90,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "bg": {
+                        "type": "polygon",
+                        "radius": 1.3,
+                        "stacks": 20,
+                        "slices": 30,
+                        "color_c": {
+                            "r": 0.5,
+                            "g": 0.5,
+                            "b": 0.5
+                        },
+                        "color_p": {
+                            "r": 0.35,
+                            "g": 0.25,
+                            "b": 0.2
+                        }
+
+                    }
+                }
+                        
             }
             
 

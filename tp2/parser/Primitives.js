@@ -94,7 +94,7 @@ function buildCylinder(cone, material){
         cone["height"],
         cone["slices"],
         cone["stacks"],
-        !(cone["capsClose"] ?? false),
+        !(cone["capsclose"] ?? false),
         (degreesToRadians(cone["thetastart"]) ?? 0),
         (degreesToRadians(cone["thetalength"]) ?? Math.PI*2)
     );
@@ -158,7 +158,7 @@ function buildSpotlight(spotLight,material ){
     const decay = spotLight.decay ?? 2;
     const penumbra = spotLight.penumbra ?? 1;
     const position = spotLight.position;
-    const targetPosition = spotLight.targetPosition;
+    const target = spotLight.target;
     const castShadow = spotLight.castShadow ?? false;
     const shadowFar = spotLight.shadowFar ?? 500;
     const shadowMapSize = spotLight.shadowMapSize ?? 512;
@@ -170,9 +170,9 @@ function buildSpotlight(spotLight,material ){
         spotlight.shadow.camera.far = shadowFar;
         spotlight.shadow.mapSize.set(shadowMapSize, shadowMapSize);
     
-        const target = new THREE.Object3D();
-        target.position.set(targetPosition.x, targetPosition.y, targetPosition.z);
-        spotlight.target = target;
+        const targetobject = new THREE.Object3D();
+        targetobject.position.set(target.x, target.y, target.z);
+        spotlight.target = targetobject;
         return spotlight
     }
     return null
