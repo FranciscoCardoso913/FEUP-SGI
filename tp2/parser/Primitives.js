@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { rgbToHex } from './utils.js';
+import { rgbToHex, degreesToRadians } from './utils.js';
 import { MyNurbsBuilder } from '../MyNurbsBuilder.js';
 
 const map = {
@@ -94,8 +94,8 @@ function buildCylinder(cone, material){
         cone["slices"],
         cone["stacks"],
         !(cone["capsClose"] ?? false),
-        (cone["thetaStart"] ?? 0),
-        (cone["thetaLength"] ?? Math.PI*2)
+        (degreesToRadians(cone["thetaStart"]) ?? 0),
+        (degreesToRadians(cone["thetaLength"]) ?? Math.PI*2)
     );
     const cylinder = new THREE.Mesh(geometry, material);
 
@@ -109,10 +109,10 @@ function buildSphere(sphere, material){
         sphere["radius"],
         sphere["slices"],
         sphere["stacks"],
-        (sphere["phiStart"] ?? 0),
-        (sphere["phiLength"] ?? Math.PI*2),
-        (sphere["thetaStart"] ?? 0),
-        (sphere["thetaLength"] ?? Math.PI*2),
+        (degreesToRadians(sphere["phiStart"]) ?? 0),
+        (degreesToRadians(sphere["phiLength"]) ?? Math.PI*2),
+        (degreesToRadians(sphere["thetaStart"]) ?? 0),
+        (degreesToRadians(sphere["thetaLength"]) ?? Math.PI*2),
     );
     
     const sphereMesh = new THREE.Mesh(geometry, material);
