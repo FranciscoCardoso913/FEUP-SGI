@@ -10,7 +10,8 @@ const map = {
     "cone": buildCone,
     "sphere": buildSphere,
     "nurbs": buildNurbs,
-    "spotlight": buildSpotlight
+    "spotlight": buildSpotlight,
+    "directionallight": buildDirectionalLight
 
 }
 
@@ -73,9 +74,9 @@ function buildCone(cone, material){
         cone["height"],
         cone["slices"],
         cone["stacks"],
-        !(cone["capsClose"] ? cone["capsClose"]: false),
-        (cone["thetaStart"] ? cone["thetaStart"] : 0),
-        (cone["thetaLength"] ? cone["thetaLength"]: Math.PI*2)
+        !(cone["capsClose"] ?? false),
+        (cone["thetaStart"] ?? 0),
+        (cone["thetaLength"] ?? Math.PI*2)
     );
     const cylinder = new THREE.Mesh(geometry, material);
 
@@ -89,10 +90,10 @@ function buildSphere(sphere, material){
         sphere["radius"],
         sphere["slices"],
         sphere["stacks"],
-        (sphere["phiStart"] ? sphere["phiStart"]: 0),
-        (sphere["phiLength"] ? sphere["phiLength"]: Math.PI*2),
-        (sphere["thetaStart"] ? sphere["thetaStart"]: 0),
-        (sphere["thetaLength"] ? sphere["thetaLength"]: Math.PI*2),
+        (sphere["phiStart"] ?? 0),
+        (sphere["phiLength"] ?? Math.PI*2),
+        (sphere["thetaStart"] ?? 0),
+        (sphere["thetaLength"] ?? Math.PI*2),
     );
     
     const sphereMesh = new THREE.Mesh(geometry, material);
@@ -153,6 +154,39 @@ function buildSpotlight(spotLight,material ){
         target.position.set(targetPosition.x, targetPosition.y, targetPosition.z);
         spotlight.target = target;
         return spotlight
+    }
+    return null
+}
+
+
+function buildDirectionalLight(directionallight,material ){
+    const enabled = directionallight.enabled ?? true;
+    const color = rgbToHex(directionallight.color);
+    const intensity = directionallight.intensity ?? 1;
+    const position = directionallight.position;
+    const castShadow = directionallight.castShadow ?? false;
+    const shadowLeft = directionallight.shadowLeft ?? -5;
+    const shadowRight = directionallight.shadowRight ?? 5;
+    const shadowBottom = directionallight.shadowBottom ?? -5;
+    const shadowTop = directionallight.shadowTop ?? 5;
+    const shadowFar = directionallight.shadowFar ?? 500.0;
+    const shadowMapSize = directionallight.shadowMapSize ?? 512;
+    
+    if (enabled) {
+        const directionalLight = new THREE.DirectionalLight(color, intensity);
+        directionalLight.position.set(position.x, position.y, position.z);
+        directionalLight.castShadow = castShadow;
+    
+        if (castShadow) {
+            directionalLight.shadow.camera.left = shadowLeft;
+            directionalLight.shadow.camera.right = shadowRight;
+            directionalLight.shadow.camera.bottom = shadowBottom;
+            directionalLight.shadow.camera.top = shadowTop;
+            directionalLight.shadow.camera.far = shadowFar;
+            directionalLight.shadow.mapSize.set(shadowMapSize, shadowMapSize);
+        }
+    
+        return directionalLight
     }
     return null
 }
