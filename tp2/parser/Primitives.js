@@ -132,11 +132,11 @@ function buildNurbs(nurbs, material){
 
     const builder = new MyNurbsBuilder()
 
-    for(let u = 0; u<orderU;u++){
+    for(let u = 0; u<=orderU;u++){
         let aux = []
-        for (let v = 0; v < orderV; v++){
+        for (let v = 0; v <= orderV; v++){
             let point =nurbs["controlpoints"][u*orderV + v]
-            aux.push([point["x"], point["y"], point["z"]])
+            aux.push([point["x"], point["y"], point["z"],1])
         }
         controlPoints.push(aux)
     }
@@ -219,7 +219,8 @@ function buildPolygon(polygon,material ){
     const color_p = rgbToHex(polygon.color_p); 
 
     const polygonGeometry = createPolygon(radius, stacks, slices, color_c, color_p);
-    material = new THREE.MeshBasicMaterial({ vertexColors: true });
+
+    material = new THREE.MeshBasicMaterial({ vertexColors: true, wireframe: material.wireframe });
     const polygonMesh = new THREE.Mesh(polygonGeometry, material);
     return polygonMesh
 }

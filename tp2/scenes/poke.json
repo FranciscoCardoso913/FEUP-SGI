@@ -94,6 +94,10 @@
             "basket": {
                 "filepath": "scenes/textures/basket.jpg",
                 "isVideo": false
+            },
+            "newspaper": {
+                "filepath": "scenes/textures/newspaper.jpg",
+                "isVideo": false
             }
         },
         "materials": {
@@ -382,6 +386,30 @@
                 "textureref": "basket",
                 "texlength_s": 4,
                 "texlength_t": 8
+            },
+            "newspaper": {
+                "color": {
+                    "r": 0.5,
+                    "g": 0.5,
+                    "b": 0.5
+                },
+                "specular": {
+                    "r": 0.5,
+                    "g": 0.5,
+                    "b": 0.5
+                },
+                "shininess": 32,
+                "emissive": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "transparent": false,
+                "opacity": 1.0,
+                "twosided": "true",
+                "textureref": "newspaper",
+                "texlength_s": 1,
+                "texlength_t": 1
             }
         },
         "cameras": {
@@ -2881,6 +2909,7 @@
                     "nodesList": [
                         "bedkratos",
                         "bedatreus",
+                        "table",
                         "basket"
                     ]
                 }
@@ -2944,7 +2973,6 @@
                     ]
                 }
             },
-
             "bedfoot": {
                 "type": "node",
                 "children": {
@@ -3551,7 +3579,208 @@
                     }
                 }
                         
+            },
+            "table":{
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 8,
+                            "y": 0,
+                            "z": 2
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 90,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children":{
+                    "nodesList": [
+                        "tableTop",
+                        "tableLegs",
+                        "newspaper"
+                    ]
+                }
+            },
+            "tableTop":{
+                "type": "node",
+                "transforms":[
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 3,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children":{
+                    "tableTopPrim":{
+                        "type":"box",
+                        "xyz1": {"x": 0, "y": 0, "z": 0},
+                        "xyz2": {"x": 7, "y": 0.5, "z": 3}
+                    }
+                }
+            },
+            "tableLegs":{
+                "type": "node",
+                "transforms":[
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 1.5,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children":{
+                    "nodesList": [
+                        "tableLeg1",
+                        "tableLeg2",
+                        "tableLeg3",
+                        "tableLeg4"
+                    ]
+                }
+            },
+            "newspaper":{
+                "type": "node",
+                "materialref": {
+                    "materialId": "newspaper"
+                },
+                "transforms":[
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -2.5,
+                            "y": 3.5,
+                            "z": -0.5
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 70,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children":{
+                    "nurbsPrim(id)": {
+                        "type": "nurbs",
+                        "degree_u": 2,
+                        "degree_v": 4,
+                        "parts_u": 20,
+                        "parts_v": 20,
+                        "controlpoints": [
+                            {"x": -2, "y": -0.5, "z": 0.0},
+                            {"x": -2.0, "y": -1.0, "z": 1.0},
+                            {"x": -2.0, "y": 1.0, "z": 1.0},
+                            {"x": -1.5, "y": 0.0, "z": -0.5},
+                            {"x": -1.5, "y": -0.4, "z": 0.3},
+                            {"x": -0.5, "y": 0, "z": 0.0},
+                            {"x": 0.0, "y": 0, "z": 0.0},
+                            {"x": 0.0, "y": 0, "z": 0.0},
+                            {"x": 0.0, "y": 0, "z": 0.0},
+                            {"x": 0.0, "y": 0, "z": 0.0},
+                            {"x": 2, "y": -0.25, "z": 0.0},
+                            {"x": 2.0, "y": -0.5, "z": 1.0},
+                            {"x": 2.0, "y": 0.5, "z": 1.0},
+                            {"x": 2.0, "y": 0.25, "z": 0.0},
+                            {"x": 2.5, "y": -0.2, "z": 0.0}
+                        ]
+
+                    }
+                }
+            },
+            "tableLeg1":{
+                "type": "node",
+                "transforms":[
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2,
+                            "y": 0,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children":{
+                    "tableLeg1Prim":{
+                        "type":"box",
+                        "xyz1": {"x": 0, "y": 0, "z": 0},
+                        "xyz2": {"x": 0.5, "y": 3, "z": 0.5}
+                    }
+                }
+            },
+            "tableLeg2":{
+                "type": "node",
+                "transforms":[
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -2,
+                            "y": 0,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children":{
+                    "tableLeg1Prim":{
+                        "type":"box",
+                        "xyz1": {"x": 0, "y": 0, "z": 0},
+                       "xyz2": {"x": 0.5, "y": 3, "z": 0.5}
+                    }
+                }
+            },
+            "tableLeg3":{
+                "type": "node",
+                "transforms":[
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -2,
+                            "y": 0,
+                            "z": -1
+                        }
+                    }
+                ],
+                "children":{
+                    "tableLeg1Prim":{
+                        "type":"box",
+                        "xyz1": {"x": 0, "y": 0, "z": 0},
+                        "xyz2": {"x": 0.5, "y": 3, "z": 0.5}
+                    }
+                }
+            },
+            "tableLeg4":{
+                "type": "node",
+                "transforms":[
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2,
+                            "y": 0,
+                            "z": -1
+                        }
+                    }
+                ],
+                "children":{
+                    "tableLeg1Prim":{
+                        "type":"box",
+                        "xyz1": {"x": 0, "y": 0, "z": 0},
+                        "xyz2": {"x": 0.5, "y": 3, "z": 0.5}
+                    }
+                }
             }
+
             
 
         }
