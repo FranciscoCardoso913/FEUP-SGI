@@ -1,4 +1,4 @@
-import {rgbToHex} from './utils.js'
+import {rgbToHex, loadMipmap} from './utils.js'
 import * as THREE from 'three';
 import { Node } from './Node.js';
 
@@ -84,7 +84,6 @@ export function parseTextures(textures){
             if(value["mipmap0"]) texture.generateMipmaps = false
             for( let i =0; i<= 7;i++){
                 if(value["mipmap"+i.toString()]){
-                    texture.mipmaps.append(value["mipmap"+i.toString()]);
                     loadMipmap(texture, i, value["mipmap"+i.toString()])    // .1024
                 }
             }
