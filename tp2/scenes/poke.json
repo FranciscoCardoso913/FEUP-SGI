@@ -18,7 +18,7 @@
                     "b": 0
                 },
                 "near": 1.0,
-                "far": 2000.0
+                "far": 200.0
             },
             "skybox": {
                 "size": {"x": 150, "y": 150, "z": 150},
@@ -285,8 +285,7 @@
                     },
                     "nodesList": [
                         "cabin",
-                        "floor",
-                        "regua"
+                        "floor"
                     ]
                 }
             },
@@ -297,7 +296,8 @@
                         "housefloor",
                         "base",
                         "walls",
-                        "roof"
+                        "roof",
+                        "interior"
                     ]
                 }
                 
@@ -1530,6 +1530,14 @@
                             "y": 0,
                             "z": -60
                         }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 1.5,
+                            "z": 1
+                        }
                     }
                 ],
                 "children": {
@@ -1559,7 +1567,7 @@
                         "amount": {
                             "x": 0,
                             "y": 0,
-                            "z": 0
+                            "z": -60
                         }
                     },
                     {
@@ -1700,17 +1708,17 @@
                     {
                         "type": "translate",
                         "amount": {
-                            "x": 0,
-                            "y": 5,
+                            "x": 5,
+                            "y": 2,
                             "z": 0
                         }
                     },
                     {
                         "type": "rotate",
                         "amount": {
-                            "x": 0,
-                            "y": 90,
-                            "z": 0
+                            "x": 90,
+                            "y": 20,
+                            "z": 90
                         }
                     }
                 ],
@@ -1723,7 +1731,7 @@
                         },
                         "xy2": {
                             "x": 6,
-                            "y": 7
+                            "y": 8
                         }
                     }
                 }
@@ -2147,196 +2155,554 @@
                 }
             },
 
-            "regua": {
+            
+            "interior": {
                 "type": "node",
+                "children": {
+                    "nodesList": [
+                        "stakes",
+                        "interiorplates",
+                        "furniture"
+                    ]
+                }
+            },
+
+            "stakes": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "woodTexture"
+                },
                 "transforms": [
                     {
-                        "type": "translate",
+                        "type": "scale", 
                         "amount": {
-                            "x": 15,
-                            "y": 0,
-                            "z": 0
+                            "x": 0.5,
+                            "y": 2,
+                            "z": 0.5
                         }
                     }
                 ],
                 "children": {
                     "nodesList": [
-                        "regua0",
-                        "regua50",
-                        "regua100",
-                        "regua150",
-                        "regua200",
-                        "regua250",
-                        "regua300",
-                        "regua350"
+                        "stake1left",
+                        "stake1right",
+                        "stake2left",
+                        "stake2right",
+                        "stake3left",
+                        "stake3right"
                     ]
                 }
             },
-            "regua0": {
+            "stake1left": {
                 "type": "node",
                 "transforms": [
                     {
                         "type": "translate",
                         "amount": {
-                            "x": 0,
-                            "y": 0,
-                            "z": 17.5
+                            "x": -10,
+                            "y": 2.5,
+                            "z": 26
                         }
                     }
                 ],
                 "children": {
                     "nodesList": [
-                        "box"
+                        "woodcilinder"
                     ]
                 }
             },
-            "regua50": {
+            "stake1right": {
                 "type": "node",
                 "transforms": [
                     {
                         "type": "translate",
                         "amount": {
-                            "x": 0,
-                            "y": 0,
-                            "z": 12.5
+                            "x": 10,
+                            "y": 2.5,
+                            "z": 26
                         }
                     }
                 ],
                 "children": {
                     "nodesList": [
-                        "box"
+                        "woodcilinder"
                     ]
                 }
             },
-            "regua100": {
+            "stake2left": {
                 "type": "node",
                 "transforms": [
                     {
                         "type": "translate",
                         "amount": {
-                            "x": 0,
-                            "y": 0,
-                            "z": 7.5
+                            "x": -10,
+                            "y": 2.5,
+                            "z": 15
                         }
                     }
                 ],
                 "children": {
                     "nodesList": [
-                        "box"
+                        "woodcilinder"
                     ]
                 }
             },
-            "regua150": {
+            "stake2right": {
                 "type": "node",
                 "transforms": [
                     {
                         "type": "translate",
                         "amount": {
-                            "x": 0,
-                            "y": 0,
-                            "z": 2.5
+                            "x": 10,
+                            "y": 2.5,
+                            "z": 15
                         }
                     }
                 ],
                 "children": {
                     "nodesList": [
-                        "box"
+                        "woodcilinder"
                     ]
                 }
             },
-            "regua200": {
+            "stake3left": {
                 "type": "node",
                 "transforms": [
                     {
                         "type": "translate",
                         "amount": {
-                            "x": 0,
-                            "y": 0,
-                            "z": -2.5
+                            "x": -10,
+                            "y": 2.5,
+                            "z": -5
                         }
                     }
                 ],
                 "children": {
                     "nodesList": [
-                        "box"
+                        "woodcilinder"
                     ]
                 }
             },
-            "regua250": {
+            "stake3right": {
                 "type": "node",
                 "transforms": [
                     {
                         "type": "translate",
                         "amount": {
-                            "x": 0,
-                            "y": 0,
-                            "z": -7.5
+                            "x": 10,
+                            "y": 2.5,
+                            "z": -5
                         }
                     }
                 ],
                 "children": {
                     "nodesList": [
-                        "box"
+                        "woodcilinder"
                     ]
                 }
             },
-            "regua300": {
-                "type": "node",
-                "transforms": [
-                    {
-                        "type": "translate",
-                        "amount": {
-                            "x": 0,
-                            "y": 0,
-                            "z": -12.5
-                        }
-                    }
-                ],
-                "children": {
-                    "nodesList": [
-                        "box"
-                    ]
-                }
-            },
-            "regua350": {
-                "type": "node",
-                "transforms": [
-                    {
-                        "type": "translate",
-                        "amount": {
-                            "x": 0,
-                            "y": 0,
-                            "z": -17.5
-                        }
-                    }
-                ],
-                "children": {
-                    "nodesList": [
-                        "box"
-                    ]
-                }
-            },
-            "box": {
+
+            "interiorplates": {
                 "type": "node",
                 "materialref": {
                     "materialId": "woodTexture"
                 },
                 "children": {
-                    "box": {
-                        "type": "box",
-                        "xyz1": {
-                            "x": 0,
+                    "nodesList": [
+                        "interiorleftplate",
+                        "interiorrightplate",
+                        "interiormiddle1plate",
+                        "interiormiddle2plate",
+                        "interiormiddle3plate"
+                    ]
+                }
+            },
+            "interiorleftplate": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -5,
+                            "y": 10,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 90,
                             "y": 0,
                             "z": 0
-                        },
-                        "xyz2": {
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
                             "x": 0.5,
-                            "y": 0.5,
+                            "y": 7.5,
                             "z": 0.5
                         }
                     }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "interiorrightplate": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 5,
+                            "y": 10,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 90,
+                            "y": 0,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 0.5,
+                            "y": 7.5,
+                            "z": 0.5
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "interiormiddle1plate": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 10,
+                            "z": 13
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 90
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 4,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            }, 
+            "interiormiddle2plate": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 10,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 90
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 4,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "interiormiddle3plate": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 10,
+                            "z": -13
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 90
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 4,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+
+
+            "furniture": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "woodTexture"
+                },
+                "children": {
+                    "nodesList": [
+                        "bedkratos",
+                        "bedatreus"
+                    ]
+                }
+            },
+
+            "bedkratos": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "bedfoot",
+                        "bedmatress"
+
+                    ]
+                }
+            },
+
+            "bedatreus": {
+                "type": "node",
+                "children": {
+                    "nodesList": [
+                    ]
+                }
+            },
+
+            "bedfoot": {
+                "type": "node",
+                "children": {
+                    "nodesList": [
+                        "bedfoot1",
+                        "bedfoot2",
+                        "bedfoot3",
+                        "bedfoot4"
+                    ]
+                }
+            },
+            "bedfoot1": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -2,
+                            "y": 0.5,
+                            "z": -2
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 0.5,
+                            "y": 0.2,
+                            "z": 0.5
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "bedfoot2": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2,
+                            "y": 0.5,
+                            "z": -2
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 0.5,
+                            "y": 0.2,
+                            "z": 0.5
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "bedfoot3": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -2,
+                            "y": 0.5,
+                            "z": 2
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 0.5,
+                            "y": 0.2,
+                            "z": 0.5
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "bedfoot4": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2,
+                            "y": 0.5,
+                            "z": 2
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 0.5,
+                            "y": 0.2,
+                            "z": 0.5
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+
+            "bedmatress": {
+                "type": "node",
+
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 1,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 0.35,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "matress": {
+                        "type": "sphere",
+                        "radius": 2,
+                        "slices": 40,
+                        "stacks": 40,
+                        "thetastart": 0,
+                        "thetalength": 45
+                    }
                 }
             }
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             
             
