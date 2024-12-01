@@ -15,6 +15,7 @@ class MyContents {
     constructor(app) {
         this.app = app
         this.axis = null
+        this.isWireframe = false
 
         this.reader = new MyFileReader(this.onSceneLoaded.bind(this));
     
@@ -83,6 +84,13 @@ class MyContents {
     }
 
     update() {
+    }
+
+    Wireframe(){
+        this.graph.remove(this.app.scene)
+        this.graph.wireframe(this.isWireframe)
+        this.graph.build()
+        this.graph.create(this.app.scene)
     }
 }
 
