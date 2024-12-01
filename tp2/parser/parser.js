@@ -114,8 +114,8 @@ export function parseMaterials(textures, materials){
             texture.wrapT = THREE.RepeatWrapping;
  
             texture.repeat.set(
-                1 / value.texlength_s, 
-                1 / value.texlength_t 
+                value.texlength_s, 
+                value.texlength_t 
             );
             material.map = texture
         }
