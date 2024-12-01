@@ -28,50 +28,60 @@ class Node {
 			}, []);
 		}
 	}
-
+	/**
+	 * Build the node and all its descendents
+	 * @param {*} nodes Map with all the nodes
+	 * @param {*} materials Map with all the materials
+	 * @param {*} inheritMaterial Predecessor material
+	 * @returns Mesh with the node and all its descendents
+	 */
 	build(nodes, materials, inheritMaterial = null){
 		let node = new THREE.Group()
+
+		// Checks if has a material of its own or if Predecessor's material must be use
 		const materialref = this.json["materialref"]
 		let materialId = null;
-
 		if( materialref) materialId = materialref["materialId"];
 		const material = materialId ? materials[materialId] : inheritMaterial
 
+		// If node of type lod creates lod with all the lodnodes
 		if(this.lodNodes){
-			
 			let lod = new THREE.LOD();
 			this.lodNodes.forEach(element => {
 				let child = nodes[element.nodeId].build(nodes, materials, material);
 				if(child) lod.addLevel(child, element.mindist)
 			});
 			node.add(lod)
-		}else{
+		}
+		else{
 
+			// Builds all the descendents nodes
 			this.edges.forEach(element => {
 				let child = nodes[element].build(nodes, materials, material);
 				if(child) node.add(child)
 				
 			});
 
+			// Build all its primitives
 			this.primitives.forEach(element => {
 				element.lightHelpers = this.lightHelpers
 				let child = buildPrimitive(element, material)
 				if(child) node.add(child)
 			});
-			
-			this.lods.forEach(element => {
-				
 
+			// Builds all the descendents lodNodes
+			this.lods.forEach(element => {
 				let child = nodes[element].build(nodes, materials, material);
 				if(child) node.add(child)
 			});
 		}
 
+		//Apply transformations and shadows
 		node = this.transform(node)
 		node.castShadow = this.castshadows;
 		node.receiveShadow = this.receiveshadows;
 
-		node.traverse((child)=> {
+		node.traverse((child) => {
 			if (child.isMesh) {
 				child.castShadow = child.castShadow ? child.castShadow : this.castshadows;
 				child.receiveShadow = child.receiveShadow ? child.receiveShadow : this.receiveshadows;
@@ -81,7 +91,11 @@ class Node {
 		
 		return node
 	}
-
+	/**
+	 * Applies transformations to the node
+	 * @param {*} node Node to be used
+	 * @returns node after transformations
+	 */
 	transform(node){
 		this.transforms.forEach(element=>{
 			if (element["type"]=== "scale"){

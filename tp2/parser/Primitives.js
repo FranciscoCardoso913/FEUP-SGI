@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { rgbToHex, degreesToRadians, createPolygon } from './utils.js';
 import { MyNurbsBuilder } from '../MyNurbsBuilder.js';
 
+// Map used to map types with corresponding functions
 const map = {
     "pointlight": buildPointlight,
     "rectangle": buildRetangle,
@@ -16,12 +17,24 @@ const map = {
 
 }
 
+/**
+ * Builds a primirive
+ * @param {*} primitive primitive info
+ * @param {*} material material used by the mesh
+ * @returns a mesh or a light depending on the primitive
+ */
 export function buildPrimitive(primitive, material){
     const func = map[primitive.type]
     if(func) return func(primitive, material)
     else console.log(primitive["type"] + " not defined yet")
 }
 
+/**
+ * Builds rectangle primitive
+ * @param {*} rectangle rectangle information
+ * @param {*} material material to be used
+ * @returns rectangle mesh
+ */
 function buildRetangle(rectangle, material){
     let width = Math.abs(rectangle["xy2"]["x"] - rectangle["xy1"]["x"] )
     let height = Math.abs(rectangle["xy2"]["y"] - rectangle["xy1"]["y"] )
@@ -32,8 +45,14 @@ function buildRetangle(rectangle, material){
     return rectangleMesh
 }
 
+/**
+ * Creates a Pointlight 
+ * @param {*} pointlight pointlight information
+ * @param {*} material material in this will not be used
+ * @returns Pointlight
+ */
 function buildPointlight(pointlight, material){
-
+    // Base information
     const enabled = pointlight.enabled ?? true;
     const color = rgbToHex(pointlight.color);
     const intensity = pointlight.intensity ?? 1.0;
@@ -53,6 +72,7 @@ function buildPointlight(pointlight, material){
             pointLight.shadow.camera.far = shadowFar;
             pointLight.shadow.mapSize.set(shadowMapSize, shadowMapSize);
         }
+        // If lightHelpers is true in the interface
         if(pointlight.lightHelpers){
             const group = new THREE.Group()
             group.add(pointLight)
@@ -64,6 +84,12 @@ function buildPointlight(pointlight, material){
     return null
 }
 
+/**
+ * Builds Triangle primitive
+ * @param {*} triangle Triangle information
+ * @param {*} material material to be used
+ * @returns Triangle mesh
+ */
 function buildTriangle(triangle, material){
 
     const geometry = new THREE.BufferGeometry();
@@ -77,6 +103,12 @@ function buildTriangle(triangle, material){
     return triangleMesh
 }
 
+/**
+ * Builds box primitive
+ * @param {*} box box information
+ * @param {*} material material to be used
+ * @returns box mesh
+ */
 function buildBox(box, material){
  
     const width = Math.abs(box["xyz2"]["x"] - box["xyz1"]["x"])
@@ -91,24 +123,36 @@ function buildBox(box, material){
     return boxMesh
 }
 
-function buildCylinder(cone, material){
+/**
+ * Builds cylinder primitive
+ * @param {*} cylinder cylinder information
+ * @param {*} material material to be used
+ * @returns cylinder mesh
+ */
+function buildCylinder(cylinder, material){
  
     const geometry = new THREE.CylinderGeometry(
-        cone["top"],
-        cone["base"],
-        cone["height"],
-        cone["slices"],
-        cone["stacks"],
-        !(cone["capsclose"] ?? false),
-        (degreesToRadians(cone["thetastart"]) ?? 0),
-        (degreesToRadians(cone["thetalength"]) ?? Math.PI*2)
+        cylinder["top"],
+        cylinder["base"],
+        cylinder["height"],
+        cylinder["slices"],
+        cylinder["stacks"],
+        !(cylinder["capsclose"] ?? false),
+        (degreesToRadians(cylinder["thetastart"]) ?? 0),
+        (degreesToRadians(cylinder["thetalength"]) ?? Math.PI*2)
     );
-    const cylinder = new THREE.Mesh(geometry, material);
+    const cylinderMesh = new THREE.Mesh(geometry, material);
 
-    return cylinder
+    return cylinderMesh
 
 }
 
+/**
+ * Builds sphere primitive
+ * @param {*} sphere sphere information
+ * @param {*} material material to be used
+ * @returns sphere mesh
+ */
 function buildSphere(sphere, material){
 
     const geometry = new THREE.SphereGeometry(
@@ -127,9 +171,16 @@ function buildSphere(sphere, material){
 
 }
 
+/**
+ * Builds nurbs primitive
+ * @param {*} nurbs nurbs information
+ * @param {*} material material to be used
+ * @returns nurbs mesh
+ */
 function buildNurbs(nurbs, material){
     let controlPoints= [];
     let surfaceData;
+
     const samplesU = nurbs["parts_u"]
     const samplesV = nurbs["parts_v"]
     const orderU = nurbs["degree_u"]
@@ -137,6 +188,7 @@ function buildNurbs(nurbs, material){
 
     const builder = new MyNurbsBuilder()
 
+    // Converts from {x,y,z} to [x,y,z] format
     for(let u = 0; u<=orderU;u++){
         let aux = []
         for (let v = 0; v <= orderV; v++){
@@ -146,7 +198,7 @@ function buildNurbs(nurbs, material){
         controlPoints.push(aux)
     }
 
-
+    // Builds nurbs with MyNurbsBuilder help from last project
     surfaceData = builder.build(controlPoints,
                 orderU, orderV, samplesU,
                 samplesV, material)  
@@ -154,7 +206,14 @@ function buildNurbs(nurbs, material){
     return mesh
 }
 
+/**
+ * Creates spotLight
+ * @param {*} spotLight spotLight information
+ * @param {*} material material will not be used
+ * @returns spotLight
+ */
 function buildSpotlight(spotLight,material ){
+    //base information
     const enabled = spotLight.enabled ?? true;
     const color = rgbToHex(spotLight.color);
     const intensity = spotLight.intensity ?? 1;
@@ -179,6 +238,7 @@ function buildSpotlight(spotLight,material ){
         targetobject.position.set(target.x, target.y, target.z);
         spotlight.target = targetobject;
 
+        // If lightHelpers is true in the interface
         if(spotLight.lightHelpers){
             const group = new THREE.Group()
             group.add(spotlight)
@@ -190,8 +250,14 @@ function buildSpotlight(spotLight,material ){
     return null
 }
 
-
+/**
+ * Creates directional light 
+ * @param {*} directionallight directional light information
+ * @param {*} directionallight material to be used
+ * @returns directional light 
+ */
 function buildDirectionalLight(directionallight,material ){
+    //Base information
     const enabled = directionallight.enabled ?? true;
     const color = rgbToHex(directionallight.color);
     const intensity = directionallight.intensity ?? 1;
@@ -217,7 +283,7 @@ function buildDirectionalLight(directionallight,material ){
             directionalLight.shadow.camera.far = shadowFar;
             directionalLight.shadow.mapSize.set(shadowMapSize, shadowMapSize);
         }
-
+        // If lightHelpers is true in the interface
         if(directionallight.lightHelpers){
             const group = new THREE.Group()
             group.add(directionalLight)
@@ -230,14 +296,21 @@ function buildDirectionalLight(directionallight,material ){
     return null
 }
 
+/**
+ * Builds polygon primitive
+ * @param {*} rectangle polygon information
+ * @param {*} material material to be used
+ * @returns polygon mesh
+ */
 function buildPolygon(polygon,material ){
+    //Base information
     const radius = polygon.radius;
     const stacks = polygon.stacks;
     const slices = polygon.slices;
     const color_c = rgbToHex(polygon.color_c);
     const color_p = rgbToHex(polygon.color_p); 
 
-    const polygonGeometry = createPolygon(radius, stacks, slices, color_c, color_p);
+    const polygonGeometry = createPolygon(radius, stacks, slices, color_c, color_p); // Creates polygon with help of auxiliar function
 
     material = new THREE.MeshBasicMaterial({ vertexColors: true, wireframe: material.wireframe });
     const polygonMesh = new THREE.Mesh(polygonGeometry, material);
