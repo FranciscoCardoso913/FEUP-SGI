@@ -45,6 +45,15 @@ class MyGraph {
 		
 	}
 
+	lightHelpers(bool){
+		this.nodes = Object.entries(this.nodes).reduce((dict, [name, value]) => {
+			value.lightHelpers = bool
+			dict[name] = value
+			return dict
+		},{})
+		
+	}
+
 
 	create(scene){
 		scene.background = this.background
