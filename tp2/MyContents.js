@@ -18,7 +18,7 @@ class MyContents {
         this.reader = new MyFileReader(this.onSceneLoaded.bind(this));
     
 
-        this.reader.open("scenes/scene.json").then((json) => {
+        this.reader.open("scenes/poke.json").then((json) => {
             console.log(json['yasf']);
             this.graph = new MyGraph(json)
             this.graph.build()
