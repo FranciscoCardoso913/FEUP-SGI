@@ -132,11 +132,11 @@ function buildNurbs(nurbs, material){
 
     const builder = new MyNurbsBuilder()
 
-    for(let u = 0; u<orderU;u++){
+    for(let u = 0; u<=orderU;u++){
         let aux = []
-        for (let v = 0; v < orderV; v++){
+        for (let v = 0; v <= orderV; v++){
             let point =nurbs["controlpoints"][u*orderV + v]
-            aux.push([point["x"], point["y"], point["z"]])
+            aux.push([point["x"], point["y"], point["z"],1])
         }
         controlPoints.push(aux)
     }
