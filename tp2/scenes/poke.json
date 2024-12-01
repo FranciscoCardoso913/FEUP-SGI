@@ -65,6 +65,19 @@
                 "mipmap5": "scenes/textures/caravaggio.32.jpg",
                 "mipmap6": "scenes/textures/caravaggio.16.jpg",
                 "mipmap7": "scenes/textures/caravaggio.8.jpg"
+            },
+            "blanket": {
+                "filepath": "scenes/textures/blanket.jpg"
+            },
+            "blanketbump": {
+                "filepath": "scenes/textures/blanket_bump.jpg"
+            },
+            "video": {
+                "filepath": "scenes/videos/video.mp4",
+                "isVideo": true
+            },
+            "pillow": {
+                "filepath": "scenes/textures/pillow.jpg"
             }
         },
         "materials": {
@@ -253,6 +266,56 @@
                 "opacity": 1.0,
                 "twosided": "true",
                 "textureref": "paint",
+                "texlength_s": 1,
+                "texlength_t": 1
+            },
+            "blanket": {
+                "color": {
+                    "r": 0.2,
+                    "g": 0.2,
+                    "b": 0.2
+                },
+                "specular": {
+                    "r": 0.2,
+                    "g": 0.2,
+                    "b": 0.2
+                },
+                "shininess": 32,
+                "emissive": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "transparent": false,
+                "opacity": 1.0,
+                "twosided": "true",
+                "textureref": "blanket",
+                "texlength_s": 1,
+                "texlength_t": 1,
+                "bumpref": "blanketbump",
+                "bumpscale": 30 
+            },
+            "pillow": {
+                "color": {
+                    "r": 0.5,
+                    "g": 0.5,
+                    "b": 0.5
+                },
+                "specular": {
+                    "r": 0.5,
+                    "g": 0.5,
+                    "b": 0.5
+                },
+                "shininess": 32,
+                "emissive": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "transparent": false,
+                "opacity": 1.0,
+                "twosided": "true",
+                "textureref": "pillow",
                 "texlength_s": 1,
                 "texlength_t": 1
             }
@@ -2676,25 +2739,56 @@
                     {
                         "type": "translate",
                         "amount": {
-                            "x": 0,
+                            "x": -6,
                             "y": 0,
-                            "z": 0
+                            "z": -8
                         }
                     }
                 ],
                 "children": {
                     "nodesList": [
                         "bedfoot",
-                        "bedmatress"
-
+                        "bedmatress",
+                        "pillowleftkratos",
+                        "pillowrightkratos"
                     ]
                 }
             },
 
             "bedatreus": {
+                
                 "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": -14
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 90,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 0.75,
+                            "y": 1,
+                            "z": 0.75
+                        }
+                    }
+                ],
                 "children": {
                     "nodesList": [
+                        "bedfoot",
+                        "bedmatress",
+                        "pillowatreus"
                     ]
                 }
             },
@@ -2817,6 +2911,9 @@
 
             "bedmatress": {
                 "type": "node",
+                "materialref": {
+                    "materialId": "blanket"
+                },
                 "transforms": [
                     {
                         "type": "translate",
@@ -2841,11 +2938,14 @@
                         "upleftcorner",
                         "uprightcorner",
                         "downleftcorner",
-                        "downrightcorner"
+                        "downrightcorner",
+                        "leftmatress",
+                        "rightmatress",
+                        "upmatress",
+                        "downmatress"
                     ]
                 }
             },
-
             "matressbox": {
                 "type": "node",
                 "children": {
@@ -2960,6 +3060,118 @@
                     ]
                 }
             },
+            "leftmatress": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -2,
+                            "y": 0,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": -90,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1.5,
+                            "y": 1,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "matresslimit"
+                    ]
+                }
+            },
+            "rightmatress": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2,
+                            "y": 0,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 90,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1.5,
+                            "y": 1,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "matresslimit"
+                    ]
+                }
+            },
+            "upmatress": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": -3
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 180,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "matresslimit"
+                    ]
+                }
+            },
+            "downmatress": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 3
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "matresslimit"
+                    ]
+                }
+            },
             "bedcorner": {
                 "type": "node",
                 "children": {
@@ -2972,6 +3184,142 @@
                         "philength": 90,
                         "thetastart": 0,
                         "thetalength": 90
+                    }
+                }
+            },
+            "matresslimit": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 90
+                        }
+                    }
+                ],
+                "children": {
+                    "cylinder": {
+                        "type": "cylinder",
+                        "base": 1,
+                        "top": 1,
+                        "height": 4,
+                        "slices": 20,
+                        "stacks": 20,
+                        "thetastart": 0,
+                        "thetalength": 90
+                    }      
+                }
+            },
+
+            "pillowleftkratos": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -1,
+                            "y": 0,
+                            "z": -2
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 25,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "pillow"
+                    ]
+                }
+            },
+            "pillowrightkratos": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 1.2,
+                            "y": 0,
+                            "z": -2
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": -25,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "pillow"
+                    ]
+                }
+            },
+            "pillowatreus": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": -2
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": -25,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "pillow"
+                    ]
+                }
+            },
+            "pillow": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "pillow"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 1.5,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 0.3,
+                            "z": 0.5
+                        }
+                    }
+                ],
+                "children": {
+                    "pillowsphere": {
+                        "type": "sphere",
+                        "radius": 1,
+                        "slices": 40,
+                        "stacks": 40
                     }
                 }
             }
