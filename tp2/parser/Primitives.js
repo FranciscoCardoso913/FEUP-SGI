@@ -6,7 +6,8 @@ const map = {
     "rectangle": buildRetangle,
     "triangle":buildTriangle,
     "box": buildBox,
-    "cone": buildCone
+    "cone": buildCone,
+    "sphere": buildSphere
 
 }
 
@@ -24,7 +25,6 @@ function buildRetangle(rectangle, material){
     let heightSegments = rectangle["parts_y"] ? rectangle["parts_y"] : 1 
     const geometry = new THREE.PlaneGeometry(width, height, widthSegments, heightSegments);
     const rectangleMesh = new THREE.Mesh(geometry, material);
-    //rectangleMesh.position.copy (new THREE.Vector3(rectangle["xy1"]["x"] , rectangle["xy1"]["y"],0 ))
     return rectangleMesh
 }
 
@@ -78,5 +78,23 @@ function buildCone(cone, material){
     const cylinder = new THREE.Mesh(geometry, material);
 
     return cylinder
+
+}
+
+function buildSphere(sphere, material){
+
+    const geometry = new THREE.SphereGeometry(
+        sphere["radius"],
+        sphere["slices"],
+        sphere["stacks"],
+        (sphere["phiStart"] ? sphere["phiStart"]: 0),
+        (sphere["phiLength"] ? sphere["phiLength"]: Math.PI*2),
+        (sphere["thetaStart"] ? sphere["thetaStart"]: 0),
+        (sphere["thetaLength"] ? sphere["thetaLength"]: Math.PI*2),
+    );
+    
+    const sphereMesh = new THREE.Mesh(geometry, material);
+
+    return sphereMesh
 
 }
