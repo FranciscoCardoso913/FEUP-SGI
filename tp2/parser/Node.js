@@ -78,8 +78,6 @@ class Node {
 			}
 		})
 
-		console.log(node)
-		
 		
 		return node
 	}

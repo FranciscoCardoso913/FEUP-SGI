@@ -56,7 +56,7 @@ function buildPointlight(pointlight, material){
         if(pointlight.lightHelpers){
             const group = new THREE.Group()
             group.add(pointLight)
-            group.add(new THREE.PointLightHelper(pointLight,10))
+            group.add(new THREE.PointLightHelper(pointLight,5))
             return group
         }
         else return pointLight
