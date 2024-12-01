@@ -29,6 +29,8 @@ class MyGuiInterface  {
      * Initialize the gui interface
      */
     init() {
+        this.datgui.add(this.app, 'activeCameraName', this.app.camerasNames ).name("active camera");
+
     }
 }
 

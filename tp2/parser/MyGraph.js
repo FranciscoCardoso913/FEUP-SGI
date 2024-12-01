@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import {rgbToHex} from './utils.js'
-import {parseAmbientLight,parseFog, parseSkybox,parseTextures,parseMaterials, parseNodes} from './parser.js'
+import {parseAmbientLight,parseFog, parseSkybox,parseTextures,parseMaterials, parseNodes, parseCameras} from './parser.js'
 
 
 class MyGraph {
@@ -18,6 +18,8 @@ class MyGraph {
 	   this.materials = parseMaterials(this.textures, this.json["materials"])
 	   this.nodes = parseNodes(this.json["graph"])
 	   this.rootNode = this.json["graph"]["rootid"]
+	   this.cameras = parseCameras(this.json["cameras"])
+	   this.initCamera = this.json["cameras"]["initial"]
 
     }
 
