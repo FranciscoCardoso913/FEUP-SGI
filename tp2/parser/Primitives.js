@@ -53,8 +53,13 @@ function buildPointlight(pointlight, material){
             pointLight.shadow.camera.far = shadowFar;
             pointLight.shadow.mapSize.set(shadowMapSize, shadowMapSize);
         }
-    
-        return pointLight
+        if(pointlight.lightHelpers){
+            const group = new THREE.Group()
+            group.add(pointLight)
+            group.add(new THREE.PointLightHelper(pointLight,10))
+            return group
+        }
+        else return pointLight
     }
     return null
 }
@@ -173,6 +178,13 @@ function buildSpotlight(spotLight,material ){
         const targetobject = new THREE.Object3D();
         targetobject.position.set(target.x, target.y, target.z);
         spotlight.target = targetobject;
+
+        if(spotLight.lightHelpers){
+            const group = new THREE.Group()
+            group.add(spotlight)
+            group.add(new THREE.SpotLightHelper(spotlight))
+            return group
+        }
         return spotlight
     }
     return null
@@ -204,6 +216,13 @@ function buildDirectionalLight(directionallight,material ){
             directionalLight.shadow.camera.top = shadowTop;
             directionalLight.shadow.camera.far = shadowFar;
             directionalLight.shadow.mapSize.set(shadowMapSize, shadowMapSize);
+        }
+
+        if(directionallight.lightHelpers){
+            const group = new THREE.Group()
+            group.add(directionalLight)
+            group.add(new THREE.DirectionalLightHelper(directionalLight, 10))
+            return group
         }
     
         return directionalLight
