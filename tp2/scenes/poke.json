@@ -54,6 +54,17 @@
             },
             "door": {
                 "filepath": "scenes/textures/door.jpg"
+            },
+            "paint": {
+                "filepath": "scenes/textures/caravaggio.jpg",
+                "mipmap0": "scenes/textures/caravaggio.1024.jpg",
+                "mipmap1": "scenes/textures/caravaggio.512.jpg",
+                "mipmap2": "scenes/textures/caravaggio.256.jpg",
+                "mipmap3": "scenes/textures/caravaggio.128.jpg",
+                "mipmap4": "scenes/textures/caravaggio.64.jpg",
+                "mipmap5": "scenes/textures/caravaggio.32.jpg",
+                "mipmap6": "scenes/textures/caravaggio.16.jpg",
+                "mipmap7": "scenes/textures/caravaggio.8.jpg"
             }
         },
         "materials": {
@@ -218,6 +229,30 @@
                 "opacity": 1.0,
                 "twosided": "true",
                 "textureref": "door",
+                "texlength_s": 1,
+                "texlength_t": 1
+            },
+            "paint": {
+                "color": {
+                    "r": 0.7,
+                    "g": 0.7,
+                    "b": 0.7
+                },
+                "specular": {
+                    "r": 0.7,
+                    "g": 0.7,
+                    "b": 0.7
+                },
+                "shininess": 32,
+                "emissive": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "transparent": false,
+                "opacity": 1.0,
+                "twosided": "true",
+                "textureref": "paint",
                 "texlength_s": 1,
                 "texlength_t": 1
             }
@@ -781,6 +816,36 @@
                         "xy2": {
                             "x": 35,
                             "y": 10
+                        }
+                    },
+                    "nodesList": ["paint"]
+                }
+            },
+            "paint":{
+                "type":"node",
+                "materialref": {
+                    "materialId": "paint"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0.1
+                        }
+                    }
+                ],
+                "children": {
+                    "paintprim": {
+                        "type": "rectangle",
+                        "xy1": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "xy2": {
+                            "x": 5,
+                            "y": 5
                         }
                     }
                 }
