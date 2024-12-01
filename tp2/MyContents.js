@@ -20,17 +20,18 @@ class MyContents {
 
         this.reader = new MyFileReader(this.onSceneLoaded.bind(this));
     
-
+        // Reads scene 
         this.reader.open("scenes/poke.json").then((json) => {
             console.log(json['yasf']);
-            this.graph = new MyGraph(json)
-            this.graph.build()
-            this.graph.create(this.app.scene)
-            this.app.cameras = this.graph.cameras
+            this.graph = new MyGraph(json) //Parce json
+            this.graph.build() // Construct graph
+            this.graph.create(this.app.scene) // adds the graph to the scene
+
+            this.app.cameras = this.graph.cameras //Get cameras
     
-            this.app.activeCameraName = this.graph.initCamera
+            this.app.activeCameraName = this.graph.initCamera //Set active camera
         
-            this.app.setActiveCamera(this.graph.initCamera)
+            //Gets all the cameras names for the interface
             this.app.camerasNames = Object.entries(this.app.cameras).reduce((list, [name, value]) => {
                 list.push(name)
                 return list;
@@ -38,10 +39,12 @@ class MyContents {
 
             this.app.renderer.shadowMap.enabled = true; // Enable shadow maps
             this.app.renderer.shadowMap.type = THREE.PCFSoftShadowMap; // Soft shadows
-    
+            
+            // creates interface
             let gui = new MyGuiInterface(this.app)
             gui.setContents(this)
             gui.init();
+            
         }).catch((error) => {
             console.error("Error in loading JSON:", error);
         });
