@@ -283,6 +283,7 @@
                             "z": 0
                         }
                     },
+  
                     "nodesList": [
                         "cabin",
                         "floor"
@@ -351,6 +352,20 @@
                             "y": 0.5,
                             "z": 33.9
                         }
+                    },
+                    "polygonPrim(id)": {
+
+                        "type": "polygon",
+                        "radius": 5,
+
+                        "stacks": 10,
+
+                        "slices": 20,
+
+                        "color_c": {"r": 1, "g": 0, "b": 0},
+
+                        "color_p": {"r": 0, "g": 1, "b": 0}
+
                     }
                 }
             },
