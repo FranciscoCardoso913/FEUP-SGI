@@ -1,5 +1,10 @@
 import * as THREE from 'three';
 
+/**
+ * Converts from {r,g,b} format to hexcode
+ * @param {*} rgb color in r,g,b} format
+ * @returns color in hexcode
+ */
 export function rgbToHex(rgb) {
     const toHex = (value) => {
         // Convert to 0-255 range and then to a 2-character hex string
@@ -9,12 +14,26 @@ export function rgbToHex(rgb) {
     return `#${toHex(rgb.r)}${toHex(rgb.g)}${toHex(rgb.b)}`;
 }
 
+/**
+ * Converts from degrees to radian
+ * @param {*} degrees angle in degrees
+ * @returns angle in radian
+ */
 export function degreesToRadians(degrees) {
     if(!degrees) return null
     return degrees * (Math.PI / 180);
 }
 
 
+/**
+ * Creates polygon
+ * @param {*} radius radius of the polygon
+ * @param {*} stacks 
+ * @param {*} slices  
+ * @param {*} color_c color in center
+ * @param {*} color_p color at the external points
+ * @returns polygon mesh
+ */
 export function createPolygon(radius, stacks, slices, color_c, color_p) {
     const geometry = new THREE.BufferGeometry();
 
@@ -80,7 +99,12 @@ export function createPolygon(radius, stacks, slices, color_c, color_p) {
     return geometry;
 }
 
-
+/**
+ * Loads mipmaps
+ * @param {*} parentTexture 
+ * @param {*} level level of mipmap 0-7
+ * @param {*} path path to the texture
+ */
 export function loadMipmap(parentTexture, level, path)
 {
     // load texture. On loaded call the function to create the mipmap for the specified level 
