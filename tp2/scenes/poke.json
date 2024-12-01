@@ -413,8 +413,56 @@
             }
         },
         "cameras": {
-            "initial": "cam1",
-            "cam1": {
+            "initial": "perspective",
+            "perspective": {
+                "type": "perspective",
+                "angle": 60,
+                "near": 0.1,
+                "far": 300,
+                "location": {
+                    "x": 30,
+                    "y": 20,
+                    "z": 30
+                },
+                "target": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "outsidefront": {
+                "type": "perspective",
+                "angle": 60,
+                "near": 0.1,
+                "far": 300,
+                "location": {
+                    "x": 0,
+                    "y": 20,
+                    "z": 40
+                },
+                "target": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "outsideside": {
+                "type": "perspective",
+                "angle": 60,
+                "near": 0.1,
+                "far": 300,
+                "location": {
+                    "x": 40,
+                    "y": 20,
+                    "z": 0
+                },
+                "target": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "corner1": {
                 "type": "perspective",
                 "angle": 60,
                 "near": 0.1,
@@ -430,24 +478,85 @@
                     "z": 0
                 }
             },
-            "cam2": {
-                "type": "orthogonal",
+            "corner2": {
+                "type": "perspective",
+                "angle": 60,
                 "near": 0.1,
-                "far": 1000,
+                "far": 300,
                 "location": {
-                    "x": 0,
-                    "y": 15,
+                    "x": -8,
+                    "y": 9,
                     "z": 15
                 },
                 "target": {
                     "x": 0,
-                    "y": 15,
+                    "y": 0,
                     "z": 0
+                }
+            },
+            "corner3": {
+                "type": "perspective",
+                "angle": 60,
+                "near": 0.1,
+                "far": 300,
+                "location": {
+                    "x": -8,
+                    "y": 9,
+                    "z": -15
                 },
-                "left": -5,
-                "right": 5,
-                "bottom": -5,
-                "top": 5
+                "target": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "corner4": {
+                "type": "perspective",
+                "angle": 60,
+                "near": 0.1,
+                "far": 300,
+                "location": {
+                    "x": 8,
+                    "y": 9,
+                    "z": -15
+                },
+                "target": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "atreusBed": {
+                "type": "perspective",
+                "angle": 60,
+                "near": 0.1,
+                "far": 300,
+                "location": {
+                    "x": 0,
+                    "y": 3,
+                    "z": -15
+                },
+                "target": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "kratosBed": {
+                "type": "perspective",
+                "angle": 60,
+                "near": 0.1,
+                "far": 300,
+                "location": {
+                    "x": -8,
+                    "y": 3,
+                    "z": -8
+                },
+                "target": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
             }
         },
         "graph": {
@@ -949,7 +1058,6 @@
                     ]
                 }
             },
-
             "rightTopPlank": {
                 "type": "node",
                 "transforms": [
