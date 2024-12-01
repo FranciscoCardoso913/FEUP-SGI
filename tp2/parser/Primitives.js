@@ -33,10 +33,29 @@ function buildRetangle(rectangle, material){
 
 function buildPointlight(pointlight, material){
 
-    const pointLight = new THREE.PointLight(rgbToHex(pointlight["color"]), pointlight["intensity"], pointlight["distance"], pointlight["decay"]);  
-    pointLight.position.set(pointlight.position.x, pointlight.position.y, pointlight.position.z);
-    pointLight.castShadow = pointlight.castshadow
-    return pointLight
+    const enabled = pointlight.enabled ?? true;
+    const color = rgbToHex(pointlight.color);
+    const intensity = pointlight.intensity ?? 1.0;
+    const distance = pointlight.distance ?? 1000;
+    const decay = pointlight.decay ?? 2;
+    const position = pointlight.position ;
+    const castShadow = pointlight.castShadow ?? false ;
+    const shadowFar = pointlight.shadowFar ?? 500.0;
+    const shadowMapSize = pointlight.shadowMapSize ?? 512;
+    
+    if (enabled) {
+        const pointLight = new THREE.PointLight(color, intensity, distance, decay);
+        pointLight.position.set(position.x, position.y, position.z);
+        pointLight.castShadow = castShadow;
+    
+        if (castShadow) {
+            pointLight.shadow.camera.far = shadowFar;
+            pointLight.shadow.mapSize.set(shadowMapSize, shadowMapSize);
+        }
+    
+        return pointLight
+    }
+    return null
 }
 
 function buildTriangle(triangle, material){
