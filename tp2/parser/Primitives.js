@@ -6,6 +6,7 @@ const map = {
     "rectangle": buildRetangle,
     "triangle":buildTriangle,
     "box": buildBox,
+    "cone": buildCone
 
 }
 
@@ -59,10 +60,23 @@ function buildBox(box, material){
     let geometry = new THREE.BoxGeometry(width, height, depth,parts_x,parts_y,parts_z );
 
     let boxMesh = new THREE.Mesh(geometry, material);
-
- 
-    console.log(boxMesh)
-
     return boxMesh
+}
+
+function buildCone(cone, material){
+ 
+    const geometry = new THREE.CylinderGeometry(
+        cone["top"],
+        cone["base"],
+        cone["height"],
+        cone["slices"],
+        cone["stacks"],
+        !(cone["capsClose"] ? cone["capsClose"]: false),
+        (cone["thetaStart"] ? cone["thetaStart"] : 0),
+        (cone["thetaLength"] ? cone["thetaLength"]: Math.PI*2)
+    );
+    const cylinder = new THREE.Mesh(geometry, material);
+
+    return cylinder
 
 }

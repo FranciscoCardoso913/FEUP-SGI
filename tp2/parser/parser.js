@@ -78,6 +78,8 @@ export function parseTextures(textures){
         }
         else{
             texture = new THREE.TextureLoader().load(value.filepath)
+            texture.wrapS = THREE.RepeatWrapping; // Repeat horizontally
+            texture.wrapT = THREE.RepeatWrapping; // Repeat vertically
             texture.minFilter = THREE.LinearMipmapLinearFilter; 
             texture.mipmaps = []
             for( let i =0; i<= 7;i++){
