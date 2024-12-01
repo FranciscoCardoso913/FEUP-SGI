@@ -17,6 +17,7 @@ class MyContents {
         this.axis = null
         this.isWireframe = false
         this.lightHelpers = false
+        this.activeLight = true
 
         this.reader = new MyFileReader(this.onSceneLoaded.bind(this));
     
@@ -103,6 +104,14 @@ class MyContents {
     showLightHelpers(){
         this.graph.remove(this.app.scene)
         this.graph.lightHelpers(this.lightHelpers)
+        this.graph.build()
+        this.graph.create(this.app.scene)
+    }
+
+    activateLight(){
+    
+        this.graph.remove(this.app.scene)
+        this.graph.lights(this.activeLight)
         this.graph.build()
         this.graph.create(this.app.scene)
     }

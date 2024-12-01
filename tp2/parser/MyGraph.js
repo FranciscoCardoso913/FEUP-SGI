@@ -69,6 +69,14 @@ class MyGraph {
 		
 	}
 
+	lights(bool){
+		this.nodes = Object.entries(this.nodes).reduce((dict, [name, value]) => {
+			value.enabled = bool
+			dict[name] = value
+			return dict
+		},{})
+	}
+
 	/**
 	 * Creates the scene with all the yasf information
 	 * @param {*} scene 

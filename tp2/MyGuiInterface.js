@@ -32,6 +32,7 @@ class MyGuiInterface  {
         this.datgui.add(this.app, 'activeCameraName', this.app.camerasNames ).name("active camera");
         this.datgui.add(this.contents, 'isWireframe', false).name("Wirefrane").onChange( () => { this.contents.Wireframe() } );
         this.datgui.add(this.contents, 'lightHelpers', false).name("Light Helpers").onChange( () => { this.contents.showLightHelpers() } );
+        this.datgui.add(this.contents, 'activeLight', false).name("Lights").onChange( () => { this.contents.activateLight() } );
 
     }
 }

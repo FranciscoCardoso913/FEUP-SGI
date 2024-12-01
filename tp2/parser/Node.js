@@ -65,6 +65,7 @@ class Node {
 			// Build all its primitives
 			this.primitives.forEach(element => {
 				element.lightHelpers = this.lightHelpers
+				element.enabled = this.enabled
 				let child = buildPrimitive(element, material)
 				if(child) node.add(child)
 			});
