@@ -7,7 +7,7 @@ const map = {
     "rectangle": buildRetangle,
     "triangle":buildTriangle,
     "box": buildBox,
-    "cone": buildCone,
+    "cylinder": buildCylinder,
     "sphere": buildSphere,
     "nurbs": buildNurbs,
     "spotlight": buildSpotlight,
@@ -85,7 +85,7 @@ function buildBox(box, material){
     return boxMesh
 }
 
-function buildCone(cone, material){
+function buildCylinder(cone, material){
  
     const geometry = new THREE.CylinderGeometry(
         cone["top"],
