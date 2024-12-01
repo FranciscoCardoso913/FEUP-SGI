@@ -12,18 +12,21 @@ class Node {
 	*/
 	constructor(json) {
         this.json = json
-        this.edges = json["children"]["nodesList"] ?? []
-		this.lods = json["children"]["lodsList"] ?? []
+
 		this.lodNodes = json["lodNodes"]
         this.transforms = json ["transforms"]?? []
 		this.castshadows = json["castshadows"] ?? false
 		this.receiveshadows = json["receiveshadows"] ?? false
-		this.primitives =  Object.entries(json["children"]).reduce((list, [name, value]) => {
-			if(name !== "nodesList"){
-				list.push (value)
-			}
-			return list;
-		}, []);
+		if(json["type"]!=="lod"){
+			this.edges = json["children"]["nodesList"] ?? []
+			this.lods = json["children"]["lodsList"] ?? []
+			this.primitives =  Object.entries(json["children"]).reduce((list, [name, value]) => {
+				if(name !== "nodesList" && name !== "lodsList" && name !== "lodNodes"){
+					list.push (value)
+				}
+				return list;
+			}, []);
+		}
 	}
 
 	build(nodes, materials, inheritMaterial = null){
@@ -36,6 +39,7 @@ class Node {
 		const material = materialId ? materials[materialId] : inheritMaterial
 
 		if(this.lodNodes){
+			
 			let lod = new THREE.LOD();
 			this.lodNodes.forEach(element => {
 				let child = nodes[element.nodeId].build(nodes, materials, material);
@@ -55,6 +59,8 @@ class Node {
 			});
 			
 			this.lods.forEach(element => {
+				
+
 				let child = nodes[element].build(nodes, materials, material);
 				if(child) node.add(child)
 			});
