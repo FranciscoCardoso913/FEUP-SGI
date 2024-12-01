@@ -23,20 +23,22 @@ class Node {
 	}
 
 	build(nodes, materials, inheritMaterial = null){
+
 		let node = new THREE.Group()
 		const materialref = this.json["materialref"]
 		let materialId = null;
+
 		if( materialref) materialId = materialref["materialId"];
 		const material = materialId ? materials[materialId] : inheritMaterial
+
 		this.edges.forEach(element => {
 			let child = nodes[element].build(nodes, materials, material);
-			
-			node.add(child)
+			if(child) node.add(child)
 		});
 
 		this.primitives.forEach(element => {
 			let child = buildPrimitive(element, material)
-			node.add(child)
+			if(child) node.add(child)
 		});
 
 		node = this.transform(node)
