@@ -9,12 +9,12 @@ const map = {
     "box": buildBox,
     "cone": buildCone,
     "sphere": buildSphere,
-    "nurbs": buildNurbs
+    "nurbs": buildNurbs,
+    "spotlight": buildSpotlight
 
 }
 
 export function buildPrimitive(primitive, material){
-    console.log(primitive)
     const func = map[primitive.type]
     if(func) return func(primitive, material)
     else console.log(primitive["type"] + " not defined yet")
@@ -126,4 +126,33 @@ function buildNurbs(nurbs, material){
                 samplesV, material)  
     const mesh = new THREE.Mesh( surfaceData, material );
     return mesh
+}
+
+function buildSpotlight(spotLight,material ){
+    const enabled = spotLight.enabled ?? true;
+    const color = rgbToHex(spotLight.color);
+    const intensity = spotLight.intensity ?? 1;
+    const distance = spotLight.distance ?? 1000;
+    const angle = spotLight.angle;
+    const decay = spotLight.decay ?? 2;
+    const penumbra = spotLight.penumbra ?? 1;
+    const position = spotLight.position;
+    const targetPosition = spotLight.targetPosition;
+    const castShadow = spotLight.castShadow ?? false;
+    const shadowFar = spotLight.shadowFar ?? 500;
+    const shadowMapSize = spotLight.shadowMapSize ?? 512;
+
+    if (enabled) {
+        const spotlight = new THREE.SpotLight(color, intensity, distance, angle, penumbra, decay);
+        spotlight.position.set(position.x, position.y, position.z);
+        spotlight.castShadow = castShadow;
+        spotlight.shadow.camera.far = shadowFar;
+        spotlight.shadow.mapSize.set(shadowMapSize, shadowMapSize);
+    
+        const target = new THREE.Object3D();
+        target.position.set(targetPosition.x, targetPosition.y, targetPosition.z);
+        spotlight.target = target;
+        return spotlight
+    }
+    return null
 }
