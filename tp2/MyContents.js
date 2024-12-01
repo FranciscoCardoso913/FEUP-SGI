@@ -35,6 +35,9 @@ class MyContents {
                 return list;
             }, []);
 
+            this.app.renderer.shadowMap.enabled = true; // Enable shadow maps
+            this.app.renderer.shadowMap.type = THREE.PCFSoftShadowMap; // Soft shadows
+    
             let gui = new MyGuiInterface(this.app)
             gui.setContents(this)
             gui.init();

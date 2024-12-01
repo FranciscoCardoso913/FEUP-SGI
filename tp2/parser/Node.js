@@ -51,6 +51,7 @@ class Node {
 			this.edges.forEach(element => {
 				let child = nodes[element].build(nodes, materials, material);
 				if(child) node.add(child)
+				
 			});
 
 			this.primitives.forEach(element => {
@@ -67,8 +68,18 @@ class Node {
 		}
 
 		node = this.transform(node)
-		node.castShadow = this.castshadows
-		node.receiveShadow = this.receiveshadows
+		node.castShadow = this.castshadows;
+		node.receiveShadow = this.receiveshadows;
+
+		node.traverse((child)=> {
+			if (child.isMesh) {
+				child.castShadow = child.castShadow ? child.castShadow : this.castshadows;
+				child.receiveShadow = child.receiveShadow ? child.receiveShadow : this.receiveshadows;
+			}
+		})
+
+		console.log(node)
+		
 		
 		return node
 	}
