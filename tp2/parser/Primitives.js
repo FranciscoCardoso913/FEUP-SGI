@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { rgbToHex } from './utils.js';
+import { MyNurbsBuilder } from '../MyNurbsBuilder.js';
 
 const map = {
     "pointlight": buildPointlight,
@@ -7,7 +8,8 @@ const map = {
     "triangle":buildTriangle,
     "box": buildBox,
     "cone": buildCone,
-    "sphere": buildSphere
+    "sphere": buildSphere,
+    "nurbs": buildNurbs
 
 }
 
@@ -97,4 +99,31 @@ function buildSphere(sphere, material){
 
     return sphereMesh
 
+}
+
+function buildNurbs(nurbs, material){
+    let controlPoints= [];
+    let surfaceData;
+    const samplesU = nurbs["parts_u"]
+    const samplesV = nurbs["parts_v"]
+    const orderU = nurbs["degree_u"]
+    const orderV = nurbs["degree_v"]
+
+    const builder = new MyNurbsBuilder()
+
+    for(let u = 0; u<orderU;u++){
+        let aux = []
+        for (let v = 0; v < orderV; v++){
+            let point =nurbs["controlpoints"][u*orderV + v]
+            aux.push([point["x"], point["y"], point["z"]])
+        }
+        controlPoints.push(aux)
+    }
+
+
+    surfaceData = builder.build(controlPoints,
+                orderU, orderV, samplesU,
+                samplesV, material)  
+    const mesh = new THREE.Mesh( surfaceData, material );
+    return mesh
 }
