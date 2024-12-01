@@ -4,7 +4,8 @@ import { rgbToHex } from './utils.js';
 const map = {
     "pointlight": buildPointlight,
     "rectangle": buildRetangle,
-    "triangle":buildTriangle
+    "triangle":buildTriangle,
+    "box": buildBox,
 
 }
 
@@ -16,13 +17,13 @@ export function buildPrimitive(primitive, material){
 }
 
 function buildRetangle(rectangle, material){
-    let width = rectangle["xy2"]["x"] - rectangle["xy1"]["x"] 
-    let height = rectangle["xy2"]["y"] - rectangle["xy1"]["y"] 
+    let width = Math.abs(rectangle["xy2"]["x"] - rectangle["xy1"]["x"] )
+    let height = Math.abs(rectangle["xy2"]["y"] - rectangle["xy1"]["y"] )
     let widthSegments = rectangle["parts_x"] ? rectangle["parts_x"] : 1 
     let heightSegments = rectangle["parts_y"] ? rectangle["parts_y"] : 1 
     const geometry = new THREE.PlaneGeometry(width, height, widthSegments, heightSegments);
     const rectangleMesh = new THREE.Mesh(geometry, material);
-    rectangleMesh.position.copy (new THREE.Vector3(rectangle["xy1"]["x"] , rectangle["xy1"]["y"],0 ))
+    //rectangleMesh.position.copy (new THREE.Vector3(rectangle["xy1"]["x"] , rectangle["xy1"]["y"],0 ))
     return rectangleMesh
 }
 
@@ -45,4 +46,23 @@ function buildTriangle(triangle, material){
     geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
     const triangleMesh = new THREE.Mesh(geometry, material);
     return triangleMesh
+}
+
+function buildBox(box, material){
+ 
+    const width = Math.abs(box["xyz2"]["x"] - box["xyz1"]["x"])
+    const height = Math.abs(box["xyz2"]["y"] - box["xyz1"]["y"])
+    const depth = Math.abs(box["xyz2"]["z"] - box["xyz1"]["z"])
+    const parts_x = box["parts_x"] ? box["parts_x"] : 1
+    const parts_y = box["parts_y"] ? box["parts_y"] : 1
+    const parts_z = box["parts_z"] ? box["parts_z"] : 1
+    let geometry = new THREE.BoxGeometry(width, height, depth,parts_x,parts_y,parts_z );
+
+    let boxMesh = new THREE.Mesh(geometry, material);
+
+ 
+    console.log(boxMesh)
+
+    return boxMesh
+
 }
