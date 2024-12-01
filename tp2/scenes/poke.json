@@ -65,6 +65,19 @@
                 "mipmap5": "scenes/textures/caravaggio.32.jpg",
                 "mipmap6": "scenes/textures/caravaggio.16.jpg",
                 "mipmap7": "scenes/textures/caravaggio.8.jpg"
+            },
+            "blanket": {
+                "filepath": "scenes/textures/blanket.jpg"
+            },
+            "blanketbump": {
+                "filepath": "scenes/textures/blanket_bump.jpg"
+            },
+            "video": {
+                "filepath": "scenes/videos/video.mp4",
+                "isVideo": true
+            },
+            "pillow": {
+                "filepath": "scenes/textures/pillow.jpg"
             }
         },
         "materials": {
@@ -255,6 +268,56 @@
                 "textureref": "paint",
                 "texlength_s": 1,
                 "texlength_t": 1
+            },
+            "blanket": {
+                "color": {
+                    "r": 0.2,
+                    "g": 0.2,
+                    "b": 0.2
+                },
+                "specular": {
+                    "r": 0.2,
+                    "g": 0.2,
+                    "b": 0.2
+                },
+                "shininess": 32,
+                "emissive": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "transparent": false,
+                "opacity": 1.0,
+                "twosided": "true",
+                "textureref": "blanket",
+                "texlength_s": 1,
+                "texlength_t": 1,
+                "bumpref": "blanketbump",
+                "bumpscale": 30 
+            },
+            "pillow": {
+                "color": {
+                    "r": 0.5,
+                    "g": 0.5,
+                    "b": 0.5
+                },
+                "specular": {
+                    "r": 0.5,
+                    "g": 0.5,
+                    "b": 0.5
+                },
+                "shininess": 32,
+                "emissive": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "transparent": false,
+                "opacity": 1.0,
+                "twosided": "true",
+                "textureref": "pillow",
+                "texlength_s": 1,
+                "texlength_t": 1
             }
         },
         "cameras": {
@@ -265,9 +328,9 @@
                 "near": 0.1,
                 "far": 300,
                 "location": {
-                    "x": 35,
-                    "y": 35,
-                    "z": 35
+                    "x": 8,
+                    "y": 9,
+                    "z": 15
                 },
                 "target": {
                     "x": 0,
@@ -389,10 +452,127 @@
                         }
                     },
                     "lodsList": [
-                        "polygonPrimLod"
-          ]
+                        "bonfireLod"
+                    ]
                 }
             },
+
+            "bonfireLod":{
+                "type": "lod",
+                "lodNodes": [{
+                    "nodeId": "bonfire1",
+                    "mindist": 5
+                },
+                {
+                    "nodeId": "bonfire2",
+                    "mindist": 10
+                },
+                {
+                    "nodeId": "bonfire3",
+                    "mindist": 15
+                }
+                
+            ]
+            },
+            "bonfire1":{
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2,
+                            "y": 0.26,
+                            "z": -6
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": -90,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+
+                ],
+                "children": {
+                    "bonfirePrim1(id)": {
+                        "type": "polygon",
+                        "radius": 4,
+                        "stacks": 30,
+                        "slices": 40,
+                        "color_c": {"r": 0, "g": 0, "b": 0},
+                        "color_p": {"r": 0.44, "g": 0.5, "b": 0.52}
+                    }
+                }
+            },
+            "bonfire2":{
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2,
+                            "y": 0.26,
+                            "z": -6
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": -90,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+
+                ],
+                "children": {
+                    "bonfirePrim1(id)": {
+                        "type": "polygon",
+                        "radius": 4,
+                        "stacks": 25,
+                        "slices": 35,
+                        "color_c": {"r": 0, "g": 0, "b": 0},
+                        "color_p": {"r": 0.465, "g": 0.53, "b": 0.59}
+                    }
+                }
+            },
+            "bonfire3":{
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2,
+                            "y": 0.26,
+                            "z": -6
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": -90,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+
+                ],
+                "children": {
+                    "bonfirePrim1(id)": {
+                        "type": "polygon",
+                        "radius": 4,
+                        "stacks": 15,
+                        "slices": 25,
+                        "color_c": {"r": 0, "g": 0, "b": 0},
+                        "color_p": {"r": 0.66, "g": 0.66, "b": 0.66}
+                    }
+                }
+            },
+
+
+
             "base": {
                 "type": "node",
                 "materialref": {
@@ -617,77 +797,7 @@
                     ]
                 }
             },
-            "polygonPrimLod":{
-                "type": "lod",
-                "lodNodes": [{
-                    "nodeId": "polygon1",
-                    "mindist": 1
-                },
-                {
-                    "nodeId": "polygon2",
-                    "mindist": 3
-                },
-                {
-                    "nodeId": "polygon3",
-                    "mindist": 5
-                }
-                
-            ]
-            },
-            "polygon1":{
-                "type": "node",
-                "children": {
-                    "polygonPrim1(id)": {
 
-                        "type": "polygon",
-                        "radius": 5,
-
-                        "stacks": 10,
-
-                        "slices": 20,
-
-                        "color_c": {"r": 1, "g": 0, "b": 0},
-
-                        "color_p": {"r": 0, "g": 1, "b": 0}
-                    }
-                }
-            },
-            "polygon2":{
-                "type": "node",
-                "children": {
-                    "polygonPrim1(id)": {
-
-                        "type": "polygon",
-                        "radius": 5,
-
-                        "stacks": 5,
-
-                        "slices": 10,
-
-                        "color_c": {"r": 1, "g": 1, "b": 0},
-
-                        "color_p": {"r": 0, "g": 1, "b": 1}
-                    }
-                }
-            },
-            "polygon3":{
-                "type": "node",
-                "children": {
-                    "polygonPrim1(id)": {
-
-                        "type": "polygon",
-                        "radius": 5,
-
-                        "stacks": 5,
-
-                        "slices": 5,
-
-                        "color_c": {"r": 1, "g": 0, "b": 1},
-
-                        "color_p": {"r": 1, "g": 1, "b": 0}
-                    }
-                }
-            },
             "rightTopPlank": {
                 "type": "node",
                 "transforms": [
@@ -819,35 +929,6 @@
                         }
                     },
                     "nodesList": ["paint"]
-                }
-            },
-            "paint":{
-                "type":"node",
-                "materialref": {
-                    "materialId": "paint"
-                },
-                "transforms": [
-                    {
-                        "type": "translate",
-                        "amount": {
-                            "x": 0,
-                            "y": 0,
-                            "z": 0.1
-                        }
-                    }
-                ],
-                "children": {
-                    "paintprim": {
-                        "type": "rectangle",
-                        "xy1": {
-                            "x": 0,
-                            "y": 0
-                        },
-                        "xy2": {
-                            "x": 5,
-                            "y": 5
-                        }
-                    }
                 }
             },
             "rightwall": {
@@ -1102,6 +1183,35 @@
                         "xy2": {
                             "x": 10,
                             "y": 10
+                        }
+                    }
+                }
+            },
+            "paint":{
+                "type":"node",
+                "materialref": {
+                    "materialId": "paint"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0.01
+                        }
+                    }
+                ],
+                "children": {
+                    "paintprim": {
+                        "type": "rectangle",
+                        "xy1": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "xy2": {
+                            "x": 5,
+                            "y": 5
                         }
                     }
                 }
@@ -2328,8 +2438,7 @@
                         "stake1right",
                         "stake2left",
                         "stake2right",
-                        "stake3left",
-                        "stake3right"
+                        "stake3left"
                     ]
                 }
             },
@@ -2412,24 +2521,6 @@
                         "type": "translate",
                         "amount": {
                             "x": -10,
-                            "y": 2.5,
-                            "z": -5
-                        }
-                    }
-                ],
-                "children": {
-                    "nodesList": [
-                        "woodcilinder"
-                    ]
-                }
-            },
-            "stake3right": {
-                "type": "node",
-                "transforms": [
-                    {
-                        "type": "translate",
-                        "amount": {
-                            "x": 10,
                             "y": 2.5,
                             "z": -5
                         }
@@ -2648,25 +2739,56 @@
                     {
                         "type": "translate",
                         "amount": {
-                            "x": 0,
+                            "x": -6,
                             "y": 0,
-                            "z": 0
+                            "z": -8
                         }
                     }
                 ],
                 "children": {
                     "nodesList": [
                         "bedfoot",
-                        "bedmatress"
-
+                        "bedmatress",
+                        "pillowleftkratos",
+                        "pillowrightkratos"
                     ]
                 }
             },
 
             "bedatreus": {
+                
                 "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": -14
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 90,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 0.75,
+                            "y": 1,
+                            "z": 0.75
+                        }
+                    }
+                ],
                 "children": {
                     "nodesList": [
+                        "bedfoot",
+                        "bedmatress",
+                        "pillowatreus"
                     ]
                 }
             },
@@ -2789,7 +2911,9 @@
 
             "bedmatress": {
                 "type": "node",
-
+                "materialref": {
+                    "materialId": "blanket"
+                },
                 "transforms": [
                     {
                         "type": "translate",
@@ -2809,17 +2933,398 @@
                     }
                 ],
                 "children": {
+                    "nodesList": [
+                        "matressbox",
+                        "upleftcorner",
+                        "uprightcorner",
+                        "downleftcorner",
+                        "downrightcorner",
+                        "leftmatress",
+                        "rightmatress",
+                        "upmatress",
+                        "downmatress"
+                    ]
+                }
+            },
+            "matressbox": {
+                "type": "node",
+                "children": {
+                    "matress": {
+                        "type": "box",
+                        "xyz1": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "xyz2": {
+                            "x": 4,
+                            "y": 2,
+                            "z": 6
+                        }
+                    }      
+                }
+            },
+            "upleftcorner": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -2,
+                            "y": 0,
+                            "z": -3
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": -90,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "bedcorner"
+                    ]
+                }
+            },
+            "uprightcorner": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2,
+                            "y": 0,
+                            "z": -3
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 180,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "bedcorner"
+                    ]
+                }
+            },
+            "downleftcorner": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -2,
+                            "y": 0,
+                            "z": 3
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "bedcorner"
+                    ]
+                }
+            },
+            "downrightcorner": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2,
+                            "y": 0,
+                            "z": 3
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 90,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "bedcorner"
+                    ]
+                }
+            },
+            "leftmatress": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -2,
+                            "y": 0,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": -90,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1.5,
+                            "y": 1,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "matresslimit"
+                    ]
+                }
+            },
+            "rightmatress": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2,
+                            "y": 0,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 90,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1.5,
+                            "y": 1,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "matresslimit"
+                    ]
+                }
+            },
+            "upmatress": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": -3
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 180,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "matresslimit"
+                    ]
+                }
+            },
+            "downmatress": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 3
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "matresslimit"
+                    ]
+                }
+            },
+            "bedcorner": {
+                "type": "node",
+                "children": {
                     "matress": {
                         "type": "sphere",
-                        "radius": 2,
+                        "radius": 1,
                         "slices": 40,
                         "stacks": 40,
+                        "phistart": 0,
+                        "philength": 90,
                         "thetastart": 0,
-                        "thetalength": 45
-                        
+                        "thetalength": 90
+                    }
+                }
+            },
+            "matresslimit": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 90
+                        }
+                    }
+                ],
+                "children": {
+                    "cylinder": {
+                        "type": "cylinder",
+                        "base": 1,
+                        "top": 1,
+                        "height": 4,
+                        "slices": 20,
+                        "stacks": 20,
+                        "thetastart": 0,
+                        "thetalength": 90
+                    }      
+                }
+            },
+
+            "pillowleftkratos": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -1,
+                            "y": 0,
+                            "z": -2
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 25,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "pillow"
+                    ]
+                }
+            },
+            "pillowrightkratos": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 1.2,
+                            "y": 0,
+                            "z": -2
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": -25,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "pillow"
+                    ]
+                }
+            },
+            "pillowatreus": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": -2
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": -25,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "pillow"
+                    ]
+                }
+            },
+            "pillow": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "pillow"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 1.5,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 0.3,
+                            "z": 0.5
+                        }
+                    }
+                ],
+                "children": {
+                    "pillowsphere": {
+                        "type": "sphere",
+                        "radius": 1,
+                        "slices": 40,
+                        "stacks": 40
                     }
                 }
             }
+            
+
         }
     }
 }
