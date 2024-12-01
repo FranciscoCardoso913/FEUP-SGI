@@ -10,6 +10,7 @@ export function rgbToHex(rgb) {
 }
 
 export function degreesToRadians(degrees) {
+    if(!degrees) return null
     return degrees * (Math.PI / 180);
 }
 
@@ -77,4 +78,33 @@ export function createPolygon(radius, stacks, slices, color_c, color_p) {
     geometry.setIndex(indices);
 
     return geometry;
+}
+
+
+export function loadMipmap(parentTexture, level, path)
+{
+    // load texture. On loaded call the function to create the mipmap for the specified level 
+    new THREE.TextureLoader().load(path, 
+        function(mipmapTexture)  // onLoad callback
+        {
+            const canvas = document.createElement('canvas')
+            const ctx = canvas.getContext('2d')
+            ctx.scale(1, 1);
+            
+            // const fontSize = 48
+            const img = mipmapTexture.image         
+            canvas.width = img.width;
+            canvas.height = img.height
+
+            // first draw the image
+            ctx.drawImage(img, 0, 0 )
+                         
+            // set the mipmap image in the parent texture in the appropriate level
+            parentTexture.mipmaps[level] = canvas
+        },
+        undefined, // onProgress callback currently not supported
+        function(err) {
+            console.error('Unable to load the image ' + path + ' as mipmap level ' + level + ".", err)
+        }
+    )
 }
