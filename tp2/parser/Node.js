@@ -30,12 +30,13 @@ class Node {
 		const material = materialId ? materials[materialId] : inheritMaterial
 		this.edges.forEach(element => {
 			let child = nodes[element].build(nodes, materials, material);
-			if(child)node.add(child)
+			
+			node.add(child)
 		});
 
 		this.primitives.forEach(element => {
 			let child = buildPrimitive(element, material)
-			if(child)node.add(child)
+			node.add(child)
 		});
 
 		node = this.transform(node)
@@ -46,15 +47,15 @@ class Node {
 	transform(node){
 		this.transforms.forEach(element=>{
 			if (element["type"]=== "scale"){
-				node.scale.set(new THREE.Vector3(element["amount"]["x"],element["amount"]["y"],element["amount"]["z"]))
+				node.scale.copy(new THREE.Vector3(element["amount"]["x"],element["amount"]["y"],element["amount"]["z"]))
 			}
 			else if (element["type"]=== "translate"){
-				node.position.copy(new THREE.Vector3(element["amount"]["x"],element["amount"]["y"],element["amount"]["z"]))
+				node.position.add(new THREE.Vector3(element["amount"]["x"],element["amount"]["y"],element["amount"]["z"]))
 			}
 			else if(element["type"]=== "rotate"){
-				node.rotation.x= degreesToRadians(element["amount"]["x"])
-				node.rotation.y= degreesToRadians(element["amount"]["y"])
-				node.rotation.z= degreesToRadians(element["amount"]["z"])
+				node.rotation.x+= degreesToRadians(element["amount"]["x"])
+				node.rotation.y+= degreesToRadians(element["amount"]["y"])
+				node.rotation.z+= degreesToRadians(element["amount"]["z"])
 			}
 
 		
