@@ -119,6 +119,15 @@ export function parseMaterials(textures, materials){
             );
             material.map = texture
         }
+        // Handle bump texture if needed
+        let bumpTexture = textures[value.bumpref];
+        if (bumpTexture) {
+            bumpTexture.wrapS = THREE.RepeatWrapping;
+            bumpTexture.wrapT = THREE.RepeatWrapping;
+            bumpTexture.repeat.set(value.texlength_s, value.texlength_t);
+            material.bumpMap = bumpTexture;
+            material.bumpScale = value.bumpscale !== undefined ? value.bumpscale : 1.0;  // Default bumpscale to 1.0 if not provided
+        }
         dict[name] = material;
         return dict;
     }, {});
