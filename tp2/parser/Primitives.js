@@ -311,8 +311,10 @@ function buildPolygon(polygon,material ){
     const color_p = rgbToHex(polygon.color_p); 
 
     const polygonGeometry = createPolygon(radius, stacks, slices, color_c, color_p); // Creates polygon with help of auxiliar function
-
-    material = new THREE.MeshBasicMaterial({ vertexColors: true, wireframe: material.wireframe });
+    if(material)
+        material = new THREE.MeshBasicMaterial({ vertexColors: true, wireframe: material.wireframe });
+    else 
+        material = new THREE.MeshBasicMaterial({ vertexColors: true, wireframe: false });
     const polygonMesh = new THREE.Mesh(polygonGeometry, material);
     return polygonMesh
 }
