@@ -36,6 +36,15 @@ class MyGraph {
 		this.graph.add(root.build(this.nodes, this.materials))
 	}
 
+	wireframe(bool){
+		this.materials = Object.entries(this.materials).reduce((dict, [name, value]) => {
+			value.wireframe = bool
+			dict[name] = value
+			return dict
+		},{})
+		
+	}
+
 
 	create(scene){
 		scene.background = this.background
@@ -43,6 +52,11 @@ class MyGraph {
 		scene.add(this.skybox)
 		scene.add(this.ambientLight)
 		scene.add(this.graph)
+	}
+	remove (scene){
+		scene.remove(this.skybox)
+		scene.remove(this.ambientLight)
+		scene.remove(this.graph)
 	}
 
 }
