@@ -353,20 +353,9 @@
                             "z": 33.9
                         }
                     },
-                    "polygonPrim(id)": {
-
-                        "type": "polygon",
-                        "radius": 5,
-
-                        "stacks": 10,
-
-                        "slices": 20,
-
-                        "color_c": {"r": 1, "g": 0, "b": 0},
-
-                        "color_p": {"r": 0, "g": 1, "b": 0}
-
-                    }
+                    "lodsList": [
+                        "polygonPrimLod"
+          ]
                 }
             },
             "base": {
@@ -591,6 +580,77 @@
                     "nodesList": [
                         "woodplank"
                     ]
+                }
+            },
+            "polygonPrimLod":{
+                "type": "lod",
+                "lodNodes": [{
+                    "nodeId": "polygon1",
+                    "mindist": 1
+                },
+                {
+                    "nodeId": "polygon2",
+                    "mindist": 3
+                },
+                {
+                    "nodeId": "polygon3",
+                    "mindist": 5
+                }
+                
+            ]
+            },
+            "polygon1":{
+                "type": "node",
+                "children": {
+                    "polygonPrim1(id)": {
+
+                        "type": "polygon",
+                        "radius": 5,
+
+                        "stacks": 10,
+
+                        "slices": 20,
+
+                        "color_c": {"r": 1, "g": 0, "b": 0},
+
+                        "color_p": {"r": 0, "g": 1, "b": 0}
+                    }
+                }
+            },
+            "polygon2":{
+                "type": "node",
+                "children": {
+                    "polygonPrim1(id)": {
+
+                        "type": "polygon",
+                        "radius": 5,
+
+                        "stacks": 5,
+
+                        "slices": 10,
+
+                        "color_c": {"r": 1, "g": 1, "b": 0},
+
+                        "color_p": {"r": 0, "g": 1, "b": 1}
+                    }
+                }
+            },
+            "polygon3":{
+                "type": "node",
+                "children": {
+                    "polygonPrim1(id)": {
+
+                        "type": "polygon",
+                        "radius": 5,
+
+                        "stacks": 5,
+
+                        "slices": 5,
+
+                        "color_c": {"r": 1, "g": 0, "b": 1},
+
+                        "color_p": {"r": 1, "g": 1, "b": 0}
+                    }
                 }
             },
             "rightTopPlank": {
@@ -2691,39 +2751,10 @@
                         "stacks": 40,
                         "thetastart": 0,
                         "thetalength": 45
+                        
                     }
                 }
             }
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-            
-                
-          
-             
         }
     }
 }

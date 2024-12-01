@@ -95,8 +95,8 @@ function buildCylinder(cone, material){
         cone["slices"],
         cone["stacks"],
         !(cone["capsClose"] ?? false),
-        (degreesToRadians(cone["thetaStart"]) ?? 0),
-        (degreesToRadians(cone["thetaLength"]) ?? Math.PI*2)
+        (degreesToRadians(cone["thetastart"]) ?? 0),
+        (degreesToRadians(cone["thetalength"]) ?? Math.PI*2)
     );
     const cylinder = new THREE.Mesh(geometry, material);
 
@@ -110,10 +110,10 @@ function buildSphere(sphere, material){
         sphere["radius"],
         sphere["slices"],
         sphere["stacks"],
-        (degreesToRadians(sphere["phiStart"]) ?? 0),
-        (degreesToRadians(sphere["phiLength"]) ?? Math.PI*2),
-        (degreesToRadians(sphere["thetaStart"]) ?? 0),
-        (degreesToRadians(sphere["thetaLength"]) ?? Math.PI*2),
+        (degreesToRadians(sphere["phistart"]) ?? 0),
+        (degreesToRadians(sphere["philength"]) ?? Math.PI*2),
+        (degreesToRadians(sphere["thetastart"]) ?? 0),
+        (degreesToRadians(sphere["thetalength"]) ?? Math.PI*2),
     );
     
     const sphereMesh = new THREE.Mesh(geometry, material);

@@ -81,11 +81,12 @@ export function parseTextures(textures){
             texture.wrapS = THREE.RepeatWrapping; // Repeat horizontally
             texture.wrapT = THREE.RepeatWrapping; // Repeat vertically
             texture.minFilter = THREE.LinearMipmapLinearFilter; 
-            texture.mipmaps = []
+            if(value["mipmap0"]) texture.generateMipmaps = false
             for( let i =0; i<= 7;i++){
                 if(value["mipmap"+i.toString()]){
                     texture.mipmaps.append(value["mipmap"+i.toString()]);
-                }else break;
+                    loadMipmap(texture, i, value["mipmap"+i.toString()])    // .1024
+                }
             }
 
         }
