@@ -454,6 +454,8 @@
             "rootid": "scene",
             "scene": {
                 "type": "node",
+                "castshadows": true,
+                "receiveshadows": true,
                 "children": {
                     "nodesList": [
                         "cabin",
@@ -526,7 +528,7 @@
                             "y": 5,
                             "z": -5
                         },
-                        "castshadow": false,
+                        "castshadow": true,
                         "shadowleft": -50,
                         "shadowright": 50,
                         "shadowbottom": -50,
@@ -3586,7 +3588,7 @@
                     {
                         "type": "translate",
                         "amount": {
-                            "x": 8,
+                            "x": 7.9,
                             "y": 0,
                             "z": 2
                         }
