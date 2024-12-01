@@ -1,0 +1,3790 @@
+{
+    "yasf": {
+        "globals": {
+            "background": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0
+            },
+            "ambient": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "intensity": 0.5
+            },
+            "fog": {
+                "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "near": 1.0,
+                "far": 200.0
+            },
+            "skybox": {
+                "size": {"x": 150, "y": 150, "z": 150},
+                "center": {"x": 0, "y": 20, "z": 0},
+                "emissive": {"r": 0, "g": 0, "b": 0},
+                "intensity": 0,
+                "front": "scenes/textures/skybox_front.jpg",              
+                "back": "scenes/textures/skybox_back.jpg",               
+                "up": "scenes/textures/skybox_up.jpg",                 
+                "down": "scenes/textures/skybox_down.jpg",
+                "left": "scenes/textures/skybox_left.jpg",
+                "right": "scenes/textures/skybox_right.jpg"
+            }
+        },
+        "textures": {
+            "floor": {
+                "filepath": "scenes/textures/floor.jpg",
+                "isVideo": false
+            },
+            "housefloor": {
+                "filepath": "scenes/textures/plate.jpg",
+                "isVideo": false
+            },
+            "wood": {
+                "filepath": "scenes/textures/wood.jpg",
+                "isVideo": false
+            },
+            "woodenplate": {
+                "filepath": "scenes/textures/woodenplate.jpg",
+                "isVideo": false
+            },
+            "doorsymbolsleft": {
+                "filepath": "scenes/textures/door_symbols_left.jpg",
+                "isVideo": false
+            },
+            "doorsymbolsright": {
+                "filepath": "scenes/textures/door_symbols_right.jpg",
+                "isVideo": false
+            },
+            "door": {
+                "filepath": "scenes/textures/door.jpg",
+                "isVideo": false
+            },
+            "paint": {
+                "filepath": "scenes/textures/caravaggio.jpg",
+                "isVideo": false,
+                "mipmap0": "scenes/textures/caravaggio.1024.jpg",
+                "mipmap1": "scenes/textures/caravaggio.512.jpg",
+                "mipmap2": "scenes/textures/caravaggio.256.jpg",
+                "mipmap3": "scenes/textures/caravaggio.128.jpg",
+                "mipmap4": "scenes/textures/caravaggio.64.jpg",
+                "mipmap5": "scenes/textures/caravaggio.32.jpg",
+                "mipmap6": "scenes/textures/caravaggio.16.jpg",
+                "mipmap7": "scenes/textures/caravaggio.8.jpg"
+            },
+            "blanket": {
+                "filepath": "scenes/textures/blanket.jpg",
+                "isVideo": false
+            },
+            "blanketbump": {
+                "filepath": "scenes/textures/blanket_bump.jpg",
+                "isVideo": false
+            },
+            "video": {
+                "filepath": "scenes/textures/video.mp4",
+                "isVideo": true
+            },
+            "pillow": {
+                "filepath": "scenes/textures/pillow.jpg",
+                "isVideo": false
+            },
+            "basket": {
+                "filepath": "scenes/textures/basket.jpg",
+                "isVideo": false
+            },
+            "newspaper": {
+                "filepath": "scenes/textures/newspaper.jpg",
+                "isVideo": false
+            }
+        },
+        "materials": {
+            "floor": {
+                "color": {
+                    "r": 0.5,
+                    "g": 0.5,
+                    "b": 0.5
+                },
+                "specular": {
+                    "r": 0.5,
+                    "g": 0.5,
+                    "b": 0.5
+                },
+                "shininess": 32,
+                "emissive": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "transparent": false,
+                "opacity": 1.0,
+                "twosided": "true",
+                "textureref": "floor",
+                "texlength_s": 5,
+                "texlength_t": -5
+            },
+            "housefloor": {
+                "color": {
+                    "r": 0.5,
+                    "g": 0.5,
+                    "b": 0.5
+                },
+                "specular": {
+                    "r": 0.5,
+                    "g": 0.5,
+                    "b": 0.5
+                },
+                "shininess": 32,
+                "emissive": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "transparent": false,
+                "opacity": 1.0,
+                "textureref": "housefloor",
+                "texlength_s": 5,
+                "texlength_t": -5
+            },
+            "woodTexture": {
+                "color": {
+                    "r": 0.39,
+                    "g": 0.29,
+                    "b": 0.13
+                },
+                "specular": {
+                    "r": 0.39,
+                    "g": 0.29,
+                    "b": 0.13
+                },
+                "shininess": 32,
+                "emissive": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "transparent": false,
+                "opacity": 1.0,
+                "textureref": "wood",
+                "texlength_s": 1.5,
+                "texlength_t": -1.5
+            },
+            "walls": {
+                "color": {
+                    "r": 0.13,
+                    "g": 0.09,
+                    "b": 0.04
+                },
+                "specular": {
+                    "r": 0.13,
+                    "g": 0.09,
+                    "b": 0.04
+                },
+                "shininess": 32,
+                "emissive": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "transparent": false,
+                "opacity": 1.0,
+                "twosided": "true",
+                "textureref": "woodenplate",
+                "texlength_s": 5,
+                "texlength_t": -5
+            },
+            "doorleftplank": {
+                "color": {
+                    "r": 0.39,
+                    "g": 0.29,
+                    "b": 0.13
+                },
+                "specular": {
+                    "r": 0.39,
+                    "g": 0.29,
+                    "b": 0.13
+                },
+                "shininess": 32,
+                "emissive": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "transparent": false,
+                "opacity": 1.0,
+                "textureref": "doorsymbolsleft",
+                "texlength_s": 1,
+                "texlength_t": 1
+            },
+            "doorrightplank": {
+                "color": {
+                    "r": 0.39,
+                    "g": 0.29,
+                    "b": 0.13
+                },
+                "specular": {
+                    "r": 0.39,
+                    "g": 0.29,
+                    "b": 0.13
+                },
+                "shininess": 32,
+                "emissive": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "transparent": false,
+                "opacity": 1.0,
+                "textureref": "doorsymbolsright",
+                "texlength_s": 1,
+                "texlength_t": 1
+            },
+            "door": {
+                "color": {
+                    "r": 0.39,
+                    "g": 0.29,
+                    "b": 0.13
+                },
+                "specular": {
+                    "r": 0.39,
+                    "g": 0.29,
+                    "b": 0.13
+                },
+                "shininess": 32,
+                "emissive": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "transparent": false,
+                "opacity": 1.0,
+                "twosided": "true",
+                "textureref": "door",
+                "texlength_s": 1,
+                "texlength_t": 1
+            },
+            "paint": {
+                "color": {
+                    "r": 0.7,
+                    "g": 0.7,
+                    "b": 0.7
+                },
+                "specular": {
+                    "r": 0.7,
+                    "g": 0.7,
+                    "b": 0.7
+                },
+                "shininess": 32,
+                "emissive": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "transparent": false,
+                "opacity": 1.0,
+                "twosided": "true",
+                "textureref": "paint",
+                "texlength_s": 1,
+                "texlength_t": 1
+            },
+            "blanket": {
+                "color": {
+                    "r": 0.2,
+                    "g": 0.2,
+                    "b": 0.2
+                },
+                "specular": {
+                    "r": 0.2,
+                    "g": 0.2,
+                    "b": 0.2
+                },
+                "shininess": 32,
+                "emissive": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "transparent": false,
+                "opacity": 1.0,
+                "twosided": "true",
+                "textureref": "blanket",
+                "texlength_s": 1,
+                "texlength_t": 1,
+                "bumpref": "blanketbump",
+                "bumpscale": 30 
+            },
+            "pillow": {
+                "color": {
+                    "r": 0.5,
+                    "g": 0.5,
+                    "b": 0.5
+                },
+                "specular": {
+                    "r": 0.5,
+                    "g": 0.5,
+                    "b": 0.5
+                },
+                "shininess": 32,
+                "emissive": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "transparent": false,
+                "opacity": 1.0,
+                "twosided": "true",
+                "textureref": "pillow",
+                "texlength_s": 1,
+                "texlength_t": 1
+            },
+            "video": {
+                "color": {
+                    "r": 1,
+                    "g": 1,
+                    "b": 1
+                },
+                "specular": {
+                    "r": 0.5,
+                    "g": 0.5,
+                    "b": 0.5
+                },
+                "shininess": 32,
+                "emissive": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "transparent": false,
+                "opacity": 1.0,
+                "twosided": "false",
+                "textureref": "video",
+                "texlength_s": 1,
+                "texlength_t": 1
+            },
+            "basket": {
+                "color": {
+                    "r": 0.35,
+                    "g": 0.25,
+                    "b": 0.2
+                },
+                "specular": {
+                    "r": 0.35,
+                    "g": 0.25,
+                    "b": 0.2
+                },
+                "shininess": 32,
+                "emissive": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "transparent": false,
+                "opacity": 1.0,
+                "twosided": "true",
+                "textureref": "basket",
+                "texlength_s": 4,
+                "texlength_t": 8
+            },
+            "newspaper": {
+                "color": {
+                    "r": 0.5,
+                    "g": 0.5,
+                    "b": 0.5
+                },
+                "specular": {
+                    "r": 0.5,
+                    "g": 0.5,
+                    "b": 0.5
+                },
+                "shininess": 32,
+                "emissive": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "transparent": false,
+                "opacity": 1.0,
+                "twosided": "true",
+                "textureref": "newspaper",
+                "texlength_s": 1,
+                "texlength_t": 1
+            }
+        },
+        "cameras": {
+            "initial": "cam1",
+            "cam1": {
+                "type": "perspective",
+                "angle": 60,
+                "near": 0.1,
+                "far": 300,
+                "location": {
+                    "x": 8,
+                    "y": 9,
+                    "z": 15
+                },
+                "target": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+            "cam2": {
+                "type": "orthogonal",
+                "near": 0.1,
+                "far": 1000,
+                "location": {
+                    "x": 0,
+                    "y": 15,
+                    "z": 15
+                },
+                "target": {
+                    "x": 0,
+                    "y": 15,
+                    "z": 0
+                },
+                "left": -5,
+                "right": 5,
+                "bottom": -5,
+                "top": 5
+            }
+        },
+        "graph": {
+            "rootid": "scene",
+            "scene": {
+                "type": "node",
+                "castshadows": true,
+                "receiveshadows": true,
+                "children": {
+                    "nodesList": [
+                        "cabin",
+                        "floor",
+                        "lights"
+                    ]
+                }
+            },
+
+            "lights": {
+                "type": "node",
+                "children": {
+                    "pointLight": {
+                        "type": "pointlight",
+                        "enabled": false,
+                        "color": {
+                            "r": 1,
+                            "g": 1,
+                            "b": 1
+                        },
+                        "intensity": 200.0,
+                        "distance": 10000,
+                        "decay": 1.0,
+                        "position": {
+                            "x": 0,
+                            "y": 100,
+                            "z": 0
+                        },
+                        "castshadow": false
+                    },
+
+                    "spotlight": {
+                        "type": "spotlight",
+                        "enabled": true,
+                        "color": {
+                            "r": 1,
+                            "g": 1,
+                            "b": 1
+                        },
+                        "intensity": 200,
+                        "distance": 50,
+                        "angle": 90,
+                        "decay": 2,
+                        "penumbra": 1,
+                        "position": {
+                            "x": 15,
+                            "y": 20,
+                            "z": -12.5
+                        },
+                        "target": {
+                            "x": 0,
+                            "y": 0,
+                            "z": -8
+                        },
+                        "castshadow": true,
+                        "shadowfar": 80,
+                        "shadowmapsize": 4096
+                    },
+                    "directionallight": {
+                        "type": "directionallight",
+                        "enabled": true,
+                        "color": {
+                            "r": 1,
+                            "g": 1,
+                            "b": 1
+                        },
+                        "intensity": 2,
+                        "position": {
+                            "x": 15,
+                            "y": 5,
+                            "z": -5
+                        },
+                        "castshadow": true,
+                        "shadowleft": -50,
+                        "shadowright": 50,
+                        "shadowbottom": -50,
+                        "shadowtop": 50,
+                        "shadowfar": 80,
+                        "shadowmapsize": 4096
+                    }
+                }
+            },
+
+
+            "cabin": {
+                "type": "node",
+                "children": {
+                    "nodesList": [
+                        "housefloor",
+                        "base",
+                        "walls",
+                        "roof",
+                        "interior"
+                    ]
+                }
+                
+            },
+
+            "floor": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "floor"
+                },
+                "transforms": [
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": -90,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "floorrectangle": {
+                        "type": "rectangle",
+                        "xy1": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "xy2": {
+                            "x": 100,
+                            "y": 100
+                        }
+                    }
+                }
+            },
+
+            "housefloor": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "housefloor"
+                },
+                "children": {
+                    "housefloorbox": {
+                        "type": "box",
+                        "xyz1": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "xyz2": {
+                            "x": 18.9,
+                            "y": 0.5,
+                            "z": 33.9
+                        }
+                    },
+                    "lodsList": [
+                        "bonfireLod"
+                    ]
+                }
+            },
+
+            "bonfireLod":{
+                "type": "lod",
+                "lodNodes": [{
+                    "nodeId": "bonfire1",
+                    "mindist": 5
+                },
+                {
+                    "nodeId": "bonfire2",
+                    "mindist": 10
+                },
+                {
+                    "nodeId": "bonfire3",
+                    "mindist": 15
+                }
+                
+            ]
+            },
+            "bonfire1":{
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2,
+                            "y": 0.26,
+                            "z": -6
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": -90,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+
+                ],
+                "children": {
+                    "bonfirePrim1(id)": {
+                        "type": "polygon",
+                        "radius": 4,
+                        "stacks": 30,
+                        "slices": 40,
+                        "color_c": {"r": 0, "g": 0, "b": 0},
+                        "color_p": {"r": 0.44, "g": 0.5, "b": 0.52}
+                    }
+                }
+            },
+            "bonfire2":{
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2,
+                            "y": 0.26,
+                            "z": -6
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": -90,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+
+                ],
+                "children": {
+                    "bonfirePrim1(id)": {
+                        "type": "polygon",
+                        "radius": 4,
+                        "stacks": 25,
+                        "slices": 35,
+                        "color_c": {"r": 0, "g": 0, "b": 0},
+                        "color_p": {"r": 0.465, "g": 0.53, "b": 0.59}
+                    }
+                }
+            },
+            "bonfire3":{
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2,
+                            "y": 0.26,
+                            "z": -6
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": -90,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+
+                ],
+                "children": {
+                    "bonfirePrim1(id)": {
+                        "type": "polygon",
+                        "radius": 4,
+                        "stacks": 15,
+                        "slices": 25,
+                        "color_c": {"r": 0, "g": 0, "b": 0},
+                        "color_p": {"r": 0.66, "g": 0.66, "b": 0.66}
+                    }
+                }
+            },
+
+
+
+            "base": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "woodTexture"
+                },
+                "children": {
+                    "nodesList": [
+                        "frontleftplank",
+                        "frontrightplank",
+                        "backleftplank",
+                        "backrightplank",
+                        "frontTopPlank",
+                        "backTopPlank",
+                        "leftTopPlank",
+                        "rightTopPlank"
+                    ]
+                }
+            },
+            "frontleftplank": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -9.25,
+                            "y": 5,
+                            "z": 16.75
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 2,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "frontrightplank": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 9.25,
+                            "y": 5,
+                            "z": 16.75
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 2,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "backleftplank": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -9.25,
+                            "y": 5,
+                            "z": -16.75
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 2,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "backrightplank": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 9.25,
+                            "y": 5,
+                            "z": -16.75
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 2,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "frontTopPlank": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 10,
+                            "z": 16.75
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 90
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 4,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "backTopPlank": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 10,
+                            "z": -16.75
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 90
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 4,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "leftTopPlank": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -9.25,
+                            "y": 10,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 90,
+                            "y": 0,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 7,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+
+            "rightTopPlank": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 9.25,
+                            "y": 10,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 90,
+                            "y": 0,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 7,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+
+
+            "walls": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "walls"
+                },
+                "children": {
+                    "nodesList": [
+                        "frontwall",
+                        "backwall",
+                        "leftwall",
+                        "rightwall",
+                        "fronttriangle",
+                        "backtriangle"
+                    ]
+                }
+            },
+            "frontwall": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 5,
+                            "z": 17
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "frontdoor",
+                        "frontleftwall",
+                        "frontrightwall"
+                    ]
+                }
+            },
+            "backwall": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 5,
+                            "z": -17
+                        }
+                    }
+                ],
+                "children": {
+                    "wall": {
+                        "type": "rectangle",
+                        "xy1": {
+                            "x": -10,
+                            "y": 0
+                        },
+                        "xy2": {
+                            "x": 10,
+                            "y": 10
+                        }
+                    },
+                    "nodesList": ["video"]
+                }
+            },
+            "leftwall": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -9.5,
+                            "y": 5,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 90,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "wall": {
+                        "type": "rectangle",
+                        "xy1": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "xy2": {
+                            "x": 35,
+                            "y": 10
+                        }
+                    },
+                    "nodesList": ["paint"]
+                }
+            },
+            "rightwall": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 9.5,
+                            "y": 5,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 90,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "rightdoor",
+                        "rigthleftwall",
+                        "rightmiddlewall",
+                        "window",
+                        "rightrightwall"
+                    ]
+                }
+            },
+            "fronttriangle": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "walls"
+                },
+                "children": {
+                    "triangle": {
+                        "type": "triangle",
+                        "xyz1": {
+                            "x": 0,
+                            "y": 17,
+                            "z": 17
+                        },
+                        "xyz2": {
+                            "x": -11,
+                            "y": 10,
+                            "z": 17
+                        },
+                        "xyz3": {
+                            "x": 11,
+                            "y": 10,
+                            "z": 17
+                        }
+                    }
+                }
+            },
+            "backtriangle": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "walls"
+                },
+                "children": {
+                    "triangle": {
+                        "type": "triangle",
+                        "xyz1": {
+                            "x": 0,
+                            "y": 17,
+                            "z": -17
+                        },
+                        "xyz2": {
+                            "x": -11,
+                            "y": 10,
+                            "z": -17
+                        },
+                        "xyz3": {
+                            "x": 11,
+                            "y": 10,
+                            "z": -17
+                        }
+                    }
+                }
+            }, 
+            "frontdoor": {
+                "type":"node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2.5,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "door",
+                        "doorleftplank",
+                        "doorrightplank"
+                    ]
+                }
+            },
+            "frontleftwall": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -5,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "wall": {
+                        "type": "rectangle",
+                        "xy1": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "xy2": {
+                            "x": 10,
+                            "y": 10
+                        }
+                    }
+                }
+            },
+            "frontrightwall": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 7.5,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "wall": {
+                        "type": "rectangle",
+                        "xy1": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "xy2": {
+                            "x": 5,
+                            "y": 10
+                        }
+                    }
+                }
+            },
+            "rightdoor": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "door"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -10,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "door",
+                        "doorleftplank",
+                        "doorrightplank"
+                    ]
+                }
+            },
+            "rigthleftwall": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -14.5,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "wall": {
+                        "type": "rectangle",
+                        "xy1": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "xy2": {
+                            "x": 3,
+                            "y": 10
+                        }
+                    }
+                }
+                
+            },
+            "rightmiddlewall": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -2.5,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "wall": {
+                        "type": "rectangle",
+                        "xy1": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "xy2": {
+                            "x": 10,
+                            "y": 10
+                        }
+                    }
+                }
+            },
+            "rightrightwall": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 12.5,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "wall": {
+                        "type": "rectangle",
+                        "xy1": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "xy2": {
+                            "x": 10,
+                            "y": 10
+                        }
+                    }
+                }
+            },
+            "paint":{
+                "type":"node",
+                "materialref": {
+                    "materialId": "paint"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0.01
+                        }
+                    }
+                ],
+                "children": {
+                    "paintprim": {
+                        "type": "rectangle",
+                        "xy1": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "xy2": {
+                            "x": 5,
+                            "y": 5
+                        }
+                    }
+                }
+            },
+            "video": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "video"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0.01
+                        }
+                    }
+                ],
+                "children": {
+                    "videoprim": {
+                        "type": "rectangle",
+                        "xy1": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "xy2": {
+                            "x": 16,
+                            "y": 9
+                        }
+                    }
+                }
+            },
+
+
+            "roof": {
+                "type": "node",
+                "children": {
+                    "nodesList": [
+                        "roofleftside",
+                        "roofrightside",
+                        "roofmiddleplank"
+                    ]
+                }
+            },
+            "roofleftside": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -11.5,
+                            "y": 10,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": -60
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "roofdefault",
+                        "extraroof"
+                    ]
+                }
+            },
+            "roofrightside": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 11.5,
+                            "y": 10,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 60
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "rightroofleftside",
+                        "rightroofrightside",
+                        "skylight",
+                        "roofextender"
+                    ]
+                }
+            },
+            "roofmiddleplank": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "woodTexture"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 17,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 90,
+                            "y": 0,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 8,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "roofdefault": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 0.7,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "roofwood",
+                        "roofleft",
+                        "roofright",
+                        "roofmiddle",
+                        "rooflimit"
+                    ]
+                }
+            },
+
+            
+            "roofwood": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "walls"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 10,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 90,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "rectangle": {
+                        "type": "rectangle",
+                        "xy1": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "xy2": {
+                            "x": 40,
+                            "y": 20
+                        }
+                    }
+                }
+            },
+            "roofleft": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "woodTexture"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 10,
+                            "z": 20
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 4,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "roofright": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "woodTexture"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 10,
+                            "z": -20
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 4,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "roofmiddle": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "woodTexture"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 10,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 90,
+                            "y": 0,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 8,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "rooflimit": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "woodTexture"
+                },
+                "transforms": [
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 90,
+                            "y": -10,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 8,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "roofside": {
+                "type": "node",                
+                "materialref": {
+                    "materialId": "woodTexture"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 10,
+                            "z": 20
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 4,
+                            "z": 1
+                        }
+                    }
+
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+
+            "rightroofleftside": {
+                "type": "node",
+                "transforms": [{
+                    "type": "translate",
+                    "amount": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 5.5
+                        }
+                },
+                {
+                    "type": "scale",
+                    "amount": {
+                        "x": 0.99,
+                        "y": 1,
+                        "z": 0.7
+                    }
+                }   
+                ],
+                "children": {
+                    "nodesList": [
+                        "roofdefault"
+                    ]
+                }
+            },
+            "rightroofrightside": {
+                "type": "node",
+                "transforms": [{
+                    "type": "translate",
+                    "amount": {
+                        "x": 0,
+                        "y": 0,
+                        "z": -18
+                        }
+                },
+                {
+                    "type": "scale",
+                    "amount": {
+                        "x": 1,
+                        "y": 1,
+                        "z": 0.1
+                    }
+                }   
+                ],
+                "children": {
+                    "nodesList": [
+                        "roofdefault"
+                    ]
+                }
+            },
+            "roofextender": {
+                "type": "node",
+                "children": {
+                    "nodesList": [
+                        "roofextenderleft",
+                        "roofextenderright",
+                        "roofextenderlimit"
+                    ]
+                }
+            },
+            "roofextenderleft": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 0.7,
+                            "z": 1
+                        }
+                    }   
+                ],
+                "children": {
+                    "nodesList": [
+                        "roofleft"
+                    ]
+                }
+            },
+            "roofextenderright": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 0.7,
+                            "z": 1
+                        }
+                    }   
+                ],
+                "children": {
+                    "nodesList": [
+                        "roofright"
+                    ]
+                }
+            },
+            "roofextenderlimit": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 0.7,
+                            "z": 1
+                        }
+                    }   
+                ],
+                "children": {
+                    "nodesList": [
+                        "rooflimit"
+                    ]
+                }
+            },
+
+
+            "skylight": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "woodTexture"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 7,
+                            "z": -12.5                        
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "skylightleftlimit",
+                        "skylightrightlimit",
+                        "skylightleftholder",
+                        "skylightroof"
+                    ]   
+                }
+            },
+            "skylightleftlimit": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "woodTexture"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 4
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 2.8,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "skylightrightlimit": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "woodTexture"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": -4
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 2.8,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "skylightleftholder": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "woodTexture"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2.7,
+                            "y": 1.125,
+                            "z": 3.75
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": -60
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 1.5,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodcilinder"
+                    ]
+                }
+
+            },
+
+            "skylightroof": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "woodTexture"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 7,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": -60
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 1,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "skylightroofleft",
+                        "skylightroofright",
+                        "skylightrooflimit",
+                        "skylightroofwood"
+                    ]
+                }
+            },
+            "skylightroofleft": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "woodTexture"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 5,
+                            "y": 2,
+                            "z": 3.5
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 110
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 2,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "skylightroofright": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "woodTexture"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 5,
+                            "y": 2,
+                            "z": -3.5
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 110
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 2,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }  
+            },
+            "skylightrooflimit": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "woodTexture"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 9,
+                            "y": 3.5,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 90,
+                            "z": 90
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 1.5,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "skylightroofwood": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "walls"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 5,
+                            "y": 2,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 90,
+                            "y": 20,
+                            "z": 90
+                        }
+                    }
+                ],
+                "children": {
+                    "rectangle": {
+                        "type": "rectangle",
+                        "xy1": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "xy2": {
+                            "x": 6,
+                            "y": 8
+                        }
+                    }
+                }
+            },
+
+            "extraroof": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": -10,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "extraroofwood",
+                        "extraroofleft",
+                        "extraroofright",
+                        "rooflimit"
+                    ]
+                }
+            },
+            "extraroofwood": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 0.5,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "roofwood"
+                    ]
+                }
+            },
+            "extraroofleft": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "woodTexture"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 5,
+                            "z": 20
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 2,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "extraroofright": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "woodTexture"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 5,
+                            "z": -20
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 2,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            
+
+            
+
+            "door": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "door"
+                },
+                "children": {
+                    "doorrectangle": {
+                        "type": "rectangle",
+                        "xy1": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "xy2": {
+                            "x": 4,
+                            "y": 10
+                        }
+                    }
+                }
+            },
+            "doorleftplank": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "doorleftplank"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -2.5,
+                            "y": 0,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 2,
+                            "z": 0.5
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "doorrightplank": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "doorrightplank"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2.5,
+                            "y": 0,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 2,
+                            "z": 0.5
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+
+
+            "window": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "woodTexture"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 5,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "windowdownplank",
+                        "windowupplank",
+                        "windowleftplank",
+                        "windowrightplank",
+                        "windowwoodup",
+                        "windowwooddown"
+                    ]
+                }
+            },
+            "windowdownplank": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": -2,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 90
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 0.75,
+                            "y": 1,
+                            "z": 0.45
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "windowupplank": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 2.5,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 90
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 0.75,
+                            "y": 1,
+                            "z": 0.45
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },            
+            "windowleftplank": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -2.5,
+                            "y": 0,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 2,
+                            "z": 0.5
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "windowrightplank": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2.5,
+                            "y": 0,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 2,
+                            "z": 0.5
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "windowwoodup": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "walls"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 3.5,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "wood": {
+                        "type": "rectangle",
+                        "xy1": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "xy2": {
+                            "x": 4,
+                            "y": 1.5
+                        }
+                    }
+                }
+            },
+            "windowwooddown": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "walls"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": -3.5,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "wood": {
+                        "type": "rectangle",
+                        "xy1": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "xy2": {
+                            "x": 4,
+                            "y": 3
+                        }
+                    }
+                }
+            },
+
+            "woodplank": {
+                "type": "node",
+                "children": {
+                    "box": {
+                        "type": "box",
+                        "xyz1": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "xyz2": {
+                            "x": 1.5,
+                            "y": 5,
+                            "z": 1.5
+                        }
+                    }
+                }
+            },
+            "woodcilinder": {
+                "type": "node",
+                "children": {
+                    "cilinder": {
+                        "type": "cylinder",
+                        "base": 0.5,
+                        "top": 0.5,
+                        "height": 5,
+                        "slices": 20,
+                        "stacks": 5,
+                        "capsclose": true
+                    }
+                }
+            },
+
+            
+            "interior": {
+                "type": "node",
+                "children": {
+                    "nodesList": [
+                        "stakes",
+                        "interiorplates",
+                        "furniture"
+                    ]
+                }
+            },
+
+            "stakes": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "woodTexture"
+                },
+                "transforms": [
+                    {
+                        "type": "scale", 
+                        "amount": {
+                            "x": 0.5,
+                            "y": 2,
+                            "z": 0.5
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "stake1left",
+                        "stake1right",
+                        "stake2left",
+                        "stake2right",
+                        "stake3left"
+                    ]
+                }
+            },
+            "stake1left": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -10,
+                            "y": 2.5,
+                            "z": 26
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodcilinder"
+                    ]
+                }
+            },
+            "stake1right": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 10,
+                            "y": 2.5,
+                            "z": 26
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodcilinder"
+                    ]
+                }
+            },
+            "stake2left": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -10,
+                            "y": 2.5,
+                            "z": 15
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodcilinder"
+                    ]
+                }
+            },
+            "stake2right": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 10,
+                            "y": 2.5,
+                            "z": 15
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodcilinder"
+                    ]
+                }
+            },
+            "stake3left": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -10,
+                            "y": 2.5,
+                            "z": -5
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodcilinder"
+                    ]
+                }
+            },
+
+            "interiorplates": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "woodTexture"
+                },
+                "children": {
+                    "nodesList": [
+                        "interiorleftplate",
+                        "interiorrightplate",
+                        "interiormiddle1plate",
+                        "interiormiddle2plate",
+                        "interiormiddle3plate"
+                    ]
+                }
+            },
+            "interiorleftplate": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -5,
+                            "y": 10,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 90,
+                            "y": 0,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 0.5,
+                            "y": 7.5,
+                            "z": 0.5
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "interiorrightplate": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 5,
+                            "y": 10,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 90,
+                            "y": 0,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 0.5,
+                            "y": 7.5,
+                            "z": 0.5
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "interiormiddle1plate": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 10,
+                            "z": 13
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 90
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 4,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            }, 
+            "interiormiddle2plate": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 10,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 90
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 4,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "interiormiddle3plate": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 10,
+                            "z": -13
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 90
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 4,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+
+
+            "furniture": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "woodTexture"
+                },
+                "children": {
+                    "nodesList": [
+                        "bedkratos",
+                        "bedatreus",
+                        "table",
+                        "basket"
+                    ]
+                }
+            },
+
+            "bedkratos": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -6,
+                            "y": 0,
+                            "z": -8
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "bedfoot",
+                        "bedmatress",
+                        "pillowleftkratos",
+                        "pillowrightkratos"
+                    ]
+                }
+            },
+
+            "bedatreus": {             
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": -14
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 90,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 0.75,
+                            "y": 1,
+                            "z": 0.75
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "bedfoot",
+                        "bedmatress",
+                        "pillowatreus"
+                    ]
+                }
+            },
+            "bedfoot": {
+                "type": "node",
+                "children": {
+                    "nodesList": [
+                        "bedfoot1",
+                        "bedfoot2",
+                        "bedfoot3",
+                        "bedfoot4"
+                    ]
+                }
+            },
+            "bedfoot1": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -2,
+                            "y": 0.5,
+                            "z": -2
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 0.5,
+                            "y": 0.2,
+                            "z": 0.5
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "bedfoot2": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2,
+                            "y": 0.5,
+                            "z": -2
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 0.5,
+                            "y": 0.2,
+                            "z": 0.5
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "bedfoot3": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -2,
+                            "y": 0.5,
+                            "z": 2
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 0.5,
+                            "y": 0.2,
+                            "z": 0.5
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+            "bedfoot4": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2,
+                            "y": 0.5,
+                            "z": 2
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 0.5,
+                            "y": 0.2,
+                            "z": 0.5
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "woodplank"
+                    ]
+                }
+            },
+
+            "bedmatress": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "blanket"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 1,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 0.35,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "matressbox",
+                        "upleftcorner",
+                        "uprightcorner",
+                        "downleftcorner",
+                        "downrightcorner",
+                        "leftmatress",
+                        "rightmatress",
+                        "upmatress",
+                        "downmatress"
+                    ]
+                }
+            },
+            "matressbox": {
+                "type": "node",
+                "children": {
+                    "matress": {
+                        "type": "box",
+                        "xyz1": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "xyz2": {
+                            "x": 4,
+                            "y": 2,
+                            "z": 6
+                        }
+                    }      
+                }
+            },
+            "upleftcorner": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -2,
+                            "y": 0,
+                            "z": -3
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": -90,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "bedcorner"
+                    ]
+                }
+            },
+            "uprightcorner": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2,
+                            "y": 0,
+                            "z": -3
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 180,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "bedcorner"
+                    ]
+                }
+            },
+            "downleftcorner": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -2,
+                            "y": 0,
+                            "z": 3
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "bedcorner"
+                    ]
+                }
+            },
+            "downrightcorner": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2,
+                            "y": 0,
+                            "z": 3
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 90,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "bedcorner"
+                    ]
+                }
+            },
+            "leftmatress": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -2,
+                            "y": 0,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": -90,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1.5,
+                            "y": 1,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "matresslimit"
+                    ]
+                }
+            },
+            "rightmatress": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2,
+                            "y": 0,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 90,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1.5,
+                            "y": 1,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "matresslimit"
+                    ]
+                }
+            },
+            "upmatress": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": -3
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 180,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "matresslimit"
+                    ]
+                }
+            },
+            "downmatress": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 3
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "matresslimit"
+                    ]
+                }
+            },
+            "bedcorner": {
+                "type": "node",
+                "children": {
+                    "matress": {
+                        "type": "sphere",
+                        "radius": 1,
+                        "slices": 40,
+                        "stacks": 40,
+                        "phistart": 0,
+                        "philength": 90,
+                        "thetastart": 0,
+                        "thetalength": 90
+                    }
+                }
+            },
+            "matresslimit": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 90
+                        }
+                    }
+                ],
+                "children": {
+                    "cylinder": {
+                        "type": "cylinder",
+                        "base": 1,
+                        "top": 1,
+                        "height": 4,
+                        "slices": 20,
+                        "stacks": 20,
+                        "thetastart": 0,
+                        "thetalength": 90
+                    }      
+                }
+            },
+
+            "pillowleftkratos": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -1,
+                            "y": 0,
+                            "z": -2
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 25,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "pillow"
+                    ]
+                }
+            },
+            "pillowrightkratos": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 1.2,
+                            "y": 0,
+                            "z": -2
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": -25,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "pillow"
+                    ]
+                }
+            },
+            "pillowatreus": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": -2
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": -25,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "pillow"
+                    ]
+                }
+            },
+            "pillow": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "pillow"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 1.5,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 1,
+                            "y": 0.3,
+                            "z": 0.5
+                        }
+                    }
+                ],
+                "children": {
+                    "pillowsphere": {
+                        "type": "sphere",
+                        "radius": 1,
+                        "slices": 40,
+                        "stacks": 40
+                    }
+                }
+            },
+            
+            "basket": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "basket"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 7,
+                            "y": 2,
+                            "z": 9
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "basketcylinder",
+                        "basketcover"
+                    ]
+                }
+            },
+            "basketcylinder": {
+                "type": "node",
+                "children": {
+                    "jar": {
+                        "type": "cylinder",
+                        "base": 1,
+                        "top": 1.5,
+                        "height": 4,
+                        "slices": 20,
+                        "stacks": 5
+                    }
+                }
+            },
+            "basketcover": {
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 1.5,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": -90,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "bg": {
+                        "type": "polygon",
+                        "radius": 1.3,
+                        "stacks": 20,
+                        "slices": 30,
+                        "color_c": {
+                            "r": 0.5,
+                            "g": 0.5,
+                            "b": 0.5
+                        },
+                        "color_p": {
+                            "r": 0.35,
+                            "g": 0.25,
+                            "b": 0.2
+                        }
+
+                    }
+                }
+                        
+            },
+            "table":{
+                "type": "node",
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 7.9,
+                            "y": 0,
+                            "z": 2
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 90,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children":{
+                    "nodesList": [
+                        "tableTop",
+                        "tableLegs",
+                        "newspaper"
+                    ]
+                }
+            },
+            "tableTop":{
+                "type": "node",
+                "transforms":[
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 3,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children":{
+                    "tableTopPrim":{
+                        "type":"box",
+                        "xyz1": {"x": 0, "y": 0, "z": 0},
+                        "xyz2": {"x": 7, "y": 0.5, "z": 3}
+                    }
+                }
+            },
+            "tableLegs":{
+                "type": "node",
+                "transforms":[
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 1.5,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children":{
+                    "nodesList": [
+                        "tableLeg1",
+                        "tableLeg2",
+                        "tableLeg3",
+                        "tableLeg4"
+                    ]
+                }
+            },
+            "newspaper":{
+                "type": "node",
+                "materialref": {
+                    "materialId": "newspaper"
+                },
+                "transforms":[
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -2.5,
+                            "y": 3.5,
+                            "z": -0.5
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 70,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children":{
+                    "nurbsPrim(id)": {
+                        "type": "nurbs",
+                        "degree_u": 2,
+                        "degree_v": 4,
+                        "parts_u": 20,
+                        "parts_v": 20,
+                        "controlpoints": [
+                            {"x": -2, "y": -0.5, "z": 0.0},
+                            {"x": -2.0, "y": -1.0, "z": 1.0},
+                            {"x": -2.0, "y": 1.0, "z": 1.0},
+                            {"x": -1.5, "y": 0.0, "z": -0.5},
+                            {"x": -1.5, "y": -0.4, "z": 0.3},
+                            {"x": -0.5, "y": 0, "z": 0.0},
+                            {"x": 0.0, "y": 0, "z": 0.0},
+                            {"x": 0.0, "y": 0, "z": 0.0},
+                            {"x": 0.0, "y": 0, "z": 0.0},
+                            {"x": 0.0, "y": 0, "z": 0.0},
+                            {"x": 2, "y": -0.25, "z": 0.0},
+                            {"x": 2.0, "y": -0.5, "z": 1.0},
+                            {"x": 2.0, "y": 0.5, "z": 1.0},
+                            {"x": 2.0, "y": 0.25, "z": 0.0},
+                            {"x": 2.5, "y": -0.2, "z": 0.0}
+                        ]
+
+                    }
+                }
+            },
+            "tableLeg1":{
+                "type": "node",
+                "transforms":[
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2,
+                            "y": 0,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children":{
+                    "tableLeg1Prim":{
+                        "type":"box",
+                        "xyz1": {"x": 0, "y": 0, "z": 0},
+                        "xyz2": {"x": 0.5, "y": 3, "z": 0.5}
+                    }
+                }
+            },
+            "tableLeg2":{
+                "type": "node",
+                "transforms":[
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -2,
+                            "y": 0,
+                            "z": 1
+                        }
+                    }
+                ],
+                "children":{
+                    "tableLeg1Prim":{
+                        "type":"box",
+                        "xyz1": {"x": 0, "y": 0, "z": 0},
+                       "xyz2": {"x": 0.5, "y": 3, "z": 0.5}
+                    }
+                }
+            },
+            "tableLeg3":{
+                "type": "node",
+                "transforms":[
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -2,
+                            "y": 0,
+                            "z": -1
+                        }
+                    }
+                ],
+                "children":{
+                    "tableLeg1Prim":{
+                        "type":"box",
+                        "xyz1": {"x": 0, "y": 0, "z": 0},
+                        "xyz2": {"x": 0.5, "y": 3, "z": 0.5}
+                    }
+                }
+            },
+            "tableLeg4":{
+                "type": "node",
+                "transforms":[
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2,
+                            "y": 0,
+                            "z": -1
+                        }
+                    }
+                ],
+                "children":{
+                    "tableLeg1Prim":{
+                        "type":"box",
+                        "xyz1": {"x": 0, "y": 0, "z": 0},
+                        "xyz2": {"x": 0.5, "y": 3, "z": 0.5}
+                    }
+                }
+            }
+
+            
+
+        }
+    }
+}
