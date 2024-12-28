@@ -1,4 +1,4 @@
-import {rgbToHex, loadMipmap} from './utils.js'
+import {rgbToHex, loadMipmap, parseNodeName} from './utils.js'
 import * as THREE from 'three';
 import { Node } from './Node.js';
 
@@ -175,9 +175,15 @@ export function parseMaterials(textures, materials){
  * @returns  map with all the nodes being the key the id of the node
  */
 export function parseNodes(graph){
-    return Object.entries(graph).reduce((dict, [name, value]) => {
+    return Object.entries(graph).reduce((dict, [node, value]) => {
+     
+        let res = parseNodeName(node)
+
+        let name = res.name
+        let params = res.params
+
         if(name !== "rootid"){
-            dict[name] = new Node(value)
+            dict[name] = new Node(value, params)
         }
         return dict;
     }, {});

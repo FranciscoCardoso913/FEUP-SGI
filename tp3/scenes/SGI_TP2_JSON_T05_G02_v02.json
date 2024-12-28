@@ -637,7 +637,7 @@
                 "receiveshadows": true,
                 "children": {
                     "nodesList": [
-                        "cabin",
+                        "cabin(0,15)",
                         "floor",
                         "lights"
                     ]
@@ -719,11 +719,11 @@
             },
 
 
-            "cabin": {
+            "cabin($x,$y)": {
                 "type": "node",
                 "children": {
                     "nodesList": [
-                        "housefloor",
+                        "housefloor($x, $y)",
                         "base",
                         "walls",
                         "roof",
@@ -763,7 +763,8 @@
                 }
             },
 
-            "housefloor": {
+            "housefloor($x,$y)": {
+           
                 "type": "node",
                 "materialref": {
                     "materialId": "housefloor"
@@ -772,7 +773,7 @@
                     "housefloorbox": {
                         "type": "box",
                         "xyz1": {
-                            "x": 0,
+                            "x": "$x",
                             "y": 0,
                             "z": 0
                         },
@@ -783,12 +784,12 @@
                         }
                     },
                     "lodsList": [
-                        "bonfireLod"
+                        "bonfireLod($y)"
                     ]
                 }
             },
 
-            "bonfireLod":{
+            "bonfireLod($x)":{
                 "type": "lod",
                 "lodNodes": [{
                     "nodeId": "bonfire1",
@@ -800,7 +801,7 @@
                 },
                 {
                     "nodeId": "bonfire3",
-                    "mindist": 15
+                    "mindist": "$x"
                 }
                 
             ]

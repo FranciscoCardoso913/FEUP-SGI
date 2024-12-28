@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {rgbToHex, degreesToRadians} from './utils.js'
+import {rgbToHex, degreesToRadians, parseNodeName} from './utils.js'
 import {parseAmbientLight,parseFog, parseSkybox,parseTextures,parseMaterials} from './parser.js'
 
 import { buildPrimitive } from './Primitives.js';
@@ -10,23 +10,70 @@ class Node {
 	/**
 	   constructs the object
 	*/
-	constructor(json) {
+	constructor(json, params) {
+		this.params = params
         this.json = json
+		this.content = json
+		this.load()
+	}
+
+	load(){
 		this.lightHelpers = false
-		this.lodNodes = json["lodNodes"]
-        this.transforms = json ["transforms"]?? []
-		this.castshadows = json["castshadows"] ?? false
-		this.receiveshadows = json["receiveshadows"] ?? false
-		if(json["type"]!=="lod"){
-			this.edges = json["children"]["nodesList"] ?? []
-			this.lods = json["children"]["lodsList"] ?? []
-			this.primitives =  Object.entries(json["children"]).reduce((list, [name, value]) => {
+		this.lodNodes = this.content["lodNodes"]
+        this.transforms = this.content ["transforms"]?? []
+		this.castshadows = this.content["castshadows"] ?? false
+		this.receiveshadows = this.content["receiveshadows"] ?? false
+		if(this.content["type"]!=="lod"){
+			this.edges = this.content["children"]["nodesList"] ?? []
+			this.lods = this.content["children"]["lodsList"] ?? []
+			this.primitives =  Object.entries(this.content["children"]).reduce((list, [name, value]) => {
 				if(name !== "nodesList" && name !== "lodsList" && name !== "lodNodes"){
 					list.push (value)
 				}
 				return list;
 			}, []);
 		}
+	}
+
+	replaceParams(data, paramNames, paramValues) {
+		// Create a map of parameter names to their corresponding values
+		const paramMap = {};
+		paramNames.forEach((name, index) => {
+			paramMap[name] = paramValues[index];
+		});
+	
+		// Recursive function to traverse and replace placeholders
+		function replacePlaceholders(value) {
+			if (typeof value === 'string') {
+				// Replace any parameter names in the string with their corresponding values
+				for (const param in paramMap) {
+					value = value.split(param).join(paramMap[param]);
+				}
+			} else if (Array.isArray(value)) {
+				// If it's an array, recursively replace items
+				value = value.map(item => replacePlaceholders(item));
+			} else if (typeof value === 'object' && value !== null) {
+				// If it's an object, recursively replace properties
+				for (const key in value) {
+					value[key] = replacePlaceholders(value[key]);
+				}
+			}
+			return value;
+		}
+	
+		return replacePlaceholders(data);
+	}
+
+	setParams(values) {
+		if (this.params.length !== values.length) {
+			throw new Error("Parameters and values arrays must have the same size.");
+		}
+	
+		this.content = this.replaceParams(this.json, this.params, values)
+
+		if(this.json["f"]) console.log(this.content)
+
+		this.load()
 	}
 	/**
 	 * Build the node and all its descendents
@@ -48,7 +95,11 @@ class Node {
 		if(this.lodNodes){
 			let lod = new THREE.LOD();
 			this.lodNodes.forEach(element => {
-				let child = nodes[element.nodeId].build(nodes, materials, material);
+				let res = parseNodeName(element.nodeId)
+				let nodeId = res.name
+				let childNode = nodes[nodeId]
+				childNode.setParams(res.params)
+				let child = childNode.build(nodes, materials, material);
 				if(child) lod.addLevel(child, element.mindist)
 			});
 			node.add(lod)
@@ -57,7 +108,11 @@ class Node {
 
 			// Builds all the descendents nodes
 			this.edges.forEach(element => {
-				let child = nodes[element].build(nodes, materials, material);
+				let res = parseNodeName(element)
+				let nodeId = res.name
+				let childNode = nodes[nodeId]
+				childNode.setParams(res.params)
+				let child = childNode.build(nodes, materials, material);
 				if(child) node.add(child)
 				
 			});
@@ -72,7 +127,11 @@ class Node {
 
 			// Builds all the descendents lodNodes
 			this.lods.forEach(element => {
-				let child = nodes[element].build(nodes, materials, material);
+				let res = parseNodeName(element)
+				let nodeId = res.name
+				let childNode = nodes[nodeId]
+				childNode.setParams(res.params)
+				let child = childNode.build(nodes, materials, material);
 				if(child) node.add(child)
 			});
 		}

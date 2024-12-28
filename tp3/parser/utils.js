@@ -132,3 +132,21 @@ export function loadMipmap(parentTexture, level, path)
         }
     )
 }
+
+export function parseNodeName(input) {
+  
+    let regex = /^\s*([a-zA-Z0-9_]+)\s*(?:\(\s*(\$?[a-zA-Z0-9_]+(?:\s*,\s*\$?[a-zA-Z0-9_]+)*)\s*\))?\s*$/;
+
+
+    let match = input.match(regex);
+
+    if (!match) {
+        console.log(input)
+        throw new Error("Invalid input string format");
+    }
+
+    let name = match[1];
+    let params = match[2] ? match[2].split(',') : [];
+   
+    return { name, params };
+}
