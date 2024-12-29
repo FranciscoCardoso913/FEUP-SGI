@@ -87,6 +87,36 @@ export function parseSkybox(skybox){
 
 }
 
+export function parseSkysphere(skysphere){
+        // Extract parameters from the JSON data
+        const { radius, center, emissive, intensity, textureref } = skysphere;
+
+        // Create a new texture loader
+        const textureLoader = new THREE.TextureLoader();
+    
+        // Load the texture
+        const texture = textureLoader.load(textureref);
+    
+        // Create a sphere geometry to represent the sky
+        const geometry = new THREE.SphereGeometry(radius, 64, 64); // Higher segments for a smoother sphere
+    
+        // Create a material with the texture
+        const material = new THREE.MeshBasicMaterial({
+            map: texture,
+            emissive: new THREE.Color(emissive.r, emissive.g, emissive.b),
+            emissiveIntensity: intensity,
+            side: THREE.BackSide // Make the texture inside the sphere
+        });
+    
+        // Create the mesh with the geometry and material
+        const skySphereMesh = new THREE.Mesh(geometry, material);
+    
+        // Position the sky sphere at the given center
+        skySphereMesh.position.set(center.x, center.y, center.z);
+    
+        return skySphereMesh;
+}
+
 /**
  * Parses Textures
  * @param {*} textures Textures list

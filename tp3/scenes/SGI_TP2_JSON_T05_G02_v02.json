@@ -21,18 +21,13 @@
                 "near": 1.0,
                 "far": 200.0
             },
-            "skybox": {
-                "size": {"x": 150, "y": 150, "z": 150},
+            "skysphere": {
+                "radius": 100,
                 "center": {"x": 0, "y": 20, "z": 0},
                 "emissive": {"r": 0, "g": 0, "b": 0},
                 "intensity": 0,
-                "front": "scenes/textures/skybox_front.jpg",              
-                "back": "scenes/textures/skybox_back.jpg",               
-                "up": "scenes/textures/skybox_up.jpg",                 
-                "down": "scenes/textures/skybox_down.jpg",
-                "left": "scenes/textures/skybox_left.jpg",
-                "right": "scenes/textures/skybox_right.jpg"
-            }
+                "textureref": "scenes/textures/skybox_front.jpg"
+        }
         },
         "textures": {
             "floor": {

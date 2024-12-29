@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import {rgbToHex} from './utils.js'
-import {parseAmbientLight,parseFog, parseSkybox,parseTextures,parseMaterials, parseNodes, parseCameras} from './parser.js'
+import {parseAmbientLight,parseFog, parseSkybox,parseTextures,parseMaterials, parseNodes, parseCameras, parseSkysphere} from './parser.js'
 
 
 class MyGraph {
@@ -33,7 +33,11 @@ class MyGraph {
 		this.background = rgbToHex(globals['background'])
 		this.ambientLight = parseAmbientLight(globals['ambient'])
 		this.fog = parseFog(globals["fog"])
-		this.skybox = parseSkybox(globals['skybox'])
+		if(globals['skybox'])
+			this.skybox = parseSkybox(globals['skybox'])
+		else {
+			this.skybox = parseSkysphere(globals['skysphere'])
+		}
 	}
 	/**
 	 * Iterates throught the nodes and creates the graph scene
