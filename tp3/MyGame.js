@@ -24,8 +24,10 @@ class MyGame {
         this.scene = app.scene
         this.ballons = [
             new MyBallon(0xff3333),
-            new MyBallon(0x33ff33),
-            new MyBallon(0x3333ff),
+            new MyBallon(0xffff33),
+            new MyBallon(0x33ffff),
+            new MyBallon(0xffffff),
+            new MyBallon(0xff33ff),
         ]
 
         // Object to store the state of pressed keys
