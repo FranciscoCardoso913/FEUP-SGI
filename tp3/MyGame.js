@@ -7,7 +7,16 @@ import MyBallon from './factories/MyBalloon.js';
 /**
  *  This class contains the contents of out application
  */
+
+
+
 class MyGame {
+
+    static STATES = {
+        QUIT: -1,
+        PICKING: 0,
+    };
+
     constructor(scene){
         this.fps = 30
         this.scene = scene
@@ -33,23 +42,31 @@ class MyGame {
         console.log(`Key up: ${event.key}`);
         });
 
-        this.start()
+ 
     }
-    start(){
-        console.log(this.ballons)
-        const STATES = {
-            "PICKING":this.picking,
-        }
-        let state = "PICKING"
+
+    async start(){
+        let state = MyGame.STATES.PICKING
         let args = [this.ballons]
-  
-        this.picking(...args)
+
+        while( state !== MyGame.STATES.QUIT ){
+            let result = {}
+
+            switch (state){
+                case MyGame.STATES.PICKING:
+                    result = await this.picking(...args);   
+            }
+
+            ({ state, args } = result);
+        }
+            
     
     }
 
     async picking(ballons) {
 
         let selected = 0
+
         function drawBallons(scene,ballons, selected){
             let r = 3
             let n = ballons.length
@@ -65,7 +82,7 @@ class MyGame {
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
           }
-
+  
         drawBallons(this.scene,ballons,selected)
         let isSelected = false
         while(!isSelected){
@@ -81,7 +98,7 @@ class MyGame {
             if(selected < 0) 
                 selected = n -1
 
-            if (left || right){
+            if (left || right || isSelected){
                 drawBallons(this.scene,ballons,selected)
                 this.hasBeenPressedKeys = {}
             }
@@ -89,7 +106,12 @@ class MyGame {
             await sleep(1000/this.fps)
             
         }
-        console.log("out")
+        ballons.forEach(ballon => {
+            this.scene.remove(ballon.getObject())
+        });
+        ballons.splice(selected, 1);
+
+        return { state: MyGame.STATES.PICKING, args: [ballons] };
     }
 
 }
