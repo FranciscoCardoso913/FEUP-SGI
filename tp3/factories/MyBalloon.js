@@ -10,6 +10,7 @@ class MyBallon{
     constructor(color = 0x00a2f1) {
         this.color = color
         this.position = new THREE.Vector3(0,5,0)
+        this.build()
     }
 
     build(){
@@ -107,7 +108,15 @@ class MyBallon{
 
         balloonGroup.position.add(this.position)
 
-        return balloonGroup
+        this.ballon = balloonGroup
+    }
+
+    getObject(){
+        return this.ballon
+    }
+
+    setPosition(position){
+        this.ballon.position.copy(position)
     }
 }
 

@@ -4,6 +4,7 @@ import { MyFileReader } from './parser/MyFileReader.js';
 import { MyGraph } from './parser/MyGraph.js';
 import { MyGuiInterface } from './MyGuiInterface.js';
 import MyBallon from './factories/MyBalloon.js';
+import MyGame from './MyGame.js';
 /**
  *  This class contains the contents of out application
  */
@@ -51,8 +52,8 @@ class MyContents {
             console.error("Error in loading JSON:", error);
         });
 
-        const ballon = new  MyBallon()
-        this.app.scene.add(ballon.build())
+        let game = new MyGame(this.app.scene)
+        game.start()
 
         
         
