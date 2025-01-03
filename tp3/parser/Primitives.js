@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { rgbToHex, degreesToRadians, createPolygon } from './utils.js';
-import { MyNurbsBuilder } from '../MyNurbsBuilder.js';
+import { MyNurbsBuilder } from '../factories/MyNurbsBuilder.js';
 
 // Map used to map types with corresponding functions
 const map = {
