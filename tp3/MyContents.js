@@ -22,7 +22,7 @@ class MyContents {
         this.reader = new MyFileReader(this.onSceneLoaded.bind(this));
     
         // Reads scene 
-        this.reader.open("scenes/SGI_TP2_JSON_T05_G02_v02.json").then((json) => {
+        this.reader.open("YASF/SGI_TP2_JSON_T05_G02_v02.json").then((json) => {
             console.log(json['yasf']);
             this.graph = new MyGraph(json) //Parce json
             this.graph.build() // Construct graph

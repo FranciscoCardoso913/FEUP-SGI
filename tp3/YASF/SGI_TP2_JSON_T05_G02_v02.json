@@ -26,76 +26,76 @@
                 "center": {"x": 0, "y": 20, "z": 0},
                 "emissive": {"r": 0, "g": 0, "b": 0},
                 "intensity": 0,
-                "textureref": "scenes/textures/skybox_front.jpg"
+                "textureref": "textures/skybox_front.jpg"
         }
         },
         "textures": {
             "floor": {
-                "filepath": "scenes/textures/floor.jpg",
+                "filepath": "textures/floor.jpg",
                 "isVideo": false
             },
             "housefloor": {
-                "filepath": "scenes/textures/plate.jpg",
+                "filepath": "textures/plate.jpg",
                 "isVideo": false
             },
             "wood": {
-                "filepath": "scenes/textures/wood.jpg",
+                "filepath": "textures/wood.jpg",
                 "isVideo": false
             },
             "woodenplate": {
-                "filepath": "scenes/textures/woodenplate.jpg",
+                "filepath": "textures/woodenplate.jpg",
                 "isVideo": false
             },
             "doorsymbolsleft": {
-                "filepath": "scenes/textures/door_symbols_left.jpg",
+                "filepath": "textures/door_symbols_left.jpg",
                 "isVideo": false
             },
             "doorsymbolsright": {
-                "filepath": "scenes/textures/door_symbols_right.jpg",
+                "filepath": "textures/door_symbols_right.jpg",
                 "isVideo": false
             },
             "door": {
-                "filepath": "scenes/textures/door.jpg",
+                "filepath": "textures/door.jpg",
                 "isVideo": false
             },
             "paint": {
-                "filepath": "scenes/textures/caravaggio.jpg",
+                "filepath": "textures/caravaggio.jpg",
                 "isVideo": false,
-                "mipmap0": "scenes/textures/caravaggio.1024.jpg",
-                "mipmap1": "scenes/textures/caravaggio.512.jpg",
-                "mipmap2": "scenes/textures/caravaggio.256.jpg",
-                "mipmap3": "scenes/textures/caravaggio.128.jpg",
-                "mipmap4": "scenes/textures/caravaggio.64.jpg",
-                "mipmap5": "scenes/textures/caravaggio.32.jpg",
-                "mipmap6": "scenes/textures/caravaggio.16.jpg",
-                "mipmap7": "scenes/textures/caravaggio.8.jpg"
+                "mipmap0": "textures/caravaggio.1024.jpg",
+                "mipmap1": "textures/caravaggio.512.jpg",
+                "mipmap2": "textures/caravaggio.256.jpg",
+                "mipmap3": "textures/caravaggio.128.jpg",
+                "mipmap4": "textures/caravaggio.64.jpg",
+                "mipmap5": "textures/caravaggio.32.jpg",
+                "mipmap6": "textures/caravaggio.16.jpg",
+                "mipmap7": "textures/caravaggio.8.jpg"
             },
             "blanket": {
-                "filepath": "scenes/textures/blanket.jpg",
+                "filepath": "textures/blanket.jpg",
                 "isVideo": false
             },
             "blanketbump": {
-                "filepath": "scenes/textures/blanket_bump.jpg",
+                "filepath": "textures/blanket_bump.jpg",
                 "isVideo": false
             },
             "video": {
-                "filepath": "scenes/textures/video.mp4",
+                "filepath": "textures/video.mp4",
                 "isVideo": true
             },
             "pillow": {
-                "filepath": "scenes/textures/pillow.jpg",
+                "filepath": "textures/pillow.jpg",
                 "isVideo": false
             },
             "basket": {
-                "filepath": "scenes/textures/basket.jpg",
+                "filepath": "textures/basket.jpg",
                 "isVideo": false
             },
             "newspaper": {
-                "filepath": "scenes/textures/newspaper.jpg",
+                "filepath": "textures/newspaper.jpg",
                 "isVideo": false
             },
             "copper": {
-                "filepath": "scenes/textures/copper.jpg",
+                "filepath": "textures/copper.jpg",
                 "isVideo": false
             }
         },
