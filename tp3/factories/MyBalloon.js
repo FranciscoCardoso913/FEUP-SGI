@@ -1,0 +1,114 @@
+import * as THREE from 'three';
+
+
+
+
+
+
+class MyBallon{
+
+    constructor(color = 0x00a2f1) {
+        this.color = color
+        this.position = new THREE.Vector3(0,5,0)
+    }
+
+    build(){
+        // Create the hot air balloon using Level of Detail (LOD)
+        const lod = new THREE.LOD();
+
+        const textureLoader = new THREE.TextureLoader();
+        const texture = textureLoader.load('/textures/ballon.webp');
+
+        // Set wrapping and repeat properties
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set(1, 1); // Adjust as needed to fit the sphere
+
+        const basqueTexture = textureLoader.load('/textures/basket.jpg');
+
+        // Set wrapping and repeat properties
+        basqueTexture.wrapS = THREE.RepeatWrapping;
+        basqueTexture.wrapT = THREE.RepeatWrapping;
+        basqueTexture.repeat.set(1, 1); // Adjust as needed to fit the sphere
+
+        // High-detail model
+        const highDetailGeometry = new THREE.SphereGeometry(1, 32, 32, 0, 2* Math.PI, 0, 5/6 * Math.PI);
+        const highDetailMaterial = new THREE.MeshBasicMaterial({ color: this.color, wireframe: false, side: THREE.DoubleSide, map: texture });
+        const highDetailMesh = new THREE.Mesh(highDetailGeometry, highDetailMaterial);
+        highDetailMesh.scale.copy(new THREE.Vector3(1,1.3,1))
+
+        lod.addLevel(highDetailMesh, 0);
+
+        // Medium-detail model
+        const mediumDetailGeometry = new THREE.SphereGeometry(1, 16, 16, 0, 2* Math.PI, 0, 5/6 * Math.PI);
+        const mediumDetailMaterial = new THREE.MeshBasicMaterial({ color: this.color, wireframe: false ,side: THREE.DoubleSide, map: texture });
+        const mediumDetailMesh = new THREE.Mesh(mediumDetailGeometry, mediumDetailMaterial);
+        mediumDetailMesh.scale.copy(new THREE.Vector3(1,1.3,1))
+        lod.addLevel(mediumDetailMesh, 10);
+
+        // Low-detail model
+        const lowDetailGeometry = new THREE.SphereGeometry(1, 8, 8, 0, 2* Math.PI, 0, 5/6 * Math.PI);
+        const lowDetailMaterial = new THREE.MeshBasicMaterial({ color: this.color, wireframe: false , side: THREE.DoubleSide, map: texture });
+        const lowDetailMesh = new THREE.Mesh(lowDetailGeometry, lowDetailMaterial);
+        lowDetailMesh.scale.copy(new THREE.Vector3(1,1.3,1))
+        lod.addLevel(lowDetailMesh, 20);
+
+        // Add a basket to the balloon (just a simple box)
+        const basketGeometry = new THREE.BoxGeometry(0.7, 0.5, 0.7);
+        const basketMaterial = new THREE.MeshBasicMaterial({ color: 0xaa7664 , map :basqueTexture});
+        const basketMesh = new THREE.Mesh(basketGeometry, basketMaterial);
+        basketMesh.position.set(0, -1.5, 0);
+
+
+
+        // Combine the balloon and the basket
+        const balloonGroup = new THREE.Group();
+
+        // Add connecting wooden cylinders
+        const woodMaterial = new THREE.MeshBasicMaterial({ color: 0x8b4513 });
+        const woodCylinders = [];
+        const cylinderPositions = [
+        [-0.25, -0.85, 0.25],
+        [0.25, -0.85, 0.25],
+        [-0.25, -0.85, -0.25],
+        [0.25, -0.85, -0.25]
+        ];
+
+        cylinderPositions.forEach(position => {
+        const woodGeometry = new THREE.CylinderGeometry(0.05, 0.05, 1.0, 16);
+        const woodMesh = new THREE.Mesh(woodGeometry, woodMaterial);
+        woodMesh.position.set(...position);
+        woodMesh.rotation.x = Math.PI* position[2]*0.8;
+        woodCylinders.push(woodMesh);
+        balloonGroup.add(woodMesh);
+        });
+        lod.position.add( new THREE.Vector3(0,0.5,0))
+        balloonGroup.add(lod);
+        balloonGroup.add(basketMesh);
+
+        // Create a small fire using a sphere and a cone
+        const fireGroup = new THREE.Group();
+
+        // Fire base (sphere)
+        const fireBaseGeometry = new THREE.SphereGeometry(0.15, 16, 16);
+        const fireBaseMaterial = new THREE.MeshBasicMaterial({ color: 0xff4500 });
+        const fireBaseMesh = new THREE.Mesh(fireBaseGeometry, fireBaseMaterial);
+        fireBaseMesh.position.set(0, -1, 0);
+        fireGroup.add(fireBaseMesh);
+
+        // Fire flames (cone)
+        const fireFlameGeometry = new THREE.ConeGeometry(0.15, 0.3, 16);
+        const fireFlameMaterial = new THREE.MeshBasicMaterial({ color: 0xff4500 });
+        const fireFlameMesh = new THREE.Mesh(fireFlameGeometry, fireFlameMaterial);
+        fireFlameMesh.position.set(0, -0.8, 0);
+        fireGroup.add(fireFlameMesh);
+
+        balloonGroup.add(fireGroup)
+
+        balloonGroup.position.add(this.position)
+
+        return balloonGroup
+    }
+}
+
+export default MyBallon;
