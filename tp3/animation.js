@@ -67,8 +67,8 @@ function animate(element,keyframes, startTime, animationDuration) {
     let currentTime = (Date.now() - startTime) / 1000;
   
     if (currentTime > animationDuration) {
-        element.position.copy(keyframes[-1].position)
-        element.rotation.copy(keyframes[-1].rotation)
+        element.position.copy(keyframes[keyframes.length - 1].position)
+        element.rotation.copy(keyframes[keyframes.length - 1].rotation)
         return
     }
   

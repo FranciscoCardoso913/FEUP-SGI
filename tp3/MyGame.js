@@ -16,6 +16,7 @@ class MyGame {
     static STATES = {
         QUIT: -1,
         PICKING: 0,
+        POSITION:1
     };
 
     constructor(app){
@@ -59,6 +60,13 @@ class MyGame {
             switch (state){
                 case MyGame.STATES.PICKING:
                     result = await this.picking(...args);   
+                    break
+
+                case MyGame.STATES.POSITION:
+                    // TODO
+                    console.log("end")
+                    result = {state:MyGame.STATES.QUIT, args: []}
+                    break
             }
 
             ({ state, args } = result);
@@ -67,7 +75,7 @@ class MyGame {
     
     }
 
-    async picking(ballons) {
+    async picking(ballons, player1= null) {
 
         let selected = 0
 
@@ -75,14 +83,13 @@ class MyGame {
             this.scene.add(ballon.getObject())
         })
 
-        function drawBallons(scene,ballons, selected){
+        function drawBallons(ballons, selected){
           
             let r = 3
             let n = ballons.length
             for (let i = 0; i < n; i++){
                 let ballon = ballons[i]
                 let theta = 2 * (Math.PI/n) * (i - selected) 
-                //scene.remove(ballon.getObject())
                 let keyframes = ballon.move(new THREE.Vector3(r * Math.sin(-theta),1, r * Math.cos(-theta)))
      
                 animate(ballon.getObject(), keyframes, Date.now(), 1)
@@ -95,7 +102,7 @@ class MyGame {
 
        
   
-        drawBallons(this.scene,ballons,selected)
+        drawBallons(ballons,selected)
      
      
         let isSelected = false
@@ -113,20 +120,27 @@ class MyGame {
                 selected = n -1
 
             if (left || right || isSelected){
-                drawBallons(this.scene,ballons,selected )
+                drawBallons(ballons,selected )
                 this.hasBeenPressedKeys = {}
             }
             
             await sleep(1000/this.fps)
             
         }
-      
+
+        let selectedBallon = ballons[selected]
+        
         ballons.forEach(ballon => {
             this.scene.remove(ballon.getObject())
         });
         ballons.splice(selected, 1);
 
-        return { state: MyGame.STATES.PICKING, args: [ballons] };
+        if( player1)
+            return { state: MyGame.STATES.POSITION, args: [{player1:player1, player2:selectedBallon}] };
+        else
+            return { state: MyGame.STATES.PICKING, args: [ballons, selectedBallon] };
+ 
+        
     }
 
 }
