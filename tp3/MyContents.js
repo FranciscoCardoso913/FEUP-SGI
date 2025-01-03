@@ -25,7 +25,7 @@ class MyContents {
     
         // Reads scene 
         this.reader.open("YASF/SGI_TP2_JSON_T05_G02_v02.json").then((json) => {
-            console.log(json['yasf']);
+            //console.log(json['yasf']);
             this.graph = new MyGraph(json) //Parce json
             this.graph.build() // Construct graph
             this.graph.create(this.app.scene) // adds the graph to the scene
@@ -47,13 +47,15 @@ class MyContents {
             let gui = new MyGuiInterface(this.app)
             gui.setContents(this)
             gui.init();
+
+            let game = new MyGame(this.app)
+            game.start()
             
         }).catch((error) => {
             console.error("Error in loading JSON:", error);
         });
 
-        let game = new MyGame(this.app.scene)
-        game.start()
+
 
         
         

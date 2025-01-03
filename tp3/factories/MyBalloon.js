@@ -115,8 +115,28 @@ class MyBallon{
         return this.ballon
     }
 
-    setPosition(position){
+    move(position){
+        let start = this.ballon.position.clone();
         this.ballon.position.copy(position)
+        let movement = new THREE.Vector3().subVectors(this.ballon.position.clone(), start);
+        let angleY = Math.atan2(movement.x, movement.z);
+        let angZ = movement.z >0 ? 3*Math.PI/2:0
+      
+        console.log(start)
+        const keyframes = [
+            { time: 0, position: start, rotation: new THREE.Vector3(0, 0, 0) },
+            { time: 0.5, position: new THREE.Vector3().addVectors(start , movement.clone().multiplyScalar(0.5)), rotation: new THREE.Vector3( 0 ,angleY  , angZ) },
+            { time: 1, position: position.clone(), rotation: new THREE.Vector3(0, 0, 0) },
+            // Add more keyframes as necessary
+          ];
+
+          keyframes.forEach((keyframe, index) => {
+            if (!keyframe.position || !(keyframe.position instanceof THREE.Vector3)) {
+                console.error(`Keyframe at index ${index} has invalid position:`, keyframe);
+            }
+        });
+
+          return keyframes
     }
 }
 
