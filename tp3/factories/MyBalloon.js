@@ -9,7 +9,7 @@ class MyBallon{
 
     constructor(color = 0x00a2f1) {
         this.color = color
-        this.position = new THREE.Vector3(0,5,0)
+        this.position = new THREE.Vector3(0,0,0)
         this.build()
     }
 
@@ -115,17 +115,42 @@ class MyBallon{
         return this.ballon
     }
 
+    getRotationAnglesToVector( targetVector) {
+        // Step 1: Define the initial direction of the balloon (assuming it's pointing along the positive z-axis)
+        const initialDirection = new THREE.Vector3(0, 1, 0); // z-axis
+
+        targetVector.y =7
+    
+        // Step 2: Normalize the target vector
+        const targetDir = targetVector.clone().normalize();
+    
+        // Step 3: Compute the quaternion that rotates from initialDirection to targetDir
+        const axis = new THREE.Vector3().crossVectors(initialDirection, targetDir).normalize(); // Rotation axis
+        const angle = Math.acos(initialDirection.dot(targetDir)); // Angle between the two vectors
+    
+        // Step 4: Create the quaternion to rotate the balloon
+        const quaternion = new THREE.Quaternion().setFromAxisAngle(axis, angle);
+    
+        // Step 5: Convert the quaternion to Euler angles (in radians by default)
+        const euler = new THREE.Euler().setFromQuaternion(quaternion);
+    
+        // Step 6: Return the Euler angles (in x, y, z)
+        return new THREE.Vector3(
+             euler.x,
+             euler.y,
+             euler.z
+        )
+    }
+
     move(position){
         let start = this.ballon.position.clone();
         this.ballon.position.copy(position)
         let movement = new THREE.Vector3().subVectors(this.ballon.position.clone(), start);
-        let angleY = Math.atan2(movement.x, movement.z);
-        let angZ = movement.z >0 ? 3*Math.PI/2:0
       
         console.log(start)
         const keyframes = [
             { time: 0, position: start, rotation: new THREE.Vector3(0, 0, 0) },
-            { time: 0.5, position: new THREE.Vector3().addVectors(start , movement.clone().multiplyScalar(0.5)), rotation: new THREE.Vector3( 0 ,angleY  , angZ) },
+            { time: 0.5, position: new THREE.Vector3().addVectors(start , movement.clone().multiplyScalar(0.5)), rotation: this.getRotationAnglesToVector(movement.clone()) },
             { time: 1, position: position.clone(), rotation: new THREE.Vector3(0, 0, 0) },
             // Add more keyframes as necessary
           ];
