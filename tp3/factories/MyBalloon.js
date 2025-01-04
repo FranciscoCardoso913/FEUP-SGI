@@ -1,11 +1,6 @@
 import * as THREE from 'three';
 
-
-
-
-
-
-class MyBallon{
+class MyBalloon{
 
     constructor(color = 0x00a2f1) {
         this.color = color
@@ -165,4 +160,4 @@ class MyBallon{
     }
 }
 
-export default MyBallon;
+export default MyBalloon;
