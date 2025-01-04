@@ -139,6 +139,14 @@ class MyApp  {
             }
             else {
                 this.controls.object = this.activeCamera
+                
+                const direction = new THREE.Vector3(); // Create a vector for the direction
+                this.activeCamera.getWorldDirection(direction);  // Get the direction vector
+
+
+                // Compute the "look at" position by adding the direction to the camera's position
+                const lookAtPosition =  this.activeCamera.position.clone().add(direction);
+                this.controls.target = lookAtPosition
             }
         }
     }

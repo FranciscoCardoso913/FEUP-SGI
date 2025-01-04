@@ -31,9 +31,13 @@ class MyGame {
             new MyBallon(0xff33ff),
         ]
 
-        // Object to store the state of pressed keys
-        this.pressedKeys = {};
-        this.hasBeenPressedKeys = {};
+        app.setActiveCamera("front")
+        
+
+
+        
+        this.pressedKeys = {}; // Keys that are pressed
+        this.hasBeenPressedKeys = {}; // keys that have been pressed
 
         // Add event listeners for keydown and keyup
         document.addEventListener('keydown', (event) => {
@@ -49,6 +53,9 @@ class MyGame {
 
  
     }
+    sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
 
     async start(){
         let state = MyGame.STATES.PICKING
@@ -79,12 +86,16 @@ class MyGame {
 
         let selected = 0
 
+        if(player1){
+            let keyframes = player1.move(new THREE.Vector3(7,5,3))
+            animate(player1.getObject(), keyframes, Date.now(), 1)
+        }
+
         ballons.forEach((ballon)=>{
             this.scene.add(ballon.getObject())
         })
 
         function drawBallons(ballons, selected){
-          
             let r = 3
             let n = ballons.length
             for (let i = 0; i < n; i++){
@@ -96,16 +107,12 @@ class MyGame {
             }
         }
 
-        function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-          }
-
        
-  
         drawBallons(ballons,selected)
      
      
         let isSelected = false
+
         while(!isSelected){
             let right = this.hasBeenPressedKeys["ArrowRight"] || false;
             let left = this.hasBeenPressedKeys["ArrowLeft"] || false;
@@ -124,23 +131,26 @@ class MyGame {
                 this.hasBeenPressedKeys = {}
             }
             
-            await sleep(1000/this.fps)
+            await this.sleep(1000/this.fps)
             
         }
 
         let selectedBallon = ballons[selected]
         
-        ballons.forEach(ballon => {
-            this.scene.remove(ballon.getObject())
-        });
+
         ballons.splice(selected, 1);
 
-        if( player1)
+        if(player1){
+            let keyframes = selectedBallon.move(new THREE.Vector3(-7,5,3))
+            animate(selectedBallon.getObject(), keyframes, Date.now(), 1)
+
+            ballons.forEach(ballon => {
+                this.scene.remove(ballon.getObject())
+            });
             return { state: MyGame.STATES.POSITION, args: [{player1:player1, player2:selectedBallon}] };
-        else
+        }else
             return { state: MyGame.STATES.PICKING, args: [ballons, selectedBallon] };
  
-        
     }
 
 }

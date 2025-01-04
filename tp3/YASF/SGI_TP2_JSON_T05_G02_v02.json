@@ -495,6 +495,24 @@
                     "z": 0
                 }
             },
+
+            "front": {
+                "type": "perspective",
+                "angle": 60,
+                "near": 0.1,
+                "far": 300,
+                "location": {
+                    "x": 0,
+                    "y": 2,
+                    "z": 17
+                },
+                "target": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                }
+            },
+
             "outsidefront": {
                 "type": "perspective",
                 "angle": 60,

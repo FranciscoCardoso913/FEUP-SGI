@@ -238,8 +238,8 @@ export function parseCameras(cameras){
                 const right = value.right;
                 const bottom = value.bottom;
                 const top = value.top;
-
                 camera = new THREE.OrthographicCamera(left, right, top, bottom, near, far);
+                camera.up = new THREE.Vector3(0,1,0);
                 camera.position.set(location.x, location.y, location.z);
                 camera.lookAt(new THREE.Vector3(target.x, target.y, target.z));
             }
