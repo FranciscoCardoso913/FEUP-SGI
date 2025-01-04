@@ -19,16 +19,19 @@ function cubicInterpolation(keyframes, t) {
 
          // Interpolated position
          
-         const interpolatedPosition = prevKeyframe.position.clone().lerp(nextKeyframe.position, alpha);
+         let interpolatedPosition = null 
+         if(prevKeyframe.position) interpolatedPosition = prevKeyframe.position.clone().lerp(nextKeyframe.position, alpha);
  
-
+         let interpolatedRotation = null
+         if(prevKeyframe.rotation){
         // Interpolating rotation using quaternions
         const q0 = new THREE.Quaternion().setFromEuler(new THREE.Euler(...prevKeyframe.rotation.toArray()));
         const q1 = new THREE.Quaternion().setFromEuler(new THREE.Euler(...nextKeyframe.rotation.toArray()));
         const interpolatedQuaternion = new THREE.Quaternion().slerpQuaternions(q0, q1, alpha);
 
         // Convert back to Euler for consistency (if required)
-        const interpolatedRotation = new THREE.Euler().setFromQuaternion(interpolatedQuaternion);
+        interpolatedRotation = new THREE.Euler().setFromQuaternion(interpolatedQuaternion);
+        }
 
 
 
@@ -67,18 +70,16 @@ function animate(element,keyframes, startTime, animationDuration) {
     let currentTime = (Date.now() - startTime) / 1000;
   
     if (currentTime > animationDuration) {
-        element.position.copy(keyframes[keyframes.length - 1].position)
-        element.rotation.copy(keyframes[keyframes.length - 1].rotation)
-        return
+        if(keyframes[keyframes.length - 1].position)element.position.copy(keyframes[keyframes.length - 1].position)
+        if(keyframes[keyframes.length - 1].rotation)element.rotation.copy(keyframes[keyframes.length - 1].rotation)
+        return 
     }
   
     // Get the interpolated values
     const { position, rotation } = cubicInterpolation(keyframes, currentTime);
   
-    if (position && rotation) {
-        element.position.copy(position);
-        element.rotation.copy(rotation);
-    }
+    if(position)element.position.copy(position);
+    if(rotation)element.rotation.copy(rotation);
   
     requestAnimationFrame((time) => animate(element, keyframes, startTime, animationDuration));
 
