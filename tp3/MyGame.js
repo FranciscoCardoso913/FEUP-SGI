@@ -32,7 +32,7 @@ class MyGame {
         ]
 
         app.setActiveCamera("front")
-        
+        this.camera = app.activeCamera
 
 
         
@@ -70,7 +70,7 @@ class MyGame {
                     break
 
                 case MyGame.STATES.POSITION:
-                    // TODO
+                    await this.spot(...args)
                     result = {state:MyGame.STATES.QUIT, args: []}
                     break
             }
@@ -150,6 +150,19 @@ class MyGame {
         }else
             return { state: MyGame.STATES.PICKING, args: [ballons, selectedBallon] };
  
+    }
+
+    async spot(players){
+        await this.sleep(1500)
+    
+        const keyframes = [
+            { time: 0, position: this.camera.position.clone()},
+            { time: 0.5, position: new THREE.Vector3(0,10,40) },
+            { time: 1, position: new THREE.Vector3(0,60,40) }
+            // Add more keyframes as necessary
+          ];
+
+          animate(this.camera, keyframes, Date.now(),3)
     }
 
 }
