@@ -71,7 +71,6 @@ class MyGame {
 
                 case MyGame.STATES.POSITION:
                     // TODO
-                    console.log("end")
                     result = {state:MyGame.STATES.QUIT, args: []}
                     break
             }
@@ -155,4 +154,4 @@ class MyGame {
 
 }
 
-export default MyGame
+export { MyGame }

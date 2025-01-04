@@ -1,10 +1,11 @@
 import * as THREE from 'three';
 import { MyAxis } from './MyAxis.js';
+import { MyGuiInterface } from './MyGuiInterface.js';
+import { MyGame } from './MyGame.js';
+import { MyTrack } from './factories/MyTrack.js';
 import { MyFileReader } from './parser/MyFileReader.js';
 import { MyGraph } from './parser/MyGraph.js';
-import { MyGuiInterface } from './MyGuiInterface.js';
-import MyBallon from './factories/MyBalloon.js';
-import MyGame from './MyGame.js';
+
 /**
  *  This class contains the contents of out application
  */
@@ -38,34 +39,18 @@ class MyContents {
     
     
             this.app.activeCameraName = this.graph.initCamera //Set active camera
+        this.activeLight = true        
         
-            //Gets all the cameras names for the interface
-            this.app.camerasNames = Object.entries(this.app.cameras).reduce((list, [name, value]) => {
-                list.push(name)
-                return list;
-            }, []);
-
-            this.app.renderer.shadowMap.enabled = true; // Enable shadow maps
-            this.app.renderer.shadowMap.type = THREE.PCFSoftShadowMap; // Soft shadows
-            
-            // creates interface
-            let gui = new MyGuiInterface(this.app)
-            gui.setContents(this)
-            gui.init();
-
-            let game = new MyGame(this.app)
-            game.start()
-            
-        }).catch((error) => {
-            console.error("Error in loading JSON:", error);
-        });
 
 
+        let gui = new MyGuiInterface(this.app)
+        gui.setContents(this)
+        gui.init();
 
-        
-        
-        
-    }
+        let game = new MyGame(this.app)
+        game.start()
+    })
+}
 
     /**
      * initializes the contents
@@ -77,30 +62,6 @@ class MyContents {
             this.axis = new MyAxis(this)
             this.app.scene.add(this.axis)
         }
-    }
-
-    /**
-     * Called when the scene JSON file load is completed
-     * @param {Object} data with the entire scene object
-     */
-    onSceneLoaded(data) {
-        console.info("YASF loaded.")
-        this.onAfterSceneLoadedAndBeforeRender(data);
-    }
-
-    printYASF(data, indent = '') {
-        for (let key in data) {
-            if (typeof data[key] === 'object' && data[key] !== null) {
-                console.log(`${indent}${key}:`);
-                this.printYASF(data[key], indent + '\t');
-            } else {
-                console.log(`${indent}${key}: ${data[key]}`);
-            }
-        }
-    }
-
-    onAfterSceneLoadedAndBeforeRender(data) {
-        this.printYASF(data)
     }
 
     update() {
@@ -127,6 +88,30 @@ class MyContents {
         this.graph.build()
         this.graph.create(this.app.scene)
     }
+
+        /**
+     * Called when the scene JSON file load is completed
+     * @param {Object} data with the entire scene object
+     */
+        onSceneLoaded(data) {
+            console.info("YASF loaded.")
+            this.onAfterSceneLoadedAndBeforeRender(data);
+        }
+    
+        printYASF(data, indent = '') {
+            for (let key in data) {
+                if (typeof data[key] === 'object' && data[key] !== null) {
+                    console.log(`${indent}${key}:`);
+                    this.printYASF(data[key], indent + '\t');
+                } else {
+                    console.log(`${indent}${key}: ${data[key]}`);
+                }
+            }
+        }
+    
+        onAfterSceneLoadedAndBeforeRender(data) {
+            this.printYASF(data)
+        }
 }
 
 export { MyContents };
