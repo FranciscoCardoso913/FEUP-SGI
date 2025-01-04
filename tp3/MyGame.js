@@ -156,24 +156,26 @@ class MyGame {
 
     async spot(players){
         await this.sleep(1500)
-    
+        const spotA = new THREE.Vector3(-40,5,0)
+        const spotB = new THREE.Vector3(-25,5,0)
+        const cameraPos = new THREE.Vector3(-30,60,0)
         let cameraKeyframes = [
             { time: 0, position: this.camera.position.clone()},
-            { time: 0.5, position: new THREE.Vector3(0,20,6) },
-            { time: 1, position: new THREE.Vector3(0,40,0) },
-            { time: 1.5, position: new THREE.Vector3(-15,50,0) },
-            { time: 2, position: new THREE.Vector3(-30,60,0) }
+            { time: 2, position: cameraPos }
             // Add more keyframes as necessary
           ];
 
-        let playerKeyframes =players.player1.move(new THREE.Vector3(-32,0,0))
+        let playerKeyframes =players.player1.move(spotA)
 
          
         animate(players.player1.getObject(), playerKeyframes, Date.now(),2)
         animate(this.camera, cameraKeyframes, Date.now(),2)
-        const targetPosition = new THREE.Vector3(-30, 0, 0); 
+        const targetPosition = new THREE.Vector3(spotA.x + (spotA.x -spotB.x)/2, 0, spotA.z); 
         this.camera.target = targetPosition
+
         this.app.updateCameraIfRequired(true)
+        await this.sleep(2000)
+        this.app.setActiveCamera("top")
 
 
 
