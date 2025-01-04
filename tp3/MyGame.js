@@ -145,4 +145,4 @@ class MyGame {
 
 }
 
-export default MyGame
+export { MyGame }
