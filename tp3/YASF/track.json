@@ -1,0 +1,54 @@
+{
+    "yasf": {
+        "globals": {
+            "background": {
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0
+            },
+            "ambient": {
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "intensity": 0.5
+            },
+            "fog": {
+                "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "near": 1.0,
+                "far": 200.0
+            },
+            "skysphere": {
+                "radius": 100,
+                "center": {"x": 0, "y": 20, "z": 0},
+                "emissive": {"r": 0, "g": 0, "b": 0},
+                "intensity": 0,
+                "textureref": "textures/VRCloud_Alb.jpg"
+        }
+        },
+        "textures": {
+
+        },
+        "materials": {
+           
+        },
+        "graph": {
+            "rootid": "scene",
+            "scene": {
+                "type": "node",
+                "castshadows": true,
+                "receiveshadows": true,
+                "children": {
+                    "nodesList": [
+                        
+                    ]
+                }
+            }
+            
+
+        }
+    }
+}
