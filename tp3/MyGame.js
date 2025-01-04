@@ -72,8 +72,7 @@ class MyGame {
                     break
 
                 case MyGame.STATES.POSITION:
-                    await this.spot(...args)
-                    result = {state:MyGame.STATES.QUIT, args: []}
+                    result =  await this.spot(...args)
                     break
             }
 
@@ -158,30 +157,63 @@ class MyGame {
         await this.sleep(1500)
         const spotA = new THREE.Vector3(-40,5,0)
         const spotB = new THREE.Vector3(-25,5,0)
-        const cameraPos = new THREE.Vector3(-30,60,0)
+        const cameraPos = new THREE.Vector3(spotB.x + (spotA.x -spotB.x)/2,60,0)
         let cameraKeyframes = [
             { time: 0, position: this.camera.position.clone()},
             { time: 2, position: cameraPos }
-            // Add more keyframes as necessary
-          ];
+            ];
 
         let playerKeyframes =players.player1.move(spotA)
 
-         
+            
         animate(players.player1.getObject(), playerKeyframes, Date.now(),2)
         animate(this.camera, cameraKeyframes, Date.now(),2)
-        const targetPosition = new THREE.Vector3(spotA.x + (spotA.x -spotB.x)/2, 0, spotA.z); 
+        const targetPosition = new THREE.Vector3(spotB.x + (spotA.x -spotB.x)/2, 0, spotA.z); 
         this.camera.target = targetPosition
 
         this.app.updateCameraIfRequired(true)
         await this.sleep(2000)
-        this.app.setActiveCamera("top")
 
 
+        let selected = 0
+        let isSelected = false
 
+        while(!isSelected){
+            let right = this.hasBeenPressedKeys["ArrowRight"] || false;
+            let left = this.hasBeenPressedKeys["ArrowLeft"] || false;
+            isSelected = this.hasBeenPressedKeys["Enter"] || false;
+            if(right){
+                if(selected ===0){
+                    let keyframes = players.player1.move(spotB)
+                    animate(players.player1.getObject(), keyframes, Date.now(), 1)
+                }
+                selected = 1
+            }
+            else if(left){
+                if(selected ===1){
+                    let keyframes = players.player1.move(spotA)
+                    animate(players.player1.getObject(), keyframes, Date.now(), 1)
+                }
+                selected = 0
+            }
 
-         
-    
+            if( isSelected || right || left) this.hasBeenPressedKeys = {}
+
+            await this.sleep(1000/this.fps)
+
+        }
+
+        if(selected === 0) {
+            let keyframes = players.player2.move(spotB)
+            animate(players.player2.getObject(), keyframes, Date.now(), 1)
+        }else{
+            let keyframes = players.player2.move(spotA)
+            animate(players.player2.getObject(), keyframes, Date.now(), 1)
+        }
+
+        await this.sleep(1000)
+
+        return {state: MyGame.STATES.QUIT, args:[{players: players}]}
 
     }
 
