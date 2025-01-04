@@ -90,7 +90,7 @@ class MyGraph {
 		scene.fog = this.fog
 		scene.add(this.skybox)
 		scene.add(this.ambientLight)
-		//scene.add(this.graph)
+		scene.add(this.graph)
 	}
 	/**
 	 * Deletes the scene
