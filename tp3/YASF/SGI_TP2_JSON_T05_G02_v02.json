@@ -512,6 +512,22 @@
                     "z": 0
                 }
             },
+            "top": {
+                "type": "perspective",
+                "angle": 60,
+                "near": 0.1,
+                "far": 300,
+                "location": {
+                    "x": -30,
+                    "y": 60,
+                    "z": 0
+                },
+                "target": {
+                    "x": -30,
+                    "y": 0,
+                    "z": 0
+                }
+            },
 
             "outsidefront": {
                 "type": "perspective",
