@@ -251,6 +251,8 @@ export function parseCameras(cameras){
             }
             camera.position.set(location.x, location.y, location.z);
             camera.lookAt(new THREE.Vector3(target.x, target.y, target.z));
+            camera.target = new THREE.Vector3(target.x, target.y, target.z)
+            console.log("fhsbjdfsbjhdf",camera.target)
             dict[name] = camera
         }
         return dict;
