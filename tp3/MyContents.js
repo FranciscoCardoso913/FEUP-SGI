@@ -30,7 +30,12 @@ class MyContents {
             this.graph.build() // Construct graph
             this.graph.create(this.app.scene) // adds the graph to the scene
 
-            this.app.cameras = this.graph.cameras //Get cameras
+            //this.app.cameras.concat( this.graph.cameras) //Get cameras
+            this.app.cameras = {
+                ...this.graph.cameras,
+                ...this.app.cameras,
+            };
+    
     
             this.app.activeCameraName = this.graph.initCamera //Set active camera
         

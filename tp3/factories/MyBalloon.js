@@ -119,7 +119,7 @@ class MyBallon{
         // Step 1: Define the initial direction of the balloon (assuming it's pointing along the positive z-axis)
         const initialDirection = new THREE.Vector3(0, 1, 0); // z-axis
 
-        targetVector.y =7
+        targetVector.y +=7
     
         // Step 2: Normalize the target vector
         const targetDir = targetVector.clone().normalize();
