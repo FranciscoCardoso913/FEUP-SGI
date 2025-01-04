@@ -118,10 +118,10 @@ class MyApp  {
      * when the active camera name changes
      * it updates the active camera and the controls
      */
-    updateCameraIfRequired() {
+    updateCameraIfRequired(required =false ) {
 
         // camera changed?
-        if (this.lastCameraName !== this.activeCameraName) {
+        if (this.lastCameraName !== this.activeCameraName || required) {
             this.lastCameraName = this.activeCameraName;
             this.activeCamera = this.cameras[this.activeCameraName]
             document.getElementById("camera").innerHTML = this.activeCameraName
@@ -139,14 +139,7 @@ class MyApp  {
             }
             else {
                 this.controls.object = this.activeCamera
-                
-                const direction = new THREE.Vector3(); // Create a vector for the direction
-                this.activeCamera.getWorldDirection(direction);  // Get the direction vector
-
-
-                // Compute the "look at" position by adding the direction to the camera's position
-                const lookAtPosition =  this.activeCamera.position.clone().add(direction);
-                this.controls.target = lookAtPosition
+                this.controls.target = this.activeCamera.target
             }
         }
     }

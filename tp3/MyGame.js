@@ -30,9 +30,11 @@ class MyGame {
             new MyBallon(0xffffff),
             new MyBallon(0xff33ff),
         ]
-
+        this.app = app
         app.setActiveCamera("front")
         this.camera = app.activeCamera
+
+        
 
 
         
@@ -155,14 +157,30 @@ class MyGame {
     async spot(players){
         await this.sleep(1500)
     
-        const keyframes = [
+        let cameraKeyframes = [
             { time: 0, position: this.camera.position.clone()},
-            { time: 0.5, position: new THREE.Vector3(0,10,40) },
-            { time: 1, position: new THREE.Vector3(0,60,40) }
+            { time: 0.5, position: new THREE.Vector3(0,20,6) },
+            { time: 1, position: new THREE.Vector3(0,40,0) },
+            { time: 1.5, position: new THREE.Vector3(-15,50,0) },
+            { time: 2, position: new THREE.Vector3(-30,60,0) }
             // Add more keyframes as necessary
           ];
 
-          animate(this.camera, keyframes, Date.now(),3)
+        let playerKeyframes =players.player1.move(new THREE.Vector3(-32,0,0))
+
+         
+        animate(players.player1.getObject(), playerKeyframes, Date.now(),2)
+        animate(this.camera, cameraKeyframes, Date.now(),2)
+        const targetPosition = new THREE.Vector3(-30, 0, 0); 
+        this.camera.target = targetPosition
+        this.app.updateCameraIfRequired(true)
+
+
+
+
+         
+    
+
     }
 
 }
