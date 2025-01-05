@@ -22,12 +22,14 @@ class MyContents {
         this.lightHelpers = false
         this.activeLight = true
 
+        
         this.reader = new MyFileReader(this.onSceneLoaded.bind(this));
     
         // Reads scene 
         this.reader.open("YASF/SGI_TP2_JSON_T05_G02_v02.json").then((json) => {
+            
             //console.log(json['yasf']);
-            this.graph = new MyGraph(json) //Parce json
+            this.graph = new MyGraph(json) //Parse json
             this.graph.build() // Construct graph
             this.graph.create(this.app.scene) // adds the graph to the scene
 
@@ -36,19 +38,31 @@ class MyContents {
                 ...this.graph.cameras,
                 ...this.app.cameras,
             };
-    
-    
             this.app.activeCameraName = this.graph.initCamera //Set active camera
-        this.activeLight = true        
-        
+            this.activeLight = true        
 
+            let gui = new MyGuiInterface(this.app)
+            gui.setContents(this)
+            gui.init();
 
-        let gui = new MyGuiInterface(this.app)
-        gui.setContents(this)
-        gui.init();
+            this.path = new THREE.CatmullRomCurve3([
+                new THREE.Vector3(-5, 0, 0),
+                new THREE.Vector3(-5, 0, -10), // 1 curve
+                new THREE.Vector3(3, 0, -10),  // 2 curve
+                new THREE.Vector3(3, 0, -3),   // 3 curve   
+                new THREE.Vector3(-2, 0, -3),  // 4 curve
+                new THREE.Vector3(-2, 0, 3),   // 5 curve
+                new THREE.Vector3(5, 0, 3),    // 6 curve
+                new THREE.Vector3(5, 0, 10),   // 7 curve
+                new THREE.Vector3(-5, 0, 10),  // 8 curve
+                new THREE.Vector3(-5, 0, 0),
+            ]);
+            let track = new MyTrack(this.path, 7)
+            track.track.position.set(0, 10, 0)
+            this.app.scene.add(track.track)
 
-        let game = new MyGame(this.app)
-        game.start()
+            let game = new MyGame(this.app)
+            game.start()
     })
 }
 
