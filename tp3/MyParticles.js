@@ -113,12 +113,16 @@ class MyParticles {
                 (Math.random() - 0.5) * speed // Z velocity
             );
         }
+
+        const  getRandomColorHex = ()=> {
+            return `#${Math.floor(Math.random() * 16700000+ 77215).toString(16).padStart(6, '0')}`;
+        }
     
         // Create the explosion geometry and material
         const explosionGeometry = new THREE.BufferGeometry();
         explosionGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(burstPositions), 3));
         const explosionMaterial = new THREE.PointsMaterial({ 
-            color: 0xffaa00, 
+            color: getRandomColorHex(), 
             size: 0.3, 
             transparent: true, 
             opacity: 1.0 
