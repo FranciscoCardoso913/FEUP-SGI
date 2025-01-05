@@ -1,8 +1,5 @@
 import * as THREE from 'three';
 
-import { MyFileReader } from '../parser/MyFileReader.js';
-import { MyGraph } from '../parser/MyGraph.js';
-
 class MyTrack  {
 
     
@@ -10,61 +7,71 @@ class MyTrack  {
        constructs the object
        @param {Number} width The width of the track
     */
-    constructor(content,width = 25) {
-        this.app = content.app
+    constructor(path, width = 1, segments = 100) {
+        this.path = path
         this.width = width
-        this.isWireframe = false
 
-        this.reader = new MyFileReader(this.onSceneLoaded.bind(content));
-    
-        // Reads scene 
-        this.reader.open("YASF/track.json").then((json) => {
-            this.graph = new MyGraph(json) //Parse json
-            this.graph.build() // Construct graph
-            this.graph.create(this.app.scene) // adds the graph to the scene
+        // Multiply path points by the width, so that the track is created with the correct width
+        // If we don't do this, the track will get weird formats when we change the width
+        this.path.points = this.path.points.map(point => point.multiplyScalar(this.width));
 
-            this.app.cameras = this.graph.cameras //Get cameras
-    
-            this.app.activeCameraName = this.graph.initCamera //Set active camera
-        
-            //Gets all the cameras names for the interface
-            this.app.camerasNames = Object.entries(this.app.cameras).reduce((list, [name, value]) => {
-                list.push(name)
-                return list;
-            }, []);
+        this.segments = segments
+        this.track = this.createTrack()
 
-            this.app.renderer.shadowMap.enabled = true; // Enable shadow maps
-            this.app.renderer.shadowMap.type = THREE.PCFSoftShadowMap; // Soft shadows
-            
-            
-        }).catch((error) => {
-            console.error("Error in loading JSON:", error);
-        });
     }
 
-    
     /**
-     * Called when the scene JSON file load is completed
-     * @param {Object} data with the entire scene object
+     * Creates the track
      */
-    onSceneLoaded(data) {
-        console.info("YASF loaded.")
-        this.onAfterSceneLoadedAndBeforeRender(data);
-    }
+    createTrack() {
 
-    printYASF(data, indent = '') {
-        for (let key in data) {
-            if (typeof data[key] === 'object' && data[key] !== null) {
-                console.log(`${indent}${key}:`);
-                this.printYASF(data[key], indent + '\t');
-            } else {
-                console.log(`${indent}${key}: ${data[key]}`);
-            }
-        }
-    }
+        const texture = new THREE.TextureLoader().load("../textures/blanket.jpg");
+        texture.wrapS = THREE.RepeatWrapping;
+    
+        this.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: texture });
+        this.material.map.repeat.set(1, 1);
+        this.material.map.wrapS = THREE.RepeatWrapping;
+        this.material.map.wrapT = THREE.RepeatWrapping;
+    
+        this.wireframeMaterial = new THREE.MeshPhongMaterial({
+          color: 0x0000ff,
+          opacity: 0.3,
+          wireframe: true,
+          transparent: true,
+        });
+    
+        this.lineMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });    
 
-    onAfterSceneLoadedAndBeforeRender(data) {
-        this.printYASF(data)
+
+        let geometry = new THREE.TubeGeometry(
+            this.path,
+            this.segments,
+            this.width,
+            3 ,
+            true
+        );
+        this.mesh = new THREE.Mesh(geometry, this.material);
+        this.wireframe = new THREE.Mesh(geometry, this.wireframeMaterial);
+
+        let points = this.path.getPoints(this.segments);
+        let bGeometry = new THREE.BufferGeometry().setFromPoints(points);        
+
+        // Create the final object to add to the scene
+        this.line = new THREE.Line(bGeometry, this.lineMaterial);
+    
+        this.curve = new THREE.Group();
+    
+        this.mesh.visible = this.showMesh;
+        this.wireframe.visible = this.showWireframe;
+        this.line.visible = this.showLine;
+    
+        this.curve.add(this.mesh);
+        this.curve.add(this.wireframe);
+        this.curve.add(this.line);
+    
+        this.curve.scale.set(1, 0.2, 1);
+        
+        return this.curve;
     }
 
 
