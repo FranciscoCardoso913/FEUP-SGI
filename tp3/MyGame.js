@@ -16,7 +16,8 @@ class MyGame {
     static STATES = {
         QUIT: -1,
         PICKING: 0,
-        POSITION:1
+        POSITION:1,
+        RACE: 2
     };
 
     constructor(app){
