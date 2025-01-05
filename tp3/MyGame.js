@@ -32,7 +32,7 @@ class MyGame {
             new MyBallon(0xff33ff),
         ]
         this.app = app
-        app.setActiveCamera("front")
+        app.setActiveCamera("top")
         this.camera = app.activeCamera
 
         
