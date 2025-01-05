@@ -7,6 +7,7 @@ import { MyFileReader } from './parser/MyFileReader.js';
 import { MyGraph } from './parser/MyGraph.js';
 import { MyObstacle } from './factories/MyObstacle.js';
 import { MyPowerUp } from './factories/MyPowerUp.js';
+import { MyRoute } from './factories/MyRoute.js';
 
 
 /**
@@ -74,19 +75,18 @@ class MyContents {
             this.app.scene.add(this.axis)
         }
         this.path = new THREE.CatmullRomCurve3([
-            new THREE.Vector3(-5, 0, 0),
-            new THREE.Vector3(-5, 0, -10), // 1 curve
-            new THREE.Vector3(3, 0, -10),  // 2 curve
-            new THREE.Vector3(3, 0, -3),   // 3 curve   
-            new THREE.Vector3(-2, 0, -3),  // 4 curve
-            new THREE.Vector3(-2, 0, 3),   // 5 curve
-            new THREE.Vector3(5, 0, 3),    // 6 curve
-            new THREE.Vector3(5, 0, 10),   // 7 curve
-            new THREE.Vector3(-5, 0, 10),  // 8 curve
-            new THREE.Vector3(-5, 0, 0),
-        ]);
-        let track = new MyTrack(this.path, 10)
-        track.track.position.set(0, 10, 0)
+            new THREE.Vector3(-15, 0, 0),
+            new THREE.Vector3(-15, 0, -30), // 1 curve
+            new THREE.Vector3(9, 0, -30),  // 2 curve
+            new THREE.Vector3(9, 0, -9),   // 3 curve   
+            new THREE.Vector3(-6, 0, -9),  // 4 curve
+            new THREE.Vector3(-6, 0, 9),   // 5 curve
+            new THREE.Vector3(15, 0, 9),    // 6 curve
+            new THREE.Vector3(15, 0, 30),   // 7 curve
+            new THREE.Vector3(-15, 0, 30),  // 8 curve
+            new THREE.Vector3(-15, 0, 0),
+        ], true, 'catmullrom', 0.5);
+        let track = new MyTrack(this.path, 5)
         this.app.scene.add(track.track)
 
         //let obstacle = new MyObstacle(new THREE.Vector3(0, 0, 0))
@@ -94,6 +94,10 @@ class MyContents {
 
         this.powerup = new MyPowerUp(new THREE.Vector3(0, 5, 0))
         this.app.scene.add(this.powerup.powerup)
+
+        let starting_position = new THREE.Vector3(-5, 0, 0)
+        this.route = new MyRoute(3, starting_position, 2)
+        this.app.scene.add(this.route.visualLine)
 
     }
 
