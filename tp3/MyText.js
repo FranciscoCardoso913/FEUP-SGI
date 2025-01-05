@@ -54,7 +54,7 @@ class MyText {
         return mesh;
     }
 
-    renderText(text, startPosition) {
+    renderText(text, startPosition, rotate = new THREE.Vector3(0,0,0)) {
         const material = new THREE.MeshBasicMaterial({
             map: this.spritesheet,
             transparent: true,
@@ -66,15 +66,17 @@ class MyText {
         characters.forEach((char, index) => {
             const asciiCode = char.charCodeAt(0);
             const position = {
-                x: startPosition.x + index, // Space between characters
-                y: startPosition.y,
-                z: startPosition.z,
+                x: index, // Space between characters
+                y: 0,
+                z: 0,
             };
     
-            const characterMesh = this.createCharacter(asciiCode, position, material);
+            let characterMesh = this.createCharacter(asciiCode, position, material);
+    
             textMesh.add(characterMesh);
         });
-
+        textMesh.position.add(startPosition)
+        textMesh.rotation.copy(rotate)
         return textMesh
     }
 
