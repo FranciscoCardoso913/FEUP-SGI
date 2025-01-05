@@ -38,7 +38,7 @@ class MyParticles {
             color: 0xffffff,
             size: 0.5,
             transparent: true,
-            opacity: 0.8,
+            opacity: 1,
         });
         this.particlesystem = new THREE.Points(this.particles, material);
         this.particlesystem.position.add(position)
@@ -77,6 +77,7 @@ class MyParticles {
     
                 // Reduce lifetime
                 this.lifetimes[i] -= delta;
+                this.particlesystem.material.opacity -= delta*0.003
             } else if (!this.explosionParticles.includes(i)) {
                 // Explode particle
  
@@ -142,8 +143,8 @@ class MyParticles {
                 positions[i * 3 + 1] += velocities[i * 3 + 1] * delta;
                 positions[i * 3 + 2] += velocities[i * 3 + 2] * delta;
     
-                // Apply gravity
-                velocities[i * 3 + 1] -= 0.5*9.8 * delta; // Gravity in the Y direction
+        
+        
             }
     
             // Update the geometry
