@@ -5,6 +5,7 @@ import { MyGraph } from './parser/MyGraph.js';
 import { MyGuiInterface } from './MyGuiInterface.js';
 import MyBallon from './factories/MyBalloon.js';
 import animate from './animation.js';
+import MyText from './MyText.js';
 /**
  *  This class contains the contents of out application
  */
@@ -33,7 +34,9 @@ class MyGame {
         this.app = app
         app.setActiveCamera("front")
         this.camera = app.activeCamera
-
+        this.textRender = new MyText()
+        this.text = this.textRender.renderText("Hello World", new THREE.Vector3(0,0,0))
+        this.scene.add(this.text)
         
 
 

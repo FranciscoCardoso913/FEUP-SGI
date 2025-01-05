@@ -6,6 +6,7 @@ import { MyTrack } from './factories/MyTrack.js';
 import { MyFileReader } from './parser/MyFileReader.js';
 import { MyGraph } from './parser/MyGraph.js';
 
+
 /**
  *  This class contains the contents of out application
  */
@@ -32,23 +33,29 @@ class MyContents {
             this.graph.create(this.app.scene) // adds the graph to the scene
 
             //this.app.cameras.concat( this.graph.cameras) //Get cameras
-            this.app.cameras = {
-                ...this.graph.cameras,
-                ...this.app.cameras,
-            };
+            this.app.cameras = this.graph.cameras
+
+            //Gets all the cameras names for the interface
+            this.app.camerasNames = Object.entries(this.app.cameras).reduce((list, [name, value]) => {
+                list.push(name)
+                return list;
+            }, []);
+            
+
+            console.log(this.app.cameras)
     
     
             this.app.activeCameraName = this.graph.initCamera //Set active camera
-        this.activeLight = true        
+            this.activeLight = true        
         
+            let gui = new MyGuiInterface(this.app)
+            gui.setContents(this)
+            gui.init();
 
+            let game = new MyGame(this.app)
 
-        let gui = new MyGuiInterface(this.app)
-        gui.setContents(this)
-        gui.init();
-
-        let game = new MyGame(this.app)
-        game.start()
+ 
+            game.start()
     })
 }
 
