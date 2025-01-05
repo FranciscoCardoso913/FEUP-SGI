@@ -5,6 +5,8 @@ import { MyGraph } from './parser/MyGraph.js';
 import { MyGuiInterface } from './MyGuiInterface.js';
 import MyBallon from './factories/MyBalloon.js';
 import animate from './animation.js';
+import MyText from './MyText.js';
+import MyParticles from './MyParticles.js';
 /**
  *  This class contains the contents of out application
  */
@@ -32,9 +34,14 @@ class MyGame {
             new MyBallon(0xff33ff),
         ]
         this.app = app
-        app.setActiveCamera("top")
+        app.setActiveCamera("perspective")
         this.camera = app.activeCamera
+        this.textRender = new MyText()
+        this.text = null
+        let particles = new MyParticles(this.scene, 100,new THREE.Vector3(-30,0,0),1,1)
+        
 
+        particles.simulate()
         
 
 
@@ -69,6 +76,7 @@ class MyGame {
 
             switch (state){
                 case MyGame.STATES.PICKING:
+                    
                     result = await this.picking(...args);   
                     break
 
@@ -84,7 +92,10 @@ class MyGame {
     }
 
     async picking(ballons, player1= null) {
-
+        
+        if(player1)this.text = this.textRender.renderText("Pick Your Oponent ballon", new THREE.Vector3(-12,12,0))
+        else this.text = this.textRender.renderText("Pick Your ballon", new THREE.Vector3(-12,12,0))
+        this.scene.add(this.text)
         let selected = 0
 
         if(player1){
@@ -140,7 +151,7 @@ class MyGame {
         
 
         ballons.splice(selected, 1);
-
+        this.scene.remove(this.text)
         if(player1){
             let keyframes = selectedBallon.move(new THREE.Vector3(-7,5,3))
             animate(selectedBallon.getObject(), keyframes, Date.now(), 1)
@@ -174,6 +185,10 @@ class MyGame {
 
         this.app.updateCameraIfRequired(true)
         await this.sleep(2000)
+
+        this.text = this.textRender.renderText("Pick Your Spot", new THREE.Vector3(-45,40,-10), new THREE.Euler(-Math.PI/2,0,0))
+      
+        this.scene.add(this.text)
 
 
         let selected = 0
@@ -212,6 +227,7 @@ class MyGame {
             animate(players.player2.getObject(), keyframes, Date.now(), 1)
         }
 
+        this.scene.remove(this.text)
         await this.sleep(1000)
 
         return {state: MyGame.STATES.QUIT, args:[{players: players}]}
