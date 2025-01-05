@@ -21,6 +21,12 @@ class MyText {
         this.gridSize = 16; // Characters per row and column
         this.tileSize = 1 / this.gridSize; // Size of one tile in UV space
 
+        this.material = new THREE.MeshBasicMaterial({
+            map: this.spritesheet,
+            transparent: true,
+            alphaTest: 0.1
+        });
+
     }
 
     getUVCoordinates(asciiCode, gridSize) {
@@ -55,12 +61,7 @@ class MyText {
     }
 
     renderText(text, startPosition, rotate = new THREE.Vector3(0,0,0)) {
-        const material = new THREE.MeshBasicMaterial({
-            map: this.spritesheet,
-            transparent: true,
-            alphaTest: 0.1
-        });
-    
+
         const characters = Array.from(text); // Split the string into characters
         const textMesh = new THREE.Group()
         characters.forEach((char, index) => {
@@ -71,7 +72,7 @@ class MyText {
                 z: 0,
             };
     
-            let characterMesh = this.createCharacter(asciiCode, position, material);
+            let characterMesh = this.createCharacter(asciiCode, position, this.material);
     
             textMesh.add(characterMesh);
         });
@@ -79,6 +80,36 @@ class MyText {
         textMesh.rotation.copy(rotate)
         return textMesh
     }
+
+    addChar(text, char, index){
+            const asciiCode = char.charCodeAt(0);
+            const position = {
+                x: index, // Space between characters
+                y: 0,
+                z: 0,
+            };
+    
+            let characterMesh = this.createCharacter(asciiCode, position, this.material);
+    
+            text.add(characterMesh);
+
+            return characterMesh
+      
+    }
+
+    removeChar(text, char, index){
+        const asciiCode = char.charCodeAt(0);
+        const position = {
+            x: index, // Space between characters
+            y: 0,
+            z: 0,
+        };
+
+        let characterMesh = this.createCharacter(asciiCode, position, this.material);
+
+        text.remove(characterMesh);
+  
+}
 
     
     

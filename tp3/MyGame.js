@@ -17,9 +17,10 @@ class MyGame {
 
     static STATES = {
         QUIT: -1,
-        PICKING: 0,
-        POSITION:1,
-        RACE: 2
+        NAME:0,
+        PICKING:1,
+        POSITION:2,
+        RACE: 3
     };
 
     constructor(app){
@@ -34,7 +35,7 @@ class MyGame {
             new MyBallon(0xff33ff),
         ]
         this.app = app
-        app.setActiveCamera("perspective")
+        app.setActiveCamera("front")
         this.camera = app.activeCamera
         this.textRender = new MyText()
         this.text = null
@@ -48,11 +49,12 @@ class MyGame {
         
         this.pressedKeys = {}; // Keys that are pressed
         this.hasBeenPressedKeys = {}; // keys that have been pressed
-
+        this.keysPressed = []
         // Add event listeners for keydown and keyup
         document.addEventListener('keydown', (event) => {
         this.pressedKeys[event.key] = true;
         this.hasBeenPressedKeys[event.key] = true
+        this.keysPressed.push(event.key)
         console.log(`Key down: ${event.key}`);
         });
 
@@ -68,13 +70,16 @@ class MyGame {
       }
 
     async start(){
-        let state = MyGame.STATES.PICKING
-        let args = [this.ballons]
+        let state = MyGame.STATES.NAME
+        let args = []
 
         while( state !== MyGame.STATES.QUIT ){
             let result = {}
 
             switch (state){
+                case MyGame.STATES.NAME:
+                result = await this.name(...args);   
+                break
                 case MyGame.STATES.PICKING:
                     
                     result = await this.picking(...args);   
@@ -232,6 +237,60 @@ class MyGame {
 
         return {state: MyGame.STATES.QUIT, args:[{players: players}]}
 
+    }
+
+    async name(){
+
+        function isCharacterKey(key) {
+            return key.length === 1 && key !== " " && !key.startsWith("Arrow") && key !== "Enter" && key !== "Backspace";
+        }
+        
+        this.text = this.textRender.renderText("Insert Name:", new THREE.Vector3(-20,50,40))
+        this.scene.add(this.text)
+        let isSelected = false
+        let index = 12
+        let chars = []
+        while(!isSelected){
+            this.keysPressed.forEach((key)=>{
+                if(key ==="Enter"){
+                    isSelected = true
+                }else if (key === "Backspace"){
+                    
+                    
+                    if(chars.length > 0){
+                        let char = chars.pop()
+                        this.text.remove(char)
+                    }
+
+                }else if (isCharacterKey(key)){
+                    let char = this.textRender.addChar(this.text,key, index + chars.length)
+                    chars.push(char)
+                }
+            })
+
+            this.keysPressed = []
+
+            await this.sleep(1000/this.fps)
+        }
+        this.scene.remove(this.text)
+        const cameraPos = new THREE.Vector3(0,5,17)
+        let cameraKeyframes = [
+            { time: 0, position: this.camera.position.clone()},
+            { time: 2, position: cameraPos }
+            ];
+
+
+        animate(this.camera, cameraKeyframes, Date.now(),2)
+        const targetPosition = new THREE.Vector3(0, 5, 0); 
+        this.camera.target = targetPosition
+
+        this.app.updateCameraIfRequired(true)
+
+        this.keysPressed = []
+        this.pressedKeys = {}
+        this.hasBeenPressedKeys= {}
+
+        return {state:MyGame.STATES.PICKING, args: [this.ballons]}
     }
 
 }
