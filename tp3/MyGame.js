@@ -39,10 +39,10 @@ class MyGame {
         this.camera = app.activeCamera
         this.textRender = new MyText()
         this.text = null
-        let particles = new MyParticles(this.scene, 100,new THREE.Vector3(-30,0,0),1,1)
+ 
         
 
-        particles.simulate()
+      
         
 
 
@@ -92,6 +92,8 @@ class MyGame {
 
             ({ state, args } = result);
         }
+        let particles = new MyParticles(this.scene, 100,new THREE.Vector3(-30,0,0),1,1)
+        particles.simulate()
             
     
     }

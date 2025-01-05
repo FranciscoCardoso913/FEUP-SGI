@@ -16,6 +16,7 @@ class MyParticles {
          this.positions = new Float32Array(this.particleCount * 3); // x, y, z for each particle
          this.velocities = []; // Store velocity for each particle
          this.lifetimes = []; // Store this.lifetimes for this.particles
+         this.birthtimes = []; // Store this.lifetimes for this.particles
 
         // Initialize this.particles
         for (let i = 0; i < this.particleCount; i++) {
@@ -30,6 +31,7 @@ class MyParticles {
                 (Math.random() - 0.5) * 10  // Random z velocity
             );
             this.lifetimes.push(Math.random() * 2 + 2); // Random lifetime (1-3 seconds)
+            this.birthtimes.push(Math.random()*5)
         }
 
         this.particles.setAttribute('position', new THREE.BufferAttribute(this.positions, 3));
@@ -65,8 +67,12 @@ class MyParticles {
             const vy = this.velocities[i * 3 + 1];
             const vz = this.velocities[i * 3 + 2];
             const lifetime = this.lifetimes[i];
+            const birthtime = this.birthtimes[i]
     
-            if (lifetime > 0) {
+            if(birthtime > 0){
+                this.birthtimes[i] -= delta
+            }
+            else if (lifetime > 0) {
                 // Update position
                 this.positions[i * 3] += vx * delta;
                 this.positions[i * 3 + 1] += vy * delta;
@@ -77,7 +83,6 @@ class MyParticles {
     
                 // Reduce lifetime
                 this.lifetimes[i] -= delta;
-                this.particlesystem.material.opacity -= delta*0.003
             } else if (!this.explosionParticles.includes(i)) {
                 // Explode particle
  
