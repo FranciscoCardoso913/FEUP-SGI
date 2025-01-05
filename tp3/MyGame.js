@@ -6,6 +6,7 @@ import { MyGuiInterface } from './MyGuiInterface.js';
 import MyBallon from './factories/MyBalloon.js';
 import animate from './animation.js';
 import MyText from './MyText.js';
+import MyParticles from './MyParticles.js';
 /**
  *  This class contains the contents of out application
  */
@@ -33,11 +34,14 @@ class MyGame {
             new MyBallon(0xff33ff),
         ]
         this.app = app
-        app.setActiveCamera("front")
+        app.setActiveCamera("perspective")
         this.camera = app.activeCamera
         this.textRender = new MyText()
         this.text = null
+        let particles = new MyParticles(this.scene)
         
+
+        particles.simulate()
         
 
 
