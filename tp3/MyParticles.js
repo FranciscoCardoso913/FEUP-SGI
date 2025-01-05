@@ -7,10 +7,11 @@ import * as THREE from 'three';
 
 
 class MyParticles {
-    constructor(scene){
+    constructor(scene,nParticulars = 100, position = new THREE.Vector3(0,0,0), width = 10, height = 10 ){
         this.scene = scene
+        this.position = position
         this.animate = this.animate.bind(this);
-        this.particleCount = 100; // Number of this.particles
+        this.particleCount = nParticulars; // Number of this.particles
         this.particles = new THREE.BufferGeometry();
          this.positions = new Float32Array(this.particleCount * 3); // x, y, z for each particle
          this.velocities = []; // Store velocity for each particle
@@ -18,9 +19,9 @@ class MyParticles {
 
         // Initialize this.particles
         for (let i = 0; i < this.particleCount; i++) {
-            const x = (Math.random() - 0.5) * 10; // Random x position on the ground
+            const x = (Math.random() - 0.5) * width; // Random x position on the ground
             const y = 0; // Starting from ground
-            const z = (Math.random() - 0.5) * 10; // Random z position
+            const z = (Math.random() - 0.5) * height; // Random z position
             this.positions.set([x, y, z], i * 3);
 
             this.velocities.push(
@@ -40,14 +41,15 @@ class MyParticles {
             opacity: 0.8,
         });
         this.particlesystem = new THREE.Points(this.particles, material);
-
-        this.scene.add(this.particlesystem)
+        this.particlesystem.position.add(position)
+       
 
     }
 
 
 
     simulate(){
+        this.scene.add(this.particlesystem)
         this.gravity = -9.8 ; 
         this.explosionParticles = []; // Track this.particles for explosions
         this.animate()
@@ -121,6 +123,7 @@ class MyParticles {
             opacity: 1.0 
         });
         const explosion = new THREE.Points(explosionGeometry, explosionMaterial);
+        explosion.position.add(this.position)
         this.scene.add(explosion);
     
         // Animate the explosion particles
@@ -130,7 +133,7 @@ class MyParticles {
         let elapsedTime = 0;
     
         const animateExplosion = () => {
-            const delta = 0.016; // Assume ~60 FPS
+            const delta = 0.016; // Assume 60 FPS
             elapsedTime += delta;
     
             for (let i = 0; i < burstCount; i++) {
