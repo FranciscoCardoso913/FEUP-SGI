@@ -5,6 +5,8 @@ import { MyGame } from './MyGame.js';
 import { MyTrack } from './factories/MyTrack.js';
 import { MyFileReader } from './parser/MyFileReader.js';
 import { MyGraph } from './parser/MyGraph.js';
+import { MyObstacle } from './factories/MyObstacle.js';
+import { MyPowerUp } from './factories/MyPowerUp.js';
 
 
 /**
@@ -23,12 +25,14 @@ class MyContents {
         this.lightHelpers = false
         this.activeLight = true
 
+        
         this.reader = new MyFileReader(this.onSceneLoaded.bind(this));
     
         // Reads scene 
         this.reader.open("YASF/SGI_TP2_JSON_T05_G02_v02.json").then((json) => {
+            
             //console.log(json['yasf']);
-            this.graph = new MyGraph(json) //Parce json
+            this.graph = new MyGraph(json) //Parse json
             this.graph.build() // Construct graph
             this.graph.create(this.app.scene) // adds the graph to the scene
 
@@ -69,9 +73,32 @@ class MyContents {
             this.axis = new MyAxis(this)
             this.app.scene.add(this.axis)
         }
+        this.path = new THREE.CatmullRomCurve3([
+            new THREE.Vector3(-5, 0, 0),
+            new THREE.Vector3(-5, 0, -10), // 1 curve
+            new THREE.Vector3(3, 0, -10),  // 2 curve
+            new THREE.Vector3(3, 0, -3),   // 3 curve   
+            new THREE.Vector3(-2, 0, -3),  // 4 curve
+            new THREE.Vector3(-2, 0, 3),   // 5 curve
+            new THREE.Vector3(5, 0, 3),    // 6 curve
+            new THREE.Vector3(5, 0, 10),   // 7 curve
+            new THREE.Vector3(-5, 0, 10),  // 8 curve
+            new THREE.Vector3(-5, 0, 0),
+        ]);
+        let track = new MyTrack(this.path, 10)
+        track.track.position.set(0, 10, 0)
+        this.app.scene.add(track.track)
+
+        //let obstacle = new MyObstacle(new THREE.Vector3(0, 0, 0))
+        //this.app.scene.add(obstacle.obstacle)
+
+        this.powerup = new MyPowerUp(new THREE.Vector3(0, 5, 0))
+        this.app.scene.add(this.powerup.powerup)
+
     }
 
     update() {
+        this.powerup.updatePowerUp()
     }
 
     Wireframe(){
@@ -117,7 +144,7 @@ class MyContents {
         }
     
         onAfterSceneLoadedAndBeforeRender(data) {
-            this.printYASF(data)
+            //this.printYASF(data)
         }
 }
 
