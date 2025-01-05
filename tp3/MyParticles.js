@@ -146,9 +146,6 @@ class MyParticles {
                 positions[i * 3] += velocities[i * 3] * delta;
                 positions[i * 3 + 1] += velocities[i * 3 + 1] * delta;
                 positions[i * 3 + 2] += velocities[i * 3 + 2] * delta;
-    
-        
-        
             }
     
             // Update the geometry
