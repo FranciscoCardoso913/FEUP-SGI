@@ -16,7 +16,8 @@ class MyGame {
         NAME:0,
         PICKING:1,
         POSITION:2,
-        RUN: 3
+        RUN: 3,
+        RES:4
     };
 
     constructor(app, track){
@@ -124,6 +125,10 @@ class MyGame {
                 case MyGame.STATES.RUN:
                     result = await this.run(...args)
                     break
+
+                case MyGame.STATES.RES:
+                        result = await this.run(...args)
+                        break
             }
 
             ({ state, args } = result);
