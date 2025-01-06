@@ -57,9 +57,8 @@ class MyContents {
             gui.setContents(this)
             gui.init();
 
-            let game = new MyGame(this.app)
+            let game = new MyGame(this.app, this.track)
 
- 
             game.start()
         })
     }
@@ -86,8 +85,8 @@ class MyContents {
             new THREE.Vector3(-5, 0, 10),  // 8 curve
             new THREE.Vector3(-5, 0, 0),
         ], true, 'catmullrom', 0.5);
-        let track = new MyTrack(this.path, 15)
-        this.app.scene.add(track.track)
+        this.track = new MyTrack(this.path, 15)
+        this.app.scene.add(this.track.track)
 
         //let obstacle = new MyObstacle(new THREE.Vector3(0, 0, 0))
         //this.app.scene.add(obstacle.obstacle)
