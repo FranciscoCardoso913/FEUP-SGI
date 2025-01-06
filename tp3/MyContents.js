@@ -72,14 +72,6 @@ class MyContents {
     }
 
     update() {
-        /*
-        const currentTime = performance.now() / 1000; // Get the current time in seconds
-        if (currentTime - this.lastUpdateTime > this.interval) {
-            // Time has passed, update the power-up
-            this.powerup.updatePowerUp();
-            this.lastUpdateTime = currentTime; // Update the last update time
-        }
-            */
     }
 
     Wireframe(){
