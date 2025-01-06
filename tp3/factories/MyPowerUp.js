@@ -96,4 +96,4 @@ class MyPowerUp  {
 
 }
 
-export { MyPowerUp };
+export default MyPowerUp;

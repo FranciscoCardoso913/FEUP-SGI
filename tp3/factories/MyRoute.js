@@ -179,4 +179,4 @@ class MyRoute  {
 
 }
 
-export { MyRoute };
+export default MyRoute;
