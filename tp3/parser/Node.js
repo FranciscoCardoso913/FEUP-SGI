@@ -119,12 +119,14 @@ class Node {
 
 				childNode.setParams(res.params)
 				let child = childNode.build(nodes, materials, material);
+				console.log(child)
 				if(child) node.add(child)
 				
 			});
 
 			// Build all its primitives
 			this.primitives.forEach(element => {
+				
 				element.lightHelpers = this.lightHelpers
 				element.enabled = this.enabled
 				let child = buildPrimitive(element, material)
@@ -168,7 +170,8 @@ class Node {
 				node.scale.copy(new THREE.Vector3(element["amount"]["x"],element["amount"]["y"],element["amount"]["z"]))
 			}
 			else if (element["type"]=== "translate"){
-				node.position.add(new THREE.Vector3(element["amount"]["x"],element["amount"]["y"],element["amount"]["z"]))
+				console.log(element["amount"])
+				node.position.add(new THREE.Vector3(parseInt(element["amount"]["x"], 10),parseInt(element["amount"]["y"], 10),parseInt(element["amount"]["z"],10)))
 			}
 			else if(element["type"]=== "rotate"){
 				node.rotation.x+= degreesToRadians(element["amount"]["x"])

@@ -135,7 +135,8 @@ export function loadMipmap(parentTexture, level, path)
 
 export function parseNodeName(input) {
   
-    let regex = /^\s*([a-zA-Z0-9_]+)\s*(?:\(\s*(\$?[a-zA-Z0-9_]+(?:\s*,\s*\$?[a-zA-Z0-9_]+)*)\s*\))?\s*$/;
+    let regex = /^\s*([a-zA-Z0-9_]+)\s*(?:\(\s*(\$?-?[a-zA-Z0-9_]+(?:\s*,\s*\$?-?[a-zA-Z0-9_]+)*)\s*\))?\s*$/;
+
 
 
     let match = input.match(regex);
