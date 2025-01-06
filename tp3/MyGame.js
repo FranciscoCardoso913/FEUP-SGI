@@ -385,6 +385,12 @@ class MyGame {
             else if (this.hasBeenPressedKeys["s"]) {
                 if (layernumber > 0) keyframes = race.changeLayer(--layernumber)
             }
+            if(this.hasBeenPressedKeys["p"]){
+                this.hasBeenPressedKeys = {}
+                while(!this.hasBeenPressedKeys["p"]){
+                    await this.sleep(1000 / this.fps)
+                }
+            }
             this.hasBeenPressedKeys = {}
 
             // Move the player

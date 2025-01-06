@@ -184,7 +184,7 @@ export async function parseMaterials(textures, materials) {
                     uniforms: {
                         colorTexture: { value: textures[value.colorTexture] },
                         heightTexture: { value: textures[value.heightTexture] },
-                        displacementScale: { value: 0.2},
+                        displacementScale: { value: value.scale},
                     },
                     vertexShader: vertexShader,
                     fragmentShader: fragmentShader,
