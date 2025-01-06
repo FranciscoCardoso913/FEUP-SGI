@@ -141,7 +141,7 @@ class MyGame {
 
     async picking(ballons, player1= null) {
         
-        if(player1)this.text = this.textRender.renderText("Pick Your Oponent ballon", new THREE.Vector3(-12,12,110))
+        if(player1)this.text = this.textRender.renderText("Pick Your Opponent ballon", new THREE.Vector3(-12,12,110))
         else this.text = this.textRender.renderText("Pick Your ballon", new THREE.Vector3(-12,12,110))
         this.scene.add(this.text)
         let selected = 0
@@ -275,7 +275,7 @@ class MyGame {
         this.scene.remove(this.text)
         await this.sleep(1000)
 
-        return {state: MyGame.STATES.RUN, args:[{players: players, track: this.track}]}
+        return {state: MyGame.STATES.RUN, args:[players]}
 
     }
 
@@ -338,12 +338,15 @@ class MyGame {
         return {state:MyGame.STATES.PICKING, args: [this.ballons]}
     }
 
-    async run(players, track){
+    async run(players){
+
         function collision(el1, el2){
             const distance = el1.getObject().position.clone().distanceTo(el2.getObject().position.clone());
             return distance <= (el1.hitSphere + el2.hitSphere )
         }
-        this.text = this.textRender.renderText("Get Ready", new THREE.Vector3(-10,5,0))
+
+        /*
+        this.text = this.textRender.renderText("Get Ready", new THREE.Vector3(10,5,0))
         this.scene.add(this.text)
         await this.sleep(1000)
         this.scene.remove(this.text)
@@ -359,20 +362,31 @@ class MyGame {
         this.scene.add(this.text)
         await this.sleep(1000)
         this.scene.remove(this.text)
-
+*/
         let starting_time = Date.now()
+        let keyframes = []
 
         let race = new MyRace(this.scene, starting_time, players.player1, players.player2, this.track)
         while (!race.ended) {
 
             let layernumber = race.layer.layer
             if (this.hasBeenPressedKeys["w"]) {
-                if (layernumber < 4) race.changeLayer(++layernumber)
+                if (layernumber < 4) keyframes = race.changeLayer(++layernumber)
             }
             else if (this.hasBeenPressedKeys["s"]) {
-                if (layernumber > 0) race.changeLayer(--layernumber)
+                if (layernumber > 0) keyframes = race.changeLayer(--layernumber)
             }
             this.hasBeenPressedKeys = {}
+
+            // Move the player
+            if (keyframes.length > 0) {
+                animate(players.player1.getObject(), keyframes, Date.now(), 1)
+                keyframes = []
+            }
+            players.player1.moveWithSpeed(this.fps)
+
+
+            // Move the autonomous player
 
             await this.sleep(1000 / this.fps)
         }
