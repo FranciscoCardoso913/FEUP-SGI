@@ -75,8 +75,6 @@ class MyTrack  {
     
         this.curve.scale.set(1, 0.2, 1);
 
-        console.log(this.points[0])
-        console.log(this.inside(new THREE.Vector3(-75,10, -10)))
         
         return this.curve;
     }
@@ -122,8 +120,6 @@ class MyTrack  {
                 if(this.nextPoint >= this.points.length) this.nextPoint =0
                 if(this.prevPoint >= this.points.length) this.prevPoint =0
                 this.crossedPoints++;
-
-                
             }
             else if( cross1 < 0 && cross3 >0 ){
                 this.prevPoint --;
@@ -135,13 +131,15 @@ class MyTrack  {
                
             }
             else{
-                console.log("Error in colition")
+                console.log("Error in coalition")
             }
             
         }
         return true
     
     }
+
+
 
 
 
