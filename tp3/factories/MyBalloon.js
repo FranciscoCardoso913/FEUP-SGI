@@ -140,6 +140,14 @@ class MyBalloon{
         )
     }
 
+    moveWithSpeed(fps){
+        if(!this.cooldown){
+            this.ballon.position.x += this.vx * 1/fps
+            this.ballon.position.z+= this.vz * 1/fps
+        }
+     
+    }
+
     setDirection(speed,pos){
         this.cooldown = true
         let start = this.ballon.position.clone();
@@ -160,7 +168,7 @@ class MyBalloon{
         const keyframes = [
             { time: 0, position: start, rotation: new THREE.Vector3(0, 0, 0) },
             { time: 0.5, position: movement , rotation: this.getRotationAnglesToVector(new THREE.Vector3(this.vx, 0, this.vz)) },
-            { time: 1, position: final, rotation: new THREE.Vector3(0, 0, 0) },
+            { time: 1, position: final, rotation: this.getRotationAnglesToVector(new THREE.Vector3(this.vx, 0, this.vz)) },
             // Add more keyframes as necessary
           ];
 
