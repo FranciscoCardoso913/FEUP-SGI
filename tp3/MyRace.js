@@ -20,6 +20,7 @@ class MyRace {
     }
 
     changeLayer(layer) {
+        console.log("Changing Layer to: " + layer);
         this.layer.layer = layer;
 
         switch (layer) {

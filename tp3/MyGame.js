@@ -317,16 +317,15 @@ class MyGame {
         while (!race.ended) {
 
             let layernumber = race.layer.layer
-            if (this.hasBeenPressedKeys["W"]) {
-                if (layernumber < 4) race.changeLayer(layernumber + 1)
+            if (this.hasBeenPressedKeys["w"]) {
+                if (layernumber < 4) race.changeLayer(++layernumber)
             }
-            else if (this.hasBeenPressedKeys["S"]) {
-                if (layernumber > 0) race.changeLayer(layernumber - 1)
+            else if (this.hasBeenPressedKeys["s"]) {
+                if (layernumber > 0) race.changeLayer(--layernumber)
             }
+            this.hasBeenPressedKeys = {}
 
-            if (Date.now() - starting_time > 5000000) {race.ended = true}
-            this.sleep(1000 / this.fps)
-
+            await this.sleep(1000 / this.fps)
         }
         
         return {state: MyGame.STATES.QUIT, args: []}
