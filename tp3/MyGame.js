@@ -93,6 +93,8 @@ class MyGame {
         this.app.scene.add(this.track.track)
         this.app.scene.add(this.track.powerups)
         this.app.scene.add(this.track.obstacles)
+
+        this.starting_position = this.track.path.getPointAt(0).clone()
  
     }
     sleep(ms) {
@@ -355,7 +357,7 @@ class MyGame {
 
         let starting_time = Date.now()
 
-        let race = new MyRace(this.scene, starting_time, players.player1, players.player2, track)
+        let race = new MyRace(this.scene, starting_time, players.player1, players.player2, this.track)
         while (!race.ended) {
 
             let layernumber = race.layer.layer
