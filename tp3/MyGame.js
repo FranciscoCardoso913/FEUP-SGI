@@ -1,18 +1,12 @@
 import * as THREE from 'three';
-import { MyAxis } from './MyAxis.js';
-import { MyFileReader } from './parser/MyFileReader.js';
-import { MyGraph } from './parser/MyGraph.js';
-import { MyGuiInterface } from './MyGuiInterface.js';
 import MyBallon from './factories/MyBalloon.js';
 import animate from './animation.js';
 import MyText from './MyText.js';
 import MyParticles from './MyParticles.js';
+
 /**
  *  This class contains the contents of out application
  */
-
-
-
 class MyGame {
 
     static STATES = {
@@ -39,13 +33,6 @@ class MyGame {
         this.camera = app.activeCamera
         this.textRender = new MyText()
         this.text = null
- 
-        
-
-      
-        
-
-
         
         this.pressedKeys = {}; // Keys that are pressed
         this.hasBeenPressedKeys = {}; // keys that have been pressed
