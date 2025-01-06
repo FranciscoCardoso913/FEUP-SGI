@@ -171,7 +171,7 @@ class Node {
 			}
 			else if (element["type"]=== "translate"){
 				console.log(element["amount"])
-				node.position.add(new THREE.Vector3(parseInt(element["amount"]["x"], 10),parseInt(element["amount"]["y"], 10),parseInt(element["amount"]["z"],10)))
+				node.position.add(new THREE.Vector3(parseFloat(element["amount"]["x"]),parseFloat(element["amount"]["y"]),parseFloat(element["amount"]["z"])))
 			}
 			else if(element["type"]=== "rotate"){
 				node.rotation.x+= degreesToRadians(element["amount"]["x"])
