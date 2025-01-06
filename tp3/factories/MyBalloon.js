@@ -180,7 +180,8 @@ class MyBalloon{
           return keyframes
     }
 
-    move(position){
+    move(position, time =1000){
+        this.cooldown = true
         let start = this.ballon.position.clone();
         this.ballon.position.copy(position)
         let movement = new THREE.Vector3().subVectors(this.ballon.position.clone(), start);
@@ -197,7 +198,7 @@ class MyBalloon{
                 console.error(`Keyframe at index ${index} has invalid position:`, keyframe);
             }
         });
-
+        (setTimeout(()=> this.cooldown=false,time))
           return keyframes
     }
 }
