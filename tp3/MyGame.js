@@ -5,7 +5,7 @@ import MyText from './factories/MyText.js';
 import MyParticles from './factories/MyParticles.js';
 import MyRace from './MyRace.js';
 import MyTrack from './factories/MyTrack.js';
-
+import MyRoute from './factories/MyRoute.js';
 /**
  *  This class contains the contents of out application
  */
@@ -100,6 +100,8 @@ class MyGame {
         this.tv_rotation = new THREE.Vector3(0,50*Math.PI/180,0)
         this.tv_position = new THREE.Vector3(-150,40,-45)
         this.starting_position = this.track.path.getPointAt(0).clone()
+ 
+        this.route = new MyRoute(this.track.width, this.track.path.points[0].clone(), 3);
         this.time = this.textRender.renderText("Time: 0", new THREE.Vector3(-150,40,-45), this.tv_rotation)
         this.scene.add(this.time)
         
@@ -151,7 +153,7 @@ class MyGame {
                     break
 
                 case MyGame.STATES.RES:
-                        result = await this.run(...args)
+
                         break
             }
 
@@ -366,7 +368,8 @@ class MyGame {
 
     async run(players){
 
-        
+        let index= 0;
+        let path = this.route.route
         this.app.setActiveCamera("firstPerson")
        
         this.updateCamera(players.player1);
@@ -397,6 +400,17 @@ class MyGame {
                     await this.sleep(1000 / this.fps)
                 }
             }
+            if(this.hasBeenPressedKeys["r"]){
+                this.laye
+                index =0 
+                race.changeLayer(0)
+                players.player1.move(this.starting_position)
+                players.player1.getObject().rotation.copy(new THREE.Euler(0,0,0))
+                players.player2.move(this.starting_position)
+                this.ticketsNumber = 0
+                this.starting_time = Date.now()
+        
+            }
             this.hasBeenPressedKeys = {}
 
             // Move the player
@@ -411,12 +425,24 @@ class MyGame {
                 powerup.updatePowerUp()
             })
 
+            if(!players.player2.cooldown){
+                if(index>= path.length)
+                    return {state: MyGame.STATES.QUIT, args: []}
+                let p = path[index].clone()
+                p.y = 10
+                let keyframes = players.player2.move(p, 2000)
+                animate(players.player2.getObject(),keyframes,Date.now(), 1)
+                index++;
+
+
+            }
+
             // Move the autonomous player
 
             this.updateText()
 
             if (this.track.won()) {
-                return {state: MyGame.STATES.QUIT, args: []}
+                return {state: MyGame.STATES.RES, args: []}
             }
 
             await this.sleep(1000 / this.fps)
