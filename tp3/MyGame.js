@@ -340,28 +340,6 @@ class MyGame {
 
     async run(players){
 
-        function collision(el1, el2){
-            const distance = el1.getObject().position.clone().distanceTo(el2.getObject().position.clone());
-            return distance <= (el1.hitSphere + el2.hitSphere )
-        }
-
-        this.text = this.textRender.renderText("Get Ready", new THREE.Vector3(10,5,0))
-        this.scene.add(this.text)
-        await this.sleep(1000)
-        this.scene.remove(this.text)
-        
-        for (let i = 3; i > 0; i--){
-            this.text = this.textRender.renderText(i, new THREE.Vector3(-1,5,0))
-            this.scene.add(this.text)
-            await this.sleep(1000)
-            this.scene.remove(this.text)
-        }
-
-        this.text = this.textRender.renderText("GO", new THREE.Vector3(-1,5,0))
-        this.scene.add(this.text)
-        await this.sleep(1000)
-        this.scene.remove(this.text)
-
         let starting_time = Date.now()
         let keyframes = []
 
@@ -382,13 +360,11 @@ class MyGame {
                 animate(players.player1.getObject(), keyframes, Date.now(), 1)
                 keyframes = []
             }
-            players.player1.moveWithSpeed(this.fps)
 
-            
+            race.checkMovement()
+
             this.track.powerups.forEach((powerup)=>{
-
                 powerup.updatePowerUp()
-
             })
 
             // Move the autonomous player
