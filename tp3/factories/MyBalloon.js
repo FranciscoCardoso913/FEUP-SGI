@@ -142,7 +142,6 @@ class MyBalloon{
         this.ballon.position.copy(position)
         let movement = new THREE.Vector3().subVectors(this.ballon.position.clone(), start);
       
-        console.log(start)
         const keyframes = [
             { time: 0, position: start, rotation: new THREE.Vector3(0, 0, 0) },
             { time: 0.5, position: new THREE.Vector3().addVectors(start , movement.clone().multiplyScalar(0.5)), rotation: this.getRotationAnglesToVector(movement.clone()) },

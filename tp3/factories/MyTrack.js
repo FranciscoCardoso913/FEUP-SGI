@@ -75,9 +75,6 @@ class MyTrack  {
     
         this.curve.scale.set(1, 0.2, 1);
 
-        console.log(this.points[0])
-        console.log(this.inside(new THREE.Vector3(-75,10, -10)))
-        
         return this.curve;
     }
 
@@ -135,7 +132,7 @@ class MyTrack  {
                
             }
             else{
-                console.log("Error in colition")
+                console.log("Error in collision")
             }
             
         }
@@ -147,4 +144,4 @@ class MyTrack  {
 
 }
 
-export { MyTrack };
+export default MyTrack ;

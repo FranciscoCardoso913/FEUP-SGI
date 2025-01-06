@@ -4,6 +4,8 @@ import animate from './animation.js';
 import MyText from './factories/MyText.js';
 import MyParticles from './factories/MyParticles.js';
 import MyRace from './MyRace.js';
+import MyTrack from './factories/MyTrack.js';
+import MyRoute from './factories/MyRoute.js';
 
 /**
  *  This class contains the contents of out application
@@ -52,6 +54,27 @@ class MyGame {
         console.log(`Key up: ${event.key}`);
         });
 
+        this.width = 15
+        this.path = new THREE.CatmullRomCurve3([
+            new THREE.Vector3(-5, 0, 0),
+            new THREE.Vector3(-5, 0, -10), // 1 curve
+            new THREE.Vector3(3, 0, -10),  // 2 curve
+            new THREE.Vector3(3, 0, -3),   // 3 curve   
+            new THREE.Vector3(-2, 0, -3),  // 4 curve
+            new THREE.Vector3(-2, 0, 3),   // 5 curve
+            new THREE.Vector3(5, 0, 3),    // 6 curve
+            new THREE.Vector3(5, 0, 10),   // 7 curve
+            new THREE.Vector3(-5, 0, 10),  // 8 curve
+            new THREE.Vector3(-5, 0, 0),
+        ], true, 'catmullrom', 0.5);
+        this.track = new MyTrack(this.path, this.width)
+        this.app.scene.add(this.track.track)
+
+        this.starting_position = this.track.path.getPointAt(0)
+        console.log(this.starting_position)
+        this.route = new MyRoute(this.width, this.starting_position, 2)
+        this.app.scene.add(this.route.visualLine)
+
  
     }
     sleep(ms) {
@@ -76,18 +99,14 @@ class MyGame {
 
                 case MyGame.STATES.POSITION:
                     result =  await this.spot(...args)
-                    console.log("imposition")
                     break
 
                 case MyGame.STATES.RUN:
-                    console.log("imaboutorun")
                     result = await this.run(...args)
-                    console.log("imrunning")
                     break
             }
 
             ({ state, args } = result);
-            console.log("CU", args)
         }
         let particles = new MyParticles(this.scene, 100,new THREE.Vector3(-30,0,0),1,1)
         particles.simulate()
@@ -171,8 +190,11 @@ class MyGame {
 
     async spot(players){
         await this.sleep(1500)
-        const spotA = new THREE.Vector3(-40,5,0)
-        const spotB = new THREE.Vector3(-25,5,0)
+        let position_dif = new THREE.Vector3(7,0,0)
+        console.log(this.starting_position)
+        const spotA = this.starting_position - position_dif 
+        const spotB = this.starting_position + position_dif
+        console.log(spotA, spotB)
         const cameraPos = new THREE.Vector3(spotB.x + (spotA.x -spotB.x)/2,60,0)
         let cameraKeyframes = [
             { time: 0, position: this.camera.position.clone()},
@@ -293,7 +315,6 @@ class MyGame {
     }
 
     async run(players, track){
-        console.log("RUN")
         this.text = this.textRender.renderText("Get Ready", new THREE.Vector3(-10,5,0))
         this.scene.add(this.text)
         await this.sleep(1000)

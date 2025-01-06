@@ -2,12 +2,8 @@ import * as THREE from 'three';
 import { MyAxis } from './MyAxis.js';
 import { MyGuiInterface } from './MyGuiInterface.js';
 import { MyGame } from './MyGame.js';
-import { MyTrack } from './factories/MyTrack.js';
 import { MyFileReader } from './parser/MyFileReader.js';
 import { MyGraph } from './parser/MyGraph.js';
-import { MyObstacle } from './factories/MyObstacle.js';
-import { MyPowerUp } from './factories/MyPowerUp.js';
-import { MyRoute } from './factories/MyRoute.js';
 
 
 /**
@@ -35,7 +31,6 @@ class MyContents {
         // Reads scene 
         this.reader.open("YASF/track.json").then(async(json) => {
             
-            //console.log(json['yasf']);
             this.graph = new MyGraph(json) //Parse json
             await this.graph.init()
             this.graph.build() // Construct graph
@@ -73,40 +68,18 @@ class MyContents {
             this.axis = new MyAxis(this)
             this.app.scene.add(this.axis)
         }
-        this.path = new THREE.CatmullRomCurve3([
-            new THREE.Vector3(-5, 0, 0),
-            new THREE.Vector3(-5, 0, -10), // 1 curve
-            new THREE.Vector3(3, 0, -10),  // 2 curve
-            new THREE.Vector3(3, 0, -3),   // 3 curve   
-            new THREE.Vector3(-2, 0, -3),  // 4 curve
-            new THREE.Vector3(-2, 0, 3),   // 5 curve
-            new THREE.Vector3(5, 0, 3),    // 6 curve
-            new THREE.Vector3(5, 0, 10),   // 7 curve
-            new THREE.Vector3(-5, 0, 10),  // 8 curve
-            new THREE.Vector3(-5, 0, 0),
-        ], true, 'catmullrom', 0.5);
-        this.track = new MyTrack(this.path, 15)
-        this.app.scene.add(this.track.track)
-
-        //let obstacle = new MyObstacle(new THREE.Vector3(0, 0, 0))
-        //this.app.scene.add(obstacle.obstacle)
-
-        this.powerup = new MyPowerUp(new THREE.Vector3(0, 5, 0))
-        this.app.scene.add(this.powerup.powerup)
-
-        let starting_position = new THREE.Vector3(-5, 0, 0)
-        this.route = new MyRoute(15, starting_position, 2)
-        this.app.scene.add(this.route.visualLine)
 
     }
 
     update() {
+        /*
         const currentTime = performance.now() / 1000; // Get the current time in seconds
         if (currentTime - this.lastUpdateTime > this.interval) {
             // Time has passed, update the power-up
             this.powerup.updatePowerUp();
             this.lastUpdateTime = currentTime; // Update the last update time
         }
+            */
     }
 
     Wireframe(){
