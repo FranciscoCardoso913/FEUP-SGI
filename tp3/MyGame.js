@@ -5,7 +5,7 @@ import MyText from './factories/MyText.js';
 import MyParticles from './factories/MyParticles.js';
 import MyRace from './MyRace.js';
 import MyTrack from './factories/MyTrack.js';
-
+import MyRoute from './factories/MyRoute.js';
 /**
  *  This class contains the contents of out application
  */
@@ -98,8 +98,9 @@ class MyGame {
         this.app.scene.add(this.track.obstacles_obj)
     
         this.starting_position = this.track.path.getPointAt(0).clone()
-      
- 
+        console.log(this.track.path.points)
+        console.log(this.track.path)
+        this.route = new MyRoute(this.track.width, this.track.path.points[0].clone(), 3);
     }
 
     updateCamera(player){
@@ -143,7 +144,7 @@ class MyGame {
                     break
 
                 case MyGame.STATES.RES:
-                        result = await this.run(...args)
+
                         break
             }
 
@@ -358,7 +359,8 @@ class MyGame {
 
     async run(players){
 
-        
+        let index= 0;
+        let path = this.route.route
         this.app.setActiveCamera("firstPerson")
        
         this.updateCamera(players.player1);
@@ -402,6 +404,18 @@ class MyGame {
             this.track.powerups.forEach((powerup)=>{
                 powerup.updatePowerUp()
             })
+
+            if(!players.player2.cooldown){
+                if(index>= path.length)
+                    return {state: MyGame.STATES.QUIT, args: []}
+                let p = path[index].clone()
+                p.y = 10
+                let keyframes = players.player2.move(p, 2000)
+                animate(players.player2.getObject(),keyframes,Date.now(), 1)
+                index++;
+
+
+            }
 
             // Move the autonomous player
 
