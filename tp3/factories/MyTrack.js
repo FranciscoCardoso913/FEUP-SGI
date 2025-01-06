@@ -59,7 +59,7 @@ class MyTrack  {
         );
         this.mesh = new THREE.Mesh(geometry, this.material);   
 
-        this.points = this.path.getPoints(20)
+        this.points = this.path.getPoints(100)
         this.prevPoint =0
         this.nextPoint = 1
         let lineGeometry = new THREE.BufferGeometry().setFromPoints([...this.points]);
@@ -74,7 +74,7 @@ class MyTrack  {
         this.curve.add(this.mesh);
 
         this.points.forEach(point => {
-            let sphereGeometry = new THREE.SphereGeometry(2, 32, 32);
+            let sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
             let sphereMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
             let sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
             sphere.position.copy(point);
@@ -117,8 +117,7 @@ class MyTrack  {
 
     createObstacles(){
         let obstacles_positions = [
-           
-            new THREE.Vector3(-4.8,0,-9.5),
+            new THREE.Vector3(-4.4,0,-9.2),
             new THREE.Vector3(0,0,2.6),
             new THREE.Vector3(4,0,11),
             new THREE.Vector3(1,0,10.5),

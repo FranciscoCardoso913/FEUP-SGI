@@ -9,8 +9,7 @@ class MyBalloon{
         this.vz = 0
         this.cooldown = false
         this.build()
-        this.hitSphere = 15
-     
+        this.hitSphere = 5
     }
 
     build(){
