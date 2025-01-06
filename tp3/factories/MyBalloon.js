@@ -153,6 +153,7 @@ class MyBalloon{
         this.cooldown = true
         let start = this.ballon.position.clone();
         let final = start.clone()
+        console.log(speed)
         this.vx = speed.x
         this.vz = speed.z
         let movement = start.clone()
@@ -173,7 +174,6 @@ class MyBalloon{
             // Add more keyframes as necessary
           ];
 
-          console.log(keyframes)
           (setTimeout(()=> this.cooldown=false,1000))
 
           return keyframes
