@@ -37,7 +37,11 @@ class MyObstacle  {
             this.obstacle.addLevel(lowDetailMesh, 30);
 
         }
+
+        getObject(){
+            return this.obstacle;
+        }
     
 }
 
-export { MyObstacle };
+export default MyObstacle ;

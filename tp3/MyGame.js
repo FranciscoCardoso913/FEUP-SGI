@@ -5,7 +5,6 @@ import MyText from './factories/MyText.js';
 import MyParticles from './factories/MyParticles.js';
 import MyRace from './MyRace.js';
 import MyTrack from './factories/MyTrack.js';
-import MyRoute from './factories/MyRoute.js';
 
 /**
  *  This class contains the contents of out application
@@ -69,12 +68,8 @@ class MyGame {
         ], true, 'catmullrom', 0.5);
         this.track = new MyTrack(this.path, this.width)
         this.app.scene.add(this.track.track)
-
-        this.starting_position = this.track.path.getPointAt(0).clone()
-
-        this.route = new MyRoute(this.width, this.starting_position.clone(), 2)
-        this.app.scene.add(this.route.visualLine)
-
+        this.app.scene.add(this.track.powerups)
+        this.app.scene.add(this.track.obstacles)
  
     }
     sleep(ms) {

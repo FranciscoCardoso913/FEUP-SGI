@@ -1,4 +1,6 @@
 import * as THREE from 'three';
+import  MyPowerUp from './MyPowerUp.js';
+import  MyObstacle from './MyObstacle.js';
 
 class MyTrack  {
 
@@ -16,11 +18,15 @@ class MyTrack  {
         this.path.points = this.path.points.map(point => point.clone().multiplyScalar(this.width));
 
         this.segments = segments
+
         this.track = this.createTrack()
         this.points = []
         this.prevPoint = null
         this.nextPoint = null
         this.crossedPoints =0
+
+        this.powerups = this.createPowerUps()
+        this.obstacles = this.createObstacles()
 
     }
 
@@ -77,6 +83,70 @@ class MyTrack  {
 
         
         return this.curve;
+    }
+
+    createPowerUps(){
+
+        let powerups_positions = [
+            new THREE.Vector3(-6,0,-7),
+            new THREE.Vector3(2.5,0,-4),
+            new THREE.Vector3(4,5,0.5),
+        ]
+
+        powerups_positions = powerups_positions.map(point => point.clone().multiplyScalar(this.width));
+
+        for (let i = 0; i < powerups_positions.length; i++) {
+            powerups_positions[i].y = 10
+        }
+
+        // HardCoded Powerups so that we can have the powerups that were asked in the assignment
+        let powerups = [
+            new MyPowerUp(powerups_positions[0]),
+            new MyPowerUp(powerups_positions[1]),
+            new MyPowerUp(powerups_positions[2]),
+        ]
+
+        let group = new THREE.Group();
+        powerups.forEach(powerup => {
+            group.add(powerup.getObject());
+        });
+
+        return group
+    }
+
+    createObstacles(){
+        let obstacles_positions = [
+            new THREE.Vector3(-6,0,-7),
+            new THREE.Vector3(2.5,0,-4),
+            new THREE.Vector3(4,0,9.5),
+        ]
+
+        obstacles_positions = obstacles_positions.map(point => point.clone().multiplyScalar(this.width));
+
+        for (let i = 0; i < obstacles_positions.length; i++) {
+            obstacles_positions[i].y = 10
+        }
+
+        // HardCoded obstacles so that we can have the obstacles that were asked in the assignment
+        let obstacles = [
+            new MyObstacle(obstacles_positions[0]),
+            new MyObstacle(obstacles_positions[1]),
+            new MyObstacle(obstacles_positions[2]),
+        ]
+
+        let group = new THREE.Group();
+        obstacles.forEach(obstacle => {
+            group.add(obstacle.getObject());
+        });
+
+        return group
+    }
+
+    changeLayer(layer){
+
+        this.powerups.position.y = layer*3 +10;
+        this.obstacles.position.y = layer*3 +10;
+
     }
 
     won(){

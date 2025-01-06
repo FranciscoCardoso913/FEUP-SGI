@@ -94,6 +94,10 @@ class MyPowerUp  {
 
     }
 
+    getObject(){
+        return this.powerup
+    }
+
 }
 
 export default MyPowerUp;

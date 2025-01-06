@@ -45,18 +45,13 @@ class MyRace {
 
         }
         
-        this.layer.y_pos = (layer*3) +10 ;
+        this.layer.y_pos = (layer*3) +10;
+        
+        this.track.changeLayer(layer)
 
 
     }
 
-    animate() {
-        requestAnimationFrame(() => this.animate());
-
-        // Update balloons and track here
-
-        this.renderer.render(this.scene, this.camera);
-    }
 }
 
 export default MyRace;
