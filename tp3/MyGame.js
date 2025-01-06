@@ -96,21 +96,22 @@ class MyGame {
         this.app.scene.add(this.track.track)
         this.app.scene.add(this.track.powerups_obj)
         this.app.scene.add(this.track.obstacles_obj)
-
+    
         this.starting_position = this.track.path.getPointAt(0).clone()
  
     }
 
     updateCamera(player){
-        console.log(player.getObject())
         const pos = player.getObject().position.clone()
-        this.firstPersonCamera.position.copy(new THREE.Vector3().addVectors(pos.clone(), new THREE.Vector3(0,6, 12)))
-        this.firstPersonCamera.target = pos.clone()
-        
+        this.thirdPersonCamera.position.copy(new THREE.Vector3().addVectors(pos.clone(), new THREE.Vector3(0,6, 12)))
+        this.firstPersonCamera.position.copy(new THREE.Vector3().addVectors(pos.clone(), new THREE.Vector3(0,-1, 0)))
 
-        this.thirdPersonCamera.position.copy(new THREE.Vector3().addVectors(pos.clone(), new THREE.Vector3(0,-1, 0)))
+      
+        
+        this.firstPersonCamera.target = new THREE.Vector3().addVectors(pos.clone(), new THREE.Vector3(player.getObject().vx,-1, player.getObject().vz))
         this.thirdPersonCamera.target = new THREE.Vector3().addVectors(pos.clone(), new THREE.Vector3(player.getObject().vx,-1, player.getObject().vz))
         this.app.updateCameraIfRequired(true)
+        
     }
     sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
@@ -360,25 +361,16 @@ class MyGame {
             const distance = el1.getObject().position.clone().distanceTo(el2.getObject().position.clone());
             return distance <= (el1.hitSphere + el2.hitSphere )
         }
-        this.updateCamera(players.player1)
-        this.app.setActiveCamera("firstPerson")
-
-        this.text = this.textRender.renderText("Get Ready", new THREE.Vector3(10,5,0))
-        this.scene.add(this.text)
-        await this.sleep(1000)
-        this.scene.remove(this.text)
         
-        for (let i = 3; i > 0; i--){
-            this.text = this.textRender.renderText(i, new THREE.Vector3(-1,5,0))
-            this.scene.add(this.text)
-            await this.sleep(1000)
-            this.scene.remove(this.text)
-        }
+        this.app.setActiveCamera("firstPerson")
+       
+        this.updateCamera(players.player1);
 
-        this.text = this.textRender.renderText("GO", new THREE.Vector3(-1,5,0))
-        this.scene.add(this.text)
-        await this.sleep(1000)
-        this.scene.remove(this.text)
+        setInterval(() => {
+            this.updateCamera(players.player1);
+        }, 10); 
+
+
 
         let starting_time = Date.now()
         let keyframes = []
@@ -410,6 +402,8 @@ class MyGame {
             })
 
             // Move the autonomous player
+
+          
 
             await this.sleep(1000 / this.fps)
         }
