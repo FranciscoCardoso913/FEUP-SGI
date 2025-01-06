@@ -240,7 +240,7 @@
            
         },
         "cameras": {
-            "initial": "perspective",
+            "initial": "tv",
             "perspective": {
                 "type": "perspective",
                 "angle": 60,
@@ -304,6 +304,22 @@
                     "x": 0,
                     "y": 0,
                     "z": 0
+                }
+            },
+            "tv": {
+                "type": "perspective",
+                "angle": 60,
+                "near": 0.1,
+                "far": 1000,
+                "location": {
+                    "x": -120,
+                    "y": 30,
+                    "z": -20
+                },
+                "target": {
+                    "x": -150,
+                    "y": 30,
+                    "z": -50
                 }
             }
         },

@@ -97,10 +97,19 @@ class MyGame {
         this.app.scene.add(this.track.powerups_obj)
         this.app.scene.add(this.track.obstacles_obj)
     
+        this.tv_rotation = new THREE.Vector3(0,50*Math.PI/180,0)
+        this.tv_position = new THREE.Vector3(-150,40,-45)
         this.starting_position = this.track.path.getPointAt(0).clone()
-        console.log(this.track.path.points)
-        console.log(this.track.path)
+ 
         this.route = new MyRoute(this.track.width, this.track.path.points[0].clone(), 3);
+        this.time = this.textRender.renderText("Time: 0", new THREE.Vector3(-150,40,-45), this.tv_rotation)
+        this.scene.add(this.time)
+        
+        this.ticketsNumber = this.textRender.renderText("Tickets: 0", new THREE.Vector3(-150,30,-45), this.tv_rotation)
+        this.scene.add(this.ticketsNumber)
+
+        this.wind = this.textRender.renderText("Wind: None", new THREE.Vector3(-150,20,-45), this.tv_rotation)
+        this.scene.add(this.wind)
     }
 
     updateCamera(player){
@@ -419,12 +428,17 @@ class MyGame {
 
             // Move the autonomous player
 
-          
+            updateText()
 
             await this.sleep(1000 / this.fps)
         }
         
         return {state: MyGame.STATES.QUIT, args: []}
+        
+    }
+
+    updateText(){
+        this.time = this.textRender.renderText("Time: " + Math.floor((Date.now() - starting_time) / 1000), new THREE.Vector3(-150, 40, -49), new THREE.Vector3(0,50,0))
         
     }
 
