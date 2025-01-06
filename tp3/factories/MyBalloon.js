@@ -5,6 +5,9 @@ class MyBalloon{
     constructor(color = 0x00a2f1) {
         this.color = color
         this.position = new THREE.Vector3(0,0,0)
+        this.vx = 0
+        this.vz = 0
+        this.cooldown = false
         this.build()
     }
 
@@ -135,6 +138,36 @@ class MyBalloon{
              euler.y,
              euler.z
         )
+    }
+
+    setDirection(speed,pos){
+        this.cooldown = true
+        let start = this.ballon.position.clone();
+        let final = start.clone()
+        this.vx = speed.x
+        this.vz = speed.z
+        let movement = start.clone()
+        movement.x += this.vx/2
+        movement.z += this.vz/2
+        movement.y = start.y + (pos - start.y)
+
+        final.x += this.vx
+        final.y = pos
+        final.z += this.vz
+
+
+
+        const keyframes = [
+            { time: 0, position: start, rotation: new THREE.Vector3(0, 0, 0) },
+            { time: 0.5, position: movement , rotation: this.getRotationAnglesToVector(new THREE.Vector3(this.vx, 0, this.vz)) },
+            { time: 1, position: final, rotation: new THREE.Vector3(0, 0, 0) },
+            // Add more keyframes as necessary
+          ];
+
+          console.log(keyframes)
+          (setTimeout(()=> this.cooldown=false,1000))
+
+          return keyframes
     }
 
     move(position){
