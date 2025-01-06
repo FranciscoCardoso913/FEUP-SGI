@@ -117,7 +117,7 @@ class MyTrack  {
 
     createObstacles(){
         let obstacles_positions = [
-            new THREE.Vector3(-5,0,-1),
+           
             new THREE.Vector3(-4.8,0,-9.5),
             new THREE.Vector3(0,0,2.6),
             new THREE.Vector3(4,0,11),
