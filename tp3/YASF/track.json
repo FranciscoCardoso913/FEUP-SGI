@@ -7,10 +7,10 @@
                 "b": 1.0
             },
             "ambient": {
-                "r": 1,
-                "g": 1,
-                "b": 1,
-                "intensity": 0.8
+                "r": 10,
+                "g": 10,
+                "b": 10,
+                "intensity": 3
             },
             "fog": {
                 "color": {
@@ -26,36 +26,36 @@
                 "center": {"x": 0, "y": 20, "z": 0},
                 "emissive": {"r": 0, "g": 0, "b": 0},
                 "intensity": 0,
-                "textureref": "textures/VRCloud_Alb.jpg"
+                "textureref": "image/textures/VRCloud_Alb.jpg"
         }
         },
         "textures": {
             "floor": {
-                "filepath": "textures/floor.webp",
+                "filepath": "image/textures/floor.webp",
                 "isVideo": false
             },
             "wood": {
-                "filepath": "textures/wood.jpg",
+                "filepath": "image/textures/wood.jpg",
                 "isVideo": false
             },
             "yellowstrips": {
-                "filepath": "textures/strips.jpg",
+                "filepath": "image/textures/strips.jpg",
                 "isVideo": false
             },
             "parkinglot": {
-                "filepath": "textures/asphalt.jpg",
+                "filepath": "image/textures/asphalt.jpg",
                 "isVideo": false
             },
             "dirt": {
-                "filepath": "textures/dirt.webp",
+                "filepath": "image/textures/dirt.webp",
                 "isVideo": false
             },
             "ad": {
-                "filepath": "textures/ad.jpeg",
+                "filepath": "image/textures/ad.jpeg",
                 "isVideo": false
             },
             "adGray": {
-                "filepath": "textures/ad-gray.jpeg",
+                "filepath": "image/textures/ad-gray.jpeg",
                 "isVideo": false
             }
         },

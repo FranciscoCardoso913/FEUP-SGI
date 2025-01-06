@@ -25,7 +25,7 @@ class MyTrack  {
      */
     createTrack() {
 
-        const texture = new THREE.TextureLoader().load("../textures/road.jpg");
+        const texture = new THREE.TextureLoader().load("../image/textures/road.jpg");
         texture.wrapS = THREE.RepeatWrapping;
     
         this.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: texture });

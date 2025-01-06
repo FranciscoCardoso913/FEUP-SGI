@@ -12,7 +12,7 @@ class MyObstacle  {
             this.obstacle = new THREE.LOD();
             
             const textureLoader = new THREE.TextureLoader();
-            const texture = textureLoader.load('/textures/box.jpg');
+            const texture = textureLoader.load('/image/textures/box.jpg');
             texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
             
             // Define Lod Levels
