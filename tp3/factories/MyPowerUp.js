@@ -8,7 +8,7 @@ class MyPowerUp  {
         this.rotationChange = 0.01
         this.animate = this.animate.bind(this)
         this.clock = new THREE.Clock();
-        this.hitSphere = 1
+        this.hitSphere = 10
     }
 
     build(){

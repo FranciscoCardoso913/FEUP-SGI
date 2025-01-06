@@ -9,7 +9,7 @@ class MyBalloon{
         this.vz = 0
         this.cooldown = false
         this.build()
-        this.hitSphere = 3
+        this.hitSphere = 15
     }
 
     build(){
@@ -153,7 +153,6 @@ class MyBalloon{
         this.cooldown = true
         let start = this.ballon.position.clone();
         let final = start.clone()
-        console.log(speed)
         this.vx = speed.x
         this.vz = speed.z
         let movement = start.clone()

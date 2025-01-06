@@ -13,7 +13,7 @@ class MyRace {
     constructor(scene, startingTime, playerBalloon, autonomousBalloon, track) {
         this.scene = scene;
         this.startingTime = startingTime;
-        console.log(playerBalloon);
+     
         this.playerBalloon = playerBalloon;
         this.autonomousBalloon = autonomousBalloon;
         this.track = track;
@@ -26,7 +26,7 @@ class MyRace {
     }
 
     changeLayer(layer) {
-        console.log("Changing Layer to: " + layer);
+   
         this.layer.layer = layer;
 
         switch (layer) {
@@ -63,44 +63,49 @@ class MyRace {
 
         function collision(el1, el2){
             const distance = el1.getObject().position.clone().distanceTo(el2.getObject().position.clone());
+           
+            if(distance <= (el1.hitSphere + el2.hitSphere )) console.log("haaaaa")
             return distance <= (el1.hitSphere + el2.hitSphere )
         }
-
 
         if ((Date.now() - this.hit_time) < 1000) {
             return
         }
+   
 
         let collided = false;
-
+    
         if (!this.track.inside(this.playerBalloon.getObject().position)) {
-            collided = true;
-        }
-        else if (collision(this.playerBalloon, this.autonomousBalloon)){
+     
             collided = true;
         }
         else {
             for (let i = 0; i < this.track.obstacles.length; i++) {
                 if (collision(this.playerBalloon, this.track.obstacles[i])) {
+                    console.log("fbfdhbf")
                     collided = true;
                     break;
                 }
             }
         }
-        
+      
         if (collided) {
-            this.playerBalloon.move(this.track.points(this.track.prevPoint));
+       
+            let p = this.track.points[this.track.prevPoint].clone()
+            p.y= this.playerBalloon.getObject().position.y
+          
+            this.playerBalloon.move(p);
 
-            if (tickets <= 0) tickets--; 
+            if (this.tickets <= 0) this.tickets--; 
             else this.hit_time = Date.now();
             return;
         }
 
-        for (let i = 0; i < this.track.powerUps.length; i++) {
-            if (collision(this.playerBalloon, this.track.powerUps[i])) {
+        for (let i = 0; i < this.track.powerups.length; i++) {
+            if (collision(this.playerBalloon, this.track.powerups[i])) {
                 this.tickets++;
                 console.log("Tickets: " + this.tickets);
-                this.track.powerUps[i].getObject().position.set(0, -100, 0);
+             
                 this.hit_time = Date.now();
                 break;
             }
