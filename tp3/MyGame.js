@@ -304,7 +304,7 @@ class MyGame {
         this.scene.remove(this.text)
         await this.sleep(1000)
 
-        return {state: MyGame.STATES.RES, args:[players]}
+        return {state: MyGame.STATES.RUN, args:[players]}
 
     }
 
@@ -322,20 +322,24 @@ class MyGame {
         let isSelected = false
         let index = 12
         let chars = []
+        let letters = []
         while(!isSelected){
             this.keysPressed.forEach((key)=>{
                 if(key ==="Enter"){
-                    isSelected = true
+                    if (letters.length > 0) {
+                        isSelected = true
+                        this.name = letters.join("")
+                    }
                 }else if (key === "Backspace"){
-                    
-                    
                     if(chars.length > 0){
                         let char = chars.pop()
+                        letters.pop()
                         this.text.remove(char)
                     }
 
                 }else if (isCharacterKey(key)){
                     let char = this.textRender.addChar(this.text,key, index + chars.length)
+                    letters.push(key)
                     chars.push(char)
                 }
             })
@@ -344,6 +348,8 @@ class MyGame {
 
             await this.sleep(1000/this.fps)
         }
+
+        console.log(chars, this.name)
         this.scene.remove(this.text)
         this.scene.remove(title)
         this.scene.remove(credits)
@@ -428,7 +434,7 @@ class MyGame {
 
             if(!players.player2.cooldown){
                 if(index>= path.length)
-                    return {state: MyGame.STATES.RES, args: []}
+                    return {state: MyGame.STATES.RES, args: [players, "lose"]}
                 let p = path[index].clone()
                 p.y = 10
                 let keyframes = players.player2.move(p, 2000)
@@ -443,7 +449,7 @@ class MyGame {
             this.updateText()
 
             if (this.track.won()) {
-                return {state: MyGame.STATES.RES, args: []}
+                return {state: MyGame.STATES.RES, args: [players, "won"]}
             }
 
             await this.sleep(1000 / this.fps)
@@ -453,8 +459,21 @@ class MyGame {
         
     }
 
-    async res(players){
+    async res(players, result){
         await this.sleep(1000)
+
+        this.scene.remove(this.time)
+        this.scene.remove(this.ticketsNumber)
+        this.scene.remove(this.wind)
+
+        console.log(this.name)
+        this.result = this.textRender.renderText("You " + result + ", " + this.name, new THREE.Vector3(-150,40,-45), this.tv_rotation)
+        this.scene.add(this.result)
+
+        let time = Math.floor((Date.now() - this.starting_time) / 1000)
+        this.time = this.textRender.renderText("Finished at: " + time, new THREE.Vector3(-150,30,-45), this.tv_rotation)
+        this.scene.add(this.time)
+
         players.player1.cooldown = false
         players.player1.getObject().position.copy(new THREE.Vector3(-150, 40, -10))
         players.player1.getObject().rotation.copy(new THREE.Euler(0,0,0))
