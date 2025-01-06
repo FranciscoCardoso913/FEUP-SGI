@@ -20,6 +20,7 @@ class MyRace {
         this.layer = new Layer(0, new THREE.Vector3(0, 0, 0), 3);
 
         this.tickets = 0;
+        this.wind = "None"
         this.hit_time = Date.now();
 
         //this.route = new MyRoute(this.track.width, this.track.path.points.getPointAt(0).clone(), 3);
@@ -32,19 +33,23 @@ class MyRace {
         switch (layer) {
             case 0: 
                 this.layer.speed = new THREE.Vector3(0, 0, 0); // No Wind
+                this.wind = "None"
                 break;
             case 1:
-                this.layer.speed = new THREE.Vector3(0, 0, -5); // North
-
+                this.layer.speed = new THREE.Vector3(0, 0, -10); // North
+                this.wind = "North"
                 break;
             case 2:
-                this.layer.speed = new THREE.Vector3(0, 0, 5); // South
+                this.layer.speed = new THREE.Vector3(0, 0, 10); // South
+                this.wind = "South"
                 break;
             case 3:
-                this.layer.speed = new THREE.Vector3(-5, 0, 0); // East
+                this.layer.speed = new THREE.Vector3(-10, 0, 0); // East
+                this.wind = "East"
                 break;
             case 4:
-                this.layer.speed = new THREE.Vector3(5, 0, 0); // West
+                this.layer.speed = new THREE.Vector3(10, 0, 0); // West
+                this.wind = "West"
                 break;
             default:
                 console.log("INVALID LAYER");
@@ -96,7 +101,7 @@ class MyRace {
           
             this.playerBalloon.move(p);
 
-            if (this.tickets <= 0) this.tickets--; 
+            if (this.tickets > 0) this.tickets--; 
             else this.hit_time = Date.now();
             return;
         }
@@ -105,8 +110,6 @@ class MyRace {
             if (collision(this.playerBalloon, this.track.powerups[i])) {
                 this.tickets++;
                 console.log("Tickets: " + this.tickets);
-             
-                this.hit_time = Date.now();
                 break;
             }
         }
