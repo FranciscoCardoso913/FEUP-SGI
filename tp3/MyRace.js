@@ -23,7 +23,7 @@ class MyRace {
         this.wind = "None"
         this.hit_time = Date.now();
 
-        //this.route = new MyRoute(this.track.width, this.track.path.points.getPointAt(0).clone(), 3);
+        
     }
 
     changeLayer(layer) {
@@ -81,11 +81,12 @@ class MyRace {
         let collided = false;
     
         if (!this.track.inside(this.playerBalloon.getObject().position)) {
-     
+            console.log("ola")
             collided = true;
         }
         else {
             for (let i = 0; i < this.track.obstacles.length; i++) {
+                
                 if (collision(this.playerBalloon, this.track.obstacles[i])) {
                     console.log("fbfdhbf")
                     collided = true;

@@ -150,7 +150,7 @@ class MyRoute  {
         let material = new THREE.LineBasicMaterial({ color: 0x0000ff });
         
         let curve = new THREE.CatmullRomCurve3(this.route);
-        let points = curve.getPoints(50);
+        let points = curve.getPoints(200);
         //let points = this.route;
         let geometry = new THREE.BufferGeometry().setFromPoints(points);
         let line = new THREE.Line(geometry, material);
