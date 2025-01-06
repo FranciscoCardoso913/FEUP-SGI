@@ -80,7 +80,7 @@ class MyTrack  {
         });
     
         this.curve.scale.set(1, 0.2, 1);
-
+        console.log("A", this.inside(new THREE.Vector3(-75,10,3)))
         
         return this.curve;
     }
@@ -89,8 +89,8 @@ class MyTrack  {
 
         let powerups_positions = [
             new THREE.Vector3(-6,0,-7),
-            new THREE.Vector3(2.5,0,-4),
-            new THREE.Vector3(5,5,9.5),
+            new THREE.Vector3(3,0,-4),
+            new THREE.Vector3(5,0,9.5),
         ]
 
         powerups_positions = powerups_positions.map(point => point.clone().multiplyScalar(this.width));
@@ -115,7 +115,7 @@ class MyTrack  {
     createObstacles(){
         let obstacles_positions = [
             new THREE.Vector3(-4.8,0,-9.5),
-            new THREE.Vector3(0,0,3),
+            new THREE.Vector3(0,0,2.6),
             new THREE.Vector3(4,0,11),
             new THREE.Vector3(1,0,10.5),
         ]

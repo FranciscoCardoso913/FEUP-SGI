@@ -19,6 +19,9 @@ class MyRace {
         this.track = track;
         this.layer = new Layer(0, new THREE.Vector3(0, 0, 0), 3);
 
+        this.tickets = 0;
+        this.hit_time = Date.now();
+
         //this.route = new MyRoute(this.track.width, this.track.path.points.getPointAt(0).clone(), 3);
     }
 
@@ -53,9 +56,57 @@ class MyRace {
         this.track.changeLayer(this.layer.y_pos)
 
         return this.playerBalloon.setDirection(this.layer.speed, this.layer.y_pos);
-        
-        
 
+    }
+
+    checkMovement(fps) {
+
+        function collision(el1, el2){
+            const distance = el1.getObject().position.clone().distanceTo(el2.getObject().position.clone());
+            return distance <= (el1.hitSphere + el2.hitSphere )
+        }
+
+
+        if ((Date.now() - this.hit_time) < 1000) {
+            return
+        }
+
+        let collided = false;
+
+        if (!this.track.inside(this.playerBalloon.getObject().position)) {
+            collided = true;
+        }
+        else if (collision(this.playerBalloon, this.autonomousBalloon)){
+            collided = true;
+        }
+        else {
+            for (let i = 0; i < this.track.obstacles.length; i++) {
+                if (collision(this.playerBalloon, this.track.obstacles[i])) {
+                    collided = true;
+                    break;
+                }
+            }
+        }
+        
+        if (collided) {
+            this.playerBalloon.move(this.track.points(this.track.prevPoint));
+
+            if (tickets <= 0) tickets--; 
+            else this.hit_time = Date.now();
+            return;
+        }
+
+        for (let i = 0; i < this.track.powerUps.length; i++) {
+            if (collision(this.playerBalloon, this.track.powerUps[i])) {
+                this.tickets++;
+                console.log("Tickets: " + this.tickets);
+                this.track.powerUps[i].getObject().position.set(0, -100, 0);
+                this.hit_time = Date.now();
+                break;
+            }
+        }
+
+        this.playerBalloon.moveWithSpeed(fps)
     }
 
 
