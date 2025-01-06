@@ -57,6 +57,10 @@
             "adGray": {
                 "filepath": "image/textures/ad-gray.jpeg",
                 "isVideo": false
+            },
+            "tv": {
+                "filepath": "image/textures/plastic.jpg",
+                "isVideo": false
             }
         },
         "materials": {
@@ -186,7 +190,53 @@
                 "heightTexture": "adGray",
                 "vertex": "./shaders/vertexShader.glsl",
                 "fragment":"./shaders/fragmentShader.glsl"
+            },
+            "tv": {
+                "color": {
+                    "r": 0.5,
+                    "g": 0.5,
+                    "b": 0.5
+                },
+                "specular": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0
+                },
+                "shininess": 32,
+                "emissive": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "transparent": false,
+                "opacity": 1.0,
+                "twosided": "true",
+                "textureref": "tv",
+                "texlength_s": 1.5,
+                "texlength_t": -1.5
+            },
+            "screen": {
+                "color": {
+                    "r": 0.1,
+                    "g": 0.1,
+                    "b": 0.1
+                },
+                "specular": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0
+                },
+                "shininess": 32,
+                "emissive": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "transparent": false,
+                "opacity": 1.0,
+                "twosided": "true"
             }
+            
            
         },
         "cameras": {
@@ -252,7 +302,8 @@
                         "floor",
                         "lights",
                         "outdoor",
-                        "parkinglot"
+                        "parkinglot",
+                        "tv"
                     ]
                 }
             },
@@ -660,6 +711,86 @@
                             "x": 30,
                             "y": 0.1,
                             "z": 120
+                        }
+                    }
+                }
+            },
+
+            "tv":{
+                "type": "node",
+                "materialref": {
+                    "materialId": "tv"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": -140,
+                            "y": 20,
+                            "z": -40
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 50,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList":[
+                        "tvBox",
+                        "tvScreen"
+                    ]
+                }
+
+            },
+            "tvBox":{
+                "type":"node",
+                "children":{
+                    "boxPrim": {
+                        "type": "box",
+                        "xyz1": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "xyz2": {
+                            "x": 60,
+                            "y": 40,
+                            "z": 5
+                        }
+                    }
+                }
+            },
+
+            "tvScreen":{
+                "type":"node",
+                "materialref": {
+                    "materialId": "screen"
+                },
+                "transforms":[
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 3
+                        }
+                    }
+                ],
+                "children":{
+                    "screenPrim":{
+                        "type":"rectangle",
+                        "xy1": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "xy2": {
+                            "x": 50,
+                            "y": 30
                         }
                     }
                 }
