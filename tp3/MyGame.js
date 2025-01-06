@@ -35,6 +35,8 @@ class MyGame {
         this.app = app
         app.setActiveCamera("front")
         this.camera = app.activeCamera
+        this.firstPersonCamera = app.cameras["firstPerson"]
+        this.thirdPersonCamera = app.cameras["thirdPerson"]
         this.textRender = new MyText()
         this.text = null
         
@@ -94,9 +96,22 @@ class MyGame {
         this.app.scene.add(this.track.track)
         this.app.scene.add(this.track.powerups_obj)
         this.app.scene.add(this.track.obstacles_obj)
-
+    
         this.starting_position = this.track.path.getPointAt(0).clone()
  
+    }
+
+    updateCamera(player){
+        const pos = player.getObject().position.clone()
+        this.thirdPersonCamera.position.copy(new THREE.Vector3().addVectors(pos.clone(), new THREE.Vector3(0,6, 12)))
+        this.firstPersonCamera.position.copy(new THREE.Vector3().addVectors(pos.clone(), new THREE.Vector3(0,-1, 0)))
+
+      
+        
+        this.firstPersonCamera.target = new THREE.Vector3().addVectors(pos.clone(), new THREE.Vector3(player.getObject().vx,-1, player.getObject().vz))
+        this.thirdPersonCamera.target = new THREE.Vector3().addVectors(pos.clone(), new THREE.Vector3(player.getObject().vx,-1, player.getObject().vz))
+        this.app.updateCameraIfRequired(true)
+        
     }
     sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
@@ -205,6 +220,8 @@ class MyGame {
     }
 
     async spot(players){
+
+        this.hasBeenPressedKeys= {}
 
         await this.sleep(1500)
         let position_dif = new THREE.Vector3(3,0,0)
@@ -321,11 +338,11 @@ class MyGame {
         const cameraPos = new THREE.Vector3(0,5,130)
         let cameraKeyframes = [
             { time: 0, position: this.camera.position.clone()},
-            { time: 2, position: cameraPos }
+            { time: 1, position: cameraPos }
             ];
 
 
-        animate(this.camera, cameraKeyframes, Date.now(),2)
+        animate(this.camera, cameraKeyframes, Date.now(),1)
         const targetPosition = new THREE.Vector3(0, 5, 0); 
         this.camera.target = targetPosition
 
@@ -339,6 +356,17 @@ class MyGame {
     }
 
     async run(players){
+
+        
+        this.app.setActiveCamera("firstPerson")
+       
+        this.updateCamera(players.player1);
+
+        setInterval(() => {
+            this.updateCamera(players.player1);
+        }, 10); 
+
+
 
         let starting_time = Date.now()
         let keyframes = []
@@ -368,6 +396,8 @@ class MyGame {
             })
 
             // Move the autonomous player
+
+          
 
             await this.sleep(1000 / this.fps)
         }

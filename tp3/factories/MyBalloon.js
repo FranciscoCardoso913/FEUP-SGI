@@ -174,6 +174,7 @@ class MyBalloon{
             // Add more keyframes as necessary
           ];
 
+
           (setTimeout(()=> this.cooldown=false,1000))
 
           return keyframes
