@@ -282,8 +282,11 @@ class MyGame {
         function isCharacterKey(key) {
             return key.length === 1 && key !== " " && !key.startsWith("Arrow") && key !== "Enter" && key !== "Backspace";
         }
-        
-        this.text = this.textRender.renderText("Insert Name:", new THREE.Vector3(-20,50,170))
+        const title =this.textRender.renderText("Vrum Vrum", new THREE.Vector3(-20,50,180))
+        const credits =this.textRender.renderText("Credits: Francisco Cardoso,Jose Martins and FEUP", new THREE.Vector3(-33,25,170))
+        this.text = this.textRender.renderText("Insert Name:", new THREE.Vector3(-30,50,170))
+        this.scene.add(title)
+        this.scene.add(credits)
         this.scene.add(this.text)
         let isSelected = false
         let index = 12
@@ -311,6 +314,8 @@ class MyGame {
             await this.sleep(1000/this.fps)
         }
         this.scene.remove(this.text)
+        this.scene.remove(title)
+        this.scene.remove(credits)
         const cameraPos = new THREE.Vector3(0,5,130)
         let cameraKeyframes = [
             { time: 0, position: this.camera.position.clone()},
