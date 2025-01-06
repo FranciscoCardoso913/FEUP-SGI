@@ -17,6 +17,10 @@ class Node {
 		this.load()
 	}
 
+	copy(){
+		return new Node(JSON.parse(JSON.stringify(this.json)),  JSON.parse(JSON.stringify(this.params)))
+	}
+
 	load(){
 		this.lightHelpers = false
 		this.lodNodes = this.content["lodNodes"]
@@ -97,7 +101,7 @@ class Node {
 			this.lodNodes.forEach(element => {
 				let res = parseNodeName(element.nodeId)
 				let nodeId = res.name
-				let childNode = nodes[nodeId]
+				let childNode = nodes[nodeId].copy()
 				childNode.setParams(res.params)
 				let child = childNode.build(nodes, materials, material);
 				if(child) lod.addLevel(child, element.mindist)
@@ -108,9 +112,11 @@ class Node {
 
 			// Builds all the descendents nodes
 			this.edges.forEach(element => {
+				console.log(element)
 				let res = parseNodeName(element)
 				let nodeId = res.name
-				let childNode = nodes[nodeId]
+				let childNode = nodes[nodeId].copy()
+
 				childNode.setParams(res.params)
 				let child = childNode.build(nodes, materials, material);
 				if(child) node.add(child)
@@ -129,7 +135,7 @@ class Node {
 			this.lods.forEach(element => {
 				let res = parseNodeName(element)
 				let nodeId = res.name
-				let childNode = nodes[nodeId]
+				let childNode = nodes[nodeId].copy()
 				childNode.setParams(res.params)
 				let child = childNode.build(nodes, materials, material);
 				if(child) node.add(child)
