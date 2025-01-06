@@ -50,7 +50,7 @@ class MyRace {
         }
         
         this.layer.y_pos = (layer*3) +10;
-        this.track.changeLayer(layer)
+        this.track.changeLayer(this.layer.y_pos)
 
         return this.playerBalloon.setDirection(this.layer.speed, this.layer.y_pos);
         

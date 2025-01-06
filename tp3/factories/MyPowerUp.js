@@ -44,9 +44,9 @@ class MyPowerUp  {
             wireframe: false,  // Wireframe option
         });
         let intmaterial = new THREE.MeshBasicMaterial({ color: 0x00aaaa, wireframe: false });
-        let geometry1 = new THREE.BoxGeometry(1, 1, 1);
-        let geometry2 = new THREE.BoxGeometry(1, 1, 1);
-        let insideGeometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+        let geometry1 = new THREE.BoxGeometry(4, 4, 4);
+        let geometry2 = new THREE.BoxGeometry(4, 4, 4);
+        let insideGeometry = new THREE.BoxGeometry(2,2,2);
         this.box1 = new THREE.Mesh(geometry1, this.extmaterial);
         this.box2 = new THREE.Mesh(geometry2, this.extmaterial);
         this.insideBox = new THREE.Mesh(insideGeometry, intmaterial);
@@ -75,7 +75,7 @@ class MyPowerUp  {
         
         // Update scale dynamically (for example, decrease over time)
         const time = this.clock.getElapsedTime();
-        const scaleFactor = Math.abs(Math.sin(time*1.5))+0.5; // Decrease but keep minimum size
+        const scaleFactor = Math.abs(Math.sin(time*1.5))+1; // Decrease but keep minimum size
         this.extmaterial.uniforms.uScale.value.set(scaleFactor, scaleFactor, scaleFactor);
     }
 
