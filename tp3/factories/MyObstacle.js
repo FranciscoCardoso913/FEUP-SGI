@@ -4,6 +4,7 @@ class MyObstacle  {
     
         constructor(position) {
             this.position = position
+            this.hitSphere = Math.sqrt(50)/2
             this.build()
         }
     
@@ -36,6 +37,10 @@ class MyObstacle  {
             lowDetailMesh.position.copy(this.position)
             this.obstacle.addLevel(lowDetailMesh, 30);
 
+        }
+
+        getObject(){
+            return this.obstacle
         }
     
 }

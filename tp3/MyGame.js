@@ -172,7 +172,7 @@ class MyGame {
         let isSelected = false
 
         while(!isSelected){
-            isSelected = this.selectedMesh?true : false;
+            isSelected = this.selectedMesh !==null ?true : false;
 
             if (isSelected){
                 selected = this.selectedMesh
@@ -332,6 +332,10 @@ class MyGame {
     }
 
     async run(players, track){
+        function collision(el1, el2){
+            const distance = el1.getObject().position.clone().distanceTo(el2.getObject().position.clone());
+            return distance <= (el1.hitSphere + el2.hitSphere )
+        }
         this.text = this.textRender.renderText("Get Ready", new THREE.Vector3(-10,5,0))
         this.scene.add(this.text)
         await this.sleep(1000)
