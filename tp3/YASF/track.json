@@ -22,7 +22,7 @@
                 "far": 900.0
             },
             "skysphere": {
-                "radius": 200,
+                "radius": 400,
                 "center": {"x": 0, "y": 20, "z": 0},
                 "emissive": {"r": 0, "g": 0, "b": 0},
                 "intensity": 0,
@@ -36,6 +36,18 @@
             },
             "wood": {
                 "filepath": "textures/wood.jpg",
+                "isVideo": false
+            },
+            "yellowstrips": {
+                "filepath": "textures/strips.jpg",
+                "isVideo": false
+            },
+            "parkinglot": {
+                "filepath": "textures/asphalt.jpg",
+                "isVideo": false
+            },
+            "dirt": {
+                "filepath": "textures/dirt.webp",
                 "isVideo": false
             }
         },
@@ -87,6 +99,78 @@
                 "textureref": "wood",
                 "texlength_s": 1.5,
                 "texlength_t": -1.5
+            },
+            "yellowstrips": {
+                "color": {
+                    "r": 0.5,
+                    "g": 0.5,
+                    "b": 0.5
+                },
+                "specular": {
+                    "r": 0.1,
+                    "g": 0.1,
+                    "b": 0.1
+                },
+                "shininess": 32,
+                "emissive": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "transparent": false,
+                "opacity": 1.0,
+                "twosided": "false",
+                "textureref": "yellowstrips",
+                "texlength_s": 2,
+                "texlength_t": -6
+            },
+            "parkinglot":{
+                "color": {
+                    "r": 0.5,
+                    "g": 0.5,
+                    "b": 0.5
+                },
+                "specular": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "shininess": 32,
+                "emissive": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "transparent": false,
+                "opacity": 1.0,
+                "twosided": "false",
+                "textureref": "parkinglot",
+                "texlength_s": 1,
+                "texlength_t": 1
+            },
+            "dirt": {
+                "color": {
+                    "r": 0.5,
+                    "g": 0.5,
+                    "b": 0.5
+                },
+                "specular": {
+                    "r": 0.0,
+                    "g": 0.0,
+                    "b": 0.0
+                },
+                "shininess": 32,
+                "emissive": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 0
+                },
+                "transparent": false,
+                "opacity": 1.0,
+                "twosided": "true",
+                "textureref": "dirt",
+                "texlength_s": 1,
+                "texlength_t": -1
             }
            
         },
@@ -96,7 +180,7 @@
                 "type": "perspective",
                 "angle": 60,
                 "near": 0.1,
-                "far": 300,
+                "far": 1000,
                 "location": {
                     "x": 60,
                     "y": 60,
@@ -113,7 +197,7 @@
                 "type": "perspective",
                 "angle": 60,
                 "near": 0.1,
-                "far": 300,
+                "far": 1000,
                 "location": {
                     "x": 0,
                     "y": 40,
@@ -129,7 +213,7 @@
                 "type": "perspective",
                 "angle": 60,
                 "near": 0.1,
-                "far": 300,
+                "far": 1000,
                 "location": {
                     "x": 0,
                     "y": 60,
@@ -152,7 +236,8 @@
                     "nodesList": [
                         "floor",
                         "lights",
-                        "outdoor"
+                        "outdoor",
+                        "parkinglot"
                     ]
                 }
             },
@@ -239,10 +324,7 @@
                         "leg(0,2)",
                         "leg(5,2)",
                         "plank",
-                        "screen",
-
-                        "park(25,50)",
-                        "park(25,-25)"
+                        "screen"
                     ]
                 }
             },
@@ -324,6 +406,36 @@
                 }
             },
         
+            "parkinglot": {
+                "type": "node",
+                "castshadows": true,
+                "receiveshadows": true,
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 180
+                        }
+                    },
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": 90,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "nodesList": [
+                        "park(80,-35)",
+                        "park(80,15)",
+                        "parkfloor"
+                    ]
+                }
+            },
             "park($x,$z)": {
                 "type": "node",
                 "materialref": {
@@ -333,9 +445,9 @@
                     {
                         "type": "translate",
                         "amount": {
-                            "x": 1,
-                            "y": 3,
-                            "z": 23
+                            "x": "$x",
+                            "y": 0,
+                            "z": "$z"
                         }
                     }
                 ],
@@ -345,7 +457,8 @@
                         "parkspot(0,5)",
                         "parkspot(0,10)",
                         "parkspot(0,15)",
-                        "parkspot(0,20)"
+                        "parkspot(0,20)",
+                        "parksurrounding"
 
                     ]
                 }
@@ -353,7 +466,7 @@
             "parkspot($x,$z)": {
                 "type": "node",
                 "materialref": {
-                    "materialId": "wood"
+                    "materialId": "parkinglot"
                 },
                 "transforms": [
                     {
@@ -374,9 +487,40 @@
                             "z": 0
                         },
                         "xyz2": {
-                            "x": 5,
+                            "x": 4.5,
+                            "y": 1,
+                            "z": 4.5
+                        }
+                    }
+                }
+            },
+            "parksurrounding": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "yellowstrips"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 10
+                        }
+                    }
+                ],
+                "children": {
+                    "parksurroundingPrim": {
+                        "type": "box",
+                        "xyz1": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "xyz2": {
+                            "x": 10,
                             "y": 0.5,
-                            "z": 5
+                            "z": 30
                         }
                     }
                 }
@@ -392,14 +536,14 @@
                     {
                         "type": "rotate",
                         "amount": {
-                            "x": -90,
+                            "x": 90,
                             "y": 0,
                             "z": 0
                         }
                     }
                 ],
                 "children": {
-                    "floorrectangle": {
+                    "floorprim": {
                         "type": "rectangle",
                         "xy1": {
                             "x": 0,
@@ -411,7 +555,40 @@
                         }
                     }
                 }
+            },
+            "parkfloor": {
+                "type": "node",
+                "materialref": {
+                    "materialId": "parkinglot"
+                },
+                "transforms": [
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 80,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+                ],
+                "children": {
+                    "parkfloorPrim": {
+                        "type": "box",
+                        "xyz1": {
+                            "x": 0,
+                            "y": 0,
+                            "z": 0
+                        },
+                        "xyz2": {
+                            "x": 30,
+                            "y": 0.1,
+                            "z": 120
+                        }
+                    }
+                }
             }
+
+
 
         }
     }

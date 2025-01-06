@@ -48,11 +48,7 @@ class MyContents {
                 list.push(name)
                 return list;
             }, []);
-            
 
-            console.log(this.app.cameras)
-    
-    
             this.app.activeCameraName = this.graph.initCamera //Set active camera
             this.activeLight = true        
         
@@ -89,7 +85,7 @@ class MyContents {
             new THREE.Vector3(-5, 0, 10),  // 8 curve
             new THREE.Vector3(-5, 0, 0),
         ], true, 'catmullrom', 0.5);
-        let track = new MyTrack(this.path, 7)
+        let track = new MyTrack(this.path, 15)
         this.app.scene.add(track.track)
 
         //let obstacle = new MyObstacle(new THREE.Vector3(0, 0, 0))
@@ -99,7 +95,7 @@ class MyContents {
         this.app.scene.add(this.powerup.powerup)
 
         let starting_position = new THREE.Vector3(-5, 0, 0)
-        this.route = new MyRoute(7, starting_position, 2)
+        this.route = new MyRoute(15, starting_position, 2)
         this.app.scene.add(this.route.visualLine)
 
     }

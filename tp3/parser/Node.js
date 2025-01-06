@@ -119,7 +119,6 @@ class Node {
 
 				childNode.setParams(res.params)
 				let child = childNode.build(nodes, materials, material);
-				console.log(child)
 				if(child) node.add(child)
 				
 			});
@@ -170,7 +169,6 @@ class Node {
 				node.scale.copy(new THREE.Vector3(element["amount"]["x"],element["amount"]["y"],element["amount"]["z"]))
 			}
 			else if (element["type"]=== "translate"){
-				console.log(element["amount"])
 				node.position.add(new THREE.Vector3(parseFloat(element["amount"]["x"]),parseFloat(element["amount"]["y"]),parseFloat(element["amount"]["z"])))
 			}
 			else if(element["type"]=== "rotate"){
