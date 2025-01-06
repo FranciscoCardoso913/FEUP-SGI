@@ -51,10 +51,13 @@ class MyContents {
             let gui = new MyGuiInterface(this.app)
             gui.setContents(this)
             gui.init();
-
             let game = new MyGame(this.app, this.track)
-
             game.start()
+
+               
+
+            
+            
         })
     }
 

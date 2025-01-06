@@ -153,14 +153,15 @@ class MyGame {
                     break
 
                 case MyGame.STATES.RES:
-
-                        break
+                    console.log(args)
+                    result = await this.res(...args)
+                    break
+                        
             }
 
             ({ state, args } = result);
         }
-        let particles = new MyParticles(this.scene, 100,new THREE.Vector3(-30,0,0),1,1)
-        particles.simulate()
+   
             
     
     }
@@ -303,7 +304,7 @@ class MyGame {
         this.scene.remove(this.text)
         await this.sleep(1000)
 
-        return {state: MyGame.STATES.RUN, args:[players]}
+        return {state: MyGame.STATES.RES, args:[players]}
 
     }
 
@@ -401,7 +402,7 @@ class MyGame {
                 }
             }
             if(this.hasBeenPressedKeys["r"]){
-                this.laye
+              
                 index =0 
                 race.changeLayer(0)
                 players.player1.move(this.starting_position)
@@ -427,7 +428,7 @@ class MyGame {
 
             if(!players.player2.cooldown){
                 if(index>= path.length)
-                    return {state: MyGame.STATES.QUIT, args: []}
+                    return {state: MyGame.STATES.RES, args: []}
                 let p = path[index].clone()
                 p.y = 10
                 let keyframes = players.player2.move(p, 2000)
@@ -444,7 +445,24 @@ class MyGame {
             await this.sleep(1000 / this.fps)
         }
         
-        return {state: MyGame.STATES.QUIT, args: []}
+        return {state: MyGame.STATES.RES, args: []}
+        
+    }
+
+    async res(players){
+        await this.sleep(1000)
+        players.player1.cooldown = false
+        players.player1.getObject().position.copy(new THREE.Vector3(-150, 40, -10))
+        players.player1.getObject().rotation.copy(new THREE.Euler(0,0,0))
+        players.player2.move(new THREE.Vector3(-150, 30, -10))
+        this.app.setActiveCamera("final")
+        let particles = new MyParticles(this.scene, 100,new THREE.Vector3(-150, 0, -20),40,40)
+        particles.simulate()
+        await this.sleep(3000)
+        while(true){
+            if(this.hasBeenPressedKeys["Enter"]) return {state: MyGame.STATES.QUIT, args: []}
+            await this.sleep(1000 / this.fps)
+        }
         
     }
 
