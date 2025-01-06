@@ -400,6 +400,17 @@ class MyGame {
                     await this.sleep(1000 / this.fps)
                 }
             }
+            if(this.hasBeenPressedKeys["r"]){
+                this.laye
+                index =0 
+                race.changeLayer(0)
+                players.player1.move(this.starting_position)
+                players.player1.getObject().rotation.copy(new THREE.Euler(0,0,0))
+                players.player2.move(this.starting_position)
+                this.ticketsNumber = 0
+                this.starting_time = Date.now()
+        
+            }
             this.hasBeenPressedKeys = {}
 
             // Move the player
@@ -428,7 +439,7 @@ class MyGame {
 
             // Move the autonomous player
 
-            updateText()
+            this.updateText()
 
             await this.sleep(1000 / this.fps)
         }
@@ -438,7 +449,7 @@ class MyGame {
     }
 
     updateText(){
-        this.time = this.textRender.renderText("Time: " + Math.floor((Date.now() - starting_time) / 1000), new THREE.Vector3(-150, 40, -49), new THREE.Vector3(0,50,0))
+        this.time = this.textRender.renderText("Time: " + Math.floor((Date.now() - this.starting_time) / 1000), new THREE.Vector3(-150, 40, -49), new THREE.Vector3(0,50,0))
         
     }
 
