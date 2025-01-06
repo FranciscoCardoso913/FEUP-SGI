@@ -8,6 +8,7 @@ class MyPowerUp  {
         this.rotationChange = 0.01
         this.animate = this.animate.bind(this)
         this.clock = new THREE.Clock();
+        this.hitSphere = 1
     }
 
     build(){
@@ -92,6 +93,9 @@ class MyPowerUp  {
 
         this.animate()
 
+    }
+    getObject(){
+        return this.group
     }
 
     getObject(){

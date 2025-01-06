@@ -4,6 +4,7 @@ class MyObstacle  {
     
         constructor(position) {
             this.position = position
+            this.hitSphere = Math.sqrt(50)/2
             this.build()
         }
     
