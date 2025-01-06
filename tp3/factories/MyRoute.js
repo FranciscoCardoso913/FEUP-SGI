@@ -141,8 +141,6 @@ class MyRoute  {
 
         let finalPoints = [this.starting_position, ...points, this.starting_position];
 
-        console.log(finalPoints)
-
         return finalPoints
 
     }
@@ -152,24 +150,24 @@ class MyRoute  {
         let material = new THREE.LineBasicMaterial({ color: 0x0000ff });
         
         let curve = new THREE.CatmullRomCurve3(this.route);
-        //let points = curve.getPoints(50);
-        let points = this.route;
+        let points = curve.getPoints(50);
+        //let points = this.route;
         let geometry = new THREE.BufferGeometry().setFromPoints(points);
         let line = new THREE.Line(geometry, material);
 
         let group = new THREE.Group();
         
+        /*
         points.forEach(point => {
-            let sphereGeometry = new THREE.SphereGeometry(0.5, 32, 32);
+            let sphereGeometry = new THREE.SphereGeometry(2, 32, 32);
             let sphereMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
             let sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
             sphere.position.copy(point);
             group.add(sphere);
         });
+        */
 
-        console.log(group.children)
-
-        group.add(line);
+        //group.add(line);
 
         group.position.y = 5
 

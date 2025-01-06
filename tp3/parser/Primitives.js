@@ -110,7 +110,6 @@ function buildTriangle(triangle, material){
  * @returns box mesh
  */
 function buildBox(box, material){
-    console.log(box)
     const width = Math.abs(box["xyz2"]["x"] - box["xyz1"]["x"])
     const height = Math.abs(box["xyz2"]["y"] - box["xyz1"]["y"])
     const depth = Math.abs(box["xyz2"]["z"] - box["xyz1"]["z"])

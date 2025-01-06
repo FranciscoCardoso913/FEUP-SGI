@@ -46,11 +46,26 @@ class MyTrack  {
         );
         this.mesh = new THREE.Mesh(geometry, this.material);   
 
+        let points = this.path.getPoints(100)
+        let lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
+        this.line = new THREE.Line(lineGeometry, this.lineMaterial);
+        this.line.position.y = 20;
+
         this.curve = new THREE.Group();
     
         this.mesh.visible = this.showMesh;
     
+        this.curve.add(this.line);
         this.curve.add(this.mesh);
+
+        points.forEach(point => {
+            let sphereGeometry = new THREE.SphereGeometry(2, 32, 32);
+            let sphereMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+            let sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+            sphere.position.copy(point);
+            sphere.position.y += 20
+            this.curve.add(sphere);
+        });
     
         this.curve.scale.set(1, 0.2, 1);
         
