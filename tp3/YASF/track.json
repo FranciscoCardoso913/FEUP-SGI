@@ -61,32 +61,22 @@
             "tv": {
                 "filepath": "image/textures/plastic.jpg",
                 "isVideo": false
+            },
+            "heatmap": {
+                "filepath": "image/textures/heatmap.jpg",
+                "isVideo": false
             }
+            
         },
         "materials": {
             "floor": {
-                "color": {
-                    "r": 0.5,
-                    "g": 0.5,
-                    "b": 0.5
-                },
-                "specular": {
-                    "r": 0.5,
-                    "g": 0.5,
-                    "b": 0.5
-                },
-                "shininess": 32,
-                "emissive": {
-                    "r": 0,
-                    "g": 0,
-                    "b": 0
-                },
-                "transparent": false,
-                "opacity": 1.0,
-                "twosided": "true",
-                "textureref": "floor",
-                "texlength_s": 5,
-                "texlength_t": -5
+                "isShader":true,
+                "colorTexture":"floor",
+                "heightTexture": "heatmap",
+                "vertex": "./shaders/vertexShader.glsl",
+                "fragment":"./shaders/fragmentShader.glsl",
+                "scale":-3
+
             },
             "wood": {
                 "color": {
@@ -189,7 +179,8 @@
                 "colorTexture":"ad",
                 "heightTexture": "adGray",
                 "vertex": "./shaders/vertexShader.glsl",
-                "fragment":"./shaders/fragmentShader.glsl"
+                "fragment":"./shaders/fragmentShader.glsl",
+                "scale":0.2
             },
             "tv": {
                 "color": {
@@ -235,6 +226,15 @@
                 "transparent": false,
                 "opacity": 1.0,
                 "twosided": "true"
+            },
+            "heatmap": {
+                "isShader":true,
+                "colorTexture":"ad",
+                "heightTexture": "adGray",
+                "vertex": "./shaders/vertexShader.glsl",
+                "fragment":"./shaders/fragmentShader.glsl",
+                "scale":0.2
+
             }
             
            
@@ -247,9 +247,9 @@
                 "near": 0.1,
                 "far": 1000,
                 "location": {
-                    "x": 60,
-                    "y": 60,
-                    "z": 60
+                    "x": 180,
+                    "y": 100,
+                    "z": 0
                 },
                 "target": {
                     "x": 0,
@@ -680,8 +680,16 @@
                     {
                         "type": "rotate",
                         "amount": {
-                            "x": 90,
+                            "x": -90,
                             "y": 0,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 0,
+                            "y": -0.2,
                             "z": 0
                         }
                     }
@@ -696,7 +704,9 @@
                         "xy2": {
                             "x": 500,
                             "y": 500
-                        }
+                        },
+                        "parts_x":100,
+                        "parts_y":100
                     }
                 }
             },
