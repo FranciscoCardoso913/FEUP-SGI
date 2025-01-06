@@ -49,7 +49,9 @@ class MyParticles {
     }
 
 
-
+    /**
+     * Releases the fireworks
+     */
     simulate(){
         this.scene.add(this.particlesystem)
         this.gravity = -9.8*0.8 ; 
@@ -58,7 +60,9 @@ class MyParticles {
         setTimeout(()=>this.scene.remove(this.particlesystem), 4000)
        
     }
-
+    /**
+     * animate the fireworks
+     */
     animate() {
         const delta = 0.016; // Assume 30 FPS
         this.positions = this.particles.attributes.position.array;
