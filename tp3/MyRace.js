@@ -49,7 +49,6 @@ class MyRace {
         
         this.track.changeLayer(layer)
 
-
     }
 
 }

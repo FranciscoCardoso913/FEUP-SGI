@@ -136,7 +136,7 @@ class MyGame {
 
     async picking(ballons, player1= null) {
         
-        if(player1)this.text = this.textRender.renderText("Pick Your Oponent ballon", new THREE.Vector3(-12,12,110))
+        if(player1)this.text = this.textRender.renderText("Pick Your Opponent ballon", new THREE.Vector3(-12,12,110))
         else this.text = this.textRender.renderText("Pick Your ballon", new THREE.Vector3(-12,12,110))
         this.scene.add(this.text)
         let selected = 0
@@ -270,7 +270,7 @@ class MyGame {
         this.scene.remove(this.text)
         await this.sleep(1000)
 
-        return {state: MyGame.STATES.RUN, args:[{players: players, track: this.track}]}
+        return {state: MyGame.STATES.RUN, args:[{players: players}]}
 
     }
 
@@ -333,12 +333,13 @@ class MyGame {
         return {state:MyGame.STATES.PICKING, args: [this.ballons]}
     }
 
-    async run(players, track){
+    async run(players){
+
         function collision(el1, el2){
             const distance = el1.getObject().position.clone().distanceTo(el2.getObject().position.clone());
             return distance <= (el1.hitSphere + el2.hitSphere )
         }
-        this.text = this.textRender.renderText("Get Ready", new THREE.Vector3(-10,5,0))
+        this.text = this.textRender.renderText("Get Ready", new THREE.Vector3(10,5,0))
         this.scene.add(this.text)
         await this.sleep(1000)
         this.scene.remove(this.text)
