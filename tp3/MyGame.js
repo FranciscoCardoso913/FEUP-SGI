@@ -377,19 +377,19 @@ class MyGame {
 
 
       
-        let starting_time = Date.now()
+        this.starting_time = Date.now()
         let keyframes = []
 
-        let race = new MyRace(this.scene, starting_time, players.player1, players.player2, this.track)
-        while (!race.ended) {
+        this.race = new MyRace(this.scene, this.starting_time, players.player1, players.player2, this.track)
+        while (!this.race.ended) {
 
-            let layernumber = race.layer.layer
+            let layernumber = this.race.layer.layer
             if (this.hasBeenPressedKeys["w"]) {
                 
-                if (layernumber < 4) keyframes = race.changeLayer(++layernumber)
+                if (layernumber < 4) keyframes = this.race.changeLayer(++layernumber)
             }
             else if (this.hasBeenPressedKeys["s"]) {
-                if (layernumber > 0) keyframes = race.changeLayer(--layernumber)
+                if (layernumber > 0) keyframes = this.race.changeLayer(--layernumber)
             }
             if(this.hasBeenPressedKeys["p"]){
                 this.hasBeenPressedKeys = {}
@@ -405,7 +405,7 @@ class MyGame {
                 keyframes = []
             }
 
-            race.checkMovement(this.fps)
+            this.race.checkMovement(this.fps)
         
             this.track.powerups.forEach((powerup)=>{
                 powerup.updatePowerUp()
@@ -413,7 +413,11 @@ class MyGame {
 
             // Move the autonomous player
 
-            updateText()
+            this.updateText()
+
+            if (this.track.won()) {
+                return {state: MyGame.STATES.QUIT, args: []}
+            }
 
             await this.sleep(1000 / this.fps)
         }
@@ -423,8 +427,20 @@ class MyGame {
     }
 
     updateText(){
-        this.time = this.textRender.renderText("Time: " + Math.floor((Date.now() - starting_time) / 1000), new THREE.Vector3(-150, 40, -49), new THREE.Vector3(0,50,0))
-        
+
+        this.scene.remove(this.time)
+        let time = Math.floor((Date.now() - this.starting_time) / 1000)
+        this.time = this.textRender.renderText("Time: " + time, new THREE.Vector3(-150,40,-45), this.tv_rotation)
+        this.scene.add(this.time)
+
+        this.scene.remove(this.ticketsNumber)
+        this.ticketsNumber = this.textRender.renderText("Tickets: " + this.race.tickets, new THREE.Vector3(-150,30,-45), this.tv_rotation)
+        this.scene.add(this.ticketsNumber)
+
+        this.scene.remove(this.wind)
+        this.wind = this.textRender.renderText("Wind: " + this.race.wind, new THREE.Vector3(-150,20,-45), this.tv_rotation)
+        this.scene.add(this.wind)
+
     }
 
 }
