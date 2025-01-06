@@ -26,6 +26,9 @@ class MyContents {
         this.lightHelpers = false
         this.activeLight = true
 
+        this.lastUpdateTime = 0;
+        this.interval = 1/30;
+
         
         this.reader = new MyFileReader(this.onSceneLoaded.bind(this));
     
@@ -102,7 +105,12 @@ class MyContents {
     }
 
     update() {
-        this.powerup.updatePowerUp()
+        const currentTime = performance.now() / 1000; // Get the current time in seconds
+        if (currentTime - this.lastUpdateTime > this.interval) {
+            // Time has passed, update the power-up
+            this.powerup.updatePowerUp();
+            this.lastUpdateTime = currentTime; // Update the last update time
+        }
     }
 
     Wireframe(){

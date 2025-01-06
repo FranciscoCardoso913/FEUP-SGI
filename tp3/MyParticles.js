@@ -7,7 +7,7 @@ import * as THREE from 'three';
 
 
 class MyParticles {
-    constructor(scene,nParticulars = 100, position = new THREE.Vector3(0,0,0), width = 10, height = 10 ){
+    constructor(scene,nParticulars = 100, position = new THREE.Vector3(0,0,0), width = 10, height = 10, duration = 5 ){
         this.scene = scene
         this.position = position
         this.animate = this.animate.bind(this);
@@ -31,7 +31,7 @@ class MyParticles {
                 (Math.random() - 0.5) * 10  // Random z velocity
             );
             this.lifetimes.push(Math.random() * 2 + 2); // Random lifetime (1-3 seconds)
-            this.birthtimes.push(Math.random()*5)
+            this.birthtimes.push(Math.random() * duration)
         }
 
         this.particles.setAttribute('position', new THREE.BufferAttribute(this.positions, 3));
@@ -52,7 +52,7 @@ class MyParticles {
 
     simulate(){
         this.scene.add(this.particlesystem)
-        this.gravity = -9.8 ; 
+        this.gravity = -9.8*0.8 ; 
         this.explosionParticles = []; // Track this.particles for explosions
         this.animate()
         setTimeout(()=>this.scene.remove(this.particlesystem), 4000)
