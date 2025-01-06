@@ -160,44 +160,80 @@ export function parseTextures(textures){
  * @param {*} materials Materials list
  * @returns map with all the materials being the key the id of the material
  */
-export function parseMaterials(textures, materials){
-    return Object.entries(materials).reduce((dict, [name, value]) => {
-
-        let material =new THREE.MeshPhongMaterial({ 
-            color: rgbToHex(value.color), 
-            specular: rgbToHex(value.specular),
-            shininess: value.shininess,
-            emissive: rgbToHex(value.emissive),
-            transparent: value.transparent,
-            opacity: value.opacity,
-            side: value.twosided? THREE.DoubleSide : THREE.FrontSide,
-            wireframe: value.wireframe? value.wireframe : false
-        })
-        // Handle texture if needed
-        let texture = textures[value.textureref]
-        if(texture){
-            texture.wrapS = THREE.RepeatWrapping
-            texture.wrapT = THREE.RepeatWrapping;
- 
-            texture.repeat.set(
-                value.texlength_s, 
-                value.texlength_t 
-            );
-            material.map = texture
-        }
-        // Handle bump texture if needed
-        let bumpTexture = textures[value.bumpref];
-        if (bumpTexture) {
-            bumpTexture.wrapS = THREE.RepeatWrapping;
-            bumpTexture.wrapT = THREE.RepeatWrapping;
-            bumpTexture.repeat.set(value.texlength_s, value.texlength_t);
-            material.bumpMap = bumpTexture;
-            material.bumpScale = value.bumpscale !== undefined ? value.bumpscale : 1.0;  // Default bumpscale to 1.0 if not provided
-        }
-        dict[name] = material;
-        return dict;
-    }, {});
+async function loadShader(url) {
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(`Failed to load shader: ${url}`);
+    }
+    return await response.text();
 }
+
+export async function parseMaterials(textures, materials) {
+    const dict = {};
+
+    for (const [name, value] of Object.entries(materials)) {
+        if (value.isShader) {
+            try {
+                const [vertexShader, fragmentShader] = await Promise.all([
+                    loadShader(value.vertex),
+                    loadShader(value.fragment),
+                ]);
+
+                // Create ShaderMaterial with the loaded shaders
+                const material = new THREE.ShaderMaterial({
+                    uniforms: {
+                        colorTexture: { value: textures[value.colorTexture] },
+                        heightTexture: { value: textures[value.heightTexture] },
+                        displacementScale: { value: 0.2},
+                    },
+                    vertexShader: vertexShader,
+                    fragmentShader: fragmentShader,
+                });
+
+                dict[name] = material;
+            } catch (error) {
+                console.error(`Error loading shaders for ${name}:`, error);
+            }
+        } else {
+            // Create a standard material
+            const material = new THREE.MeshPhongMaterial({
+                color: rgbToHex(value.color),
+                specular: rgbToHex(value.specular),
+                shininess: value.shininess,
+                emissive: rgbToHex(value.emissive),
+                transparent: value.transparent,
+                opacity: value.opacity,
+                side: value.twosided ? THREE.DoubleSide : THREE.FrontSide,
+                wireframe: value.wireframe ? value.wireframe : false,
+            });
+
+            // Handle texture if needed
+            const texture = textures[value.textureref];
+            if (texture) {
+                texture.wrapS = THREE.RepeatWrapping;
+                texture.wrapT = THREE.RepeatWrapping;
+                texture.repeat.set(value.texlength_s, value.texlength_t);
+                material.map = texture;
+            }
+
+            // Handle bump texture if needed
+            const bumpTexture = textures[value.bumpref];
+            if (bumpTexture) {
+                bumpTexture.wrapS = THREE.RepeatWrapping;
+                bumpTexture.wrapT = THREE.RepeatWrapping;
+                bumpTexture.repeat.set(value.texlength_s, value.texlength_t);
+                material.bumpMap = bumpTexture;
+                material.bumpScale =
+                    value.bumpscale !== undefined ? value.bumpscale : 1.0; // Default bumpscale to 1.0 if not provided
+            }
+
+            dict[name] = material;
+        }
+    }
+
+    return dict;
+}
+
 
 /**
  * Parses all the nodes

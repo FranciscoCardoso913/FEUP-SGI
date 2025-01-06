@@ -33,10 +33,11 @@ class MyContents {
         this.reader = new MyFileReader(this.onSceneLoaded.bind(this));
     
         // Reads scene 
-        this.reader.open("YASF/track.json").then((json) => {
+        this.reader.open("YASF/track.json").then(async(json) => {
             
             //console.log(json['yasf']);
             this.graph = new MyGraph(json) //Parse json
+            await this.graph.init()
             this.graph.build() // Construct graph
             this.graph.create(this.app.scene) // adds the graph to the scene
 

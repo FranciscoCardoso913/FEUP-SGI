@@ -49,6 +49,14 @@
             "dirt": {
                 "filepath": "textures/dirt.webp",
                 "isVideo": false
+            },
+            "ad": {
+                "filepath": "textures/ad.jpeg",
+                "isVideo": false
+            },
+            "adGray": {
+                "filepath": "textures/ad-gray.jpeg",
+                "isVideo": false
             }
         },
         "materials": {
@@ -171,6 +179,13 @@
                 "textureref": "dirt",
                 "texlength_s": 1,
                 "texlength_t": -1
+            },
+            "ad": {
+                "isShader":true,
+                "colorTexture":"ad",
+                "heightTexture": "adGray",
+                "vertex": "./shaders/vertexShader.glsl",
+                "fragment":"./shaders/fragmentShader.glsl"
             }
            
         },
@@ -317,6 +332,32 @@
             },
             "outdoor":{
                 "type":"node",
+                "transforms":[
+                    {
+                        "type": "rotate",
+                        "amount": {
+                            "x": 0,
+                            "y": -150,
+                            "z": 0
+                        }
+                    },
+                    {
+                        "type": "scale",
+                        "amount": {
+                            "x": 2,
+                            "y": 2,
+                            "z": 2
+                        }
+                    },
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 5,
+                            "y": 0,
+                            "z": 0
+                        }
+                    }
+                ],
                 "children":{
                     "nodesList":[
                         "leg(0,0)",
@@ -324,8 +365,42 @@
                         "leg(0,2)",
                         "leg(5,2)",
                         "plank",
+                        "screen",
+                        "outdoorback",
                         "screen"
                     ]
+                }
+            },
+
+            "outdoorback":{
+                "type":"node",
+                "materialref": {
+                    "materialId": "wood"
+                },
+                "transforms":[
+                    {
+                        "type": "translate",
+                        "amount": {
+                            "x": 2.5,
+                            "y": 7,
+                            "z": 0.9
+                        }
+                    }
+                ],
+                "children":{
+                    "screenPrim":{
+                        "type":"rectangle",
+                        "xy1": {
+                            "x": 0,
+                            "y": 0
+                        },
+                        "xy2": {
+                            "x": 7,
+                            "y": 5
+                        },
+                        "parts_x":100,
+                        "parts_y":100
+                    }
                 }
             },
 
@@ -379,7 +454,7 @@
             "screen":{
                 "type":"node",
                 "materialref": {
-                    "materialId": "wood"
+                    "materialId": "ad"
                 },
                 "transforms":[
                     {
@@ -401,7 +476,9 @@
                         "xy2": {
                             "x": 7,
                             "y": 5
-                        }
+                        },
+                        "parts_x":100,
+                        "parts_y":100
                     }
                 }
             },
