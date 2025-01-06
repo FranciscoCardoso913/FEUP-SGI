@@ -35,6 +35,8 @@ class MyGame {
         this.app = app
         app.setActiveCamera("front")
         this.camera = app.activeCamera
+        this.firstPersonCamera = app.cameras["firstPerson"]
+        this.thirdPersonCamera = app.cameras["thirdPerson"]
         this.textRender = new MyText()
         this.text = null
         
@@ -97,6 +99,18 @@ class MyGame {
 
         this.starting_position = this.track.path.getPointAt(0).clone()
  
+    }
+
+    updateCamera(player){
+        console.log(player.getObject())
+        const pos = player.getObject().position.clone()
+        this.firstPersonCamera.position.copy(new THREE.Vector3().addVectors(pos.clone(), new THREE.Vector3(0,6, 12)))
+        this.firstPersonCamera.target = pos.clone()
+        
+
+        this.thirdPersonCamera.position.copy(new THREE.Vector3().addVectors(pos.clone(), new THREE.Vector3(0,-1, 0)))
+        this.thirdPersonCamera.target = new THREE.Vector3().addVectors(pos.clone(), new THREE.Vector3(player.getObject().vx,-1, player.getObject().vz))
+        this.app.updateCameraIfRequired(true)
     }
     sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
@@ -205,6 +219,8 @@ class MyGame {
     }
 
     async spot(players){
+
+        this.hasBeenPressedKeys= {}
 
         await this.sleep(1500)
         let position_dif = new THREE.Vector3(3,0,0)
@@ -321,11 +337,11 @@ class MyGame {
         const cameraPos = new THREE.Vector3(0,5,130)
         let cameraKeyframes = [
             { time: 0, position: this.camera.position.clone()},
-            { time: 2, position: cameraPos }
+            { time: 1, position: cameraPos }
             ];
 
 
-        animate(this.camera, cameraKeyframes, Date.now(),2)
+        animate(this.camera, cameraKeyframes, Date.now(),1)
         const targetPosition = new THREE.Vector3(0, 5, 0); 
         this.camera.target = targetPosition
 
@@ -344,6 +360,8 @@ class MyGame {
             const distance = el1.getObject().position.clone().distanceTo(el2.getObject().position.clone());
             return distance <= (el1.hitSphere + el2.hitSphere )
         }
+        this.updateCamera(players.player1)
+        this.app.setActiveCamera("firstPerson")
 
         /*
         this.text = this.textRender.renderText("Get Ready", new THREE.Vector3(10,5,0))
