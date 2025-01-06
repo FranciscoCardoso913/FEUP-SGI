@@ -240,7 +240,7 @@
            
         },
         "cameras": {
-            "initial": "tv",
+            "initial": "front",
             "perspective": {
                 "type": "perspective",
                 "angle": 60,
