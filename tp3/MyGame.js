@@ -377,7 +377,7 @@ class MyGame {
 
         let index= 0;
         let path = this.route.route
-        this.app.setActiveCamera("firstPerson")
+        this.app.setActiveCamera("thirdPerson")
        
         this.updateCamera(players.player1);
 
