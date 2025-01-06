@@ -13,7 +13,7 @@ class MyTrack  {
 
         // Multiply path points by the width, so that the track is created with the correct width
         // If we don't do this, the track will get weird formats when we change the width
-        //this.path.points = this.path.points.map(point => point.multiplyScalar(this.width));
+        this.path.points = this.path.points.map(point => point.multiplyScalar(this.width));
 
         this.segments = segments
         this.track = this.createTrack()
@@ -25,7 +25,7 @@ class MyTrack  {
      */
     createTrack() {
 
-        const texture = new THREE.TextureLoader().load("../textures/blanket.jpg");
+        const texture = new THREE.TextureLoader().load("../textures/road.jpg");
         texture.wrapS = THREE.RepeatWrapping;
     
         this.material = new THREE.MeshPhongMaterial({ color: 0xffffff, map: texture });
@@ -33,13 +33,7 @@ class MyTrack  {
         this.material.map.wrapS = THREE.RepeatWrapping;
         this.material.map.wrapT = THREE.RepeatWrapping;
     
-        this.wireframeMaterial = new THREE.MeshPhongMaterial({
-          color: 0x0000ff,
-          opacity: 0.3,
-          wireframe: true,
-          transparent: true,
-        });
-    
+
         this.lineMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });    
 
 
@@ -50,24 +44,13 @@ class MyTrack  {
             3 ,
             true
         );
-        this.mesh = new THREE.Mesh(geometry, this.material);
-        this.wireframe = new THREE.Mesh(geometry, this.wireframeMaterial);
+        this.mesh = new THREE.Mesh(geometry, this.material);   
 
-        let points = this.path.getPoints(this.segments);
-        let bGeometry = new THREE.BufferGeometry().setFromPoints(points);        
-
-        // Create the final object to add to the scene
-        this.line = new THREE.Line(bGeometry, this.lineMaterial);
-    
         this.curve = new THREE.Group();
     
         this.mesh.visible = this.showMesh;
-        this.wireframe.visible = this.showWireframe;
-        this.line.visible = this.showLine;
     
         this.curve.add(this.mesh);
-        this.curve.add(this.wireframe);
-        this.curve.add(this.line);
     
         this.curve.scale.set(1, 0.2, 1);
         
