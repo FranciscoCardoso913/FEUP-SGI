@@ -321,6 +321,22 @@
                     "y": 30,
                     "z": -50
                 }
+            },
+            "final": {
+                "type": "perspective",
+                "angle": 60,
+                "near": 0.1,
+                "far": 1000,
+                "location": {
+                    "x": -120,
+                    "y": 30,
+                    "z": 10
+                },
+                "target": {
+                    "x": -150,
+                    "y": 30,
+                    "z": -50
+                }
             }
         },
         "graph": {
