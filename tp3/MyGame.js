@@ -234,11 +234,11 @@ class MyGame {
 
         await this.sleep(1500)
         let position_dif = new THREE.Vector3(3,0,0)
-        console.log(this.starting_position)
+      
         this.starting_position.y = 10
         const spotA = new THREE.Vector3().subVectors( this.starting_position.clone() , position_dif )
         const spotB = new THREE.Vector3().addVectors( this.starting_position.clone() , position_dif )
-        console.log(spotA, spotB)
+     
         const cameraPos = new THREE.Vector3(spotB.x + (spotA.x -spotB.x)/2,60)
         let cameraKeyframes = [
             { time: 0, position: this.camera.position.clone()},
@@ -376,7 +376,7 @@ class MyGame {
         }, 10); 
 
 
-
+      
         let starting_time = Date.now()
         let keyframes = []
 
@@ -385,6 +385,7 @@ class MyGame {
 
             let layernumber = race.layer.layer
             if (this.hasBeenPressedKeys["w"]) {
+                
                 if (layernumber < 4) keyframes = race.changeLayer(++layernumber)
             }
             else if (this.hasBeenPressedKeys["s"]) {
@@ -404,8 +405,8 @@ class MyGame {
                 keyframes = []
             }
 
-            race.checkMovement()
-
+            race.checkMovement(this.fps)
+        
             this.track.powerups.forEach((powerup)=>{
                 powerup.updatePowerUp()
             })

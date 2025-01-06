@@ -18,15 +18,18 @@ class MyTrack  {
         this.path.points = this.path.points.map(point => point.clone().multiplyScalar(this.width));
 
         this.segments = segments
-
-        this.track = this.createTrack()
         this.points = []
+
         this.prevPoint = null
         this.nextPoint = null
         this.crossedPoints =0
-
+  
+        this.track = this.createTrack()
+     
         this.powerups_obj = this.createPowerUps()
         this.obstacles_obj = this.createObstacles()
+
+    
 
     }
 
@@ -56,10 +59,10 @@ class MyTrack  {
         );
         this.mesh = new THREE.Mesh(geometry, this.material);   
 
-        this.points = this.path.getPoints(100)
+        this.points = this.path.getPoints(20)
         this.prevPoint =0
         this.nextPoint = 1
-        let lineGeometry = new THREE.BufferGeometry().setFromPoints(this.points);
+        let lineGeometry = new THREE.BufferGeometry().setFromPoints([...this.points]);
         this.line = new THREE.Line(lineGeometry, this.lineMaterial);
         this.line.position.y = 20;
 
@@ -80,7 +83,7 @@ class MyTrack  {
         });
     
         this.curve.scale.set(1, 0.2, 1);
-        console.log("A", this.inside(new THREE.Vector3(-75,10,3)))
+    
         
         return this.curve;
     }
@@ -114,6 +117,7 @@ class MyTrack  {
 
     createObstacles(){
         let obstacles_positions = [
+            new THREE.Vector3(-5,0,-1),
             new THREE.Vector3(-4.8,0,-9.5),
             new THREE.Vector3(0,0,2.6),
             new THREE.Vector3(4,0,11),
@@ -158,6 +162,7 @@ class MyTrack  {
             const AP = new THREE.Vector2(P.x - A.x, P.z - A.z);
             return AB.x * AP.y - AB.y * AP.x;
         }
+   
         let vector = new THREE.Vector3().subVectors(this.points[this.nextPoint].clone(), this.points[this.prevPoint].clone())
 
         let perp = new THREE.Vector3(0, 1, 0);  
@@ -176,6 +181,8 @@ class MyTrack  {
         const cross2 = crossProduct(A2, B2, position)
         const cross3 = crossProduct(B2, B1, position)
         const cross4 = crossProduct(B1, A1, position)
+
+ 
 
     
         const inside = (cross1 >= 0 && cross2 >= 0 && cross3 >= 0 && cross4 >= 0) || (cross1 <= 0 && cross2 <= 0 && cross3 <= 0 && cross4 <= 0)
@@ -199,7 +206,7 @@ class MyTrack  {
                
             }
             else{
-                console.log("Error in coalition")
+                console.log("Error in collision")
             }
             
         }
