@@ -45,7 +45,7 @@ class MyRace {
 
         }
         
-        this.layer.y_pos = (layer+1)*3;
+        this.layer.y_pos = (layer*3) +10 ;
 
 
     }

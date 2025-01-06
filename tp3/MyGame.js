@@ -70,9 +70,9 @@ class MyGame {
         this.track = new MyTrack(this.path, this.width)
         this.app.scene.add(this.track.track)
 
-        this.starting_position = this.track.path.getPointAt(0)
-        console.log(this.starting_position)
-        this.route = new MyRoute(this.width, this.starting_position, 2)
+        this.starting_position = this.track.path.getPointAt(0).clone()
+
+        this.route = new MyRoute(this.width, this.starting_position.clone(), 2)
         this.app.scene.add(this.route.visualLine)
 
  
@@ -116,13 +116,13 @@ class MyGame {
 
     async picking(ballons, player1= null) {
         
-        if(player1)this.text = this.textRender.renderText("Pick Your Oponent ballon", new THREE.Vector3(-12,12,0))
-        else this.text = this.textRender.renderText("Pick Your ballon", new THREE.Vector3(-12,12,0))
+        if(player1)this.text = this.textRender.renderText("Pick Your Oponent ballon", new THREE.Vector3(-12,12,120))
+        else this.text = this.textRender.renderText("Pick Your ballon", new THREE.Vector3(-12,12,120))
         this.scene.add(this.text)
         let selected = 0
 
         if(player1){
-            let keyframes = player1.move(new THREE.Vector3(7,5,3))
+            let keyframes = player1.move(new THREE.Vector3(7,5,120))
             animate(player1.getObject(), keyframes, Date.now(), 1)
         }
 
@@ -136,7 +136,7 @@ class MyGame {
             for (let i = 0; i < n; i++){
                 let ballon = ballons[i]
                 let theta = 2 * (Math.PI/n) * (i - selected) 
-                let keyframes = ballon.move(new THREE.Vector3(r * Math.sin(-theta),1, r * Math.cos(-theta)))
+                let keyframes = ballon.move(new THREE.Vector3(r * Math.sin(-theta),4, r * Math.cos(-theta)+100))
      
                 animate(ballon.getObject(), keyframes, Date.now(), 1)
             }
@@ -176,7 +176,7 @@ class MyGame {
         ballons.splice(selected, 1);
         this.scene.remove(this.text)
         if(player1){
-            let keyframes = selectedBallon.move(new THREE.Vector3(-7,5,3))
+            let keyframes = selectedBallon.move(new THREE.Vector3(-7,5,120))
             animate(selectedBallon.getObject(), keyframes, Date.now(), 1)
 
             ballons.forEach(ballon => {
@@ -189,18 +189,21 @@ class MyGame {
     }
 
     async spot(players){
+
         await this.sleep(1500)
-        let position_dif = new THREE.Vector3(7,0,0)
+        let position_dif = new THREE.Vector3(5,0,0)
         console.log(this.starting_position)
-        const spotA = this.starting_position - position_dif 
-        const spotB = this.starting_position + position_dif
+        this.starting_position.y = 10
+        const spotA = new THREE.Vector3().subVectors( this.starting_position.clone() , position_dif )
+        const spotB = new THREE.Vector3().addVectors( this.starting_position.clone() , position_dif )
         console.log(spotA, spotB)
-        const cameraPos = new THREE.Vector3(spotB.x + (spotA.x -spotB.x)/2,60,0)
+        const cameraPos = new THREE.Vector3(spotB.x + (spotA.x -spotB.x)/2,60)
         let cameraKeyframes = [
             { time: 0, position: this.camera.position.clone()},
             { time: 2, position: cameraPos }
             ];
-
+        
+        
         let playerKeyframes =players.player1.move(spotA)
 
             
@@ -266,7 +269,7 @@ class MyGame {
             return key.length === 1 && key !== " " && !key.startsWith("Arrow") && key !== "Enter" && key !== "Backspace";
         }
         
-        this.text = this.textRender.renderText("Insert Name:", new THREE.Vector3(-20,50,40))
+        this.text = this.textRender.renderText("Insert Name:", new THREE.Vector3(-20,50,170))
         this.scene.add(this.text)
         let isSelected = false
         let index = 12
@@ -294,7 +297,7 @@ class MyGame {
             await this.sleep(1000/this.fps)
         }
         this.scene.remove(this.text)
-        const cameraPos = new THREE.Vector3(0,5,17)
+        const cameraPos = new THREE.Vector3(0,5,140)
         let cameraKeyframes = [
             { time: 0, position: this.camera.position.clone()},
             { time: 2, position: cameraPos }
