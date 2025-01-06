@@ -91,6 +91,7 @@ class MyGraph {
 		scene.add(this.skybox)
 		scene.add(this.ambientLight)
 		scene.add(this.graph)
+		console.log(this.graph)
 	}
 	/**
 	 * Deletes the scene
