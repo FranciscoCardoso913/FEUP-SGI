@@ -24,7 +24,7 @@ class MyText {
         this.material = new THREE.MeshBasicMaterial({
             map: this.spritesheet,
             transparent: true,
-            alphaTest: 0.1
+          
         });
 
     }
