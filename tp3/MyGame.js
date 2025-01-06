@@ -53,6 +53,29 @@ class MyGame {
         this.pressedKeys[event.key] = false;
         console.log(`Key up: ${event.key}`);
         });
+        this.raycaster = new THREE.Raycaster();
+        this.mouse = new THREE.Vector2();
+        this.selectedMesh = null
+
+        window.addEventListener('click', (event)=> {
+            // Calculate mouse position in normalized device coordinates (-1 to +1)
+            this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+          
+            // Update the raycaster with the camera and mouse position
+            this.raycaster.setFromCamera(this.mouse, this.camera);
+            let i = 0
+            this.ballons.forEach((ballon)=>{
+                // Check for intersections with objects in the scene
+                const intersects = this.raycaster.intersectObject(ballon.getObject());
+            
+                if (intersects.length > 0) {
+                    this.selectedMesh = i
+                }
+                i++;
+            })
+
+          });
 
         this.width = 15
         this.path = new THREE.CatmullRomCurve3([
@@ -116,8 +139,8 @@ class MyGame {
 
     async picking(ballons, player1= null) {
         
-        if(player1)this.text = this.textRender.renderText("Pick Your Oponent ballon", new THREE.Vector3(-12,12,120))
-        else this.text = this.textRender.renderText("Pick Your ballon", new THREE.Vector3(-12,12,120))
+        if(player1)this.text = this.textRender.renderText("Pick Your Oponent ballon", new THREE.Vector3(-12,12,110))
+        else this.text = this.textRender.renderText("Pick Your ballon", new THREE.Vector3(-12,12,110))
         this.scene.add(this.text)
         let selected = 0
 
@@ -131,12 +154,12 @@ class MyGame {
         })
 
         function drawBallons(ballons, selected){
-            let r = 3
+            let r = 10
             let n = ballons.length
             for (let i = 0; i < n; i++){
                 let ballon = ballons[i]
-                let theta = 2 * (Math.PI/n) * (i - selected) 
-                let keyframes = ballon.move(new THREE.Vector3(r * Math.sin(-theta),4, r * Math.cos(-theta)+100))
+
+                let keyframes = ballon.move(new THREE.Vector3(-2*r + r*i,2, 100))
      
                 animate(ballon.getObject(), keyframes, Date.now(), 1)
             }
@@ -149,21 +172,12 @@ class MyGame {
         let isSelected = false
 
         while(!isSelected){
-            let right = this.hasBeenPressedKeys["ArrowRight"] || false;
-            let left = this.hasBeenPressedKeys["ArrowLeft"] || false;
-            isSelected = this.hasBeenPressedKeys["Enter"] || false;
-            let n = this.ballons.length
-            if(right)
-                selected = (selected +1) % n
-            else if(left)
-                selected = selected -1
+            isSelected = this.selectedMesh?true : false;
 
-            if(selected < 0) 
-                selected = n -1
-
-            if (left || right || isSelected){
+            if (isSelected){
+                selected = this.selectedMesh
                 drawBallons(ballons,selected )
-                this.hasBeenPressedKeys = {}
+                this.selectedMesh = null
             }
             
             await this.sleep(1000/this.fps)
@@ -191,7 +205,7 @@ class MyGame {
     async spot(players){
 
         await this.sleep(1500)
-        let position_dif = new THREE.Vector3(5,0,0)
+        let position_dif = new THREE.Vector3(3,0,0)
         console.log(this.starting_position)
         this.starting_position.y = 10
         const spotA = new THREE.Vector3().subVectors( this.starting_position.clone() , position_dif )
@@ -215,7 +229,7 @@ class MyGame {
         this.app.updateCameraIfRequired(true)
         await this.sleep(2000)
 
-        this.text = this.textRender.renderText("Pick Your Spot", new THREE.Vector3(-45,40,-10), new THREE.Euler(-Math.PI/2,0,0))
+        this.text = this.textRender.renderText("Pick Your Spot", new THREE.Vector3(cameraPos.x -20,40,cameraPos.z -10), new THREE.Euler(-Math.PI/2,0,0))
       
         this.scene.add(this.text)
 
@@ -297,7 +311,7 @@ class MyGame {
             await this.sleep(1000/this.fps)
         }
         this.scene.remove(this.text)
-        const cameraPos = new THREE.Vector3(0,5,140)
+        const cameraPos = new THREE.Vector3(0,5,130)
         let cameraKeyframes = [
             { time: 0, position: this.camera.position.clone()},
             { time: 2, position: cameraPos }
