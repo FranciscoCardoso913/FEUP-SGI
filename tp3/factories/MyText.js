@@ -77,7 +77,9 @@ class MyText {
             textMesh.add(characterMesh);
         });
         textMesh.position.add(startPosition)
-        textMesh.rotation.copy(rotate)
+        console.log(text, rotate)
+        textMesh.rotation.set(rotate.x, rotate.y, rotate.z)
+        console.log(text, textMesh.rotation)
         return textMesh
     }
 
