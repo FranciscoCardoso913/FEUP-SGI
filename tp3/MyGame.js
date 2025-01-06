@@ -357,10 +357,6 @@ class MyGame {
 
     async run(players){
 
-        function collision(el1, el2){
-            const distance = el1.getObject().position.clone().distanceTo(el2.getObject().position.clone());
-            return distance <= (el1.hitSphere + el2.hitSphere )
-        }
         
         this.app.setActiveCamera("firstPerson")
        
@@ -398,13 +394,11 @@ class MyGame {
                 animate(players.player1.getObject(), keyframes, Date.now(), 1)
                 keyframes = []
             }
-            players.player1.moveWithSpeed(this.fps)
 
-            
+            race.checkMovement()
+
             this.track.powerups.forEach((powerup)=>{
-
                 powerup.updatePowerUp()
-
             })
 
             // Move the autonomous player
