@@ -10,15 +10,14 @@ class MyGraph {
 	*/
 	constructor(json) {
         this.json = json['yasf']
-        this.init()
 	}
 	/**
 	 * Parses the json file and creates the graph
 	 */
-    init(){
+    async init(){
        this.parseGlobals(this.json['globals'])
 	   this.textures= parseTextures(this.json['textures'])
-	   this.materials = parseMaterials(this.textures, this.json["materials"])
+	   this.materials = await parseMaterials(this.textures, this.json["materials"])
 	   this.nodes = parseNodes(this.json["graph"])
 	   this.rootNode = this.json["graph"]["rootid"]
 	   this.cameras = parseCameras(this.json["cameras"])
