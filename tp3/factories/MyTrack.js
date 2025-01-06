@@ -25,8 +25,8 @@ class MyTrack  {
         this.nextPoint = null
         this.crossedPoints =0
 
-        this.powerups = this.createPowerUps()
-        this.obstacles = this.createObstacles()
+        this.powerups_obj = this.createPowerUps()
+        this.obstacles_obj = this.createObstacles()
 
     }
 
@@ -90,62 +90,60 @@ class MyTrack  {
         let powerups_positions = [
             new THREE.Vector3(-6,0,-7),
             new THREE.Vector3(2.5,0,-4),
-            new THREE.Vector3(4,5,0.5),
+            new THREE.Vector3(5,5,9.5),
         ]
 
         powerups_positions = powerups_positions.map(point => point.clone().multiplyScalar(this.width));
 
-        for (let i = 0; i < powerups_positions.length; i++) {
-            powerups_positions[i].y = 10
-        }
-
         // HardCoded Powerups so that we can have the powerups that were asked in the assignment
-        let powerups = [
+        this.powerups = [
             new MyPowerUp(powerups_positions[0]),
             new MyPowerUp(powerups_positions[1]),
             new MyPowerUp(powerups_positions[2]),
         ]
 
         let group = new THREE.Group();
-        powerups.forEach(powerup => {
+        this.powerups.forEach(powerup => {
             group.add(powerup.getObject());
         });
+
+        group.position.y = 10
 
         return group
     }
 
     createObstacles(){
         let obstacles_positions = [
-            new THREE.Vector3(-6,0,-7),
-            new THREE.Vector3(2.5,0,-4),
-            new THREE.Vector3(4,0,9.5),
+            new THREE.Vector3(-4.8,0,-9.5),
+            new THREE.Vector3(0,0,3),
+            new THREE.Vector3(4,0,11),
+            new THREE.Vector3(1,0,10.5),
         ]
 
         obstacles_positions = obstacles_positions.map(point => point.clone().multiplyScalar(this.width));
 
-        for (let i = 0; i < obstacles_positions.length; i++) {
-            obstacles_positions[i].y = 10
-        }
-
         // HardCoded obstacles so that we can have the obstacles that were asked in the assignment
-        let obstacles = [
+        this.obstacles = [
             new MyObstacle(obstacles_positions[0]),
             new MyObstacle(obstacles_positions[1]),
             new MyObstacle(obstacles_positions[2]),
+            new MyObstacle(obstacles_positions[3]),
         ]
 
         let group = new THREE.Group();
-        obstacles.forEach(obstacle => {
+        this.obstacles.forEach(obstacle => {
             group.add(obstacle.getObject());
         });
+
+        group.position.y = 10
 
         return group
     }
 
-    changeLayer(layer){
+    changeLayer(pos){
 
-        this.powerups.position.y = layer*3 +10;
-        this.obstacles.position.y = layer*3 +10;
+        this.powerups_obj.position.y = pos;
+        this.obstacles_obj.position.y = pos;
 
     }
 
