@@ -2,9 +2,9 @@ import * as THREE from 'three';
 
 class MyBalloon{
 
-    constructor(color = 0x00a2f1) {
+    constructor(color = 0x00a2f1, position =new THREE.Vector3(0,0,0)) {
         this.color = color
-        this.position = new THREE.Vector3(0,0,0)
+        this.position = position
         this.vx = 0
         this.vz = 0
         this.cooldown = false

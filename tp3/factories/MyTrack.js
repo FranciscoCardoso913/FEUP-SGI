@@ -13,7 +13,7 @@ class MyTrack  {
 
         // Multiply path points by the width, so that the track is created with the correct width
         // If we don't do this, the track will get weird formats when we change the width
-        this.path.points = this.path.points.map(point => point.multiplyScalar(this.width));
+        this.path.points = this.path.points.map(point => point.clone().multiplyScalar(this.width));
 
         this.segments = segments
         this.track = this.createTrack()
