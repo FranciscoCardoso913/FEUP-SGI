@@ -16,14 +16,14 @@ class MyBalloon{
         const lod = new THREE.LOD();
 
         const textureLoader = new THREE.TextureLoader();
-        const texture = textureLoader.load('/textures/ballon.webp');
+        const texture = textureLoader.load('image/textures/ballon.webp');
 
         // Set wrapping and repeat properties
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
         texture.repeat.set(1, 1); // Adjust as needed to fit the sphere
 
-        const basqueTexture = textureLoader.load('/textures/basket.jpg');
+        const basqueTexture = textureLoader.load('image/textures/basket.jpg');
 
         // Set wrapping and repeat properties
         basqueTexture.wrapS = THREE.RepeatWrapping;
