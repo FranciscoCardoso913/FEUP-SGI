@@ -91,8 +91,8 @@ class MyGame {
         ], true, 'catmullrom', 0.5);
         this.track = new MyTrack(this.path, this.width)
         this.app.scene.add(this.track.track)
-        this.app.scene.add(this.track.powerups)
-        this.app.scene.add(this.track.obstacles)
+        this.app.scene.add(this.track.powerups_obj)
+        this.app.scene.add(this.track.obstacles_obj)
 
         this.starting_position = this.track.path.getPointAt(0).clone()
  
@@ -340,7 +340,6 @@ class MyGame {
             return distance <= (el1.hitSphere + el2.hitSphere )
         }
 
-        /*
         this.text = this.textRender.renderText("Get Ready", new THREE.Vector3(10,5,0))
         this.scene.add(this.text)
         await this.sleep(1000)
@@ -357,7 +356,7 @@ class MyGame {
         this.scene.add(this.text)
         await this.sleep(1000)
         this.scene.remove(this.text)
-*/
+
         let starting_time = Date.now()
         let keyframes = []
 
@@ -380,6 +379,12 @@ class MyGame {
             }
             players.player1.moveWithSpeed(this.fps)
 
+            
+            this.track.powerups.forEach((powerup)=>{
+
+                powerup.updatePowerUp()
+
+            })
 
             // Move the autonomous player
 
