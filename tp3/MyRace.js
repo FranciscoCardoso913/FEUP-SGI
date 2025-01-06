@@ -25,7 +25,9 @@ class MyRace {
 
         
     }
-
+    /**
+     * Change the ballon layer, speeds and directions
+     */
     changeLayer(layer) {
    
         this.layer.layer = layer;
@@ -63,7 +65,9 @@ class MyRace {
         return this.playerBalloon.setDirection(this.layer.speed, this.layer.y_pos);
 
     }
-
+    /**
+     *Verifies if the ballon collides our goes out of the track
+     */
     checkMovement(fps) {
 
         function collision(el1, el2){

@@ -12,7 +12,7 @@ class MyPowerUp  {
     }
 
     build(){
-
+        // Vertex and fragment shader for pulsing effect
         const vertex = `
             // Vertex Shader
             uniform vec3 uScale; // Scale factors for width, height, and depth
@@ -78,7 +78,9 @@ class MyPowerUp  {
         const scaleFactor = Math.abs(Math.sin(time*1.5))+1; // Decrease but keep minimum size
         this.extmaterial.uniforms.uScale.value.set(scaleFactor, scaleFactor, scaleFactor);
     }
-
+    /**
+     * powerup animation
+     */
     updatePowerUp(){
 
         this.box1.rotation.x -= this.rotationChange

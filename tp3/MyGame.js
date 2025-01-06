@@ -112,6 +112,7 @@ class MyGame {
         this.scene.add(this.wind)
     }
 
+    /**Updates camera when player ballon moves */
     updateCamera(player){
         const pos = player.getObject().position.clone()
         this.thirdPersonCamera.position.copy(new THREE.Vector3().addVectors(pos.clone(), new THREE.Vector3(0,6, 12)))
@@ -128,6 +129,9 @@ class MyGame {
         return new Promise(resolve => setTimeout(resolve, ms));
       }
 
+      /**
+       * Game loop
+       */
     async start(){
         let state = MyGame.STATES.NAME
         let args = []
@@ -165,7 +169,9 @@ class MyGame {
             
     
     }
-
+    /**
+     * Picking up the ballons for the race
+     */
     async picking(ballons, player1= null) {
         
         if(player1)this.text = this.textRender.renderText("Pick Your Opponent ballon", new THREE.Vector3(-12,12,110))
@@ -231,6 +237,9 @@ class MyGame {
  
     }
 
+    /**
+     * Picking up the starting spot
+     */
     async spot(players){
 
         this.hasBeenPressedKeys= {}
@@ -307,7 +316,9 @@ class MyGame {
         return {state: MyGame.STATES.RUN, args:[players]}
 
     }
-
+    /**
+     * Writing user name and displaying it
+     */
     async name(){
 
         function isCharacterKey(key) {
@@ -373,6 +384,9 @@ class MyGame {
         return {state:MyGame.STATES.PICKING, args: [this.ballons]}
     }
 
+    /**
+     * The race logic
+     */
     async run(players){
 
         let index= 0;
@@ -459,6 +473,9 @@ class MyGame {
         
     }
 
+    /**
+     * Showing up the race results
+     */
     async res(players, result){
         await this.sleep(1000)
 
@@ -488,7 +505,7 @@ class MyGame {
         }
         
     }
-
+    /**Updates text in the big screen */
     updateText(){
 
         this.scene.remove(this.time)

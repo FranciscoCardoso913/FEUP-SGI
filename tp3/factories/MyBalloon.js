@@ -141,6 +141,9 @@ class MyBalloon{
         )
     }
 
+    /**
+     * Move ballon with its velocity
+     */
     moveWithSpeed(fps){
         if(!this.cooldown){
             this.ballon.position.x += this.vx * 1/fps
@@ -148,6 +151,9 @@ class MyBalloon{
         }
      
     }
+    /**
+     * Set ballon direction
+     */
 
     setDirection(speed,pos){
         this.cooldown = true
@@ -178,7 +184,9 @@ class MyBalloon{
 
           return keyframes
     }
-
+    /**
+     * Move ballon to a position
+     */
     move(position, time =1000){
         this.cooldown = true
         let start = this.ballon.position.clone();
