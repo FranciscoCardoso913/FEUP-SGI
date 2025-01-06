@@ -20,6 +20,7 @@ class MyTrack  {
         this.points = []
         this.prevPoint = null
         this.nextPoint = null
+        this.crossedPoints =0
 
     }
 
@@ -80,6 +81,10 @@ class MyTrack  {
         return this.curve;
     }
 
+    won(){
+        return this.crossedPoints >= this.points.length
+    }
+
     inside(position){
 
         function crossProduct(A, B, P) {
@@ -114,11 +119,16 @@ class MyTrack  {
             else if( cross1 > 0 && cross3 <0 ){
                 this.prevPoint ++;
                 this.nextPoint++;
+                if(this.nextPoint >= this.points.length) this.nextPoint =0
+                if(this.prevPoint >= this.points.length) this.prevPoint =0
+                this.crossedPoints++;
+
                 
             }
             else if( cross1 < 0 && cross3 >0 ){
                 this.prevPoint --;
                 this.nextPoint--;
+                this.crossedPoints--;
 
                 if(this.prevPoint< 0) this.prevPoint = this.points.length -1 
                 if(this.nextPoint< 0) this.nextPoint = this.points.length -1 
