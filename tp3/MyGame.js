@@ -1,8 +1,9 @@
 import * as THREE from 'three';
 import MyBallon from './factories/MyBalloon.js';
 import animate from './animation.js';
-import MyText from './MyText.js';
-import MyParticles from './MyParticles.js';
+import MyText from './factories/MyText.js';
+import MyParticles from './factories/MyParticles.js';
+import MyRace from './MyRace.js';
 
 /**
  *  This class contains the contents of out application
@@ -14,10 +15,10 @@ class MyGame {
         NAME:0,
         PICKING:1,
         POSITION:2,
-        RACE: 3
+        RUN: 3
     };
 
-    constructor(app){
+    constructor(app, track){
        
         this.fps = 30
         this.scene = app.scene
@@ -28,6 +29,7 @@ class MyGame {
             new MyBallon(0xffffff),
             new MyBallon(0xff33ff),
         ]
+        this.track = track
         this.app = app
         app.setActiveCamera("front")
         this.camera = app.activeCamera
@@ -65,19 +67,27 @@ class MyGame {
 
             switch (state){
                 case MyGame.STATES.NAME:
-                result = await this.name(...args);   
-                break
+                    result = await this.name(...args);   
+                    break
+
                 case MyGame.STATES.PICKING:
-                    
                     result = await this.picking(...args);   
                     break
 
                 case MyGame.STATES.POSITION:
                     result =  await this.spot(...args)
+                    console.log("imposition")
+                    break
+
+                case MyGame.STATES.RUN:
+                    console.log("imaboutorun")
+                    result = await this.run(...args)
+                    console.log("imrunning")
                     break
             }
 
             ({ state, args } = result);
+            console.log("CU", args)
         }
         let particles = new MyParticles(this.scene, 100,new THREE.Vector3(-30,0,0),1,1)
         particles.simulate()
@@ -224,7 +234,7 @@ class MyGame {
         this.scene.remove(this.text)
         await this.sleep(1000)
 
-        return {state: MyGame.STATES.QUIT, args:[{players: players}]}
+        return {state: MyGame.STATES.RUN, args:[{players: players, track: this.track}]}
 
     }
 
@@ -280,6 +290,46 @@ class MyGame {
         this.hasBeenPressedKeys= {}
 
         return {state:MyGame.STATES.PICKING, args: [this.ballons]}
+    }
+
+    async run(players, track){
+        console.log("RUN")
+        this.text = this.textRender.renderText("Get Ready", new THREE.Vector3(-10,5,0))
+        this.scene.add(this.text)
+        await this.sleep(1000)
+        this.scene.remove(this.text)
+        
+        for (let i = 3; i > 0; i--){
+            this.text = this.textRender.renderText(i, new THREE.Vector3(-1,5,0))
+            this.scene.add(this.text)
+            await this.sleep(1000)
+            this.scene.remove(this.text)
+        }
+
+        this.text = this.textRender.renderText("GO", new THREE.Vector3(-1,5,0))
+        this.scene.add(this.text)
+        await this.sleep(1000)
+        this.scene.remove(this.text)
+
+        let starting_time = Date.now()
+
+        let race = new MyRace(this.scene, starting_time, players.player1, players.player2, track)
+        while (!race.ended) {
+
+            let layernumber = race.layer.layer
+            if (this.hasBeenPressedKeys["w"]) {
+                if (layernumber < 4) race.changeLayer(++layernumber)
+            }
+            else if (this.hasBeenPressedKeys["s"]) {
+                if (layernumber > 0) race.changeLayer(--layernumber)
+            }
+            this.hasBeenPressedKeys = {}
+
+            await this.sleep(1000 / this.fps)
+        }
+        
+        return {state: MyGame.STATES.QUIT, args: []}
+        
     }
 
 }
